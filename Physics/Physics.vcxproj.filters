@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Collider.h">
+      <Filter>PhysicsEngine 2.0\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>PhysicsEngine 2.0\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>PhysicsEngine 2.0\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneCollider.h">
+      <Filter>PhysicsEngine 2.0\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine.h">
+      <Filter>PhysicsEngine 2.0\Engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>PhysicsEngine 2.0\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>PhysicsEngine 2.0\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneCollider.cpp">
+      <Filter>PhysicsEngine 2.0\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine.cpp">
+      <Filter>PhysicsEngine 2.0\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>PhysicsEngine 2.0\Colliders</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="PhysicsEngine 2.0">
+      <UniqueIdentifier>{b62ce04c-f04a-4999-84d2-c9c9a147085b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine 2.0\Colliders">
+      <UniqueIdentifier>{38d8882f-e008-466a-94e7-208775bbf894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine 2.0\Objects">
+      <UniqueIdentifier>{40e12027-da26-49ea-aba0-b780c476a3ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine 2.0\Engine">
+      <UniqueIdentifier>{d4c91a91-158d-45da-a563-fb4a13f796e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

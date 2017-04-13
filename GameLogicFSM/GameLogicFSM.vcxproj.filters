@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="FSMManager.h" />
+    <ClInclude Include="FSM.h">
+      <Filter>Finite State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Finite State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>Finite State Machine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FSMManager.cpp" />
+    <ClCompile Include="FSM.cpp">
+      <Filter>Finite State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Finite State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>Finite State Machine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Finite State Machine">
+      <UniqueIdentifier>{efe7cf0b-bee5-4ca2-bcca-f7e83b346ce8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

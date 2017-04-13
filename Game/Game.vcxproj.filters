@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Levels">
+      <UniqueIdentifier>{98211780-0f49-4943-aa66-3d9accd969e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Structure">
+      <UniqueIdentifier>{a1ed596f-0472-4941-8217-fd727638d194}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{eeb4060a-a977-4e17-9f9a-8dc7f64528ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gameplay">
+      <UniqueIdentifier>{d02ac237-87b5-48bb-96e4-a46c5014ed2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SubSystems">
+      <UniqueIdentifier>{565f721b-06d0-4e00-9bd5-ca079a0506fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{ffad4122-371d-410e-afbd-38299a57cfe6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Level.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObject.h">
+      <Filter>Game Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Game Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterModel.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Subsystem.h">
+      <Filter>SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="SubsystemManager.h">
+      <Filter>SubSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Level.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObject.cpp">
+      <Filter>Game Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Game Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="Run.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterModel.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="SubsystemManager.cpp">
+      <Filter>SubSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="GamepadMapper.cpp">
+      <Filter>Gamepad</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Input Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="MKMapper.cpp">
+      <Filter>Mouse &amp; Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nclgl\Gamepad.cpp">
+      <Filter>Gamepad</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GamepadMapper.h">
+      <Filter>Gamepad</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMapper.h">
+      <Filter>Input Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Input Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="MKMapper.h">
+      <Filter>Mouse &amp; Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nclgl\Gamepad.h">
+      <Filter>Gamepad</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Gamepad">
+      <UniqueIdentifier>{00d299f3-107e-4389-8d95-96fa7dd2560a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input Managment">
+      <UniqueIdentifier>{f9c68836-5d73-48a7-908c-e14688ec8835}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mouse &amp; Keyboard">
+      <UniqueIdentifier>{3cea07e0-7127-44fd-ac52-e912a877851a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
