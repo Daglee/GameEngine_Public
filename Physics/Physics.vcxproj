@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\..\SOIL;..\..\GLEW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\SOIL\$(Configuration);..\..\GLEW\lib\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>..\SOIL;..\GLEW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\SOIL\$(Configuration);..\GLEW\lib\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>..\..\SOIL;..\..\GLEW\include;$(IncludePath)</IncludePath>

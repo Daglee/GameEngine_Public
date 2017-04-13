@@ -4,7 +4,7 @@
 #include "FramerateCounter.h"
 #include "../Game/Subsystem.h"
 #include "../ResourceManagment/ResourceBase.h"
-#include "../../nclgl/Text.h"
+#include "../nclgl/Text.h"
 #include <map>
 
 class Window;

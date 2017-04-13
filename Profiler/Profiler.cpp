@@ -1,8 +1,8 @@
 #include "Profiler.h"
 
-#include "../../nclgl/Window.h"
+#include "../nclgl/Window.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../../nclgl/Renderer.h"
+#include "../nclgl/Renderer.h"
 #include "../ResourceManagment/Log.h"
 
 #define FRAME_MIN 1

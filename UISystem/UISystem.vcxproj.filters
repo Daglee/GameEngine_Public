@@ -10,9 +10,6 @@
     <ClCompile Include="MKMapper.cpp">
       <Filter>Mouse &amp; Keyboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\nclgl\Gamepad.cpp">
-      <Filter>Gamepad</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamepadMapper.h">
@@ -26,9 +23,6 @@
     </ClInclude>
     <ClInclude Include="MKMapper.h">
       <Filter>Mouse &amp; Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\nclgl\Gamepad.h">
-      <Filter>Gamepad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

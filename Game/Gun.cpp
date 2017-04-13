@@ -2,7 +2,7 @@
 
 #include "../ResourceManagment/DataBase.h"
 #include "../ResourceManagment/Log.h"
-#include "../../nclgl/Vector3.h"
+#include "../nclgl/Vector3.h"
 
 #include <time.h>
 

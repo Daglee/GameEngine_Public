@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../nclgl/Vector3.h"
-#include "../../nclgl/SceneNode.h"
-#include "../../nclgl/Mesh.h"
+#include "../nclgl/Vector3.h"
+#include "../nclgl/SceneNode.h"
+#include "../nclgl/Mesh.h"
 #include "../ResourceManagment/ResourceBase.h"
 
 class Renderer;

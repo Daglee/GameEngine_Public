@@ -19,13 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\nclgl\Gamepad.cpp" />
     <ClCompile Include="GamepadMapper.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MKMapper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\nclgl\Gamepad.h" />
     <ClInclude Include="GamepadMapper.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputMapper.h" />
@@ -83,8 +81,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>..\..\nclgl\$(Configuration);..\..\SOIL\$(Configuration);..\..\GLEW\lib\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <IncludePath>..\..\SOIL;..\..\GLEW\include;..\..\nclgl\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\nclgl\$(Configuration);..\SOIL\$(Configuration);..\GLEW\lib\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\SOIL;..\GLEW\include;..\nclgl\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>..\..\SOIL;..\..\GLEW\include;..\..\nclgl\;$(IncludePath)</IncludePath>

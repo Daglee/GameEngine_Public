@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../NCLGL/Vector3.h"
-#include "../../NCLGL/Mesh.h"
-#include "../../NCLGL/Renderer.h"
+#include "../NCLGL/Vector3.h"
+#include "../NCLGL/Mesh.h"
+#include "../NCLGL/Renderer.h"
 #include "../Physics/SphereCollider.h"
 #include "../Physics/PhysicsEngine.h"
 #include "../Physics/RigidBody.h"

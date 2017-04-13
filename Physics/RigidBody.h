@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../nclgl/Vector3.h"
-#include "../../nclgl/SceneNode.h"
+#include "../nclgl/Vector3.h"
+#include "../nclgl/SceneNode.h"
 
 class Collider;
 

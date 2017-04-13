@@ -16,15 +16,15 @@
 #include "../Profiler/MemoryWatcher.h"
 #include "ResourceManager.h"
 #include "../Game/PhysicsObject.h"
-#include "../../nclgl/Mesh.h"
-#include "../../nclgl/OBJMesh.h"
+#include "../nclgl/Mesh.h"
+#include "../nclgl/OBJMesh.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../GameLogicFSM/FSM.h"
-#include "../../NCLGL/Renderer.h"
-#include "../../nclgl/Gamepad.h"
-#include "../../nclgl/Camera.h"
+#include "../NCLGL/Renderer.h"
+#include "../nclgl/Gamepad.h"
+#include "../nclgl/Camera.h"
 #include "../Physics/PhysicsEngine.h"
-#include "../../nclgl/Window.h"
+#include "../nclgl/Window.h"
 #include "../Game/Player.h"
 #include "../Profiler/Profiler.h"
 #include "../UISystem/InputManager.h"
@@ -335,7 +335,7 @@ private:
 		Window* win = new Window(name, resX, resY, fullscreen);
 		GWindow->Load(name, win);
 
-		FSM* f = new FSM(win->vars, "../../GameLogic/Window.txt");
+		FSM* f = new FSM(win->vars, "../GameLogic/Window.txt");
 		FSMManager* fm = GFSMManager->Find("GFSMManager");
 		fm->AddFSM(f);
 	}

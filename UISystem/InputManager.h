@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../nclgl/Gamepad.h"
+#include "../nclgl/Gamepad.h"
 #include "GamepadMapper.h"
 #include "MKMapper.h"
 #include "../Game/Player.h"

@@ -2,8 +2,8 @@
 
 #include "../UISystem/InputManager.h"
 #include "../Threading/ThreadManager.h"
-#include "../../nclgl/Renderer.h"
-#include "../../nclgl/Window.h"
+#include "../nclgl/Renderer.h"
+#include "../nclgl/Window.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../Physics/PhysicsEngine.h"
 #include "../Profiler/Profiler.h"

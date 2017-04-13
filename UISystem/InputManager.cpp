@@ -37,8 +37,8 @@ void InputManager::ConnectToDataBase(DataBase* db)
 	  Store these pointers so we dont have to retrieve 
 	  them again every time a player is added.
 	*/
-	defaultBulletMesh	= database->OBJMeshes->Find("../../Meshes/sphere.obj");
-	defaultPlayerMesh	= database->OBJMeshes->Find("../../Meshes/cube.obj");
+	defaultBulletMesh	= database->OBJMeshes->Find("../Meshes/sphere.obj");
+	defaultPlayerMesh	= database->OBJMeshes->Find("../Meshes/cube.obj");
 	renderer			= database->GRenderer->Find("Renderer");
 	physicsEngine		= database->GPhysicsEngine->Find("PhysicsEngine");
 	window				= database->GWindow->Find("Window");
@@ -95,7 +95,7 @@ void InputManager::UpdateConnections()
 */
 void InputManager::InitialisePlayer(Player* p, Gamepad* gp) 
 {
-	FSM* f = new FSM(p->vars, "../../GameLogic/Player.txt");
+	FSM* f = new FSM(p->vars, "../GameLogic/Player.txt");
 	//f->BuildFSM();
 
 	FSMManager* fm = database->GFSMManager->Find("GFSMManager");
@@ -118,13 +118,13 @@ void InputManager::InitialisePlayer(Player* p, Gamepad* gp)
 */
 void InputManager::InitialisePlayer(Player* p)
 {
-	FSM* f = new FSM(p->vars, "../../GameLogic/Player.txt");
+	FSM* f = new FSM(p->vars, "../GameLogic/Player.txt");
 	//f->BuildFSM();
 
 	FSMManager* fm = database->GFSMManager->Find("GFSMManager");
 	fm->AddFSM(f);
 
-	MKMapper* mkm = new MKMapper(window, "../../ButtonMapping/MKMap.txt");
+	MKMapper* mkm = new MKMapper(window, "../ButtonMapping/MKMap.txt");
 	p->SetInputMapper(mkm);
 	float reloadSpeed = 2000;
 	float bulletsPerMag = 20;
@@ -148,7 +148,7 @@ void InputManager::SetPlayerParameters(Player* p)
 	p->walkingSoundName = "walkingsound" + tag;
 
 	SoundNode* walkingSound = new SoundNode(
-		new Sound("../../Sounds/41579__erdie__steps-on-stone01.wav"),
+		new Sound("../Sounds/41579__erdie__steps-on-stone01.wav"),
 		p->GetPlayerModel());
 
 	AudioManager::GetInstance()->AddSound("walkingsound" + tag, walkingSound);

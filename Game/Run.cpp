@@ -10,8 +10,8 @@
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../Threading/ThreadManager.h"
-#include "../../NCLGL/window.h"
-#include "../../NCLGL/Renderer.h"
+#include "../NCLGL/window.h"
+#include "../NCLGL/Renderer.h"
 #include "../Physics/PhysicsEngine.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../Profiler/Profiler.h"
@@ -47,10 +47,10 @@ int main()
 	Game* game = new Game("Renderer", "Window", database);
 
 	//Base assets such as the renderer, physics engine etc get loaded in.
-	game->StartUp("../../startup.txt");
+	game->StartUp("../startup.txt");
 
 	//More specific assets for a level such as a set number of spheres get loaded in.
-	game->LoadLevel("../../Levels/Directories/Arena1.txt");
+	game->LoadLevel("../Levels/Directories/Arena1.txt");
 
 	if (!game->Initialised()) return -1;
 

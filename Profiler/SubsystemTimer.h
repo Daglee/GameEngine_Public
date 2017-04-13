@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "../../nclgl/GameTimer.h"
+#include "../nclgl/GameTimer.h"
 #include <iomanip>
 #include <iostream>
 

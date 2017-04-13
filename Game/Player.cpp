@@ -64,7 +64,7 @@ void Player::ApplyInputs()
 
 	if (input->Fired()) {
 		if (gun->Fire(rigidBody.lastPosition, input->rawRotation, teamID)) {
-			Sound* shoot = new Sound("../../Sounds/14615__man__canon.wav"); //AudioManager will delete this.
+			Sound* shoot = new Sound("../Sounds/14615__man__canon.wav"); //AudioManager will delete this.
 			AudioManager::GetInstance()->TemporaryPlay(shoot, SOUNDPRIORITY_MEDIUM);
 		}
 	}

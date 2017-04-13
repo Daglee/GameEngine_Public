@@ -2,7 +2,7 @@
 
 #include "../ResourceManagment/ResourceBase.h"
 #include "../ResourceManagment/Log.h"
-#include "../../nclgl/SoundNode.h"
+#include "../nclgl/SoundNode.h"
 #include "../Game/Subsystem.h"
 
 #include <unordered_map>

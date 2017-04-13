@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../nclgl/Vector3.h"
+#include "../nclgl/Vector3.h"
 #include "CharacterModel.h"
 #include "../ResourceManagment/ResourceBase.h"
 #include "Gun.h"
@@ -14,7 +14,7 @@ class RigidBody;
 
 
 #include <map>
-#define CHARCT_MODEL_LOC "../../CharacterModel/PlayerModel.txt"
+#define CHARCT_MODEL_LOC "../CharacterModel/PlayerModel.txt"
 
 /*
   Physics entity wrapper.
