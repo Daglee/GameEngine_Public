@@ -14,7 +14,7 @@ class RigidBody;
 
 
 #include <map>
-#define CHARCT_MODEL_LOC "../CharacterModel/PlayerModel.txt"
+#define CHARCT_MODEL_LOC "../Data/CharacterModel/PlayerModel.txt"
 
 /*
   Physics entity wrapper.

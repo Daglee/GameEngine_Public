@@ -335,7 +335,7 @@ private:
 		Window* win = new Window(name, resX, resY, fullscreen);
 		GWindow->Load(name, win);
 
-		FSM* f = new FSM(win->vars, "../GameLogic/Window.txt");
+		FSM* f = new FSM(win->vars, "../Data/GameLogic/Window.txt");
 		FSMManager* fm = GFSMManager->Find("GFSMManager");
 		fm->AddFSM(f);
 	}

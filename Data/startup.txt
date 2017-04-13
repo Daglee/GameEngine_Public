@@ -1,0 +1,12 @@
+10
+4
+params GThreadPool ThreadPool
+params GFSMManager GFSMManager 8
+params GWindow Window 1280 720 0
+params GRenderer Renderer Window
+params GCamera Camera -60 00 0 900 640
+params GProfiler Profiler Window 8
+1 PhysicsEngine PhysicsEngine
+1 GInputManager InputManager
+6 Players player
+6 Gamepads gamepad

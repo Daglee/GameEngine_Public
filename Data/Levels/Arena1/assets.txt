@@ -1,0 +1,8 @@
+6
+6
+1 OBJMeshes ../Data/Meshes/sphere.obj
+1 OBJMeshes ../Data/Meshes/centeredcube.obj
+1 OBJMeshes ../Data/Meshes/cube.obj
+1 OBJMeshes ../Data/Meshes/pyramid.obj
+10 PhysicsObjects sphere
+1 PhysicsObjects floor

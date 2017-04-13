@@ -47,10 +47,10 @@ int main()
 	Game* game = new Game("Renderer", "Window", database);
 
 	//Base assets such as the renderer, physics engine etc get loaded in.
-	game->StartUp("../startup.txt");
+	game->StartUp("../Data/startup.txt");
 
 	//More specific assets for a level such as a set number of spheres get loaded in.
-	game->LoadLevel("../Levels/Directories/Arena1.txt");
+	game->LoadLevel("../Data/Levels/Directories/Arena1.txt");
 
 	if (!game->Initialised()) return -1;
 
