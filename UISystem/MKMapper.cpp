@@ -114,4 +114,8 @@ void MKMapper::ReadMapping(std::string filename)
 	//MOVE UP
 	getline(file, button);
 	NEG_MOVEMENT_Z = Window::GetKeyboard()->Mapper(button);
+
+	//PAUSE BUTTON
+	getline(file, button);
+	PAUSE = Window::GetKeyboard()->Mapper(button);
 }

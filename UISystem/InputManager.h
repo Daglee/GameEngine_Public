@@ -9,6 +9,7 @@
 #include "../ResourceManagment/ResourceBase.h"
 
 class DataBase;
+class ThreadPool;
 
 /*
   Manages input devices and their connections to players.
@@ -17,7 +18,7 @@ class DataBase;
 class InputManager : public Subsystem, public ResourceBase
 {
 public:
-	InputManager();
+	InputManager(ThreadPool* t);
 	~InputManager();
 
 	//Return the number of controllers connected -- max 6
@@ -48,6 +49,7 @@ public:
 	void Read(string resourcename);
 	void ReadParams(string params);
 
+	ThreadPool* threadPool;
 protected:
 	//For players using a controller
 	void InitialisePlayer(Player* p, Gamepad* gp);

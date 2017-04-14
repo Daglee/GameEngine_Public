@@ -34,6 +34,7 @@ public:
 	//Read in the button mappings.
 	virtual void ReadMapping(std::string filename);
 
+	KeyboardKeys PAUSE;
 private:
 	float inputs[6];
 	Window* window;

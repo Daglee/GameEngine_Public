@@ -1,10 +1,13 @@
 #include "InputManager.h"
 #include "../ResourceManagment/DataBase.h"
+#include "../Threading/ThreadPool.h"
 
-InputManager::InputManager()
+InputManager::InputManager(ThreadPool* t)
 {
 	gpad	= new Gamepad*[6];
 	players	= new Player*[6];
+
+	threadPool = t;
 }
 
 InputManager::~InputManager()
@@ -46,7 +49,6 @@ void InputManager::ConnectToDataBase(DataBase* db)
 	//There must always be a player 1 (M&K)
 	connectedPlayers.push_back(players[0]);
 	InitialisePlayer(players[0]);
-
 }
 
 /*
@@ -126,6 +128,9 @@ void InputManager::InitialisePlayer(Player* p)
 
 	MKMapper* mkm = new MKMapper(window, "../Data/ButtonMapping/MKMap.txt");
 	p->SetInputMapper(mkm);
+
+	threadPool->pauseButton = mkm->PAUSE;
+
 	float reloadSpeed = 2000;
 	float bulletsPerMag = 20;
 	float fireDelay = 150;

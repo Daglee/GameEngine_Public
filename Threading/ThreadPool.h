@@ -4,6 +4,7 @@
 #include "ThreadTask.h"
 #include "TaskFuture.h"
 #include "../ResourceManagment/ResourceBase.h"
+#include "../nclgl/Window.h"
 
 #include <algorithm>
 #include <atomic>
@@ -41,20 +42,32 @@ public:
 	  Tidies up the private one a bit + it's inline
 	*/
 	template <typename Function, typename... Params>
-	inline auto submitJob(Function&& func, Params&&... params)
+	inline auto SubmitJob(Function&& func, Params&&... params)
 	{
-		return submit(forward<Function>(func), forward<Params>(params)...);
+		/*
+		  If thread execution is paused, no job will be 
+		  submitted to maintain the current state.
+		*/
+		if (!paused) return Submit(forward<Function>(func), forward<Params>(params)...);
+	}
+
+	void CheckPause()
+	{
+		if (Window::GetKeyboard()->KeyTriggered(pauseButton)) paused = !paused;
 	}
 
 	void Read(string resourcename);
 	void ReadParams(string params);
+
+	std::atomic_bool paused = false;
+	KeyboardKeys pauseButton;
 private:
 	/*
 	  Get a thread to carry out a function/method
 	  Using auto because its easier and reads better...
 	*/
 	template <typename Function, typename... Params>
-	auto ThreadPool::submit(Function&& func, Params&&... args) 
+	auto ThreadPool::Submit(Function&& func, Params&&... args) 
 	{
 		/*
 		  Create a function template with the passed in function 

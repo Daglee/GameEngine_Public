@@ -130,13 +130,13 @@ void Level::InitialiseObjects(std::string filename)
 	}
 
 	//1st half
-	auto readloop1 = database->GThreadPool->Find("ThreadPool")->submitJob([](
+	auto readloop1 = database->GThreadPool->Find("ThreadPool")->SubmitJob([](
 		Level& lvl, vector<string> lines, int linenum) {
 		lvl.ReadLoop(lines, linenum);
 	}, std::ref(*this), lines0, mid);
 
 	//2nd half
-	auto readloop2 = database->GThreadPool->Find("ThreadPool")->submitJob([](
+	auto readloop2 = database->GThreadPool->Find("ThreadPool")->SubmitJob([](
 		Level& lvl, vector<string> lines, int linenum) {
 		lvl.ReadLoop(lines, linenum);
 	}, std::ref(*this), lines1, threadCount - mid);

@@ -29,7 +29,6 @@ public:
 	virtual bool Fired()			= 0;
 
 	Vector3 rawRotation;
-
 protected:
 	float prevRotation = 0;
 };

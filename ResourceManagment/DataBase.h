@@ -176,12 +176,12 @@ public:
 			}
 		}
 
-		auto readloop1 = GThreadPool->Find("ThreadPool")->submitJob([](
+		auto readloop1 = GThreadPool->Find("ThreadPool")->SubmitJob([](
 			DataBase& db, vector<vector<string>> tokenshold, vector<string> lines, int linenum) {
 			db.ReadLoop(tokenshold, lines, linenum);
 		}, std::ref(*this), tokensHolder0, lines0, mid);
 
-		auto readloop2 = GThreadPool->Find("ThreadPool")->submitJob([](
+		auto readloop2 = GThreadPool->Find("ThreadPool")->SubmitJob([](
 			DataBase& db, vector<vector<string>> tokenshold, vector<string> lines, int linenum) {
 			db.ReadLoop(tokenshold, lines, linenum);
 		}, std::ref(*this), tokensHolder1, lines1, threadCount - mid);
@@ -259,7 +259,7 @@ private:
 	}
 
 	void AddToGInputManager(string resourcename) {
-		InputManager* inputManager = new InputManager();
+		InputManager* inputManager = new InputManager(GThreadPool->Find("ThreadPool"));
 		GInputManager->Load(resourcename, inputManager);
 	}
 
