@@ -19,7 +19,7 @@ public:
 
 	~ThreadQueue()
 	{
-		invalidate();
+		Invalidate();
 	}
 
 	/*
@@ -30,16 +30,16 @@ public:
 	*/
 	bool WaitPop(T& out)
 	{
-		unique_lock<mutex> lock(tMutex);
+		unique_lock<mutex> lock(function_mutex);
 
 		condition.wait(lock, [this]() {
-				return !tQueue.empty() || !valid;
+			return !queue_instance.empty() || !valid;
 		});
 
 		if (!valid) return false;
 
-		out = move(tQueue.front());
-		tQueue.pop();
+		out = move(queue_instance.front());
+		queue_instance.pop();
 
 		return true;
 	}
@@ -47,9 +47,9 @@ public:
 	//Insert a new value
 	void Push(T value) 
 	{
-		unique_lock<mutex> lock(tMutex);
+		unique_lock<mutex> lock(function_mutex);
 
-		tQueue.push(move(value));
+		queue_instance.push(move(value));
 		condition.notify_one();
 	}
 
@@ -59,18 +59,18 @@ public:
 	//Is queue empty?
 	bool IsEmpty() const
 	{
-		lock_guard<mutex> lock(tMutex);
+		lock_guard<mutex> lock(function_mutex);
 
-		return tQueue.empty();
+		return instance.empty();
 	}
 
 	//Get rid of everything!
 	void DeleteAll()
 	{
-		lock_guard<mutex> lock(tMutex);
+		lock_guard<mutex> lock(function_mutex);
 
-		while (!tQueue.empty()) {
-			tQueue.pop();
+		while (!queue_instance.empty()) {
+			queue_instance.pop();
 		}
 
 		condition.notify_all();
@@ -80,18 +80,18 @@ public:
 	  Ensure nothing is being waited on, if a thread is trying to exit. 
 	  Will be an error to continue using it after calling this.
 	*/
-	void invalidate()
+	void Invalidate()
 	{
-		lock_guard<mutex> lock(tMutex);
+		lock_guard<mutex> lock(function_mutex);
 
 		valid = false;
 		condition.notify_all();
 	}
 
 		
-	bool isValid() const
+	bool IsValid() const
 	{
-		lock_guard<mutex> lock(tMutex);
+		lock_guard<mutex> lock(function_mutex);
 
 		return valid;
 	}
@@ -101,7 +101,7 @@ public:
 private:
 	std::atomic_bool valid{ true };
 
-	mutable std::mutex		tMutex;
-	std::queue<T>			tQueue;
+	mutable std::mutex		function_mutex;
+	std::queue<T>			queue_instance;
 	std::condition_variable condition;
 };

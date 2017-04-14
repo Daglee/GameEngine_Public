@@ -34,7 +34,10 @@ public:
 	ThreadPool(const int numThreads);
 
 	~ThreadPool() {
-		destroy();
+		running = false;
+		taskQueue.Invalidate();
+
+		JoinAll();
 	}
 
 	/*
@@ -75,29 +78,29 @@ private:
 		*/
 		auto thisTask = bind(forward<Function>(func), forward<Params>(args)...);
 
-		using ResultType	= result_of_t<decltype(thisTask)()>; //What will the function return?
-		using PackagedTask	= packaged_task<ResultType()>;		 //Prepare the function for async...
-		using TaskType		= ThreadTask<PackagedTask>;			 //Create a thread task for that function.
+		using resultType	= result_of_t<decltype(thisTask)()>; //What will the function return?
+		using packagedTask	= packaged_task<resultType()>;		 //Prepare the function for async...
+		using taskType		= ThreadTask<packagedTask>;			 //Create a thread task for that function.
 
 		//So fancy things can be done.
-		PackagedTask			task{ move(thisTask) };
-		TaskFuture<ResultType>	result{ task.get_future() };
+		packagedTask			task{ move(thisTask) };
+		TaskFuture<resultType>	result{ task.get_future() };
 
 		//Let a thread carry the task out.
-		taskQueue.Push(make_unique<TaskType>(move(task)));
+		taskQueue.Push(make_unique<taskType>(move(task)));
 		return result;
 	}
 
 	//Initialise threads
-	void CreateWorkers(int numWorkers);
+	void InitialiseWorkers(int numWorkers);
 
 	//Threads use this continiously and grab a task to perform.
-	void worker();
+	void FindNewTask();
 
 	//Invalidate queue and join all threads.
-	void destroy();
+	void JoinAll();
 
-	std::atomic_bool finished; //Should the threads still be finding tasks to carry out?
+	std::atomic_bool running; //Should the threads still be finding tasks to carry out?
 	ThreadQueue<std::unique_ptr<Task>> taskQueue;
-	std::vector < std::thread > threads;
+	std::vector<std::thread> threads;
 };

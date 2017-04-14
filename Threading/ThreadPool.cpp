@@ -2,56 +2,57 @@
 
 ThreadPool::ThreadPool(const int numThreads) : ResourceBase() 
 {
-	finished = false;
-	CreateWorkers(numThreads);
+	running = true;
+	InitialiseWorkers(numThreads);
 
 	this->SetResourceSize(sizeof(*this));
 }
 
 ThreadPool::ThreadPool() : ResourceBase()
 {
-	finished = false;
+	running = true;
 
 	//Create as many threads as the hardware allows but keep one for the main thread.
 	int numThreads = (max)(thread::hardware_concurrency(), unsigned(2)) - 1;
 
-	CreateWorkers(numThreads);
+	InitialiseWorkers(numThreads);
 
 	this->SetResourceSize(sizeof(*this));
 }
 
-void ThreadPool::CreateWorkers(int numWorkers) 
+void ThreadPool::InitialiseWorkers(int numWorkers)
 {
 	try {
 		for (int i = 0; i < numWorkers; ++i) {
-			threads.emplace_back(&ThreadPool::worker, this);
+			threads.emplace_back(&ThreadPool::FindNewTask, this);
 		}
 	}
 	catch (...) {
-		//Dont continue.
-		destroy();
+		//Don't continue.
+		running = false;
+		taskQueue.Invalidate();
+
+		JoinAll();
+
 		throw;
 	}
 }
 
-void ThreadPool::worker()
+void ThreadPool::FindNewTask()
 {
 	//Continiously poll the queue until all work is done
-	while (!finished) {
-		unique_ptr<Task> pTask = nullptr;
+	while (running) {
+		unique_ptr<Task> newTask = nullptr;
 
-		if (taskQueue.WaitPop(pTask)) {
+		if (taskQueue.WaitPop(newTask)) {
 			//A new job has been found. Put it on a thread and do it...
-			pTask->execute();
+			newTask->execute();
 		}
 	}
 }
 
-void ThreadPool::destroy()
+void ThreadPool::JoinAll()
 {
-	finished = true; 
-	taskQueue.invalidate();
-
 	//Wont let me do my usual "for each"...
 	for (auto& thread : threads) {
 		if (thread.joinable()) {
