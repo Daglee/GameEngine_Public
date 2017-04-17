@@ -70,24 +70,23 @@ int main()
 	Camera*			camera		 = database->GCamera->Find("Camera");
 
 	physics->gamelogic = gamelogic;
+	renderer->SetCamera(camera);
+	AudioManager::GetInstance()->SetListener(camera->GetSceneNode());
 
 	//Set up any timers we want displayed on screen...
-	renderer->SetCamera(camera);
 	profiler->AddSubSystemTimer("Renderer", &renderer->updateTimer);
 	profiler->AddSubSystemTimer("PhysicsE", &physics->updateTimer);
 	profiler->AddSubSystemTimer("Gamelogic", &gamelogic->updateTimer);
 	profiler->AddSubSystemTimer("Input", &inputManager->updateTimer);
 	profiler->AddSubSystemTimer("Audio", &AudioManager::GetInstance()->updateTimer);
 
-	AudioManager::GetInstance()->SetListener(camera->GetSceneNode());
-
 	//Which subsystems will be updated...
 	SubsystemManager subsystems(inputManager, tPool, renderer, win,
 		gamelogic, physics, profiler);
 
 	//Game loop...
-	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running == 1) {
-		subsystems.UpdateAll(win->GetTimer()->GetTimedMS());
+	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running) {
+		subsystems.ThreadedUpdate(win->GetTimer()->GetTimedMS());
 	}
 
 	//I'm just loading in a level and releasing it on shutdown. 

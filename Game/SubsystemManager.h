@@ -10,6 +10,7 @@
 #include "Subsystem.h"
 
 #include "../Threading/ThreadPool.h"
+#include <ctime>
 
 /*
   Updates any subsystems passed to it on each
@@ -26,7 +27,8 @@ public:
 	~SubsystemManager() {}
 
 	//Iterates the game loop
-	void UpdateAll(float deltatime);
+	void ThreadedUpdate(float deltatime);
+	void Update(float deltatime);
 
 private:
 	InputManager* inputManager;
@@ -38,5 +40,7 @@ private:
 	Profiler* profiler;
 
 	ThreadPool* threadPool;
+
+	Subsystem* subsystems[5];
 };
 

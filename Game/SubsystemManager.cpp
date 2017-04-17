@@ -12,10 +12,16 @@ SubsystemManager::SubsystemManager(
 	this->physicsEngine = physicsEngine;
 	this->profiler		= profiler;
 	this->threadPool	= threadPool;
+
+	subsystems[0] = inputManager;
+	subsystems[1] = gamelogic;
+	subsystems[2] = physicsEngine;
+	subsystems[3] = profiler;
+	subsystems[4] = AudioManager::GetInstance();
 }
 
 //Game loop iteration!
-void SubsystemManager::UpdateAll(float deltatime) 
+void SubsystemManager::ThreadedUpdate(float deltatime)
 {
 	/*
 	  The pause button MUST be checked via the thread pool
@@ -27,31 +33,31 @@ void SubsystemManager::UpdateAll(float deltatime)
 	//OpenGL doesn't like to be threaded...
 	renderer->Update(deltatime);
 
-	//But these subsystems do...
-
-	auto physicsupdate = threadPool->SubmitJob([](	//A promise that it will get done...
-		PhysicsEngine* pe, float dt) {				//Any parameters needed...
-		pe->Update(dt);								//The function to call...
-	}, std::cref(physicsEngine), deltatime);		//What we are passing in...
+	//But the other subsystems do...
+	vector<TaskFuture<void>> updates;
+	for each(Subsystem* subsystem in subsystems)
+	{
+		if (!threadPool->paused) {
+			updates.push_back(threadPool->SubmitJob([](	//A promise that it will get done...
+				Subsystem* s, float dt) {				//Any parameters needed...
+				s->Update(dt);							//The function to call...
+			}, subsystem, deltatime));					//What we are passing in...
+		}
+	}
 	//Equivalent to "physicsEngine->Update(deltatime);".
 
-	auto inputupdate = threadPool->SubmitJob([](
-		InputManager* im, float dt) {
-		im->Update(dt);
-	}, std::cref(inputManager), deltatime);
+	//Synchronise threads.
+	for (auto& task : updates) {
+		task.Complete();
+	}
+}
 
-	auto gamelogicupdate = threadPool->SubmitJob([](
-		FSMManager* gl, float dt) {
-		gl->Update(dt);
-	}, std::cref(gamelogic), deltatime);
+void SubsystemManager::Update(float deltatime)
+{
+	renderer->Update(deltatime);
 
-	auto profilerupdate = threadPool->SubmitJob([](
-		Profiler* p, float dt) {
-		p->Update(dt);
-	}, std::cref(profiler), deltatime);
-
-	auto audioupdate = threadPool->SubmitJob([](
-		float dt) {
-		AudioManager::GetInstance()->Update(dt);
-	}, deltatime);
+	for each(Subsystem* subsystem in subsystems)
+	{
+		subsystem->Update(deltatime);
+	}
 }

@@ -14,8 +14,6 @@
 #include <algorithm> //For std::sort
 #include <vector>
 
-#define SHADOWSIZE 2048
-
 class Renderer : public OGLRenderer, public ResourceBase, public Subsystem {
 public:
 	Renderer(Window &parent);

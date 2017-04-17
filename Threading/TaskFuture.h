@@ -21,7 +21,7 @@ public:
 		if (tFuture.valid()) tFuture.get();
 	}
 
-	auto get()
+	auto Complete()
 	{
 		return tFuture.get();
 	}
