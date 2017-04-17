@@ -20,7 +20,7 @@
 	Important Notes:
 	Up to 5 players supported. Player 1 will use mouse and keyboard.
 	Xbox One controllers are supported and the official wireless/bluetooth
-	adapter IS compatible.
+	adapter is compatible.
 
 	Controls::
 	Mouse + Keyboard: WASD = Move, Mouse = Aim, Left Click = shoot.
@@ -59,30 +59,21 @@ int main()
 	game->GetWindow()->LockMouseToWindow(true);
 	game->GetWindow()->ShowOSPointer(false);
 
-	//Returns the pointers now and send the to the appropriate subsystems.
-	ThreadPool*		tPool		 = database->GThreadPool->Find("ThreadPool");
-	Renderer*		renderer	 = database->GRenderer->Find("Renderer");
-	Window*			win			 = database->GWindow->Find("Window");
-	PhysicsEngine*	physics		 = database->GPhysicsEngine->Find("PhysicsEngine");
-	FSMManager*		gamelogic	 = database->GFSMManager->Find("GFSMManager");
-	Profiler*		profiler	 = database->GProfiler->Find("Profiler");
-	InputManager*	inputManager = database->GInputManager->Find("InputManager");
-	Camera*			camera		 = database->GCamera->Find("Camera");
+	//Return the pointers now and send the to the appropriate subsystems.
+	Camera*	camera	= database->GCamera->Find("Camera");
+	Window*	win		= database->GWindow->Find("Window");
 
-	physics->gamelogic = gamelogic;
-	renderer->SetCamera(camera);
+	database->GPhysicsEngine->Find("PhysicsEngine")->gamelogic = 
+		database->GFSMManager->Find("GFSMManager");
+
+	database->GRenderer->Find("Renderer")->SetCamera(camera);
 	AudioManager::GetInstance()->SetListener(camera->GetSceneNode());
 
 	//Set up any timers we want displayed on screen...
-	profiler->AddSubSystemTimer("Renderer", &renderer->updateTimer);
-	profiler->AddSubSystemTimer("PhysicsE", &physics->updateTimer);
-	profiler->AddSubSystemTimer("Gamelogic", &gamelogic->updateTimer);
-	profiler->AddSubSystemTimer("Input", &inputManager->updateTimer);
-	profiler->AddSubSystemTimer("Audio", &AudioManager::GetInstance()->updateTimer);
+	game->InitProfilerTimers();
 
-	//Which subsystems will be updated...
-	SubsystemManager subsystems(inputManager, tPool, renderer, win,
-		gamelogic, physics, profiler);
+	//Prepare all subsystems for updating...
+	SubsystemManager subsystems(database);
 
 	//Game loop...
 	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running) {

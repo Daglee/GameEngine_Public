@@ -34,6 +34,8 @@ public:
 	void LoadLevel(string level);
 	void ExitLevel();
 
+	void InitProfilerTimers();
+
 	Renderer* GetRenderer() const
 	{
 		return renderer;

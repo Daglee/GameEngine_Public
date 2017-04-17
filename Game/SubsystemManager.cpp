@@ -1,23 +1,17 @@
 #include "SubsystemManager.h"
 
-SubsystemManager::SubsystemManager(
-	InputManager* inputManager, ThreadPool* threadPool,
-	Renderer* renderer, Window* window, FSMManager* gamelogic, 
-	PhysicsEngine* physicsEngine, Profiler* profiler) 
-{
-	this->inputManager	= inputManager;
-	this->renderer		= renderer;
-	this->window		= window;
-	this->gamelogic		= gamelogic;
-	this->physicsEngine = physicsEngine;
-	this->profiler		= profiler;
-	this->threadPool	= threadPool;
+#include "../ResourceManagment/DataBase.h"
 
-	subsystems[0] = inputManager;
-	subsystems[1] = gamelogic;
-	subsystems[2] = physicsEngine;
-	subsystems[3] = profiler;
-	subsystems[4] = AudioManager::GetInstance();
+SubsystemManager::SubsystemManager(DataBase* database)
+{
+	this->renderer		= database->GRenderer->Find("Renderer");
+	this->threadPool	= database->GThreadPool->Find("ThreadPool");
+
+	subsystems[INPUT_MANAGER]	= database->GInputManager->Find("InputManager");
+	subsystems[GAME_LOGIC]		= database->GFSMManager->Find("GFSMManager");
+	subsystems[PHYS_ENGINE]		= database->GPhysicsEngine->Find("PhysicsEngine");
+	subsystems[PROFILER]		= database->GProfiler->Find("Profiler");
+	subsystems[AUDIO_MNGR]		= AudioManager::GetInstance();
 }
 
 //Game loop iteration!
@@ -34,17 +28,20 @@ void SubsystemManager::ThreadedUpdate(float deltatime)
 	renderer->Update(deltatime);
 
 	//But the other subsystems do...
+
+	//Contains the promises that the updates will get done.
 	vector<TaskFuture<void>> updates;
+
+	//Update each subsystem...
 	for each(Subsystem* subsystem in subsystems)
 	{
 		if (!threadPool->paused) {
-			updates.push_back(threadPool->SubmitJob([](	//A promise that it will get done...
-				Subsystem* s, float dt) {				//Any parameters needed...
-				s->Update(dt);							//The function to call...
-			}, subsystem, deltatime));					//What we are passing in...
+			updates.push_back(threadPool->SubmitJob([](Subsystem* s, float dt) {	//Any parameters needed...
+				s->Update(dt);				//The function to call...
+			}, subsystem, deltatime));		//What we are passing in...
 		}
 	}
-	//Equivalent to "physicsEngine->Update(deltatime);".
+	//Equivalent to "physicsEngine->Update(deltatime)".
 
 	//Synchronise threads.
 	for (auto& task : updates) {

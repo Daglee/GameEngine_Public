@@ -64,6 +64,22 @@ void Game::ExitLevel()
 	else Log::Error("Trying to unload a level that has not been loaded!");
 }
 
+void Game::InitProfilerTimers()
+{
+	//Retrieve everything from the database and hook it up.
+	Profiler* profiler = database->GProfiler->Find("Profiler");
+
+	profiler->AddSubSystemTimer("Renderer", &renderer->updateTimer);
+	profiler->AddSubSystemTimer("Input", &inputManager->updateTimer);
+	profiler->AddSubSystemTimer("Audio", &AudioManager::GetInstance()->updateTimer);
+
+	profiler->AddSubSystemTimer("PhysicsE", 
+		&database->GPhysicsEngine->Find("PhysicsEngine")->updateTimer);
+	profiler->AddSubSystemTimer("Gamelogic",
+		&database->GFSMManager->Find("GFSMManager")->updateTimer);
+
+}
+
 void Game::InitialisePlayers()
 {
 	inputManager->ConnectToDataBase(database);
