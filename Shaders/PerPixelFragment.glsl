@@ -2,6 +2,7 @@
 
 uniform sampler2D diffuseTex;
 uniform int useTexture;
+uniform int useOverlay;
 
 uniform vec3  cameraPos;
 uniform vec4  lightColour;
@@ -20,7 +21,7 @@ out vec4 gl_FragColor;
 void main(void){
 	vec4 diffuse = IN.colour;//texture(diffuseTex, IN.texCoord);
 	if(useTexture > 0) {
-		//diffuse = texture(diffuseTex, IN.texCoord);
+		diffuse = texture(diffuseTex, IN.texCoord);
 	}	
 
 	vec3 incident = normalize(lightPos - IN.worldPos);
@@ -40,5 +41,11 @@ void main(void){
 	colour       += (lightColour.rgb * sFactor) * 0.33;
 	gl_FragColor  = vec4(colour * atten * lambert, diffuse.a);
 
-	gl_FragColor.rgb += (diffuse.rgb * lightColour.rgb) * 0.3;
+	if(useOverlay == 0) {
+		gl_FragColor.rgb += (diffuse.rgb * lightColour.rgb) * 0.3;
+	}
+	else if(useTexture > 0) {
+		gl_FragColor = texture(diffuseTex, IN.texCoord);
+		gl_FragColor.a = 0.9;
+	}
 }

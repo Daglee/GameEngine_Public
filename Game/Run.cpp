@@ -15,6 +15,7 @@
 #include "../Physics/PhysicsEngine.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../Profiler/Profiler.h"
+#include "../GameLogicFSM/MessageSystem.h"
 
 /*
 	Important Notes:
@@ -41,11 +42,12 @@ int main()
 {
 	//Initialise the singleton (Gets added to database next).
 	AudioManager::Initialise();
+	MessageSystem::Initialise();
 
 	//Gets initialised on start up.
 	DataBase* database = new DataBase();
 
-	//Hook a few things up...
+	//Prepare for start up and initialise database.
 	Game* game = new Game("Renderer", "Window", database);
 
 	//Base assets such as the renderer, physics engine etc get loaded in.

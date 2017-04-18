@@ -1,0 +1,53 @@
+6
+state 0
+overlay1 = 1
+overlay2 = 0
+overlay3 = 0
+--
+state 1
+overlay1 = 0
+overlay2 = 1
+overlay3 = 0
+--
+state 2
+overlay1 = 0
+overlay2 = 0
+overlay3 = 1
+--
+state 3
+overlay1 = 0
+overlay2 = 0
+overlay3 = 0
+timer = 0
+--
+state 4
+overlay1 = 0
+overlay2 = 0
+overlay3 = 0
+timer = 0
+--
+state 5
+overlay1 = 0
+overlay2 = 0
+overlay3 = 0
+--
+-
+transition1 
+0 -> 3 
+exists_transmission = s:player_moved
+transition2
+3 -> 1
+timer > 200
+transition3
+1 -> 4
+exists_transmission = s:player_rotated
+transition 4
+4 -> 2
+timer > 200
+transition 5
+2 -> 5
+exists_transmission = s:player_fired
+transition 6
+5 -> 0
+exists_transmission = s:replay_tutorial
+-

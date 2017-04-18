@@ -149,7 +149,7 @@ void InputManager::SetPlayerParameters(Player* p)
 	p->teamID = connectedPlayers.size(); //Just for now (free for all)...
 
 	string tag = "player" + std::to_string(connectedPlayers.size());
-	p->GetRigidBody()->tag = tag;// p->GetResourceName();
+	p->GetRigidBody()->tag = "player";
 	p->walkingSoundName = "walkingsound" + tag;
 
 	SoundNode* walkingSound = new SoundNode(

@@ -5,6 +5,7 @@
 #include "../Physics/PhysicsEngine.h"
 #include "../Physics/RigidBody.h"
 #include "../../nclgl/Renderer.h"
+#include "../GameLogicFSM/MessageSystem.h"
 
 #define PLAYER_MASS 500.0f
 #define PLAYER_DRAG 0.7f
@@ -50,8 +51,13 @@ Player::~Player()
 
 void Player::ApplyInputs()
 {
-	Matrix4 rot = Matrix4::Rotation(input->GetRotation(), Vector3(0, 1, 0));
+	float rotationDegrees = input->GetRotation();
+
+	Matrix4 rot = Matrix4::Rotation(rotationDegrees, Vector3(0, 1, 0));
 	playerModel->SetTransform(playerModel->GetTransform() * rot);
+	if (rotationDegrees != 0) {
+		MessageSystem::GetInstance()->Transmit(Log::Hash("player_rotated"));
+	}
 
 	Vector3 movement = input->GetMovement() * 30;
 
@@ -59,6 +65,7 @@ void Player::ApplyInputs()
 
 	if (movement.x != 0 || movement.y != 0 || movement.z != 0) {
 		AudioManager::GetInstance()->BeginPlay(walkingSoundName);
+		MessageSystem::GetInstance()->Transmit(Log::Hash("player_moved"));
 	}
 	else AudioManager::GetInstance()->StopPlay(walkingSoundName);
 
@@ -67,6 +74,7 @@ void Player::ApplyInputs()
 			Sound* shoot = new Sound("../Data/Sounds/14615__man__canon.wav"); //AudioManager will delete this.
 			AudioManager::GetInstance()->TemporaryPlay(shoot, SOUNDPRIORITY_MEDIUM);
 		}
+		MessageSystem::GetInstance()->Transmit(Log::Hash("player_fired"));
 	}
 }
 

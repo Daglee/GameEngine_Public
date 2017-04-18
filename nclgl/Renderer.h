@@ -13,6 +13,7 @@
 
 #include <algorithm> //For std::sort
 #include <vector>
+#include <unordered_map>
 
 class Renderer : public OGLRenderer, public ResourceBase, public Subsystem {
 public:
@@ -77,13 +78,20 @@ public:
 	void Read(string resourcename);
 	void ReadParams(string params);
 
+	std::unordered_map<std::string, float*>* vars;
+	std::vector<std::string> overlays;
+
 	Mesh* loadingBar;
+	Mesh* overlay;
 protected:
 	Shader* textShader;
 
 	void DrawTextBuffer();
 	void DrawTextOBJ(const Text& textobj);
 	void DrawLoadingScreen(float current, float total);
+
+	void RenderOverlay();
+	void DrawOverlay();
 
 	/*<---From MSc tutorials + Slight modifications--->*/
 	void BuildNodeLists(SceneNode* from);
@@ -102,6 +110,8 @@ protected:
 	std::vector<SceneNode*> nodeList;
 
 	Window* wparent;
+	float timer = 0;
+	float overlayFlags[3];
 };
 
 

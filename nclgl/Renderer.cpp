@@ -12,7 +12,6 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent), ResourceBase() {
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f,
 		(float)width / (float)height, 45.0f);
 
-	//root = new SceneNode();
 	root.SetTransform(Matrix4::Translation(Vector3(0, 0, 0)));
 	basicFont = new Font(SOIL_load_OGL_texture(TEXTUREDIR"tahoma.tga",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_COMPRESS_TO_DXT), 16, 16);
@@ -23,6 +22,23 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent), ResourceBase() {
 
 	init = true;
 	this->SetResourceSize(sizeof(*this));
+
+	overlay = Mesh::GenerateQuad();
+	/*string texLoc = "../Data/Textures/Movement.tga";
+	overlay->SetTexture(SOIL_load_OGL_texture(texLoc.c_str(),
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS));*/
+
+	overlay->SetTexture(0);
+	//overlays.push_back(0);
+	overlays.push_back("../Data/Textures/Movement.tga");
+	overlays.push_back("../Data/Textures/Rotation.tga");
+	overlays.push_back("../Data/Textures/Shoot.tga");
+
+	vars = new std::unordered_map<std::string, float*>;
+	vars->insert({ "overlay1", &overlayFlags[0] });
+	vars->insert({ "overlay2", &overlayFlags[1] });
+	vars->insert({ "overlay3", &overlayFlags[2] });
+	vars->insert({ "timer", &timer });
 
 	wparent = &parent;
 }
@@ -45,6 +61,11 @@ Renderer::Renderer() : OGLRenderer(*(new Window())), ResourceBase() {
 	basicFont = new Font(SOIL_load_OGL_texture(TEXTUREDIR"tahoma.tga",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_COMPRESS_TO_DXT), 16, 16);
 
+	overlay = Mesh::GenerateQuad();
+	string texLoc = "../Data/Textures/Barren Reds.jpg";
+	overlay->SetTexture(SOIL_load_OGL_texture(texLoc.c_str(),
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS));
+
 	init = true;
 	this->SetResourceSize(sizeof(*this));
 }
@@ -61,6 +82,7 @@ void Renderer::Update(float deltatime) {
 
 	UpdateScene(deltatime);
 	RenderScene();
+	//DrawOverlay();
 
 	updateTimer.StopTimer();
 }
@@ -91,6 +113,9 @@ void Renderer::RenderScene() {
 	glUseProgram(currentShader->GetProgram());
 
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
+		"useOverlay"), 0);
+
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 		"diffuseTex"), 0);
 
 	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
@@ -108,6 +133,8 @@ void Renderer::RenderScene() {
 		textbuffer.clear();
 	}
 
+	RenderOverlay();
+
 	glUseProgram(0);
 
 	SwapBuffers();
@@ -115,6 +142,7 @@ void Renderer::RenderScene() {
 }
 
 void Renderer::UpdateScene(float msec) {
+	++timer;
 	camera->UpdateCamera(msec);
 	viewMatrix = camera->BuildViewMatrix();
 	root.Update(msec);
@@ -132,6 +160,44 @@ void Renderer::DrawLoadingScreen(float current, float total) {
 		"modelMatrix"), 1, false, *&modelMatrix.values);
 
 	loadingBar->Draw();
+}
+
+void Renderer::RenderOverlay()
+{
+	int overlayIndex = 0;
+	//for (std::unordered_map<std::string, float*>::iterator i = vars->begin();
+		//i != vars->end(); ++i) {
+	for each (float flag in overlayFlags) {
+		if (flag) {
+			overlay->SetTexture(SOIL_load_OGL_texture(overlays[overlayIndex].c_str(),
+				SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS));
+			glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
+				"useTexture"), overlay->GetTexture());
+			DrawOverlay();
+		}
+
+		++overlayIndex;
+	}
+
+
+	overlay->SetTexture(0);
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
+		"useTexture"), 0);
+	//DrawOverlay();
+}
+
+void Renderer::DrawOverlay()
+{
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
+		"useOverlay"), 1);
+
+	modelMatrix.SetScalingVector(Vector3(width * 0.5, height, 0));
+	modelMatrix.SetPositionVector(Vector3(0, -200, 0));
+
+	SwitchToOrthographic();
+	UpdateShaderMatrices();
+	overlay->Draw();
+	SwitchToPerspective();
 }
 
 void Renderer::DrawNode(SceneNode* n) {

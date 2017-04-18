@@ -1,4 +1,5 @@
 #include "Transition.h"
+#include "MessageSystem.h"
 
 Transition::Transition(std::unordered_map<string, float*>* vars, int from, int to, string check)
 {
@@ -30,6 +31,11 @@ bool Transition::Check()
 	}
 	else if (check.boolOperator == "<") {
 		if (*vars->find(check.var)->second < check.comparison) {
+			return true;
+		}
+	}
+	else if (check.var == "exists_transmission") {
+		if (MessageSystem::GetInstance()->MessageTransmitting(check.comparison)) {
 			return true;
 		}
 	}

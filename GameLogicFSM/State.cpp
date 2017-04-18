@@ -1,5 +1,6 @@
 #include "State.h"
 #include "../ResourceManagment/Log.h"
+#include "MessageSystem.h"
 
 State::State(std::unordered_map<string, float*>* vars, int id)
 {
@@ -22,6 +23,9 @@ void State::ExecuteAllActions()
 		}
 		else if (a.actoperator == "*=") {
 			*vars->find(a.var)->second *= a.action;
+		}
+		else if (a.actoperator == "transmit") {
+			MessageSystem::GetInstance()->Transmit(a.action);
 		}
 	}
 }

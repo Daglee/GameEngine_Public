@@ -16,8 +16,8 @@ coloura = 1
 -
 transition1 
 0 -> 1 
-collider == s:bullet
+exists_transmission = s:player_colliding_sphere
 transition2
 1 -> 0
-timer > 60
+timer > 100
 -

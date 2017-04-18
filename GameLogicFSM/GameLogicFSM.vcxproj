@@ -21,12 +21,14 @@
   <ItemGroup>
     <ClInclude Include="FSM.h" />
     <ClInclude Include="FSMManager.h" />
+    <ClInclude Include="MessageSystem.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Transition.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="FSMManager.cpp" />
+    <ClCompile Include="MessageSystem.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Transition.cpp" />
   </ItemGroup>

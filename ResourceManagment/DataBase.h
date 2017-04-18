@@ -351,6 +351,10 @@ private:
 
 		Renderer* rend = new Renderer(*(GWindow->Find(winName)));
 		GRenderer->Load(name, rend);
+
+		FSM* f = new FSM(rend->vars, "../Data/GameLogic/Renderer.txt");
+		FSMManager* fm = GFSMManager->Find("GFSMManager");
+		fm->AddFSM(f);
 	}
 
 	void ReadLoop(vector<vector<string>> tokens, vector<string> line, int numLines) {

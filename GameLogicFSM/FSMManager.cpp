@@ -1,6 +1,7 @@
 #include "FSMManager.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../Game/Player.h"
+#include "MessageSystem.h"
 
 FSMManager::FSMManager(DataBase* db, int numFSMs) : ResourceBase()
 {
@@ -25,14 +26,13 @@ void FSMManager::Update(float deltatime)
 {
 	updateTimer.StartTimer();
 
-	UpdateColliders();
-
 	//Update each FSM
 	for (int i = 0; i < numAdded; ++i)
 	{
 		fsms[i]->Update();
 	}
 
+	MessageSystem::GetInstance()->ClearAllMessages();
 	updateTimer.StopTimer();
 }
 
