@@ -7,7 +7,6 @@ FSMManager::FSMManager(int numFSMs) : ResourceBase()
 {
 	this->numFSMs	= numFSMs;
 	fsms			= new FSM*[numFSMs];
-	//database		= db;
 
 	this->SetResourceSize(sizeof(*this));
 }

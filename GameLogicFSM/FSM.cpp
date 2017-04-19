@@ -9,6 +9,12 @@ FSM::FSM(std::unordered_map<string, float*>* vars, string filename)
 	BuildFSM();
 }
 
+FSM::FSM(std::unordered_map<string, float*>* vars)
+{
+	this->vars = vars;
+	this->filename = filename;
+}
+
 FSM::~FSM()
 {
 	for each(State* state in states) {
@@ -16,8 +22,10 @@ FSM::~FSM()
 	}
 }
 
-void FSM::BuildFSM() 
+void FSM::BuildFSM(string newFileName)
 {
+	if (newFileName != "") filename = newFileName;
+
 	std::ifstream file(filename);
 	string line;
 	

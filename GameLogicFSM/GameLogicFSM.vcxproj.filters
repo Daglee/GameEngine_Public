@@ -16,6 +16,7 @@
     <ClInclude Include="FSMManager.h">
       <Filter>FSM Managment</Filter>
     </ClInclude>
+    <ClInclude Include="FSMUnit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FSM.cpp">
@@ -33,6 +34,7 @@
     <ClCompile Include="MessageSystem.cpp">
       <Filter>FSM Managment</Filter>
     </ClCompile>
+    <ClCompile Include="FSMUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Finite State Machine">

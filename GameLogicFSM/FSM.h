@@ -12,11 +12,14 @@ class FSM
 {
 public:
 	FSM(std::unordered_map<string, float*>* vars, string filename);
-
+	FSM(std::unordered_map<string, float*>* vars);
 	~FSM();
 
-	void BuildFSM();	//Read states and transitions.
-	void Update();		//State switching.
+	//Read states and transitions.
+	void BuildFSM(string newFileName = "");	
+
+	//State switching.
+	void Update();		
 
 	vector<State*> states;
 
