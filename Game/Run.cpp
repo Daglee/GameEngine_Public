@@ -4,17 +4,11 @@
 #pragma comment(lib, "GameLogicFSM.lib")
 #pragma comment(lib, "Profiler.lib")
 #pragma comment(lib, "UISystem.lib")
+#pragma comment(lib, "ResourceManagment.lib")
 
 #include "Game.h"
 #include "SubsystemManager.h"
-#include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../Threading/ThreadManager.h"
-#include "../NCLGL/window.h"
-#include "../NCLGL/Renderer.h"
-#include "../Physics/PhysicsEngine.h"
-#include "../GameLogicFSM/FSMManager.h"
-#include "../Profiler/Profiler.h"
 #include "../GameLogicFSM/MessageSystem.h"
 
 /*
@@ -23,7 +17,7 @@
 	Xbox One controllers are supported and the official wireless/bluetooth
 	adapter is compatible.
 
-	Controls::
+	Controls: (There is also an in-game tutorial)
 	Mouse + Keyboard: WASD = Move, Mouse = Aim, Left Click = shoot.
 	Controller: Left Stick = Move, Right Stick = Aim, Right Trigger = shoot.
 

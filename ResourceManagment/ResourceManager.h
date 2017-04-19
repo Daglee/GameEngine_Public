@@ -106,7 +106,7 @@ public:
 			newMap->Add(resourcename, resourceObj);
 			currentSize = currentSize + resourceObj->GetResourceSize();
 		}
-		else Log::Error("Cannot add item - would exceed limit");
+		else Log::Error(Name + " Cannot add item - would exceed limit");
 
 		return resourceObj;
 	}
