@@ -34,9 +34,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -79,8 +79,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\SOIL;..\..\GLEW\include;..\..\nclgl\;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\Graphics For Games\$(Configuration);..\..\SOIL\$(Configuration);..\..\GLEW\lib\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\libvorbis-1.3.2\include;..\OpenAL 1.1 SDK\include;..\SOIL;..\GLEW\include;..\nclgl\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\OpenAL 1.1 SDK\libs\$(Configuration);..\nclgl\$(Configuration);..\SOIL\$(Configuration);..\GLEW\lib\$(Configuration)\;..\libvorbis-1.3.2\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,7 +96,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Game Engine\GLEW\lib;C:\Users\Kiya\Desktop\New folder %282%29\Games Development 6.0\Framework\NCLGL Framework\OpenAL 1.1 SDK\libs\Win32;C:\Users\Kiya\Desktop\New folder %282%29\Games Development 6.0\Framework\NCLGL Framework\libvorbis-1.3.2;..\libvorbis-1.3.2;..\OpenAL 1.1 SDK\libs\Win32;C:\Users\Kiya\Desktop\Games Development 2.0\Framework\NCLGL Framework\Graphics For Games\UISystem;C:\Users\Kiya\Desktop\Games Development 2.0\Framework\NCLGL Framework\Graphics For Games\Profiler;C:\Users\Kiya\Desktop\Projects\Games Development\Framework\NCLGL Framework\Graphics For Games\Threading;H:\Games Development\Framework\NCLGL Framework\Graphics For Games\ResourceManagment;H:\Games Development\Framework\NCLGL Framework\Graphics For Games\Physics;$(SolutionDir)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Game Engine\GLEW\lib;..\libvorbis-1.3.2;..\OpenAL 1.1 SDK\libs\Win32;$(SolutionDir)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,13 +121,18 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\Game Engine\GLEW\lib;..\libvorbis-1.3.2;..\OpenAL 1.1 SDK\libs\Win32;$(SolutionDir)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
