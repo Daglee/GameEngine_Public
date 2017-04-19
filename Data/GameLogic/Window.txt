@@ -8,5 +8,5 @@ running = 0
 -
 transition1 
 0 -> 1 
-timer > 100000
+exists_transmission = s:stop_game
 -

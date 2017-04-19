@@ -1,4 +1,5 @@
 #include "MKMapper.h"
+#include "../GameLogicFSM/MessageSystem.h"
 
 //Using macros for array indexes 
 //to make it more readable...
@@ -38,10 +39,15 @@ void MKMapper::FillInputs()
 		inputs[MOVEMENT_X] = inputs[MOVEMENT_X] + 1.1f;
 	}
 
+	if (Window::GetKeyboard()->KeyDown(STOP_GAME)) {
+		MessageSystem::GetInstance()->Transmit(Log::Hash("stop_game"));
+	}
+
 	//Key: LC - index - 4
 	if (Window::GetMouse()->ButtonDown(FIRE_BUTTON)) {
 		inputs[FIRED] = 1;
 	}
+
 
 	//Rotation - Y - 2 (pitch)
 	inputs[ROTATION_Y] = Window::GetMouse()->GetRelativePosition().y / 10;
@@ -118,4 +124,8 @@ void MKMapper::ReadMapping(std::string filename)
 	//PAUSE BUTTON
 	getline(file, button);
 	PAUSE = Window::GetKeyboard()->Mapper(button);
+
+	//QUIT BUTTON
+	getline(file, button);
+	STOP_GAME = Window::GetKeyboard()->Mapper(button);
 }

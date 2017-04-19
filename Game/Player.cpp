@@ -54,9 +54,7 @@ void Player::ApplyInputs()
 
 	Matrix4 rot = Matrix4::Rotation(rotationDegrees, Vector3(0, 1, 0));
 	playerModel->SetTransform(playerModel->GetTransform() * rot);
-	if (rotationDegrees != 0) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash("player_rotated"));
-	}
+	if (rotationDegrees != 0) MessageSystem::GetInstance()->Transmit(Log::Hash("player_rotated"));
 
 	Vector3 movement = input->GetMovement() * 30;
 

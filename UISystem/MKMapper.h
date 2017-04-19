@@ -44,5 +44,6 @@ private:
 	KeyboardKeys POS_MOVEMENT_X;
 	KeyboardKeys POS_MOVEMENT_Z;
 	KeyboardKeys NEG_MOVEMENT_Z;
+	KeyboardKeys STOP_GAME;
 	MouseButtons FIRE_BUTTON;
 };

@@ -3,8 +3,8 @@
 //Just a style choice.
 #define MAX_MEM_PER_TYPE 1000
 #define MAX_MEM_PLAYERS 2000
-#define MAX_MEM_OBJMESHES 2000
-#define MAX_MEM_PHYSOBJ 3000
+#define MAX_MEM_OBJMESHES 4000
+#define MAX_MEM_PHYSOBJ 8000
 
 #define PHYS_OBJ_BINS 5
 #define OBJMESH_BINS 5
