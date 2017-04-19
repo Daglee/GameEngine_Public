@@ -127,10 +127,8 @@ void PhysicsEngine::NarrowPhase(vector<CollisionPair> pairs)
 
 		if (collisionPair.r1->collider->IsColliding(contactNormal, *(collisionPair.r2->collider), penetrationDepth)) {
 			//Add them to the game logic in case anything else needs to happen.
-			if (gamelogic != nullptr && 
-				collisionPair.r1->tag != "" && //If they dont have a tag then they're probably not needed!
+			if (collisionPair.r1->tag != "" && //If they dont have a tag then they're probably not needed!
 				collisionPair.r2->tag != "") {
-				//gamelogic->colliders.insert({ collisionPair.r1, collisionPair.r2 });
 				MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
 			}
 

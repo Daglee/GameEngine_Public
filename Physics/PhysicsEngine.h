@@ -9,8 +9,6 @@
 #include <vector>
 #include <algorithm>
 
-class FSMManager;
-
 const float AT_REST = 0.001f;
 
 struct CollisionPair
@@ -45,8 +43,6 @@ public:
 	
 	void Read(string resourcename);
 	void ReadParams(string params);
-	
-	FSMManager* gamelogic;
 private:
 	vector<RigidBody*> rigidBodies;
 

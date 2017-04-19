@@ -6,8 +6,6 @@
 #include "FSM.h"
 #include <map>
 
-class DataBase;
-
 /*
   Handles the game logic of the game via finite state machines.
   Main use is for colliders and how, if at all, to respond to them.
@@ -19,7 +17,7 @@ class DataBase;
 class FSMManager : public ResourceBase, public Subsystem
 {
 public:
-	FSMManager(DataBase* db, int numFSMs = 0);
+	FSMManager(int numFSMs = 0);
 	~FSMManager();
 
 	void AddFSM(FSM* fsm) 
@@ -29,7 +27,6 @@ public:
 	}
 
 	void Update(float deltatime = 0); //For state changes
-	void UpdateColliders();
 
 	FSM** fsms;		//Array of FSMs
 	int numFSMs;	//upper bounds of how many FSMs can be added
@@ -37,9 +34,5 @@ public:
 
 	void Read(string resourcename);
 	void ReadParams(string params);
-
-	std::map<RigidBody*, RigidBody*> colliders; //Gets added to by the physics engine
-private:
-	DataBase* database;
 };
 

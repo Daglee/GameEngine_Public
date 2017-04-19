@@ -65,9 +65,6 @@ int main()
 	Camera*	camera	= database->GCamera->Find("Camera");
 	Window*	win		= database->GWindow->Find("Window");
 
-	database->GPhysicsEngine->Find("PhysicsEngine")->gamelogic = 
-		database->GFSMManager->Find("GFSMManager");
-
 	database->GRenderer->Find("Renderer")->SetCamera(camera);
 	AudioManager::GetInstance()->SetListener(camera->GetSceneNode());
 

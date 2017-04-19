@@ -275,7 +275,7 @@ private:
 	}
 
 	void AddToGFSMManager(string params) {
-		FSMManager* fsmm = new FSMManager(this);
+		FSMManager* fsmm = new FSMManager();
 		fsmm->ReadParams(params);
 		GFSMManager->Load(fsmm);
 	}

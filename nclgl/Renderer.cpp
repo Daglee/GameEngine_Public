@@ -165,8 +165,6 @@ void Renderer::DrawLoadingScreen(float current, float total) {
 void Renderer::RenderOverlay()
 {
 	int overlayIndex = 0;
-	//for (std::unordered_map<std::string, float*>::iterator i = vars->begin();
-		//i != vars->end(); ++i) {
 	for each (float flag in overlayFlags) {
 		if (flag) {
 			overlay->SetTexture(SOIL_load_OGL_texture(overlays[overlayIndex].c_str(),
@@ -179,11 +177,9 @@ void Renderer::RenderOverlay()
 		++overlayIndex;
 	}
 
-
 	overlay->SetTexture(0);
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 		"useTexture"), 0);
-	//DrawOverlay();
 }
 
 void Renderer::DrawOverlay()

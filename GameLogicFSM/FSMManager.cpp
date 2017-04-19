@@ -3,11 +3,11 @@
 #include "../Game/Player.h"
 #include "MessageSystem.h"
 
-FSMManager::FSMManager(DataBase* db, int numFSMs) : ResourceBase()
+FSMManager::FSMManager(int numFSMs) : ResourceBase()
 {
 	this->numFSMs	= numFSMs;
 	fsms			= new FSM*[numFSMs];
-	database		= db;
+	//database		= db;
 
 	this->SetResourceSize(sizeof(*this));
 }
@@ -26,6 +26,9 @@ void FSMManager::Update(float deltatime)
 {
 	updateTimer.StartTimer();
 
+	this->SetResourceSize(sizeof(*this) + 
+		sizeof(*MessageSystem::GetInstance()));
+
 	//Update each FSM
 	for (int i = 0; i < numAdded; ++i)
 	{
@@ -33,50 +36,11 @@ void FSMManager::Update(float deltatime)
 	}
 
 	MessageSystem::GetInstance()->ClearAllMessages();
+
+	this->SetResourceSize(sizeof(*this) + 
+		sizeof(*MessageSystem::GetInstance()));
+
 	updateTimer.StopTimer();
-}
-
-/*
-  Iterate through the collider pairs and add to any game logic
-  maps appropriately. 
-*/
-void  FSMManager::UpdateColliders() 
-{
-	for (std::map<RigidBody*, RigidBody*>::iterator i = colliders.begin();
-		i != colliders.end(); i++) {
-		string colliderA = i->first->tag;
-		string colliderB = i->second->tag;
-		
-		string colliderAID = colliderA.substr(6, 1);
-		string colliderBID = colliderB.substr(6, 1);
-
-		if (colliderAID != colliderBID) {
-			if (colliderA.find("bullet") != string::npos
-				&& colliderB.find("player") != string::npos) {
-
-				int playerID		= atoi(colliderBID.c_str()) - 1;
-				string playername	= "player" + to_string(playerID);
-				Player* player		= database->Players->Find(playername);
-
-				float* h = new float(Log::Hash("bullet"));
-				player->vars->find("collider")->second = h;
-			}
-			//Also check the other way round
-			else if (colliderA.find("player") != string::npos
-				&& colliderB.find("bullet") != string::npos) {
-
-				int playerID		= atoi(colliderAID.c_str()) - 1;
-				string playername	= "player" + to_string(playerID);
-				Player* player		= database->Players->Find(playername);
-
-				float* h = new float(Log::Hash("bullet"));
-				player->vars->find("collider")->second = h;
-			}
-		}
-
-	}
-
-	colliders.clear();
 }
 
 void FSMManager::Read(string resourcename)
