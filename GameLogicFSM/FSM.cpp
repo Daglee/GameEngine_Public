@@ -2,17 +2,19 @@
 
 #include "../ResourceManagment/Log.h"
 
-FSM::FSM(std::unordered_map<string, float*>* vars, string filename)
+FSM::FSM(string FSMName, std::unordered_map<string, float*>* vars, string filename)
 {
 	this->vars = vars;
 	this->filename = filename;
+	this->FSMName = FSMName;
+
 	BuildFSM();
 }
 
-FSM::FSM(std::unordered_map<string, float*>* vars)
+FSM::FSM(string FSMName, std::unordered_map<string, float*>* vars)
 {
 	this->vars = vars;
-	this->filename = filename;
+	this->FSMName = FSMName;
 }
 
 FSM::~FSM()
@@ -81,7 +83,10 @@ void FSM::Update()
 {
 	//If transition returns true, move to a new state
 	if (states[activeState]->transition->Check()) {
+		//The new State is the one that the transition specifies/
 		activeState = states[activeState]->transition->to;
+
+		//Update the game based on the state's actions.
 		states[activeState]->ExecuteAllActions();
 	}
 	//else no change

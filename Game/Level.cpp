@@ -36,6 +36,9 @@ void Level::LoadAndInitialise(std::string directory)
 	if (infile.good()) {
 		ReadPhysicsObject(physObj);
 	}
+
+	string gamelogicFile = line + "/GameLogic.txt";
+	InitialiseGameLogic(gamelogicFile);
 }
 
 //Assets for database
@@ -258,4 +261,22 @@ void Level::ReadPhysicsObject(std::string filename)
 
 	}
 
+}
+
+void Level::InitialiseGameLogic(std::string filename)
+{
+	std::ifstream file(filename);
+	string line;
+
+	FSMManager* fsmManager = database->GFSMManager->Find("GFSMManager");
+
+	while (getline(file, line))
+	{
+		vector<std::string> tokens = Log::tokenise(line);
+		std::string FSMName = tokens.at(0);
+		std::string FSMFile = tokens.at(1);
+
+		//Construct the FSM
+		fsmManager->LateBuildFSM(FSMName, FSMFile);
+	}
 }

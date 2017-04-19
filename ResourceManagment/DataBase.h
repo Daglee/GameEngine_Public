@@ -307,7 +307,7 @@ private:
 	}
 
 	void AddToPlayers(string resourceName) {
-		Player* p = new Player();
+		Player* p = new Player(this);
 		Players->Load(resourceName, p);
 	}
 
@@ -332,12 +332,8 @@ private:
 		int resY = atoi(tokens.at(2).c_str());
 		bool fullscreen = atoi(tokens.at(3).c_str()) != 0;
 
-		Window* win = new Window(name, resX, resY, fullscreen);
+		Window* win = new Window(this, name, resX, resY, fullscreen);
 		GWindow->Load(name, win);
-
-		FSM* f = new FSM(win->vars, "../Data/GameLogic/Window.txt");
-		FSMManager* fm = GFSMManager->Find("GFSMManager");
-		fm->AddFSM(f);
 	}
 
 	//WILL NOT USE READ FUNCTIONS FOR NOW
@@ -349,12 +345,8 @@ private:
 		string name = tokens.at(0);
 		string winName = tokens.at(1);
 
-		Renderer* rend = new Renderer(*(GWindow->Find(winName)));
+		Renderer* rend = new Renderer(this, *(GWindow->Find(winName)));
 		GRenderer->Load(name, rend);
-
-		FSM* f = new FSM(rend->vars, "../Data/GameLogic/Renderer.txt");
-		FSMManager* fm = GFSMManager->Find("GFSMManager");
-		fm->AddFSM(f);
 	}
 
 	void ReadLoop(vector<vector<string>> tokens, vector<string> line, int numLines) {

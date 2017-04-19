@@ -47,6 +47,9 @@ private:
 	//Moves and orientates the objects appropriately
 	void InitialiseObjects(std::string filename);
 
+	//Build the FSMs required for this level
+	void InitialiseGameLogic(std::string filename);
+
 	//Reads a singular object
 	void ReadObject(std::string line);
 

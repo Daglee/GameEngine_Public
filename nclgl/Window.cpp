@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "Mouse.h"
 #include "Keyboard.h"
+#include "../ResourceManagment/DataBase.h"
 
 Window* Window::window;
 
@@ -8,7 +9,8 @@ Keyboard*Window::keyboard	= NULL;
 Mouse*Window::mouse			= NULL;
 //GameTimer*Window::timer		= NULL;
 
-Window::Window(std::string title, int sizeX, int sizeY, bool fullScreen) : ResourceBase() {
+Window::Window(DataBase* database, std::string title, 
+	int sizeX, int sizeY, bool fullScreen) : ResourceBase(), FSMUnit("Window", database) {
 	renderer		= NULL;
 	window			= this;
 	forceQuit		= false;
@@ -124,12 +126,8 @@ Window::Window(std::string title, int sizeX, int sizeY, bool fullScreen) : Resou
 
 	init = true;
 
-	vars = new std::unordered_map<std::string, float*>;
-
 	vars->insert({ "timer", &elapsedMS });
 	vars->insert({ "running", &running });
-	//vars["timer"] = &elapsedMS;
-	//vars["running"] = &running;
 
 	this->SetResourceSize(sizeof(*this));
 }

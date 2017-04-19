@@ -19,16 +19,19 @@ Description:Creates and handles the Window, including the initialisation of the 
 #include "Mouse.h"
 #include "GameTimer.h"
 #include "../ResourceManagment/ResourceBase.h"
+#include "../GameLogicFSM/FSMUnit.h"
 
 #define WIN32_LEAN_AND_MEAN
 #define VC_EXTRALEAN
 #define WINDOWCLASS "WindowClass"
 
 class OGLRenderer;
+class Database;
 
-class Window : public ResourceBase {
+class Window : public ResourceBase, FSMUnit {
 public:
-	Window(std::string title = "OpenGL Framework", int sizeX = 800, int sizeY = 600, bool fullScreen = false);
+	Window(DataBase* database = nullptr, std::string title = "OpenGL Framework", 
+		int sizeX = 800, int sizeY = 600, bool fullScreen = false);
 	~Window(void);
 
 	bool	UpdateWindow();	
@@ -52,8 +55,8 @@ public:
 	void Read(string resourcename);
 	void ReadParams(string params);
 
-	std::unordered_map<std::string, float*>* vars;
 	float running = 1;
+	float elapsedMS;
 
 protected:
 	void	CheckMessages(MSG &msg);
@@ -78,7 +81,6 @@ protected:
 	Vector2				position;
 	Vector2				size;
 
-	float				elapsedMS;
 
 	bool				mouseLeftWindow;
 };

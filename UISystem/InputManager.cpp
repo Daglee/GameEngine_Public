@@ -97,12 +97,6 @@ void InputManager::UpdateConnections()
 */
 void InputManager::InitialisePlayer(Player* p, Gamepad* gp) 
 {
-	FSM* f = new FSM(p->vars, "../Data/GameLogic/Player.txt");
-	//f->BuildFSM();
-
-	FSMManager* fm = database->GFSMManager->Find("GFSMManager");
-	fm->AddFSM(f);
-
 	GamepadMapper* gm = new GamepadMapper();
 	gm->SetGamePad(gp);
 	p->SetInputMapper(gm);
@@ -120,12 +114,6 @@ void InputManager::InitialisePlayer(Player* p, Gamepad* gp)
 */
 void InputManager::InitialisePlayer(Player* p)
 {
-	FSM* f = new FSM(p->vars, "../Data/GameLogic/Player.txt");
-	//f->BuildFSM();
-
-	FSMManager* fm = database->GFSMManager->Find("GFSMManager");
-	fm->AddFSM(f);
-
 	MKMapper* mkm = new MKMapper(window, "../Data/ButtonMapping/MKMap.txt");
 	p->SetInputMapper(mkm);
 

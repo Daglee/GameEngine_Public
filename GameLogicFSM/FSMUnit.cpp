@@ -4,7 +4,8 @@
 
 FSMUnit::FSMUnit(std::string FSMName, DataBase* database)
 {
-	vars = new std::unordered_map<std::string, float*>;
+	vars	= new std::unordered_map<std::string, float*>;
+	fsm		= new FSM(FSMName, vars);
 
-	fsm = new FSM(vars);
+	database->GFSMManager->Find("GFSMManager")->AddFSM(fsm, false);
 }

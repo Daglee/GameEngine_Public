@@ -1,0 +1,3 @@
+Player ../Data/GameLogic/Player.txt
+Window ../Data/GameLogic/Window.txt
+Renderer ../Data/GameLogic/Renderer.txt

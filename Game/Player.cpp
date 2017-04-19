@@ -11,7 +11,7 @@
 #define PLAYER_DRAG 0.7f
 #define PLAYER_GRAVITY -0.001f
 
-Player::Player() : ResourceBase()
+Player::Player(DataBase* database) : ResourceBase(), FSMUnit("Player", database)
 {
 	//Load in a character model
 	playerModel = new CharacterModel(CHARCT_MODEL_LOC);
@@ -32,7 +32,6 @@ Player::Player() : ResourceBase()
 	rigidBody.collider->position = rigidBody.lastPosition;
 
 	//For the game logic FSM
-	vars = new std::unordered_map<std::string, float*>;
 	vars->insert({ "colourr", &colourr });
 	vars->insert({ "colourg", &colourg });
 	vars->insert({ "colourb", &colourb });

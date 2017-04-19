@@ -21,6 +21,17 @@ FSMManager::~FSMManager(){
 	delete fsms;
 }
 
+void FSMManager::LateBuildFSM(string FSMName, string filename)
+{
+	//Multiple FSMs could use the same config file.
+	for each (FSM* fsm in notBuilt)
+	{
+		if (fsm->FSMName == FSMName) {
+			fsm->BuildFSM(filename);
+		}
+	}
+}
+
 void FSMManager::Update(float deltatime) 
 {
 	updateTimer.StartTimer();

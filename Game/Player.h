@@ -5,6 +5,7 @@
 #include "../ResourceManagment/ResourceBase.h"
 #include "Gun.h"
 #include "AudioManager.h"
+#include "../GameLogicFSM/FSMUnit.h"
 
 class DataBase;
 class InputMapper;
@@ -20,10 +21,10 @@ class RigidBody;
   Physics entity wrapper.
   Contains gameplay mechanics focused on the player.
 */
-class Player : public ResourceBase
+class Player : public ResourceBase, FSMUnit
 {
 public:
-	Player();
+	Player(DataBase* database);
 	~Player();
 
 	void ApplyInputs();
@@ -68,9 +69,6 @@ public:
 	Gun*	gun;
 	int		teamID;
 	string walkingSoundName;
-
-	//For the finite state machine
-	std::unordered_map<std::string, float*>* vars;
 protected:
 	CharacterModel* playerModel;
 	InputMapper* input; //Updated in game loop

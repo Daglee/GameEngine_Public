@@ -11,8 +11,8 @@
 class FSM
 {
 public:
-	FSM(std::unordered_map<string, float*>* vars, string filename);
-	FSM(std::unordered_map<string, float*>* vars);
+	FSM(string FSMName, std::unordered_map<string, float*>* vars, string filename);
+	FSM(string FSMName, std::unordered_map<string, float*>* vars);
 	~FSM();
 
 	//Read states and transitions.
@@ -27,6 +27,7 @@ public:
 	std::unordered_map<string, float*>* vars;
 
 	string filename;
+	string FSMName;
 
 	//Each state has an ID. Default start state has ID 0.
 	int activeState = 0;

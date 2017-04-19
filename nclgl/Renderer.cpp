@@ -1,6 +1,9 @@
 #include "Renderer.h"
 
-Renderer::Renderer(Window &parent) : OGLRenderer(parent), ResourceBase() {
+#include "../ResourceManagment/DataBase.h"
+
+Renderer::Renderer(DataBase* database, Window &parent) : 
+	OGLRenderer(parent), ResourceBase(), FSMUnit("Renderer", database) {
 	light = new Light(Vector3(500000, 1000000, 0), Vector4(1, 1, 1, 1), 10000000.0f);
 
 	currentShader = new Shader(SHADERDIR"PerPixelVertex.glsl",
@@ -24,17 +27,12 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent), ResourceBase() {
 	this->SetResourceSize(sizeof(*this));
 
 	overlay = Mesh::GenerateQuad();
-	/*string texLoc = "../Data/Textures/Movement.tga";
-	overlay->SetTexture(SOIL_load_OGL_texture(texLoc.c_str(),
-		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS));*/
-
 	overlay->SetTexture(0);
-	//overlays.push_back(0);
+
 	overlays.push_back("../Data/Textures/Movement.tga");
 	overlays.push_back("../Data/Textures/Rotation.tga");
 	overlays.push_back("../Data/Textures/Shoot.tga");
 
-	vars = new std::unordered_map<std::string, float*>;
 	vars->insert({ "overlay1", &overlayFlags[0] });
 	vars->insert({ "overlay2", &overlayFlags[1] });
 	vars->insert({ "overlay3", &overlayFlags[2] });

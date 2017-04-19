@@ -20,15 +20,22 @@ public:
 	FSMManager(int numFSMs = 0);
 	~FSMManager();
 
-	void AddFSM(FSM* fsm) 
+	void AddFSM(FSM* fsm, bool built) 
 	{
 		fsms[numAdded] = fsm;
+		if (!built) notBuilt.push_back(fsm);
+
 		numAdded++;
 	}
 
+	//Can be called to construct a FSM that has not been built yet.
+	void LateBuildFSM(string FSMName, string filename);
+
 	void Update(float deltatime = 0); //For state changes
 
-	FSM** fsms;		//Array of FSMs
+	FSM** fsms;				//Array of FSMs.
+	vector<FSM*> notBuilt;	//FSMs that have yet to be constructed.
+
 	int numFSMs;	//upper bounds of how many FSMs can be added
 	int numAdded = 0;
 

@@ -7,6 +7,7 @@
 #include "OBJMesh.h"
 #include "Mesh.h"
 #include "../ResourceManagment/ResourceBase.h"
+#include "../GameLogicFSM/FSMUnit.h"
 #include "../Game/Subsystem.h"
 #include "Text.h"
 #include "TextMesh.h"
@@ -15,9 +16,12 @@
 #include <vector>
 #include <unordered_map>
 
-class Renderer : public OGLRenderer, public ResourceBase, public Subsystem {
+class DataBase;
+
+class Renderer : public OGLRenderer, public ResourceBase, 
+	public Subsystem, FSMUnit {
 public:
-	Renderer(Window &parent);
+	Renderer(DataBase* database, Window &parent);
 	Renderer();
 	~Renderer(void);
 
@@ -78,7 +82,6 @@ public:
 	void Read(string resourcename);
 	void ReadParams(string params);
 
-	std::unordered_map<std::string, float*>* vars;
 	std::vector<std::string> overlays;
 
 	Mesh* loadingBar;
