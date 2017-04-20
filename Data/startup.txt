@@ -8,5 +8,5 @@ params GCamera Camera -60 00 0 900 640
 params GProfiler Profiler Window 8
 1 PhysicsEngine PhysicsEngine
 1 GInputManager InputManager
-6 Players player
-6 Gamepads gamepad
+5 Players player
+4 Gamepads gamepad

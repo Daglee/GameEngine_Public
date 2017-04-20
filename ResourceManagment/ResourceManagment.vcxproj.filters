@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Log.h" />
-    <ClInclude Include="resource1.h" />
     <ClInclude Include="ResourceBase.h">
       <Filter>Resources</Filter>
     </ClInclude>
@@ -15,9 +14,9 @@
     <ClInclude Include="DataBase.h">
       <Filter>Database</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="ResourceManagment.rc" />
+    <ClInclude Include="resource1.h">
+      <Filter>Random Things</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resources">
@@ -26,10 +25,18 @@
     <Filter Include="Database">
       <UniqueIdentifier>{69b19bfd-213d-4392-b9b2-ae49c0944291}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Random Things">
+      <UniqueIdentifier>{49d6153c-c8dd-40eb-abf2-4a68288aa724}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataBase.cpp">
       <Filter>Database</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ResourceManagment.rc">
+      <Filter>Random Things</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -3,6 +3,5 @@ player2 ../Data/GameLogic/player2.txt
 player3 ../Data/GameLogic/player3.txt
 player4 ../Data/GameLogic/player4.txt
 player5 ../Data/GameLogic/player5.txt
-player6 ../Data/GameLogic/player6.txt
 Window ../Data/GameLogic/Window.txt
 Renderer ../Data/GameLogic/Renderer.txt

@@ -58,7 +58,7 @@ void Player::ApplyInputs()
 
 	Vector3 movement = input->GetMovement() * 30;
 
-	rigidBody.ApplyMomentum(movement);
+	rigidBody.ApplyForce(movement);
 
 	if (movement.x != 0 || movement.y != 0 || movement.z != 0) {
 		AudioManager::GetInstance()->BeginPlay(walkingSoundName);

@@ -34,7 +34,7 @@ public:
 	~PhysicsObject() {}
 
 	//Adds to the physics engine
-	inline void UpdatePhysics(PhysicsEngine* p)
+	void UpdatePhysics(PhysicsEngine* p)
 	{
 		p->AddRigidBody(&rigidBody);
 	}
@@ -43,39 +43,39 @@ public:
 
 	inline void ApplyForce(const Vector3& newtons)
 	{
-		rigidBody.ApplyMomentum(newtons);
+		rigidBody.ApplyForce(newtons);
 	}
 
-	inline Vector3 GetPosition() const
+	Vector3 GetPosition() const
 	{
 		return position;
 	}
 
-	inline void SetPosition(const Vector3& pos)
+	void SetPosition(const Vector3& pos)
 	{
 		position = pos;
 		rigidBody.UpdatePosition(position);
 	}
 
-	inline Vector3 GetSize() const
+	Vector3 GetSize() const
 	{
 		return scale;
 	}
 
 	void SetSize(const Vector3& size);
 
-	inline bool IsMoveable() const
+	bool IsMoveable() const
 	{
 		return moveable;
 	}
 
-	inline void SetIsMoveable(const bool& m)
+	 void SetIsMoveable(const bool& m)
 	{
 		moveable = m;
 		rigidBody.isStatic = m;
 	}
 
-	inline RigidBody* GetRigidBody()
+	RigidBody* GetRigidBody()
 	{
 		return &rigidBody;
 	}

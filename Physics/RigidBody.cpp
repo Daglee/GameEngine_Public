@@ -29,9 +29,9 @@ RigidBody::~RigidBody()
 	delete collider;
 }
 
-void RigidBody::ApplyMomentum(Vector3 momentum)
+void RigidBody::ApplyForce(Vector3 force)
 {
-	velocity += (momentum * inverseMass);
+	velocity += (force * inverseMass);
 }
 
 void RigidBody::UpdatePosition(Vector3 pos)

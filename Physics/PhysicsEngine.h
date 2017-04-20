@@ -1,4 +1,13 @@
 #pragma once
+
+/*
+  IMPORTANT:
+  Physics engine and the other classes in this 
+  library will be used for CSC3222 coursework. 
+  All extensions for the game engine have been marked with 
+  "// BEGIN EXT" and "// END EXT".
+*/
+
 #include "RigidBody.h"
 #include "SphereCollider.h"
 #include "PlaneCollider.h"
@@ -20,6 +29,7 @@ struct CollisionPair
 class PhysicsEngine : public ResourceBase, public Subsystem
 {
 public:
+	//	BEGIN EXT
 	/*
 	  A mutex is needed in the update function to make sure
 	  no rigid bodies are added or removed during the update.
@@ -30,6 +40,7 @@ public:
 	  load of errors.
 	*/
 	mutex update_mutex;
+	//	END EXT
 
 	PhysicsEngine();
 	~PhysicsEngine() {}
@@ -41,8 +52,11 @@ public:
 
 	void semiImplicitEuler(RigidBody& r, Vector3 gravity, float time);
 	
+	//	BEGIN EXT
 	void Read(string resourcename);
 	void ReadParams(string params);
+	//	END EXT
+
 private:
 	vector<RigidBody*> rigidBodies;
 

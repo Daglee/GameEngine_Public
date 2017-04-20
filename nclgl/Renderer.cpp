@@ -185,7 +185,7 @@ void Renderer::DrawOverlay()
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 		"useOverlay"), 1);
 
-	modelMatrix.SetScalingVector(Vector3(width * 0.5, height, 0));
+	modelMatrix.SetScalingVector(Vector3(width * 0.4, height * 0.9, 0));
 	modelMatrix.SetPositionVector(Vector3(0, -200, 0));
 
 	SwitchToOrthographic();

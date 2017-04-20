@@ -11,11 +11,7 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/MessageSystem.h"
 
-/*  THINGS LEFT:
-	ADD AUTHOR COMMENTS TO NCLGL
-	CHECK LOADING SCREEN WORKS
-	stdafx
-
+/*  
 	Important Notes:
 	Up to 5 players supported. Player 1 will use mouse and keyboard.
 	Xbox One controllers are supported and the official wireless/bluetooth

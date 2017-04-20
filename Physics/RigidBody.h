@@ -1,4 +1,5 @@
 #pragma once
+//SEE PHYSICSENGINE.H COMMENT
 
 #include "../nclgl/Vector3.h"
 #include "../nclgl/SceneNode.h"
@@ -12,7 +13,7 @@ public:
 		float drag = 0.99f, float gravity = -0.00001f, std::string tag = "");
 	virtual ~RigidBody();
 
-	void ApplyMomentum	(Vector3 momentum);
+	void ApplyForce(Vector3 momentum);
 	void UpdatePosition	(Vector3 pos);
 
 	Vector3 acceleration;

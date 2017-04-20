@@ -10,22 +10,26 @@ PhysicsEngine::PhysicsEngine() : ResourceBase()
 
 void PhysicsEngine::AddRigidBody(RigidBody* r) 
 {
+	//	BEGIN EXT
 	/*
 	  Is the update busy? If not, add. If it is,
 	  then just wait.
 	*/
 	unique_lock<mutex> lock(update_mutex);
+	//	END EXT
 
 	rigidBodies.push_back(r);
 }
 
 void PhysicsEngine::RemoveRigidBody(RigidBody* r) 
 {
+	//	BEGIN EXT
 	/*
 	  Is the update busy? If not, remove. If it is, 
 	  then just wait.
 	*/
 	unique_lock<mutex> lock(update_mutex);
+	//	END EXT
 
 	rigidBodies.erase(std::remove(rigidBodies.begin(),
 		rigidBodies.end(), r), rigidBodies.end());
@@ -33,6 +37,7 @@ void PhysicsEngine::RemoveRigidBody(RigidBody* r)
 
 void PhysicsEngine::Update(float sec)
 {
+	//	BEGIN EXT
 	/*
 	  LOCK! Nothing in the engine is allowed
 	  to change until the update is done.
@@ -40,6 +45,7 @@ void PhysicsEngine::Update(float sec)
 	lock_guard<mutex> lock(update_mutex);
 
 	updateTimer.StartTimer();
+	//	END EXT
 
 	updatePositions(sec);
 
@@ -49,7 +55,9 @@ void PhysicsEngine::Update(float sec)
 	*/
 	NarrowPhase(BroadPhase());
 
+	//	BEGIN EXT
 	updateTimer.StopTimer();
+	//	END EXT
 }
 
 void PhysicsEngine::updatePositions(float sec) 
@@ -126,11 +134,13 @@ void PhysicsEngine::NarrowPhase(vector<CollisionPair> pairs)
 		float penetrationDepth;
 
 		if (collisionPair.r1->collider->IsColliding(contactNormal, *(collisionPair.r2->collider), penetrationDepth)) {
+			//	BEGIN EXT
 			//Add them to the game logic in case anything else needs to happen.
 			if (collisionPair.r1->tag != "" && //If they dont have a tag then they're probably not needed!
 				collisionPair.r2->tag != "") {
 				MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
 			}
+			//	END EXT
 
 			ImpulseResponse(collisionPair, contactNormal, penetrationDepth);
 		}
@@ -180,6 +190,7 @@ void PhysicsEngine::ProjectionResponse(CollisionPair collisionPair, Vector3 cont
 	collisionPair.r2->UpdatePosition(yOff);
 }
 
+//	BEGIN EXT
 void PhysicsEngine::Read(string resourcename)
 {
 	this->SetResourceName(resourcename);
@@ -189,3 +200,4 @@ void PhysicsEngine::ReadParams(string params)
 {
 	Read(params);
 }
+//	END EXT
