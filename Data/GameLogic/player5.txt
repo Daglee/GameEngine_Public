@@ -1,0 +1,23 @@
+2
+state 0
+collider = s:none
+timer = 0
+colourr = 1
+colourg = 0
+colourb = 0
+coloura = 1
+--
+state 1
+colourr = 1
+colourg = 1
+colourb = 0
+coloura = 1
+--
+-
+transition1 
+0 -> 1 
+exists_transmission = s:player5_colliding_sphere
+transition2
+1 -> 0
+timer > 100
+-

@@ -73,7 +73,7 @@ void Game::InitProfilerTimers()
 	profiler->AddSubSystemTimer("Input", &inputManager->updateTimer);
 	profiler->AddSubSystemTimer("Audio", &AudioManager::GetInstance()->updateTimer);
 
-	profiler->AddSubSystemTimer("PhysicsE", 
+	profiler->AddSubSystemTimer("PhysicsEngine", 
 		&database->GPhysicsEngine->Find("PhysicsEngine")->updateTimer);
 	profiler->AddSubSystemTimer("Gamelogic",
 		&database->GFSMManager->Find("GFSMManager")->updateTimer);

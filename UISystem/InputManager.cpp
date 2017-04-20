@@ -135,9 +135,8 @@ void InputManager::SetPlayerParameters(Player* p)
 	p->Move(Vector3(500, 100, 0 * connectedPlayers.size())); // REPLACE LATER
 	p->GetRigidBody()->UpdatePosition(Vector3(0, 100, 50 * connectedPlayers.size()));
 	p->teamID = connectedPlayers.size(); //Just for now (free for all)...
-
 	string tag = "player" + std::to_string(connectedPlayers.size());
-	p->GetRigidBody()->tag = "player";
+	p->GetRigidBody()->tag = tag;
 	p->walkingSoundName = "walkingsound" + tag;
 
 	SoundNode* walkingSound = new SoundNode(

@@ -12,10 +12,10 @@
 #include "../GameLogicFSM/MessageSystem.h"
 
 /*  THINGS LEFT:
-	BACKGROUND MUSIC - THIS WILL NEED A FSM
 	FIX BOTH PLAYERS GOING YELLOW - AN FSM PER PLAYER MAY BE NEEDED
-
-
+	FIX FIRE RATE
+	ADD AUTHOR COMMENTS TO NCLGL
+	CHECK LOADING SCREEN WORKS
 
 	Important Notes:
 	Up to 5 players supported. Player 1 will use mouse and keyboard.

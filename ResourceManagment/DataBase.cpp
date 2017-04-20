@@ -28,6 +28,7 @@ DataBase::DataBase()
 	GAudioManager	= new ResourceManager<AudioManager>	(false, false);
 
 	InitialiseFunctionMap();
+	playerIDCount = 1;
 }
 
 DataBase::~DataBase()
@@ -253,8 +254,10 @@ void DataBase::AddToPhysicsObjects(string resourceName)
 
 void DataBase::AddToPlayers(string resourceName)
 {
-	Player* p = new Player(this);
+	Player* p = new Player(this, playerIDCount);
 	Players->Load(resourceName, p);
+
+	++playerIDCount;
 }
 
 void DataBase::AddToGThreadPool(string params)

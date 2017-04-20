@@ -99,5 +99,7 @@ private:
 	void AddToGamepads		(string resourcename);
 	void AddToPlayers		(string resourceName);
 	void AddToOBJMeshes		(string meshLocation);
+
+	int playerIDCount;
 };
 

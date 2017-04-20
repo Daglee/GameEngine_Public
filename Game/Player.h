@@ -21,10 +21,10 @@ class RigidBody;
   Physics entity wrapper.
   Contains gameplay mechanics focused on the player.
 */
-class Player : public ResourceBase, FSMUnit
+class Player : public ResourceBase, public FSMUnit
 {
 public:
-	Player(DataBase* database);
+	Player(DataBase* database, int id);
 	~Player();
 
 	void ApplyInputs();

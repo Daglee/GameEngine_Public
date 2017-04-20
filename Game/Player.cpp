@@ -11,7 +11,7 @@
 #define PLAYER_DRAG 0.7f
 #define PLAYER_GRAVITY -0.001f
 
-Player::Player(DataBase* database) : ResourceBase(), FSMUnit("Player", database)
+Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + to_string(id), database)
 {
 	//Load in a character model
 	playerModel = new CharacterModel(CHARCT_MODEL_LOC);
