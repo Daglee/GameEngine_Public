@@ -3,6 +3,7 @@
 #include "PhysicsObject.h"
 #include "../nclgl/Vector4.h"
 #include "../ResourceManagment/Log.h"
+#include "../Game/AudioManager.h"
 
 #include <sstream>
 #include <iostream>
@@ -17,11 +18,11 @@ void Level::LoadAndInitialise(std::string directory)
 {
 	//Directory file contains locations of the assets file and positions file
 	std::ifstream file(directory);
-	string line;
+	string path;
 
-	getline(file, line);
-	string assets		= line + "/assets.txt";
-	string positions	= line + "/positions.txt";
+	getline(file, path);
+	string assets		= path + "/assets.txt";
+	string positions	= path + "/positions.txt";
 
 	assetsfile = assets;
 	LoadLevel(assets);
@@ -31,14 +32,14 @@ void Level::LoadAndInitialise(std::string directory)
 	  Read parameters for individual objects if files of each type exist.
 	  More can be added.
 	*/
-	string physObj = line + "/PhysicsObjects.txt";
-	std::ifstream infile(physObj);
-	if (infile.good()) {
-		ReadPhysicsObject(physObj);
-	}
+	string physObj = path + "/PhysicsObjects.txt";
+	if(Log::FileExists(physObj)) ReadPhysicsObject(physObj);
 
-	string gamelogicFile = line + "/GameLogic.txt";
-	InitialiseGameLogic(gamelogicFile);
+	string gamelogicFile = path + "/GameLogic.txt";
+	if (Log::FileExists(gamelogicFile)) InitialiseGameLogic(gamelogicFile);
+
+	string musicFile = path + "/Music.txt";
+	if (Log::FileExists(musicFile)) InitialiseMusic(musicFile);
 }
 
 //Assets for database
@@ -278,5 +279,16 @@ void Level::InitialiseGameLogic(std::string filename)
 
 		//Construct the FSM
 		fsmManager->LateBuildFSM(FSMName, FSMFile);
+	}
+}
+
+void Level::InitialiseMusic(std::string filename)
+{
+	std::ifstream file(filename);
+	string line;
+
+	while (getline(file, line)) {
+		//Song's filename = the current line.
+		AudioManager::GetInstance()->AddBackgroundSound(line);
 	}
 }

@@ -68,5 +68,13 @@ public:
 	{
 		return static_cast<float>(std::hash<std::string>{}(s));
 	}
+
+	static bool FileExists(string filename)
+	{
+		std::ifstream infile(filename);
+
+		if (infile.good()) return true;
+		else return false;
+	}
 };
 

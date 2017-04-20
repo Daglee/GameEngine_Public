@@ -1,6 +1,7 @@
 #include "AudioManager.h"
 
 #include "../nclgl/SoundSystem.h"
+#include "../ResourceManagment/DataBase.h"
 
 AudioManager* AudioManager::instance = NULL;
 
@@ -45,6 +46,17 @@ void AudioManager::BeginPlay(SoundNode* gs)
 
 	gs->SetLooping(true);
 	SoundSystem::GetSoundSystem()->AddSoundNode(gs);
+}
+
+void AudioManager::BeginBackgroundPlay(string name)
+{
+	SoundNode* sound = backgroundSounds.at(name);
+
+	if (sound == nullptr) Log::Error("Sound " + name + " not found.");
+
+	sound->SetLooping(true);
+	sound->SetIsGlobal(true);
+	SoundSystem::GetSoundSystem()->AddSoundNode(sound);
 }
 
 void AudioManager::BeginPlay(string name)
@@ -107,6 +119,11 @@ void AudioManager::Update(float deltatime)
 	this->SetResourceSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 
 	//Play the audio!
+	for each (std::pair<string, SoundNode*> bsound in backgroundSounds)
+	{
+		BeginBackgroundPlay(bsound.first);
+	}
+
 	SoundSystem::GetSoundSystem()->Update(deltatime);
 
 	updateTimer.StopTimer();

@@ -11,7 +11,12 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/MessageSystem.h"
 
-/*
+/*  THINGS LEFT:
+	BACKGROUND MUSIC - THIS WILL NEED A FSM
+	FIX BOTH PLAYERS GOING YELLOW - AN FSM PER PLAYER MAY BE NEEDED
+
+
+
 	Important Notes:
 	Up to 5 players supported. Player 1 will use mouse and keyboard.
 	Xbox One controllers are supported and the official wireless/bluetooth
@@ -73,7 +78,7 @@ int main()
 
 	//Game loop...
 	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running) {
-		subsystems.ThreadedUpdate(win->GetTimer()->GetTimedMS());
+		subsystems.Update(win->GetTimer()->GetTimedMS());
 	}
 
 	//I'm just loading in a level and releasing it on shutdown. 

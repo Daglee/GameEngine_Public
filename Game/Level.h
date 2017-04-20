@@ -50,6 +50,9 @@ private:
 	//Build the FSMs required for this level
 	void InitialiseGameLogic(std::string filename);
 
+	//Add any background music needed
+	void InitialiseMusic(std::string filename);
+
 	//Reads a singular object
 	void ReadObject(std::string line);
 

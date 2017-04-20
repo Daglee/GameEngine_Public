@@ -144,7 +144,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DataBase.h" />
-    <ClInclude Include="DatabaseIncludes.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="ResourceBase.h" />

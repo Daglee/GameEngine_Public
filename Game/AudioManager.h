@@ -16,7 +16,8 @@
   to be played/are stored. Use of hashmap ensures
   fast retrieval.
 */
-class AudioManager : public ResourceBase, public Subsystem
+class AudioManager : public ResourceBase, 
+	public Subsystem
 {
 public:
 	/*
@@ -60,6 +61,16 @@ public:
 		this->SetResourceSize(sizeof(*instance));
 	}
 
+	void AddBackgroundSound(string filename)
+	{
+		SoundNode* backgroundSound = new SoundNode(
+			new Sound(filename), new SceneNode());
+
+		backgroundSounds.insert({ filename, backgroundSound });
+
+		this->SetResourceSize(sizeof(*instance));
+	}
+
 	//Get the sound by name to do things with it...
 	inline SoundNode* GetSound(string name)
 	{
@@ -78,6 +89,7 @@ public:
 	void StopPlay(string name);  //Stop playing if it is already playing.
 	void PlayOnce(string name);  //Just play the sound once.
 
+	void BeginBackgroundPlay(string name);
 	/*
 	  Used, for example, for gun shots. 
 	  Allows multiples of a single sound to be played,
@@ -122,6 +134,7 @@ protected:
 
 	//Stores all sounds that will be played at multiple points...
 	unordered_map<std::string, SoundNode*> sounds;
+	unordered_map<std::string, SoundNode*> backgroundSounds;
 
 	//Temporary sounds stored here from TemporaryPlay
 	vector<Sound*> remove_buffer;
