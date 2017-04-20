@@ -113,23 +113,15 @@ void	Sound::AddSound(string name) {
 			cout << "Incompatible file extension '" << extension << "'!" << endl;
 		}
 
-		//sounds.insert(make_pair(name, s));
-
 		sound = s;
 	}
 }
 
 Sound*		Sound::GetSound(string name) {
-	//map<string, Sound*>::iterator s = sounds.find(name);
-	//return (s != sounds.end() ? s->second : NULL);
 	return sound;
 }
 
 void	Sound::DeleteSounds() {
-	//for(map<string, Sound*>::iterator i = sounds.begin(); i != sounds.end(); ++i) {
-	//	delete i->second;
-	//}
-
 	delete sound;
 }
 

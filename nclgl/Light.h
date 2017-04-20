@@ -1,5 +1,7 @@
 #pragma once
-
+/*
+	AUTHOR: RICH DAVISON
+*/
 #include "Vector4.h"
 #include "Vector3.h"
 

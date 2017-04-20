@@ -1,4 +1,9 @@
 #pragma once
+
+/*
+	AUTHOR: RICH DAVISON
+*/
+
 #include "Matrix4.h"
 #include "Vector3.h"
 #include "Vector4.h"

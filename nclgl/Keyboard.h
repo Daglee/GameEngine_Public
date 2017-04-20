@@ -1,23 +1,7 @@
-/******************************************************************************
-Class:Keyboard
-Implements:InputDevice
-Author:Rich Davison
-Description:RAW Input keyboard class. I've made absolutely no attempt to ensure
-that this class works for multiple keyboards attached to a single system.
-
-You shouldn't really have to mess with this class too much, there's nothing too
-interesting about it!
-
-STUDENT CHALLENGE! You could have a function pointer per key, that can be
-automatically called when a key is triggered / held? (Checked from within the
-Update function)
-
--_-_-_-_-_-_-_,------,   
-_-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
--_-_-_-_-_-_-~|__( ^ .^) /
-_-_-_-_-_-_-_-""  ""   
-
-*//////////////////////////////////////////////////////////////////////////////
+/*
+	AUTHOR RICH DAVISON +
+	KIYAVASH KANDAR WHERE SPECIFIED
+*/
 #pragma once
 #include "InputDevice.h"
 
@@ -183,6 +167,7 @@ public:
 	//Is this the first update the key has been pressed for?
 	bool KeyTriggered(KeyboardKeys key);
 
+	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	void InitialiseMapper()
 	{
 		button_mapping.insert({ "A", KEYBOARD_A });
@@ -218,6 +203,7 @@ public:
 	{
 		return button_mapping.find(key)->second;
 	}
+	//	CSC3224 NCODE BLOCK ENDS
 
 protected:
 	Keyboard(HWND &hwnd);
@@ -232,7 +218,9 @@ protected:
 	bool keyStates[KEYBOARD_MAX];		//Is the key down?
 	bool holdStates[KEYBOARD_MAX];		//Has the key been down for multiple updates?
 
+	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	std::map<std::string, KeyboardKeys> button_mapping;
+	//	CSC3224 NCODE BLOCK ENDS
 };
 
 

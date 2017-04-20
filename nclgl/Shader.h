@@ -1,4 +1,9 @@
 #pragma once
+
+/*
+	AUTHOR: RICH DAVISON
+*/
+
 #include "OGLRenderer.h"
 
 #define SHADER_VERTEX	0

@@ -1,4 +1,8 @@
 #pragma once
+/*
+	AUTHOR: RICH DAVISON +
+	KIYAVASH KANDAR WHERE SPECIFIED
+*/
 #include "OGLRenderer.h"
 #include "../ResourceManagment/ResourceBase.h"
 
@@ -52,6 +56,7 @@ protected:
 	unsigned int* indices;
 	GLuint		bumpTexture;	
 	
+	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	virtual void Read(string resourcename) {
 		this->SetResourceName(resourcename);
 	}
@@ -59,6 +64,6 @@ protected:
 	virtual void ReadParams(string params) {
 		Read(params);
 	}
-
+	//	CSC3224 NCODE BLOCK ENDS
 };
 

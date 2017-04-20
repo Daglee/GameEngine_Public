@@ -12,9 +12,9 @@
 #include "../GameLogicFSM/MessageSystem.h"
 
 /*  THINGS LEFT:
-	FIX FIRE RATE
 	ADD AUTHOR COMMENTS TO NCLGL
 	CHECK LOADING SCREEN WORKS
+	stdafx
 
 	Important Notes:
 	Up to 5 players supported. Player 1 will use mouse and keyboard.

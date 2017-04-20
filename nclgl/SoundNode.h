@@ -1,4 +1,8 @@
 #pragma once
+/*
+	AUTHOR: RICH DAVISON
+*/
+
 #include "scenenode.h"
 #include "Sound.h"
 #include "SoundSystem.h"

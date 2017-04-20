@@ -1,16 +1,7 @@
-/******************************************************************************
-Class:Camera
-Implements:
-Author:Rich Davison	<richard.davison4@newcastle.ac.uk>
-Description:FPS-Style camera. Uses the mouse and keyboard from the Window
-class to get movement values!
-
--_-_-_-_-_-_-_,------,   
-_-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
--_-_-_-_-_-_-~|__( ^ .^) /
-_-_-_-_-_-_-_-""  ""   
-
-*//////////////////////////////////////////////////////////////////////////////
+/*
+	AUTHOR: RICH DAVISON +
+	KIYAVASH KDNAR WHERE SPECIFIED
+*/
 #pragma once
 
 #include "Window.h"
@@ -24,7 +15,10 @@ public:
 	Camera(void) : ResourceBase() {
 		yaw		= 0.0f;
 		pitch	= 0.0f;
+
+		//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 		this->SetResourceSize(sizeof(*this));
+		//	CSC3224 NCODE BLOCK ENDS
 	};
 
 	Camera(float pitch, float yaw, Vector3 position) : ResourceBase(){
@@ -32,7 +26,10 @@ public:
 		this->yaw		= yaw;
 
 		SetPosition(position);
+
+		//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 		this->SetResourceSize(sizeof(*this));
+		//	CSC3224 NCODE BLOCK ENDS
 	}
 
 	~Camera(void){
@@ -69,8 +66,10 @@ public:
 	//Sets pitch, in degrees
 	void	SetPitch(float p) {pitch = p;}
 
+	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	void Read(string resourcename);
 	void ReadParams(string params);
+	//	CSC3224 NCODE BLOCK ENDS
 
 protected:
 	SceneNode node;

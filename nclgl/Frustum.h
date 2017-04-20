@@ -1,4 +1,7 @@
 #pragma once
+/*
+	AUTHOR: RICH DAVISON
+*/
 
 #include "Plane.h"
 #include "Matrix4.h"

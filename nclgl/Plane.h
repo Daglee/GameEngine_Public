@@ -1,4 +1,9 @@
 #pragma once
+/*
+	AUTHOR: RICH DAVISON
+*/
+
+
 #include "Vector3.h"
 
 class Plane

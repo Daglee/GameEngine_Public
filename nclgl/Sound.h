@@ -1,4 +1,7 @@
 #pragma once
+/*
+AUTHOR: RICH DAVISON
+*/
 
 #include <string>
 #include <map>
@@ -6,7 +9,6 @@
 #include <fstream>
 
 #pragma comment(lib, "OpenAL32.lib")
-//#include "../OpenAL 1.1 SDK/include/al.h"
 #include <../OpenAL 1.1 SDK/include/al.h>
 
 using namespace std;
@@ -60,6 +62,4 @@ protected:
 	unsigned int	bitRate;
 	unsigned int	size;
 	unsigned int	channels;
-
-	//static map<string, Sound*> sounds;
 };

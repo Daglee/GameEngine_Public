@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+	AUTHOR: RICH DAVISON
+*/
+
 #include <vector>
 #include <algorithm>
 

@@ -1,6 +1,10 @@
 #include "TextMesh.h"
 
 /*
+	AUTHOR: RICH DAVISON
+*/
+
+/*
 Our really basic TextMesh is going to make one big line of quads, each
 containing a character of text, generated from the passed in string, and
 the font struct.

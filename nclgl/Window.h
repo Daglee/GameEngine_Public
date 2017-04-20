@@ -1,7 +1,6 @@
 /*
-Class:Window
-Author:Rich Davison
-Description:Creates and handles the Window, including the initialisation of the mouse and keyboard.
+	AUTHOR: RICH DAVISON +
+	KIYAVASH KANDAR WHERE SPECFIED
 */
 #pragma once
 #pragma warning( disable : 4099 )
@@ -28,7 +27,8 @@ Description:Creates and handles the Window, including the initialisation of the 
 class OGLRenderer;
 class Database;
 
-class Window : public ResourceBase, FSMUnit {
+class Window :/*	CSC3224 NCODE [Kiyavash Kandar] [140245239] */ 
+	public ResourceBase, FSMUnit /*CSC3224 NCODE BLOCK ENDS*/ {
 public:
 	Window(DataBase* database = nullptr, std::string title = "OpenGL Framework", 
 		int sizeX = 800, int sizeY = 600, bool fullScreen = false);
@@ -52,12 +52,13 @@ public:
 
 	GameTimer*   GetTimer()		{return timer;}
 
+	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	void Read(string resourcename);
 	void ReadParams(string params);
 
 	float running = 1;
 	float elapsedMS;
-
+	//	CSC3224 NCODE BLOCK ENDS
 protected:
 	void	CheckMessages(MSG &msg);
 	static LRESULT CALLBACK WindowProc(HWND hWnd,UINT message,WPARAM wParam,LPARAM lParam);

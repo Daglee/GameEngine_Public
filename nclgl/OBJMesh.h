@@ -149,6 +149,7 @@ public:
 
 	virtual void Draw();
 
+	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	virtual void Read(string resourcename) {
 		this->SetResourceName(resourcename);
 		LoadOBJMesh(resourcename);
@@ -157,6 +158,7 @@ public:
 	virtual void ReadParams(string params) {
 		Read(params);
 	}
+	//	CSC3224 NCODE BLOCK ENDS
 
 protected:
 	void	SetTexturesFromMTL(string &mtlFile, string &mtlType);
