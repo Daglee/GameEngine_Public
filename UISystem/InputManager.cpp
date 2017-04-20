@@ -102,7 +102,7 @@ void InputManager::InitialisePlayer(Player* p, Gamepad* gp)
 	p->SetInputMapper(gm);
 	float reloadSpeed = 2000;
 	float bulletsPerMag = 20;
-	float fireDelay = 150;
+	float fireDelay = 450;
 	p->gun = new Gun(database, renderer, physicsEngine, reloadSpeed,
 		bulletsPerMag, 8, fireDelay, defaultBulletMesh);
 	SetPlayerParameters(p);
@@ -121,7 +121,7 @@ void InputManager::InitialisePlayer(Player* p)
 
 	float reloadSpeed = 2000;
 	float bulletsPerMag = 20;
-	float fireDelay = 150;
+	float fireDelay = 450;
 	p->gun = new Gun(database, renderer, physicsEngine, reloadSpeed,
 		bulletsPerMag, 8, fireDelay, defaultBulletMesh);
 	SetPlayerParameters(p);

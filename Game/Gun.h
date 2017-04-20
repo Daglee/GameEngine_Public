@@ -34,7 +34,7 @@ protected:
 
 	double	lastShotTime;
 	double	lastReloadTime;
-	float	fireRate;
+	float	fireDelay;
 
 	vector<PhysicsObject*> magazine;
 

@@ -7,7 +7,7 @@
 #include <time.h>
 
 Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, float reloadSpeed, int bulletsPerMag,
-	float bulletSpeed, float frate, Mesh* m) : ResourceBase() 
+	float bulletSpeed, float fireDelay, Mesh* m) : ResourceBase() 
 {
 	rend = r;
 	phys = p;
@@ -20,8 +20,8 @@ Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, float reloadSpeed, int bul
 	if		(reloadSpeed < 1000)	Log::Error("Reload Speed is too low.");
 	else	this->tempReloadSpeed	= reloadSpeed;
 
-	if		(frate > 150)	Log::Error("Fire Rate is too high.");
-	else	fireRate		= frate;
+	if		(fireDelay < 150)	Log::Error("Fire Rate is too high.");
+	else	this->fireDelay = fireDelay;
 
 	bulletsFired = 0;
 	lastShotTime = 0;
@@ -37,7 +37,7 @@ bool Gun::Fire(const Vector3& from, const Vector3& rotation, const int& id)
 	  Rate of firing of new bullets is independent 
 	  of input. Depends on fire rate.
 	*/
-	if (now - lastShotTime > fireRate
+	if (now - lastShotTime > fireDelay
 		&& lastReloadTime + reloadSpeed < now) {
 
 		fired = true;
