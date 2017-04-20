@@ -54,9 +54,10 @@ public:
 		if (!paused) return Submit(forward<Function>(func), forward<Params>(params)...);
 	}
 
-	void CheckPause()
+	inline bool Paused()
 	{
 		if (Window::GetKeyboard()->KeyTriggered(pauseButton)) paused = !paused;
+		return paused;
 	}
 
 	void Read(string resourcename);

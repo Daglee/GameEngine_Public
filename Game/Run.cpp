@@ -73,7 +73,7 @@ int main()
 
 	//Game loop...
 	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running) {
-		subsystems.Update(win->GetTimer()->GetTimedMS());
+		subsystems.ThreadedUpdate(win->GetTimer()->GetTimedMS());
 	}
 
 	//I'm just loading in a level and releasing it on shutdown. 

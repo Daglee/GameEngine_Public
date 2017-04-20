@@ -21,8 +21,9 @@ void SubsystemManager::ThreadedUpdate(float deltatime)
 	  The pause button MUST be checked via the thread pool
 	  itself as the UI System will be suspended and no more
 	  updates will be performed on it.
+
+	  The UI System start up will specify the button to check.
 	*/
-	threadPool->CheckPause();
 
 	//OpenGL doesn't like to be threaded...
 	renderer->Update(deltatime);
@@ -33,9 +34,9 @@ void SubsystemManager::ThreadedUpdate(float deltatime)
 	vector<TaskFuture<void>> updates;
 
 	//Update each subsystem...
-	for each(Subsystem* subsystem in subsystems)
-	{
-		if (!threadPool->paused) {
+	if (!threadPool->Paused()) {
+		for each(Subsystem* subsystem in subsystems)
+		{
 			updates.push_back(threadPool->SubmitJob([](Subsystem* s, float dt) {	//Any parameters needed...
 				s->Update(dt);				//The function to call...
 			}, subsystem, deltatime));		//What we are passing in...
@@ -51,10 +52,20 @@ void SubsystemManager::ThreadedUpdate(float deltatime)
 
 void SubsystemManager::Update(float deltatime)
 {
+	/*
+	  Even though this update i not threaded, 
+	  this works just fine and saves writing 
+	  the same code in two places.
+	*/
+	threadPool->Paused();
+
 	renderer->Update(deltatime);
 
-	for each(Subsystem* subsystem in subsystems)
-	{
-		subsystem->Update(deltatime);
+	if (!threadPool->paused) {
+		for each(Subsystem* subsystem in subsystems)
+		{
+			subsystem->Update(deltatime);
+		}
 	}
+
 }
