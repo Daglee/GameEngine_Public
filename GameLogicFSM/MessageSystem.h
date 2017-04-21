@@ -5,6 +5,14 @@
 #include <vector>
 #include <mutex>
 
+/*
+  A system for subsystems to transmit messages, read them, 
+  and trigger events.
+   - Messages last 1 frame.
+   - Events stay until asked to to be removed.
+  Strings must be hashed.
+  Uses singleton.
+*/
 class MessageSystem
 {
 public:
@@ -25,7 +33,8 @@ public:
 		return instance;
 	}
 
-	inline void Transmit(float msg)
+	//Single frame message
+	inline void Transmit(float msg, bool isEvent)
 	{	
 		/*
 		  Is the update busy? If not, transmit. If it is,
@@ -33,12 +42,15 @@ public:
 		*/
 		unique_lock<mutex> lock(transmit_mutex);
 
-		messages.push_back(msg);
+		if (isEvent) events.push_back(msg);
+		else messages.push_back(msg);
 	}
 
-	float* RetrieveMessage(float msgTitle);
+	//Is a message currently being transmitted?
 	bool MessageTransmitting(float msgTitle);
-	void StopTransmit(float msgTitle);
+
+	//Stop an event
+	void StopTransmitting(float msgTitle);
 
 	void ClearAllMessages()
 	{
@@ -61,5 +73,6 @@ protected:
 	static MessageSystem* instance;
 
 	vector<float> messages;
+	vector<float> events;
 };
 

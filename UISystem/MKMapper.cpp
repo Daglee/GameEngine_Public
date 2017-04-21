@@ -40,7 +40,7 @@ void MKMapper::FillInputs()
 	}
 
 	if (Window::GetKeyboard()->KeyDown(STOP_GAME)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash("stop_game"));
+		MessageSystem::GetInstance()->Transmit(Log::Hash("stop_game"), true);
 	}
 
 	//Key: LC - index - 4

@@ -12,7 +12,6 @@
 #include "../GameLogicFSM/MessageSystem.h"
 
 /*  
-	IMPROVED SYSTEM TO APPLY INPUTS - MORE GENERIC
 	DECREASE MASSES OF SPHERES + ADD MORE
 
 	Important Notes:

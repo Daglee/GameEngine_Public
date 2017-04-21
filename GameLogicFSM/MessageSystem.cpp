@@ -2,24 +2,6 @@
 
 MessageSystem* MessageSystem::instance = NULL;
 
-float* MessageSystem::RetrieveMessage(float msgTitle)
-{
-	/*
-	  LOCK! Nothing in the system is allowed
-	  to change until the check is done.
-	*/
-	lock_guard<mutex> lock(transmit_mutex);
-
-	for each(float msg in messages)
-	{
-		if (msg == msgTitle) {
-			return &msg;
-		}
-	}
-
-	return nullptr;
-}
-
 bool MessageSystem::MessageTransmitting(float msgTitle)
 {
 	/*
@@ -28,6 +10,7 @@ bool MessageSystem::MessageTransmitting(float msgTitle)
 	*/
 	lock_guard<mutex> lock(transmit_mutex);
 
+	//Check messages
 	for each(float msg in messages)
 	{
 		if (msg == msgTitle) {
@@ -35,10 +18,18 @@ bool MessageSystem::MessageTransmitting(float msgTitle)
 		}
 	}
 
+	//Check ongoing events
+	for each(float evnt in events)
+	{
+		if (evnt == msgTitle) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
-void MessageSystem::StopTransmit(float msgTitle)
+void MessageSystem::StopTransmitting(float msgTitle)
 {
 	/*
 	  LOCK! Nothing in the system is allowed
@@ -46,9 +37,9 @@ void MessageSystem::StopTransmit(float msgTitle)
 	*/
 	lock_guard<mutex> lock(transmit_mutex);
 
-	for (vector<float>::iterator i = messages.begin();
+	for (vector<float>::iterator i = events.begin();
 		i != messages.end();) {
-		if (*i == msgTitle) i = messages.erase(i);
+		if (*i == msgTitle) i = events.erase(i);
 		else ++i;
 	}
 }

@@ -1,0 +1,5 @@
+1
+tower
+size 500 700 500
+colour 1 1 1 1
+-

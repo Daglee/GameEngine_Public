@@ -57,6 +57,7 @@ private:
 	void ReadObject(std::string line);
 
 	void ReadPhysicsObject(std::string file);
+	void ReadGameObject(std::string file);
 
 	DataBase* database;
 	std::string assetsfile; //Stored for easier unloading

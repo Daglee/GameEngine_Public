@@ -21,7 +21,7 @@ sphere2
 size 30 30 30
 colour 0 0 1 1
 gravity -0.01
-mass 800
+mass 400
 damping 0.9
 atRest 0
 tag sphere
@@ -30,7 +30,7 @@ sphere3
 size 40 40 40
 colour 1 1 0 1
 gravity -0.01
-mass 1600
+mass 500
 damping 0.9
 atRest 0
 tag sphere
@@ -39,7 +39,7 @@ sphere4
 size 50 50 50
 colour 0 1 1 1
 gravity -0.01
-mass 3200
+mass 600
 damping 0.9
 atRest 0
 tag sphere
@@ -66,7 +66,7 @@ sphere7
 size 50 50 50
 colour 1 1 0 1
 gravity -0.01
-mass 2500
+mass 400
 damping 0.9
 atRest 0
 tag sphere
@@ -82,7 +82,7 @@ tag sphere
 -
 floor
 size 500 1 500
-colour 0.8 0.8 0.8 1
+colour 0.8 0.8 0.8 0
 gravity 0
 mass 10
 damping 0.9

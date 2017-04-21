@@ -6,3 +6,4 @@
 1 OBJMeshes ../Data/Meshes/pyramid.obj
 10 PhysicsObjects sphere
 1 PhysicsObjects floor
+1 GameObjects tower

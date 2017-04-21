@@ -77,6 +77,7 @@ public:
 	ResourceManager<Profiler>*		GProfiler;
 	ResourceManager<InputManager>*	GInputManager;
 	ResourceManager<AudioManager>*	GAudioManager;
+	ResourceManager<GameObject>*	GameObjects;
 private:
 	void InitialiseFunctionMap();
 
@@ -99,6 +100,7 @@ private:
 	void AddToGamepads		(string resourcename);
 	void AddToPlayers		(string resourceName);
 	void AddToOBJMeshes		(string meshLocation);
+	void AddToGameObjects	(string resourceName);
 
 	int playerIDCount;
 };

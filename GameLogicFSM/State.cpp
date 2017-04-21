@@ -25,7 +25,7 @@ void State::ExecuteAllActions()
 			*vars->find(a.var)->second *= a.action;
 		}
 		else if (a.actoperator == "transmit") {
-			MessageSystem::GetInstance()->Transmit(a.action);
+			MessageSystem::GetInstance()->Transmit(a.action, false);
 		}
 	}
 }

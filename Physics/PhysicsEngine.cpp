@@ -138,7 +138,7 @@ void PhysicsEngine::NarrowPhase(vector<CollisionPair> pairs)
 			//Add them to the game logic in case anything else needs to happen.
 			if (collisionPair.r1->tag != "" && //If they dont have a tag then they're probably not needed!
 				collisionPair.r2->tag != "") {
-				MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
+				MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag), false);
 			}
 			//	END EXT
 

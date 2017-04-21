@@ -16,6 +16,7 @@ DataBase::DataBase()
 	Players			= new ResourceManager<Player>		(false, true);
 	Gamepads		= new ResourceManager<Gamepad>		(false, true);
 	PhysicsObjects	= new ResourceManager<PhysicsObject>(false, true);
+	GameObjects		= new ResourceManager<GameObject>	(false, true);
 	OBJMeshes		= new ResourceManager<OBJMesh>		(false, true);
 	GThreadPool		= new ResourceManager<ThreadPool>	(false, false);
 	GRenderer		= new ResourceManager<Renderer>		(false, false);
@@ -46,11 +47,13 @@ DataBase::~DataBase()
 	delete GProfiler;
 	delete GInputManager;
 	delete GAudioManager;
+	delete GameObjects;
 }
 
 void DataBase::InitialiseDataBase()
 {
 	PhysicsObjects	->Initialise("Physics Object Manager",	size_t(MAX_MEM_PHYSOBJ),	PHYS_OBJ_BINS);
+	GameObjects		->Initialise("Game Object Manager",		size_t(MAX_MEM_PHYSOBJ / 4), 2);
 	OBJMeshes		->Initialise("OBJMesh Manager",			size_t(MAX_MEM_OBJMESHES),	OBJMESH_BINS);
 	Players			->Initialise("Players",					size_t(MAX_MEM_PLAYERS),	SINGLE_BIN);
 	GThreadPool		->Initialise("GThreadPool",				size_t(MAX_MEM_PER_TYPE),	SINGLE_BIN);
@@ -159,6 +162,7 @@ size_t DataBase::CurrentSize() const
 	size += Gamepads->GetCurrentSize();
 	size += GFSMManager->GetCurrentSize();
 	size += GAudioManager->GetCurrentSize();
+	size += GameObjects->GetCurrentSize();
 
 	return size;
 }
@@ -177,6 +181,7 @@ size_t DataBase::MaxSize() const
 	size += Gamepads->GetMaxSize();
 	size += GFSMManager->GetMaxSize();
 	size += GAudioManager->GetMaxSize();
+	size += GameObjects->GetMaxSize();
 
 	return size;
 }
@@ -199,6 +204,7 @@ void DataBase::InitialiseFunctionMap()
 	addmap["GFSMManager"]		= &DataBase::AddToGFSMManager;
 	addmap["GProfiler"]			= &DataBase::AddToGProfiler;
 	addmap["GInputManager"]		= &DataBase::AddToGInputManager;
+	addmap["GameObjects"]		= &DataBase::AddToGameObjects;
 }
 
 void DataBase::AddToGInputManager(string resourcename)
@@ -250,6 +256,11 @@ void DataBase::AddToOBJMeshes(string meshLocation)
 void DataBase::AddToPhysicsObjects(string resourceName)
 {
 	PhysicsObjects->Load(resourceName, new PhysicsObject());
+}
+
+void DataBase::AddToGameObjects(string resourceName)
+{
+	GameObjects->Load(resourceName, new GameObject());
 }
 
 void DataBase::AddToPlayers(string resourceName)

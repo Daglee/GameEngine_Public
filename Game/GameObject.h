@@ -56,6 +56,7 @@ public:
 	inline virtual void SetPosition(const Vector3& pos)
 	{
 		position = pos;
+		node.SetTransform(pos);
 	}
 
 	inline virtual void SetSize(const Vector3& size)

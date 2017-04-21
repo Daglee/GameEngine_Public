@@ -35,6 +35,9 @@ void Level::LoadAndInitialise(std::string directory)
 	string physObj = path + "/PhysicsObjects.txt";
 	if(Log::FileExists(physObj)) ReadPhysicsObject(physObj);
 
+	string gameObj = path + "/GameObjects.txt";
+	if (Log::FileExists(gameObj)) ReadGameObject(gameObj);
+
 	string gamelogicFile = path + "/GameLogic.txt";
 	if (Log::FileExists(gamelogicFile)) InitialiseGameLogic(gamelogicFile);
 
@@ -105,6 +108,9 @@ void Level::UnloadItem(std::string resourcemanager, std::string resourcename)
 	}
 	else if (resourcemanager == "PhysicsObjects") {
 		database->PhysicsObjects->Unload(resourcename);
+	}
+	else if (resourcemanager == "GameObjects") {
+		database->GameObjects->Unload(resourcename);
 	}
 }
 
@@ -190,6 +196,13 @@ void Level::ReadObject(std::string line)
 			p->SetPosition(Vector3(xPos, yPos, zPos));
 		}
 	}
+	else if (manager == "GameObjects") {
+		GameObject* g = database->GameObjects->Find(name);
+		g->UpdateRenderer(*database->GRenderer->Find("Renderer"));
+
+		g->SetPosition(Vector3(xPos, yPos, zPos));
+		g->AddMesh(*database->OBJMeshes->Find(tokens.at(5)));
+	}
 }
 
 /*
@@ -259,6 +272,51 @@ void Level::ReadPhysicsObject(std::string filename)
 			else if (variable == "tag") {
 				string tag = tokens.at(1);
 				obj->GetRigidBody()->tag = tag;
+			}
+			else if (tokens.at(0) == "-") break;
+		}
+
+	}
+
+}
+
+void Level::ReadGameObject(std::string filename) {
+	std::ifstream file(filename);
+	string line;
+
+	getline(file, line);
+
+	int numItems = std::atoi(line.c_str());
+
+	for (int i = 0; i < numItems; ++i) {
+		getline(file, line); //Obj name
+		GameObject* obj = database->GameObjects->Find(line);
+
+		while (getline(file, line)) {
+			vector<string> tokens = Log::tokenise(line);
+			string variable = tokens.at(0);
+
+			if (variable == "size") {
+				float x = stof(tokens.at(1));
+				float y = stof(tokens.at(2));
+				float z = stof(tokens.at(3));
+
+				Vector3 size(x, y, z);
+
+				obj->SetSize(size);
+			}
+			else if (variable == "colour") {
+				float r = stof(tokens.at(1));
+				float g = stof(tokens.at(2));
+				float b = stof(tokens.at(3));
+				float a = stof(tokens.at(4));
+
+				Vector4 col(r, g, b, a);
+
+				obj->GetSceneNode()->SetColour(col);
+			}
+			else if (variable == "texture") {
+				obj->SetTexture(*(tokens.at(1)).c_str());
 			}
 			else if (tokens.at(0) == "-") break;
 		}
