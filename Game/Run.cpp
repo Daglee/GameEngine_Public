@@ -12,6 +12,9 @@
 #include "../GameLogicFSM/MessageSystem.h"
 
 /*  
+	IMPROVED SYSTEM TO APPLY INPUTS - MORE GENERIC
+	DECREASE MASSES OF SPHERES + ADD MORE
+
 	Important Notes:
 	Up to 5 players supported. Player 1 will use mouse and keyboard.
 	Xbox One controllers are supported and the official wireless/bluetooth

@@ -120,7 +120,7 @@ void Renderer::RenderScene() {
 		"cameraPos"), 1, (float*)&camera->GetPosition());
 
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
-		"bumpTex"), 1);
+		"bumpTex"), 0);
 
 	UpdateShaderMatrices();
 	SetShaderLight(*light);

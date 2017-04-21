@@ -89,3 +89,4 @@ damping 0.9
 isSphere 0
 isMoveable 1
 atRest 0
+texture ../Data/Textures/chessboard.tga

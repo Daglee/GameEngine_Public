@@ -233,6 +233,9 @@ void Level::ReadPhysicsObject(std::string filename)
 
 				obj->GetSceneNode()->SetColour(col);
 			}
+			else if (variable == "texture") {
+				obj->SetTexture(*(tokens.at(1)).c_str());
+			}
 			else if (variable == "gravity") {
 				float gravity = stof(tokens.at(1));
 				obj->GetRigidBody()->gravity = gravity;
