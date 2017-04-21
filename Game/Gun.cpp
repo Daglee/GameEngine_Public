@@ -6,8 +6,8 @@
 
 #include <time.h>
 
-Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, float reloadSpeed, int bulletsPerMag,
-	float bulletSpeed, float fireDelay, Mesh* m) : ResourceBase() 
+Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, float reloadSpeed, int bulletsPerMag,
+	float bulletSpeed, float fireDelay) : ResourceBase() 
 {
 	rend = r;
 	phys = p;

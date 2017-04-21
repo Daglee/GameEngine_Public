@@ -28,11 +28,14 @@ public:
 	Game(string rendererName, string windowName, DataBase* db);
 	~Game() {}
 
-	void InitialisePlayers();
-
 	void StartUp(string directory);
 	void LoadLevel(string level);
 	void ExitLevel();
+
+	void InitialisePlayers();
+	void InitialiseGPPlayer(Player* p, Gamepad* gp);
+	void InitialiseMKPlayer(Player* p);
+	void SetPlayerParameters(Player* p);
 
 	void InitProfilerTimers();
 

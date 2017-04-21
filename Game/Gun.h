@@ -14,8 +14,8 @@ class DataBase;
 class Gun : public ResourceBase
 {
 public:
-	Gun(DataBase* db, Renderer* rend, PhysicsEngine* p, float reloadSpeed, int bulletsPerMag,
-		float bulletSpeed, float frate, Mesh* m);
+	Gun(DataBase* db, Renderer* rend, PhysicsEngine* p, Mesh* m, float reloadSpeed = 2000.0f,
+		int bulletsPerMag = 20, float bulletSpeed = 8.0f, float frate = 450.0f);
 
 	virtual ~Gun() {}
 

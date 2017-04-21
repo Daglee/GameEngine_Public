@@ -100,11 +100,7 @@ void InputManager::InitialisePlayer(Player* p, Gamepad* gp)
 	GamepadMapper* gm = new GamepadMapper();
 	gm->SetGamePad(gp);
 	p->SetInputMapper(gm);
-	float reloadSpeed = 2000;
-	float bulletsPerMag = 20;
-	float fireDelay = 450;
-	p->gun = new Gun(database, renderer, physicsEngine, reloadSpeed,
-		bulletsPerMag, 8, fireDelay, defaultBulletMesh);
+	p->gun = new Gun(database, renderer, physicsEngine, defaultBulletMesh);
 	SetPlayerParameters(p);
 }
 
@@ -119,11 +115,7 @@ void InputManager::InitialisePlayer(Player* p)
 
 	threadPool->pauseButton = mkm->PAUSE;
 
-	float reloadSpeed = 2000;
-	float bulletsPerMag = 20;
-	float fireDelay = 450;
-	p->gun = new Gun(database, renderer, physicsEngine, reloadSpeed,
-		bulletsPerMag, 8, fireDelay, defaultBulletMesh);
+	p->gun = new Gun(database, renderer, physicsEngine, defaultBulletMesh);
 	SetPlayerParameters(p);
 }
 
