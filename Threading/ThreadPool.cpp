@@ -22,19 +22,8 @@ ThreadPool::ThreadPool() : ResourceBase()
 
 void ThreadPool::InitialiseWorkers(int numWorkers)
 {
-	try {
-		for (int i = 0; i < numWorkers; ++i) {
-			threads.emplace_back(&ThreadPool::FindNewTask, this);
-		}
-	}
-	catch (...) {
-		//Don't continue.
-		running = false;
-		taskQueue.Invalidate();
-
-		JoinAll();
-
-		throw;
+	for (int i = 0; i < numWorkers; ++i) {
+		threads.emplace_back(&ThreadPool::FindNewTask, this);
 	}
 }
 
@@ -53,7 +42,6 @@ void ThreadPool::FindNewTask()
 
 void ThreadPool::JoinAll()
 {
-	//Wont let me do my usual "for each"...
 	for (auto& thread : threads) {
 		if (thread.joinable()) {
 			thread.join(); //Stop all threads.

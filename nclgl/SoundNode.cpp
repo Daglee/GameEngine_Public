@@ -85,7 +85,7 @@ void		SoundNode::AttachSource(OALSource* s) {
 		}
 		else{
 			alSourcei(oalSource->source,AL_BUFFER,sound->GetBuffer());
-			alSourcef(oalSource->source,AL_SEC_OFFSET,(sound->GetLength()/ 1000.0) - (timeLeft / 1000.0));
+			alSourcef(oalSource->source,AL_SEC_OFFSET, (ALfloat)((sound->GetLength()/ 1000.0f) - (timeLeft / 1000.0f)));
 
 			//cout << "Attaching! Timeleft: " << (sound->GetLength()/ 1000.0) - (timeLeft / 1000.0) << endl;
 			alSourcePlay(oalSource->source);

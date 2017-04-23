@@ -12,8 +12,6 @@
 #include "../GameLogicFSM/MessageSystem.h"
 
 /*  
-	DECREASE MASSES OF SPHERES + ADD MORE
-
 	Important Notes:
 	Up to 5 players supported. Player 1 will use mouse and keyboard.
 	Xbox One controllers are supported and the official wireless/bluetooth
@@ -52,13 +50,10 @@ int main()
 	//Base assets such as the renderer, physics engine etc get loaded in.
 	game->StartUp("../Data/startup.txt");
 
-	//More specific assets for a level such as a set number of spheres get loaded in.
+	//More specific assets for a level, such as a set number of spheres, get loaded in.
 	game->LoadLevel("../Data/Levels/Directories/Arena1.txt");
 
 	if (!game->Initialised()) return -1;
-
-	game->GetWindow()->LockMouseToWindow(true);
-	game->GetWindow()->ShowOSPointer(false);
 
 	//Return the pointers now and send the to the appropriate subsystems.
 	Camera*	camera	= database->GCamera->Find("Camera");
@@ -79,7 +74,7 @@ int main()
 	}
 
 	//I'm just loading in a level and releasing it on shutdown. 
-	//In reality, this function could be called at any time.
+	//In reality, these functions could be called at any time.
 	game->ExitLevel();
 
 	//Free up all the memory...

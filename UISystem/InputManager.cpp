@@ -124,8 +124,8 @@ void InputManager::SetPlayerParameters(Player* p)
 	p->GetPlayerModel()->UpdateMesh(defaultPlayerMesh);
 	p->UpdatePhysics(physicsEngine);
 	p->UpdateRenderer(renderer);
-	p->Move(Vector3(500, 100, 0 * connectedPlayers.size())); // REPLACE LATER
-	p->GetRigidBody()->UpdatePosition(Vector3(0, 100, 50 * connectedPlayers.size()));
+	p->Move(Vector3(500, 100, (float)(0 * connectedPlayers.size()))); // REPLACE LATER
+	p->GetRigidBody()->UpdatePosition(Vector3(0, 100, (float)(50 * connectedPlayers.size())));
 	p->teamID = connectedPlayers.size(); //Just for now (free for all)...
 	string tag = "player" + std::to_string(connectedPlayers.size());
 	p->GetRigidBody()->tag = tag;

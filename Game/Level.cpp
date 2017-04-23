@@ -179,7 +179,7 @@ void Level::ReadObject(std::string line)
 		p->UpdatePhysics(database->GPhysicsEngine->Find("PhysicsEngine"));
 		p->UpdateRenderer(*database->GRenderer->Find("Renderer"));
 		
-		bool isSphere = std::atoi(tokens.at(6).c_str());
+		bool isSphere = std::atoi(tokens.at(6).c_str()) != 0;
 		p->isSphere = isSphere;
 		if (!isSphere) {
 			//There must be an extra 3 tokens to define the plane here! e.g. "1 0 0" = Vector3(1,0,0)
@@ -262,11 +262,11 @@ void Level::ReadPhysicsObject(std::string filename)
 				obj->GetRigidBody()->drag = damping;
 			}
 			else if (variable == "isMoveable") {
-				int isMoveable = atoi(tokens.at(1).c_str());
+				bool isMoveable = atoi(tokens.at(1).c_str()) != 0;
 				obj->GetRigidBody()->isStatic = isMoveable;
 			}
 			else if (variable == "atRest") {
-				int atRest = atoi(tokens.at(1).c_str());
+				bool atRest = atoi(tokens.at(1).c_str()) != 0;
 				obj->GetRigidBody()->atRest = atRest;
 			}
 			else if (variable == "tag") {

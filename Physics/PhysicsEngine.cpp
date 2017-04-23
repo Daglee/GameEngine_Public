@@ -105,8 +105,8 @@ vector<CollisionPair> PhysicsEngine::BroadPhase()
 
 	std::sort(rigidBodies.begin(), rigidBodies.end(), compareRigidBodies);
 
-	for (int x = 0; x < rigidBodies.size(); ++x) {
-		for (int y = x + 1; y < rigidBodies.size(); ++y) {
+	for (unsigned x = 0; x < rigidBodies.size(); ++x) {
+		for (unsigned y = x + 1; y < rigidBodies.size(); ++y) {
 
 			//Are they possibly colliding?
 			if (rigidBodies[x]->collider->objbounds.max > rigidBodies[y]->collider->objbounds.min) {
@@ -184,7 +184,7 @@ void PhysicsEngine::ProjectionResponse(CollisionPair collisionPair, Vector3 cont
 	Vector3 xOff = xPos - (contactNormal * penetrationDepth * moveratio);
 
 	Vector3 yPos = collisionPair.r2->collider->position;
-	Vector3 yOff = yPos + (contactNormal * penetrationDepth * (1.0 - moveratio));
+	Vector3 yOff = yPos + (contactNormal * penetrationDepth * (1.0f - moveratio));
 
 	collisionPair.r1->UpdatePosition(xOff);
 	collisionPair.r2->UpdatePosition(yOff);

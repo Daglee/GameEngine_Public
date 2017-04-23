@@ -57,7 +57,7 @@ float GamepadMapper::GetRotation()
 {
 	if (inputs[ROTATION_Y] != 0 || inputs[ROTATION_X] != 0) {
 		float rotation = atan2(inputs[ROTATION_X], inputs[ROTATION_Y])
-			* (180.0f / M_PI) + 90;
+			* (float)(180.0f / M_PI) + 90.0f;
 
 		//So we dont keep bouncing back and forth
 		if (rotation < 0) {

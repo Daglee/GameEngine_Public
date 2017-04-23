@@ -17,32 +17,28 @@ SubsystemManager::SubsystemManager(DataBase* database)
 //Game loop iteration!
 void SubsystemManager::ThreadedUpdate(float deltatime)
 {
-	/*
-	  The pause button MUST be checked via the thread pool
-	  itself as the UI System will be suspended and no more
-	  updates will be performed on it.
-
-	  The UI System start up will specify the button to check.
-	*/
-
 	//OpenGL doesn't like to be threaded...
 	renderer->Update(deltatime);
 
-	//But the other subsystems do...
+	//But these other subsystems do...
 
-	//Contains the promises that the updates will get done.
+	/*
+	  The promises that multithreaded updates will get 
+	  done must be stored as they would wait and join
+	  if they went out of scope/destructor was called.
+	*/
 	vector<TaskFuture<void>> updates;
 
-	//Update each subsystem...
 	if (!threadPool->Paused()) {
+		//Start all the threads needed to update sybsystems...
 		for each(Subsystem* subsystem in subsystems)
 		{
 			updates.push_back(threadPool->SubmitJob([](Subsystem* s, float dt) {	//Any parameters needed...
 				s->Update(dt);				//The function to call...
 			}, subsystem, deltatime));		//What we are passing in...
+			//Equivalent to "physicsEngine->Update(deltatime)".
 		}
 	}
-	//Equivalent to "physicsEngine->Update(deltatime)".
 
 	//Synchronise threads.
 	for (auto& task : updates) {
@@ -52,16 +48,14 @@ void SubsystemManager::ThreadedUpdate(float deltatime)
 
 void SubsystemManager::Update(float deltatime)
 {
-	/*
-	  Even though this update i not threaded, 
-	  this works just fine and saves writing 
-	  the same code in two places.
-	*/
-	threadPool->Paused();
-
 	renderer->Update(deltatime);
 
-	if (!threadPool->paused) {
+	/*
+	  Even though this update is not threaded,
+	  this works just fine and saves writing
+	  the same code in two places.
+	*/
+	if (!threadPool->Paused()) {
 		for each(Subsystem* subsystem in subsystems)
 		{
 			subsystem->Update(deltatime);

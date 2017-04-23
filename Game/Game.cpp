@@ -39,6 +39,9 @@ void Game::StartUp(string filename)
 		initialised = true;
 	}
 	else Log::Error("Window or Renderer has failed to initialise.");
+
+	window->LockMouseToWindow(true);
+	window->ShowOSPointer(false);
 }
 
 void Game::LoadLevel(string levelFolder)

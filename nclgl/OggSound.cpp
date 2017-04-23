@@ -61,7 +61,7 @@ double	OggSound::StreamData(ALuint	buffer, double timeLeft) {
 	}
 
 	if(read > 0) {
-		alBufferData(buffer, GetOALFormat(), data, read, GetFrequency());
+		alBufferData(buffer, GetOALFormat(), data, read, (ALsizei)GetFrequency());
 	}
 
 	return (float)read / (channels * freqRate * (bitRate / 8.0)) * 1000.0f;

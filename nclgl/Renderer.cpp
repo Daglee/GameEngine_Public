@@ -91,9 +91,9 @@ void Renderer::RenderLoadingScreen(float current, float total) {
 	glUseProgram(currentShader->GetProgram());
 
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
-		"currentProgress"), current);
+		"currentProgress"), (int)current);
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
-		"finalValue"), total);
+		"finalValue"), (int)total);
 
 	UpdateShaderMatrices();
 	DrawLoadingScreen(current, total);
@@ -149,7 +149,7 @@ void Renderer::UpdateScene(float msec) {
 void Renderer::DrawLoadingScreen(float current, float total) {
 	float progress = (current / total);
 	Vector3 scale((float)width * progress, 100, 100);
-	Vector3 pos(-((float)width * 0.5) + scale.x, -((float)height * 0.5) + scale.y, 0);
+	Vector3 pos(-((float)width * 0.5f) + scale.x, -((float)height * 0.5f) + scale.y, 0);
 
 	modelMatrix.SetPositionVector(pos);
 	modelMatrix.SetScalingVector(scale);
@@ -185,8 +185,8 @@ void Renderer::DrawOverlay()
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 		"useOverlay"), 1);
 
-	modelMatrix.SetScalingVector(Vector3(width * 0.4, height * 0.9, 0));
-	modelMatrix.SetPositionVector(Vector3(0, -200, 0));
+	modelMatrix.SetScalingVector(Vector3(width * 0.4f, height * 0.9f, 0));
+	modelMatrix.SetPositionVector(Vector3(0, -300, 0));
 
 	SwitchToOrthographic();
 	UpdateShaderMatrices();

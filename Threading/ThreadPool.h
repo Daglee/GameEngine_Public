@@ -41,17 +41,30 @@ public:
 	}
 
 	/*
-	  Give the thread pool a task to do.
-	  Tidies up the private one a bit + it's inline
+	  Give the thread pool a task to do y getting
+	  a thread to carry out a function/method.
+	  Using auto because its easier and reads better...
 	*/
 	template <typename Function, typename... Params>
-	inline auto SubmitJob(Function&& func, Params&&... params)
+	auto SubmitJob(Function&& func, Params&&... params)
 	{
 		/*
-		  If thread execution is paused, no job will be 
-		  submitted to maintain the current state.
+		  Create a function template with the passed in function
+		  reference and any number of parameters.
 		*/
-		if (!paused) return Submit(forward<Function>(func), forward<Params>(params)...);
+		auto thisTask = bind(forward<Function>(func), forward<Params>(params)...);
+
+		using resultType = result_of_t<decltype(thisTask)()>; //What will the function return?
+		using packagedTask = packaged_task<resultType()>;		 //Prepare the function for async...
+		using taskType = ThreadTask<packagedTask>;			 //Create a thread task for that function.
+
+															 //So fancy things can be done.
+		packagedTask			task{ move(thisTask) };
+		TaskFuture<resultType>	result{ task.get_future() };
+
+		//Let a thread carry the task out.
+		taskQueue.Push(make_unique<taskType>(move(task)));
+		return result;
 	}
 
 	inline bool Paused()
@@ -63,34 +76,9 @@ public:
 	void Read(string resourcename);
 	void ReadParams(string params);
 
-	std::atomic_bool paused = false;
 	KeyboardKeys pauseButton;
 private:
-	/*
-	  Get a thread to carry out a function/method
-	  Using auto because its easier and reads better...
-	*/
-	template <typename Function, typename... Params>
-	auto ThreadPool::Submit(Function&& func, Params&&... args) 
-	{
-		/*
-		  Create a function template with the passed in function 
-		  reference and any number of parameters.
-		*/
-		auto thisTask = bind(forward<Function>(func), forward<Params>(args)...);
-
-		using resultType	= result_of_t<decltype(thisTask)()>; //What will the function return?
-		using packagedTask	= packaged_task<resultType()>;		 //Prepare the function for async...
-		using taskType		= ThreadTask<packagedTask>;			 //Create a thread task for that function.
-
-		//So fancy things can be done.
-		packagedTask			task{ move(thisTask) };
-		TaskFuture<resultType>	result{ task.get_future() };
-
-		//Let a thread carry the task out.
-		taskQueue.Push(make_unique<taskType>(move(task)));
-		return result;
-	}
+	std::atomic_bool paused = false;
 
 	//Initialise threads
 	void InitialiseWorkers(int numWorkers);

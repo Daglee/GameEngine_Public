@@ -75,7 +75,7 @@ float MKMapper::GetRotation()
 {
 	if (inputs[ROTATION_Y] != 0 || inputs[ROTATION_X] != 0) {
 		float rotation = atan2(inputs[ROTATION_X], inputs[ROTATION_Y])
-			* (180.0f / M_PI);
+			* (float)(180.0 / M_PI);
 
 		if (rotation < 0) {
 			rotation = 360 - (-rotation);
@@ -94,7 +94,7 @@ float MKMapper::GetRotation()
 
 bool MKMapper::Fired()
 {
-	return inputs[FIRED];
+	return inputs[FIRED] != 0;
 }
 
 /*

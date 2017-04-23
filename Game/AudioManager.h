@@ -76,7 +76,11 @@ public:
 	{
 		SoundNode* sound = sounds.at(name);
 
-		if (sound == nullptr) Log::Error("Sound " + name + " not found.");
+		if (sound == nullptr) {
+			Log::Error("Sound " + name + " not found.");
+
+			return nullptr;
+		}
 		else return sounds.at(name);
 	}
 

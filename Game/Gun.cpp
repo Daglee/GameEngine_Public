@@ -116,7 +116,7 @@ void Gun::InitialiseBullet(PhysicsObject* b)
 	b->GetRigidBody()->parentMesh = b->GetSceneNode();
 	b->SetSize(Vector3(7, 7, 7));
 	b->GetRigidBody()->collider = new SphereCollider(7);
-	b->GetRigidBody()->drag = 0.999;
+	b->GetRigidBody()->drag = 0.999f;
 	b->GetRigidBody()->UpdateMass(10);
 	b->GetRigidBody()->gravity = -0.0f;
 	b->GetRigidBody()->atRest = false;

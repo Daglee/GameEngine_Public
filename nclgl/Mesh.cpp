@@ -96,7 +96,7 @@ Mesh * Mesh::GenerateQuad() {
 
 void Mesh::SetColour(Vector4 newCol, Mesh* m) {
 	m->colours = new Vector4[m->numVertices];
-	for (int i = 0; i < m->numVertices; i++) {
+	for (unsigned i = 0; i < m->numVertices; i++) {
 		m->colours[i] = newCol;
 	}
 
