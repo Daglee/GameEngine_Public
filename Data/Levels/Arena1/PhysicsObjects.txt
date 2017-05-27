@@ -1,0 +1,209 @@
+26
+wall0
+size 30 30 30
+colour 1 1 1 1
+gravity -0.1
+mass 300
+damping 0.9
+atRest 0
+-
+wall1
+size 50 50 50
+colour 1 0 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+wall2
+size 70 70 70
+colour 1 1 0 1
+gravity -0.1
+mass 700
+damping 0.9
+atRest 0
+-
+wall3
+size 50 50 50
+colour 0 1 1 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+wall4
+size 100 100 100
+colour 1 0 0.3 1
+gravity -0.1
+mass 1000
+damping 0.9
+atRest 0
+-
+wall5
+size 60 60 60
+colour 1 0 0 1
+gravity -0.1
+mass 600
+damping 0.9
+atRest 0
+-
+wall6
+size 40 40 40
+colour 0 0 1 1
+gravity -0.1
+mass 400
+damping 0.9
+atRest 0
+-
+wall7
+size 50 50 50
+colour 0 1 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+wall8
+size 50 50 50
+colour 0.1 0.1 0.1 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+wall9
+size 80 80 80
+colour 1 0.2 0 1
+gravity -0.1
+mass 800
+damping 0.9
+atRest 0
+-
+wall10
+size 50 50 50
+colour 1 0.2 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+wall11
+size 60 60 60
+colour 0.3 0.3 1 1
+gravity -0.1
+mass 600
+damping 0.9
+atRest 0
+-
+wall12
+size 50 50 50
+colour 0.5 0.2 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+wall13
+size 50 50 50
+colour 1 0 0.5 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+wall14
+size 50 50 50
+colour 0.3 1 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+smallcube0
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube1
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube2
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube3
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube4
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube5
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube6
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube7
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube8
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallcube9
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+floor
+size 800 1 500
+colour 0.5 0.5 0.5 1
+gravity 0
+mass 10
+damping 0.9
+isMoveable 1
+atRest 0

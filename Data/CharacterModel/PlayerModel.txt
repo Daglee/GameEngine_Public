@@ -1,0 +1,53 @@
+body
+colour 1 0 0 1
+scale 10 15 5
+transform 0 25 0
+-
+head
+colour 0 1 0 1
+scale 5 5 5
+transform 0 30 0
+-
+uleftArm
+colour 0 0 1 1
+scale 3 -9 3
+transform -12 30 -1
+rotation -10 0 0 1
+rotation -25 1 0 0
+-
+dleftArm
+colour 0 0 1 1
+scale 3 -9 3
+transform 0 -22 0
+rotation -95 1 0 0 
+rotation 35 0 0 1 
+-
+urightArm
+colour 0 0 1 1
+scale 3 -9 3
+transform 12 30 1
+rotation -10 0 0 1
+rotation -45 1 0 0
+-
+drightArm
+colour 0 0 1 1
+scale 3 -9 3
+transform 0 -22 0
+rotation -95 1 0 0 
+rotation -35 0 0 1 
+-
+leftLeg
+colour 0 0 1 1
+scale 3 -17.5 3
+transform -8 0 0
+-
+rightLeg
+colour 0 0 1 1
+scale 3 -17.5 3
+transform 8 0 0
+-
+gun
+colour 0 0 0 1
+scale 3 3 19
+transform -3 19 23
+-

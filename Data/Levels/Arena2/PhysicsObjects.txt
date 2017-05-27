@@ -1,0 +1,193 @@
+24
+sphere0
+size 30 30 30
+colour 1 1 1 1
+gravity -0.1
+mass 300
+damping 0.9
+atRest 0
+-
+sphere1
+size 50 50 50
+colour 1 0 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+sphere2
+size 70 70 70
+colour 1 1 0 1
+gravity -0.1
+mass 700
+damping 0.9
+atRest 0
+-
+sphere3
+size 50 50 50
+colour 0 1 1 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+sphere4
+size 100 100 100
+colour 1 0 0.3 1
+gravity -0.1
+mass 1000
+damping 0.9
+atRest 0
+-
+sphere5
+size 60 60 60
+colour 1 0 0 1
+gravity -0.1
+mass 600
+damping 0.9
+atRest 0
+-
+sphere6
+size 40 40 40
+colour 0 0 1 1
+gravity -0.1
+mass 400
+damping 0.9
+atRest 0
+-
+sphere7
+size 50 50 50
+colour 0 1 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+sphere8
+size 50 50 50
+colour 0.1 0.1 0.1 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+sphere9
+size 80 80 80
+colour 1 0.2 0 1
+gravity -0.1
+mass 800
+damping 0.9
+atRest 0
+-
+sphere10
+size 50 50 50
+colour 1 0.2 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+sphere11
+size 60 60 60
+colour 0.3 0.3 1 1
+gravity -0.1
+mass 600
+damping 0.9
+atRest 0
+-
+sphere12
+size 50 50 50
+colour 0.5 0.2 0 1
+gravity -0.1
+mass 500
+damping 0.9
+atRest 0
+-
+smallsphere0
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere1
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere2
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere3
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere4
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere5
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere6
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere7
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere8
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+smallsphere9
+size 10 10 10
+colour 1 1 1 1
+gravity -0.1
+mass 100
+damping 0.9
+atRest 0
+-
+floor
+size 800 1 500
+colour 0.5 0.5 0.5 1
+gravity 0
+mass 10
+damping 0.9
+isMoveable 1
+atRest 0

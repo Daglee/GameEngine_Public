@@ -1,0 +1,290 @@
+9
+state 0
+timer = 0
+colourr = 1
+colourg = 0
+colourb = 0
+coloura = 1
+teamid = 0
+r newevent s:player3redteam
+b endevent s:player3blueteam
+y endevent s:player3yellowteam
+g endevent s:player3greenteam
+--
+state 1
+timer = 0
+colourr = 0
+colourg = 0
+colourb = 1
+coloura = 1
+teamid = 1
+b newevent s:player3blueteam
+r endevent s:player3redteam
+y endevent s:player3yellowteam
+g endevent s:player3greenteam
+--
+state 2
+timer = 0
+colourr = 0
+colourg = 1
+colourb = 0
+coloura = 1
+teamid = 2
+r endevent s:player3redteam
+b endevent s:player3blueteam
+y endevent s:player3yellowteam
+g newevent s:player3greenteam
+--
+state 3
+timer = 0
+colourr = 1
+colourg = 1
+colourb = 0
+coloura = 1
+teamid = 3
+r endevent s:player3redteam
+b endevent s:player3blueteam
+y newevent s:player3yellowteam
+g endevent s:player3greenteam
+--
+state 4 temporary
+health -= 100
+coloura = 0
+timer = 0
+killstreak = 0
+--
+state 5 temporary
+player3 addpoints 1
+--
+state 6 temporary
+killstreak += 1
+addkillstreakpoints newevent s:player3addkillstreakpoints
+a endevent s:player2_colliding_bullet3
+b endevent s:player1_colliding_bullet3
+c endevent s:player4_colliding_bullet3
+c endevent s:player5_colliding_bullet3
+--
+state 7 temporary
+getrocketlauncher newevent s:player3rocketlauncher
+--
+state 8 temporary
+getmachinegun newevent s:player3machinegun
+--
+-
+transition1_red_to_blue_team
+0 -> 1
+exists_transmission = s:Player3SwitchBlueTeam && timer > 5
+transition2_green_to_blue_team
+2 -> 1
+exists_transmission = s:Player3SwitchBlueTeam && timer > 5
+transition3_yellow_to_blue_team
+3 -> 1
+exists_transmission = s:Player3SwitchBlueTeam && timer > 5
+transition4_blue_to_red_team
+1 -> 0
+exists_transmission = s:Player3SwitchRedTeam && timer > 5
+transition5_green_to_red_team
+2 -> 0
+exists_transmission = s:Player3SwitchRedTeam && timer > 5
+transition6_yellow_to_red_team
+3 -> 0
+exists_transmission = s:Player3SwitchRedTeam && timer > 5
+transition7_red_to_green_team
+0 -> 2
+exists_transmission = s:Player3SwitchGreenTeam && timer > 5
+transition8_blue_to_green_team
+1 -> 2
+exists_transmission = s:Player3SwitchGreenTeam && timer > 5
+transition9_yellow_to_green_team
+3 -> 2
+exists_transmission = s:Player3SwitchGreenTeam && timer > 5
+transition10_red_to_yellow_team
+0 -> 3
+exists_transmission = s:Player3SwitchYellowTeam && timer > 5
+transition11_blue_to_yellow_team
+1 -> 3
+exists_transmission = s:Player3SwitchYellowTeam && timer > 5
+transition12_green_to_yellow_team
+2 -> 3
+exists_transmission = s:Player3SwitchYellowTeam && timer > 5
+transision13_dead				  
+0 -> 4						  
+exists_transmission = s:player3_colliding_bullet1
+transision14_dead				  
+0 -> 4						  
+exists_transmission = s:player3_colliding_bullet2
+transision15_dead				 
+0 -> 4						 
+exists_transmission = s:player3_colliding_bullet4
+transision16_dead				 
+0 -> 4						 
+exists_transmission = s:player3_colliding_bullet5
+transision17_dead				
+1 -> 4						
+exists_transmission = s:player3_colliding_bullet1
+transision18_dead				 
+1 -> 4						 
+exists_transmission = s:player3_colliding_bullet2
+transision19_dead				 
+1 -> 4						 
+exists_transmission = s:player3_colliding_bullet4
+transision20_dead				 
+1 -> 4						 
+exists_transmission = s:player3_colliding_bullet5
+transision21_dead
+2 -> 4
+exists_transmission = s:player3_colliding_bullet1
+transision23_dead
+2 -> 4
+exists_transmission = s:player3_colliding_bullet2
+transision24_dead
+2 -> 4
+exists_transmission = s:player3_colliding_bullet4
+transision25_dead
+2 -> 4
+exists_transmission = s:player3_colliding_bullet5
+transision26_dead
+3 -> 4
+exists_transmission = s:player3_colliding_bullet1
+transision27_dead
+3 -> 4
+exists_transmission = s:player3_colliding_bullet2
+transision28_dead
+3 -> 4
+exists_transmission = s:player3_colliding_bullet4
+transision29_dead
+3 -> 4
+exists_transmission = s:player3_colliding_bullet5
+transition30_enemy_player2_killed_by_teammate
+0 -> 5
+exists_transmission = s:player2dead && !exists_transmission = s:player2redteam && !exists_transmission = s:player2_colliding_bullet3
+transition31_enemy_player1_killed_by_teammate
+0 -> 5
+exists_transmission = s:player1dead && !exists_transmission = s:player1redteam && !exists_transmission = s:player1_colliding_bullet3
+transition32_enemy_player4_killed_by_teammate
+0 -> 5
+exists_transmission = s:player4dead && !exists_transmission = s:player4redteam && !exists_transmission = s:player4_colliding_bullet3
+transition33_enemy_player5_killed_by_teammate
+0 -> 5
+exists_transmission = s:player5dead && !exists_transmission = s:player5redteam && !exists_transmission = s:player5_colliding_bullet3
+transition34_enemy_player2_killed_by_teammate
+1 -> 5
+exists_transmission = s:player2dead && !exists_transmission = s:player2blueteam && !exists_transmission = s:player2_colliding_bullet3
+transition35_enemy_player1_killed_by_teammate
+1 -> 5
+exists_transmission = s:player1dead && !exists_transmission = s:player1blueteam && !exists_transmission = s:player1_colliding_bullet3
+transition36_enemy_player4_killed_by_teammate
+1 -> 5
+exists_transmission = s:player4dead && !exists_transmission = s:player4blueteam && !exists_transmission = s:player4_colliding_bullet3
+transition38_enemy_player5_killed_by_teammate
+1 -> 5
+exists_transmission = s:player5dead && !exists_transmission = s:player5blueteam && !exists_transmission = s:player5_colliding_bullet3
+transition39_enemy_player2_killed_by_teammate
+2 -> 5
+exists_transmission = s:player2dead && !exists_transmission = s:player2greenteam && !exists_transmission = s:player2_colliding_bullet3
+transition40_enemy_player1_killed_by_teammate
+2 -> 5
+exists_transmission = s:player1dead && !exists_transmission = s:player1greenteam && !exists_transmission = s:player1_colliding_bullet3
+transition41_enemy_player4_killed_by_teammate
+2 -> 5
+exists_transmission = s:player4dead && !exists_transmission = s:player4greenteam && !exists_transmission = s:player4_colliding_bullet3
+transition42_enemy_player5_killed_by_teammate
+2 -> 5
+exists_transmission = s:player5dead && !exists_transmission = s:player5greenteam && !exists_transmission = s:player5_colliding_bullet3
+transition43_enemy_player2_killed_by_teammate
+3 -> 5
+exists_transmission = s:player2dead && !exists_transmission = s:player2yellowteam && !exists_transmission = s:player2_colliding_bullet3
+transition44_enemy_player1_killed_by_teammate
+3 -> 5
+exists_transmission = s:player1dead && !exists_transmission = s:player1yellowteam && !exists_transmission = s:player1_colliding_bullet3
+transition45_enemy_player4_killed_by_teammate
+3 -> 5
+exists_transmission = s:player4dead && !exists_transmission = s:player4yellowteam && !exists_transmission = s:player4_colliding_bullet1
+transition46_enemy_player5_killed_by_teammate
+3 -> 5
+exists_transmission = s:player5dead && !exists_transmission = s:player5yellowteam && !exists_transmission = s:player5_colliding_bullet1
+transition47_killed_enemy_player2
+0 -> 6
+exists_transmission = s:player2_colliding_bullet3 && !exists_transmission = s:player2redteam
+transition48_killed_enemy_player1
+0 -> 6
+exists_transmission = s:player1_colliding_bullet3 && !exists_transmission = s:player1redteam
+transition49_killed_enemy_player4
+0 -> 6
+exists_transmission = s:player4_colliding_bullet3 && !exists_transmission = s:player4redteam
+transition50_killed_enemy_player5
+0 -> 6
+exists_transmission = s:player5_colliding_bullet3 && !exists_transmission = s:player5redteam
+transition51_killed_enemy_player2
+1 -> 6
+exists_transmission = s:player2_colliding_bullet1 && !exists_transmission = s:player2blueteam
+transition52_killed_enemy_player1
+1 -> 6
+exists_transmission = s:player1_colliding_bullet3 && !exists_transmission = s:player1blueteam
+transition53_killed_enemy_player4
+1 -> 6
+exists_transmission = s:player4_colliding_bullet3 && !exists_transmission = s:player4blueteam
+transition54_killed_enemy_player5
+1 -> 6
+exists_transmission = s:player5_colliding_bullet3 && !exists_transmission = s:player5blueteam
+transition55_killed_enemy_player2
+2 -> 6
+exists_transmission = s:player2_colliding_bullet3 && !exists_transmission = s:player2greenteam
+transition56_killed_enemy_player1
+2 -> 6
+exists_transmission = s:player1_colliding_bullet3 && !exists_transmission = s:player1greenteam
+transition57_killed_enemy_player4
+2 -> 6
+exists_transmission = s:player4_colliding_bullet3 && !exists_transmission = s:player4greenteam
+transition58_killed_enemy_player5
+2 -> 6
+exists_transmission = s:player5_colliding_bullet3 && !exists_transmission = s:player5greenteam
+transition59_killed_enemy_player2
+3 -> 6
+exists_transmission = s:player2_colliding_bullet3 && !exists_transmission = s:player2yellowteam
+transition60_killed_enemy_player1
+3 -> 6
+exists_transmission = s:player1_colliding_bullet3 && !exists_transmission = s:player1yellowteam
+transition61_killed_enemy_player4
+3 -> 6
+exists_transmission = s:player4_colliding_bullet3 && !exists_transmission = s:player4yellowteam
+transition62_killed_enemy_player5
+3 -> 6
+exists_transmission = s:player5_colliding_bullet3 && !exists_transmission = s:player5yellowteam
+transition63_get_rocketlauncher
+0 -> 7
+killstreak == 10 && !exists_transmission = s:player3hasrocketlauncher
+transition64_get_rocketlauncher
+1 -> 7
+killstreak == 10 && !exists_transmission = s:player3hasrocketlauncher
+transition65_get_rocketlauncher
+2 -> 7
+killstreak == 10 && !exists_transmission = s:player3hasrocketlauncher
+transition66_get_rocketlauncher
+3 -> 7
+killstreak == 10 && !exists_transmission = s:player3hasrocketlauncher
+transition67_get_machinegun
+0 -> 8
+killstreak == 5 && !exists_transmission = s:player3hasmachinegun
+transition68_get_machinegun
+1 -> 8
+killstreak == 5 && !exists_transmission = s:player3hasmachinegun
+transition69_get_machinegun
+2 -> 8
+killstreak == 5 && !exists_transmission = s:player3hasmachinegun
+transition70_get_machinegun
+3 -> 8
+killstreak == 5 && !exists_transmission = s:player3hasmachinegun
+transition71_fell_off_map
+0 -> 4
+ypos < -500
+transition72_fell_off_map
+1 -> 4
+ypos < -500
+transition73_fell_off_map
+2 -> 4
+ypos < -500
+transition74_fell_off_map
+3 -> 4
+ypos < -500
+-

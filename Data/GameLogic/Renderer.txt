@@ -1,0 +1,19 @@
+6
+state 0
+overlay1 = 0
+overlay2 = 0
+overlay3 = 0
+--
+state 1
+overlay1 = 0
+overlay2 = 0
+overlay3 = 0
+--
+-
+transition1_overlays_turned_off
+0 -> 1 
+timer > 200
+transition2_overlays_turned_off
+1 -> 0
+timer > 200
+-

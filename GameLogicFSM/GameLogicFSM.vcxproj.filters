@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="FSM.h">
+      <Filter>Finite State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Finite State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>Finite State Machine</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMManager.h">
+      <Filter>FSM Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageSystem.h">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMUnit.h">
+      <Filter>FSM Managment</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FSM.cpp">
+      <Filter>Finite State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Finite State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>Finite State Machine</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMManager.cpp">
+      <Filter>FSM Managment</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageSystem.cpp">
+      <Filter>Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMUnit.cpp">
+      <Filter>FSM Managment</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Finite State Machine">
+      <UniqueIdentifier>{efe7cf0b-bee5-4ca2-bcca-f7e83b346ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FSM Managment">
+      <UniqueIdentifier>{19dda4f3-2416-41cb-befb-43c715f1dfa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Messaging">
+      <UniqueIdentifier>{fda86c62-56b7-4350-b6bf-3148b2640a86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
