@@ -9,6 +9,7 @@
 #include "Gun.h"
 #include "AudioManager.h"
 #include "../GameLogicFSM/FSMUnit.h"
+#include "PlayerController.h"
 
 class DataBase;
 class InputMapper;
@@ -41,9 +42,9 @@ public:
 	void CheckRagdollLimits();
 	void Ragdoll();
 
-	void SetInputMapper(InputMapper* im) 
+	void SetPlayerController(PlayerController* im)
 	{
-		input = im;
+		controller = im;
 	}
 
 	CharacterModel* GetPlayerModel()
@@ -51,9 +52,9 @@ public:
 		return playerModel;
 	}
 
-	InputMapper* GetInputMapper() 
+	PlayerController* GetPlayerController()
 	{
-		return input;
+		return controller;
 	}
 
 	RigidBody* GetRigidBody()
@@ -95,7 +96,8 @@ protected:
 	void Respawn(const Vector3& spawnPoint);
 
 	CharacterModel* playerModel;
-	InputMapper* input; //Updated in game loop
+	//InputMapper* input; //Updated in game loop
+	PlayerController* controller;
 	RigidBody rigidBody;
 	Matrix4 playerRotation;
 

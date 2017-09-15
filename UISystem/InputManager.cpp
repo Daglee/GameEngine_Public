@@ -4,6 +4,7 @@
 #include "../Game/ScoreBoard.h"
 #include "../Game/Pistol.h"
 #include "../Game/RocketLauncher.h"
+#include "../Game/TopDownController.h"
 
 InputManager::InputManager(ThreadPool* t)
 {
@@ -96,7 +97,7 @@ void InputManager::UpdateConnections()
 void InputManager::ReInitialisePlayers()
 {
 	MKMapper* mkm = new MKMapper(window, "../Data/ButtonMapping/MKMap.txt");
-	players[0]->SetInputMapper(mkm);
+	players[0]->GetPlayerController()->SetInputMapper(mkm);
 	connectedPlayers.push_back(players[0]);
 	threadPool->pauseButton = mkm->PAUSE;
 
@@ -117,7 +118,8 @@ void InputManager::InitialisePlayer(Player* p, Gamepad* gp)
 {
 	GamepadMapper* gm = new GamepadMapper();
 	gm->SetGamePad(gp);
-	p->SetInputMapper(gm);
+	p->SetPlayerController(new TopDownController(gm));
+	p->GetPlayerController()->SetInputMapper(gm);
 	p->gun = new Pistol(database, renderer, physicsEngine, defaultBulletMesh);
 	SetPlayerParameters(p);
 }
@@ -129,7 +131,8 @@ void InputManager::InitialisePlayer(Player* p, Gamepad* gp)
 void InputManager::InitialisePlayer(Player* p)
 {
 	MKMapper* mkm = new MKMapper(window, "../Data/ButtonMapping/MKMap.txt");
-	p->SetInputMapper(mkm);
+	p->SetPlayerController(new TopDownController(mkm));
+	p->GetPlayerController()->SetInputMapper(mkm);
 
 	threadPool->pauseButton = mkm->PAUSE;
 
@@ -156,6 +159,10 @@ void InputManager::SetPlayerParameters(Player* p)
 	p->gun->parent = tag;
 	p->playerModelMesh = defaultPlayerMesh;
 
+	p->GetPlayerController()->SetCharacterModel(p->GetPlayerModel());
+	p->GetPlayerController()->SetRigidBody(p->GetRigidBody());
+	p->GetPlayerController()->SetMovementSound(p->walkingSoundName);
+
 	SoundNode* walkingSound = new SoundNode(
 		new Sound("../Data/Sounds/41579__erdie__steps-on-stone01.wav"),
 		p->GetPlayerModel());
@@ -173,8 +180,8 @@ void InputManager::Update(float deltatime)
 	for (vector<Player*>::iterator i = connectedPlayers.begin();
 		i != connectedPlayers.end(); i++) {
 		(*i)->Update(deltatime, window->GetTimer()->GetMS());
-		(*i)->GetInputMapper()->ClearInputs();
-		(*i)->GetInputMapper()->FillInputs();
+		(*i)->GetPlayerController()->GetInputMapper()->ClearInputs();
+		(*i)->GetPlayerController()->GetInputMapper()->FillInputs();
 		(*i)->ApplyInputs();
 	}
 

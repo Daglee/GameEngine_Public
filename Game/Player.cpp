@@ -59,41 +59,23 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 Player::~Player()
 {
 	delete playerModel;
+	delete controller;
 }
 
 
 void Player::ApplyInputs()
 {
 	if (!lockInputs) {
-		float rotationDegrees = input->GetRotation();
+		//if (input->Fired()) {
+		//	if (gun->Fire(rigidBody.lastPosition, input->rawRotation, idNumber)) {
+		//		Sound* shoot = new Sound("../Data/Sounds/14615__man__canon.wav"); //AudioManager will delete this.
+		//		AudioManager::GetInstance()->TemporaryPlay(shoot, SOUNDPRIORITY_MEDIUM);
+		//	}
+		//	MessageSystem::GetInstance()->Transmit(Log::Hash("player_fired"), false);
+		//}
 
-		Matrix4 rot = Matrix4::Rotation(rotationDegrees, Vector3(0, 1, 0));
-		playerModel->SetTransform(playerModel->GetTransform() * rot);
-		if (rotationDegrees != 0) {
-			playerRotation = rot;
-			MessageSystem::GetInstance()->Transmit(Log::Hash("player_rotated"), false);
-		}
-
-		Vector3 movement = input->GetMovement() * 30;
-
-		rigidBody.ApplyForce(movement);
-
-		if (movement.x != 0 || movement.y != 0 || movement.z != 0) {
-			AudioManager::GetInstance()->BeginPlay(walkingSoundName);
-			MessageSystem::GetInstance()->Transmit(Log::Hash("player_moved"), false);
-			MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "moving"), true);
-		}
-		else AudioManager::GetInstance()->StopPlay(walkingSoundName);
-
-		if (input->Fired()) {
-			if (gun->Fire(rigidBody.lastPosition, input->rawRotation, idNumber)) {
-				Sound* shoot = new Sound("../Data/Sounds/14615__man__canon.wav"); //AudioManager will delete this.
-				AudioManager::GetInstance()->TemporaryPlay(shoot, SOUNDPRIORITY_MEDIUM);
-			}
-			MessageSystem::GetInstance()->Transmit(Log::Hash("player_fired"), false);
-		}
-
-		if (input->Reload()) gun->Reload();
+		//if (input->Reload()) gun->Reload();
+		controller->ApplyInputs();
 	}
 }
 
@@ -254,7 +236,7 @@ void Player::Ragdoll()
 		part->GetRigidBody()->atRest = false;
 		part->GetSceneNode()->SetTransform(Matrix4::Translation(
 			part->GetSceneNode()->GetTransform().GetPositionVector()) *
-			playerRotation);
+			/*playerRotation*/controller->GetCurrentRotation());
 
 		bodies.push_back(part);
 	}

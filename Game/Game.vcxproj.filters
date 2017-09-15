@@ -25,6 +25,9 @@
     <Filter Include="AssetConstruction">
       <UniqueIdentifier>{0eb7da0c-c71f-47d9-98f6-1bfb9ebec688}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayerControl">
+      <UniqueIdentifier>{f07b1178-a991-45f9-8401-e333e8b14520}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h">
@@ -87,6 +90,12 @@
     <ClInclude Include="LevelConfiguration.h">
       <Filter>Levels</Filter>
     </ClInclude>
+    <ClInclude Include="TopDownController.h">
+      <Filter>PlayerControl</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>PlayerControl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -146,6 +155,12 @@
     </ClCompile>
     <ClCompile Include="LevelConfiguration.cpp">
       <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="TopDownController.cpp">
+      <Filter>PlayerControl</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>PlayerControl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
