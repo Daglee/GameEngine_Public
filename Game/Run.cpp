@@ -6,7 +6,7 @@
 #pragma comment(lib, "UISystem.lib")
 #pragma comment(lib, "ResourceManagment.lib")
 
-#include "Game.h"
+#include "Launcher.h"
 #include "SubsystemManager.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/MessageSystem.h"
@@ -38,57 +38,41 @@
 */
 int main()
 {
-
-	//Initialise the singleton (Gets added to database next).
 	AudioManager::Initialise();
 	MessageSystem::Initialise();
 
-	//Gets initialised on start up.
 	DataBase* database = new DataBase();
+	Launcher* game = new Launcher("Renderer", "Window", database);
 
-	//Prepare for start up and initialise database.
-	Game* game = new Game("Renderer", "Window", database);
-
-	//Base assets such as the renderer, physics engine etc get loaded in.
-	game->StartUp("../Data/startup.txt");
-
-	//More specific assets for a level, such as a set number of spheres, get loaded in.
-	//game->LoadLevel("../Data/Levels/Directories/Arena1.txt");
+	database->InitialiseDataBase();
+	game->Launch("../Data/startup.txt");
 
 	if (!game->Initialised()) return -1;
 
-	//Return the pointers now and send the to the appropriate subsystems.
 	Camera*	camera	= database->GCamera->Find("Camera");
 	Window*	win		= database->GWindow->Find("Window");
-
 	database->GRenderer->Find("Renderer")->SetCamera(camera);
 	AudioManager::GetInstance()->SetListener(camera->GetSceneNode());
 
 	//Set up any timers we want displayed on screen...
 	game->InitProfilerTimers();
 
-	//Prepare all subsystems for updating...
 	SubsystemManager subsystems(database);
 
-	//Begin the level manager and initialise its FSM.
-	LevelManager* lvlManager = new LevelManager(game, database, "../Data/Levels/LevelList.txt");
-
-	//Load the first level before the first frame.
-	lvlManager->Update(0.0f);
+	LevelManager* lvlManager = new LevelManager(database, "../Data/Levels/LevelList.txt");
+	lvlManager->LoadFirstLevel();
 
 	//Game loop...
 	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running) {
 		float deltatime = win->GetTimer()->GetTimedMS();
 
-		lvlManager->Update(deltatime); //Checks if it should transition level.
-		subsystems.ThreadedUpdate(deltatime);
+		lvlManager->Update(deltatime);
+		subsystems.Update(deltatime);
 	}
 
 	//Game logic handles exiting the level.
 
-	//Free up all the memory...
 	delete database;
 
-	//Done. GG.
     return 0;
 }

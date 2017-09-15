@@ -20,11 +20,9 @@
 class PhysicsObject : public GameObject
 {
 public:
-	//Default physics entity
 	PhysicsObject(Renderer* r, PhysicsEngine* p,
 		bool isStatic, bool isSphere);
 
-	//Custom rigid body
 	PhysicsObject(Renderer* r, PhysicsEngine* p,
 		bool isStatic, bool isSphere,
 		RigidBody* rb);
@@ -33,8 +31,7 @@ public:
 
 	~PhysicsObject() {}
 
-	//Adds to the physics engine
-	void UpdatePhysics(PhysicsEngine* p)
+	void AddToPhysicsEngine(PhysicsEngine* p)
 	{
 		p->AddRigidBody(&rigidBody);
 	}

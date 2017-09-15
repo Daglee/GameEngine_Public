@@ -3,24 +3,16 @@
 
 GameObject::GameObject(Renderer& r) : ResourceBase()
 {
-	node		= SceneNode();
-	scale		= Vector3();
-	position	= Vector3();
 	r.AddSceneNode(&node);
-
 	this->SetResourceSize(sizeof(*this));
 }
 
 GameObject::GameObject() : ResourceBase()
 {
-	node		= SceneNode();
-	scale		= Vector3();
-	position	= Vector3();
-
 	this->SetResourceSize(sizeof(*this));
 }
 
-void GameObject::UpdateRenderer(Renderer& r)
+void GameObject::AddToRenderer(Renderer& r)
 {
 	r.AddSceneNode(&node);
 }
@@ -46,3 +38,10 @@ void GameObject::SetBumpMap(const char& bmloc)
 	node.GetMesh()->SetBumpMap(SOIL_load_OGL_texture(&bmloc,
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS));
 }
+
+void GameObject::MakeQuad() {
+	Mesh* mesh = new Mesh();
+	mesh = mesh->GenerateQuad();
+	AddMesh(*mesh);
+}
+

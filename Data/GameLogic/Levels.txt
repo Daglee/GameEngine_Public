@@ -1,7 +1,7 @@
 3
 state 0
 arena1 = 1
-matchLength = 280
+matchLength = 120
 --
 state 1
 endlevel newevent s:ExitLevel
@@ -17,7 +17,7 @@ quit newevent s:stop_game
 -
 transition1_begin_second_level
 0 -> 1 
-timer > 280
+timer > 120
 transition2_quit_game
 1 -> 2
 timer > 120

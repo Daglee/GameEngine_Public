@@ -132,6 +132,10 @@ Window::Window(DataBase* database, std::string title,
 
 	this->SetResourceSize(sizeof(*this));
 	//	CSC3224 NCODE BLOCK ENDS
+
+
+	LockMouseToWindow(true);
+	ShowOSPointer(false);
 }
 
 

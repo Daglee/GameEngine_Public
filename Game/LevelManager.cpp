@@ -1,6 +1,6 @@
 #include "LevelManager.h"
 
-#include "Game.h"
+#include "Launcher.h"
 #include "../GameLogicFSM/MessageSystem.h"
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"
@@ -9,18 +9,24 @@
 #define INITIAL_LEVEL 1
 #define REPLACEMENT_LEVEL 2
 
-LevelManager::LevelManager(Game* game, DataBase* database, std::string filename) : FSMUnit("Levels", database)
+LevelManager::LevelManager(DataBase* database, std::string filename) : FSMUnit("Levels", database)
 {
 	ConstructLevelList(filename);
 	InitialiseFSM();
 	database->GFSMManager->Find("GFSMManager")->LateBuildFSM("Levels", "../Data/GameLogic/Levels.txt");
 
-	this->game = game;
 	renderer = database->GRenderer->Find("Renderer");
+
+	loader = LevelLoader(database);
 }
 
 LevelManager::~LevelManager()
 {
+}
+
+void LevelManager::LoadFirstLevel()
+{
+	Update(0.0f);
 }
 
 void LevelManager::Update(const float& msec)
@@ -28,7 +34,7 @@ void LevelManager::Update(const float& msec)
 	//Is it time to stop this level?
 	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash("ExitLevel"))) {
 		MessageSystem::GetInstance()->StopTransmitting(Log::Hash("ExitLevel"));
-		game->ExitLevel();
+		loader.ExitLevel();
 	}
 
 	//Should we load a new one?
@@ -47,11 +53,11 @@ void LevelManager::CheckLoadLevel()
 	for (int i = 0; i < levelIDs.size(); ++i)
 	{
 		if (levelIDs[i] == INITIAL_LEVEL) {
-			game->LoadLevel(levels[i]);
+			loader.LoadFirstLevel(levels[i]);
 			levelIDs[i] = 0;
 		}
 		else if (levelIDs[i] == REPLACEMENT_LEVEL) {
-			game->LoadNewLevel(levels[i]);
+			loader.LoadReplacementLevel(levels[i]);
 			levelIDs[i] = 0;
 		}
 	}

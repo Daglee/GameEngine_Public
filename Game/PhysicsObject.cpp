@@ -5,7 +5,6 @@ PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
 	bool isStatic, bool isSphere) : GameObject(*r)
 {
 	moveable	= isStatic;
-	rigidBody	= RigidBody();
 
 	rigidBody.isStatic		= isStatic;
 	this->isSphere			= isSphere;
@@ -31,7 +30,6 @@ PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
 PhysicsObject::PhysicsObject() : GameObject()
 {
 	moveable	= false;
-	rigidBody	= RigidBody();
 
 	rigidBody.isStatic		= moveable;
 	this->isSphere			= true;
@@ -43,14 +41,12 @@ PhysicsObject::PhysicsObject() : GameObject()
 void PhysicsObject::SetEntity(RigidBody* rb, Renderer* renderer, PhysicsEngine* physics)
 {
 	if (!rigidBody.initialised) {
-		//Add a new one
 		rigidBody = *rb;
 
 		renderer->AddSceneNode(rigidBody.parentMesh);
 		physics->AddRigidBody(&rigidBody);
 	}
 	else {
-		//Remove the current one from physics and renderer and update
 		renderer->RemoveSceneNode(&node);
 		physics->RemoveRigidBody(&rigidBody);
 

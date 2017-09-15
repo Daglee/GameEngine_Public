@@ -18,46 +18,32 @@ class DataBase;
    - Safety checks on initialisation of window and renderer.
    - Startup and level loading.
 */
-class Game
+class Launcher
 {
 public:
-	//Initialise with pointers to what is in the database
-	Game(Renderer* rend, Window* wind, DataBase* db);
+	Launcher(string rendererName, string windowName, DataBase* db);
+	~Launcher() {}
 
-	//Initialise by searching the database
-	Game(string rendererName, string windowName, DataBase* db);
-	~Game() {}
+	void Launch(string directory);
 
-	void StartUp(string directory);
-
-	void LoadNewLevel(string level);	//Used to replace the current one
-	void LoadLevel(string level);		//Used to initialise the first level.
-	void ExitLevel();
-
-	void InitialisePlayers();
 	void InitProfilerTimers();
-
-	Renderer* GetRenderer() const
-	{
-		return renderer;
-	}
 
 	Window* GetWindow() const
 	{
 		return window;
 	}
 
-	InputManager* GetInputManager()
-	{
-		return inputManager;
-	}
-
-	bool Initialised() const
+	const bool Initialised() const
 	{
 		return initialised;
 	}
 
 private:
+	bool GraphicsExists();
+	bool IsGraphicsInitialised();
+	bool IsSubSystemNull(Subsystem* subsystem, std::string name);
+	void AttachGraphicsAndInput();
+
 	InputManager* inputManager;
 	DataBase*	database;
 	Renderer*	renderer;
@@ -65,8 +51,6 @@ private:
 
 	string		windowName;
 	string		rendererName;
-
-	Level*		currentLevel;
 
 	bool initialised = false;
 };

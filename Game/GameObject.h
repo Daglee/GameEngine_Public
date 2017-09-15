@@ -17,22 +17,19 @@ class GameObject : public ResourceBase
 {
 public:
 	GameObject(Renderer& r);
-	GameObject(); //The scene node will not be added to a renderer.
+	GameObject();
 
 	virtual ~GameObject() {}
 
-	/*
-	  To be used if default constructor was called.
-	*/
-	virtual void UpdateRenderer(Renderer& r);
+	virtual void AddToRenderer(Renderer& r);
 
-	//SceneNode Stuff
 	void AddMesh(const string& meshLocation);
 	void AddMesh(Mesh& m);
 	void SetTexture(const char& texloc);
 	void SetBumpMap(const char& bmLoc);
 
-	//In worldspace.
+	void MakeQuad();
+
 	inline virtual Vector3 GetPosition() const
 	{
 		return position;
@@ -46,12 +43,6 @@ public:
 	SceneNode* GetSceneNode()
 	{
 		return &node;
-	}
-
-	void MakeQuad() {
-		Mesh* mesh = new Mesh();
-		mesh = mesh->GenerateQuad();
-		AddMesh(*mesh);
 	}
 
 	Mesh GetMesh()

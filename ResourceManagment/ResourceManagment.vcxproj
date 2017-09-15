@@ -144,17 +144,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DataBase.h" />
+    <ClInclude Include="GameEntityDatabaseEntryFile.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ResourceMap.h" />
+    <ClInclude Include="TemporaryDatabaseIdentifier.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ResourceManagment.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="GameEntityDatabaseEntryFile.cpp" />
+    <ClCompile Include="TemporaryDatabaseIdentifier.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

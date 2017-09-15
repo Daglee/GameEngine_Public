@@ -1,12 +1,13 @@
 #pragma once
 
 #include "../GameLogicFSM/FSMUnit.h"
+#include "LevelLoader.h"
 
 #include <string>
 #include <map>
 #include <vector>
 
-class Game;
+class Launcher;
 class DataBase;
 class Renderer;
 
@@ -17,26 +18,25 @@ class Renderer;
 class LevelManager : public FSMUnit
 {
 public:
-	LevelManager(Game* game, DataBase* database, std::string filename);
+	LevelManager(DataBase* database, std::string filename);
 	~LevelManager();
 
-	//Decide what to do.
-	void Update(const float& msec);
+	void LoadFirstLevel();
 
-	//Which level to load, if any.
+	void Update(const float& msec);
+private:
 	void CheckLoadLevel();
 
-	//Whats the order of levels and which ones should be prepared.
 	void ConstructLevelList(std::string filename);
 	void InitialiseFSM();
 
-	Game*		game;
 	Renderer*	renderer;
-
-	float timer;
-	float matchLength;
+	LevelLoader loader;
 
 	std::vector<float>			levelIDs;
 	std::vector<std::string>	levels;
+
+	float timer;
+	float matchLength;
 };
 

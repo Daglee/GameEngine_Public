@@ -22,6 +22,9 @@
     <Filter Include="Scoring">
       <UniqueIdentifier>{28baa0c5-f647-4f0f-8771-b88464e0e942}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AssetConstruction">
+      <UniqueIdentifier>{0eb7da0c-c71f-47d9-98f6-1bfb9ebec688}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h">
@@ -31,9 +34,6 @@
       <Filter>Game Structure</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Game Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
       <Filter>Game Structure</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -66,6 +66,25 @@
     <ClInclude Include="LevelManager.h">
       <Filter>Levels</Filter>
     </ClInclude>
+    <ClInclude Include="Launcher.h">
+      <Filter>Game Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEntityBuilder.h">
+      <Filter>AssetConstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntityBuilder.h">
+      <Filter>AssetConstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityConfiguration.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityAttributeReader.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelConfiguration.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -75,9 +94,6 @@
       <Filter>Game Structure</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Game Structure</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
       <Filter>Game Structure</Filter>
     </ClCompile>
     <ClCompile Include="Run.cpp" />
@@ -108,5 +124,24 @@
     <ClCompile Include="LevelManager.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Launcher.cpp">
+      <Filter>Game Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEntityBuilder.cpp">
+      <Filter>AssetConstruction</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEntityBuilder.cpp">
+      <Filter>AssetConstruction</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityConfiguration.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityAttributeReader.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelConfiguration.cpp" />
   </ItemGroup>
 </Project>
