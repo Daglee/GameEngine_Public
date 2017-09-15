@@ -84,7 +84,9 @@
     <ClInclude Include="EntityAttributeReader.h">
       <Filter>Levels</Filter>
     </ClInclude>
-    <ClInclude Include="LevelConfiguration.h" />
+    <ClInclude Include="LevelConfiguration.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -142,6 +144,8 @@
     <ClCompile Include="EntityAttributeReader.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="LevelConfiguration.cpp" />
+    <ClCompile Include="LevelConfiguration.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
