@@ -10,6 +10,8 @@
 #include "AudioManager.h"
 #include "../GameLogicFSM/FSMUnit.h"
 #include "PlayerController.h"
+#include "GunInput.h"
+#include "LifeSpan.h"
 
 class DataBase;
 class InputMapper;
@@ -79,6 +81,11 @@ public:
 		spawnPoints.push_back(newPoint);
 	}
 
+	const int GetIDNumber() const
+	{
+		return idNumber;
+	}
+
 	void Update(const float& msec, const float& timer = 0);
 
 	void Read(string resourcename);
@@ -91,9 +98,11 @@ public:
 
 	Mesh* playerModelMesh;
 	std::vector<Vector3> spawnPoints;
+	GunInput* gunInput;
 protected:
 	void Despawn();
 	void Respawn(const Vector3& spawnPoint);
+	auto ChooseRandomSpawnPoint();
 
 	CharacterModel* playerModel;
 	//InputMapper* input; //Updated in game loop
@@ -109,11 +118,11 @@ protected:
 
 	std::vector<PhysicsObject*> bodies;
 
-	int deadFrames = 0;
+	//int deadFrames = 0;
 	int idNumber = -1;
 
 	float	teamid = 0;
-	float	health = 100;
+	//float	health = 100;
 	float	damage;
 	float	colourr = 1;
 	float	colourg = 0;
@@ -122,6 +131,8 @@ protected:
 	float	timer = 0;
 	float	collider = 0;
 	float	killstreak = 0;
+
+	LifeSpan lifeSpan;
 
 	bool lockInputs		= false;
 	bool transmitting	= false;

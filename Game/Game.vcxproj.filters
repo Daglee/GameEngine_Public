@@ -25,7 +25,13 @@
     <Filter Include="AssetConstruction">
       <UniqueIdentifier>{0eb7da0c-c71f-47d9-98f6-1bfb9ebec688}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PlayerControl">
+    <Filter Include="Gameplay\WeaponTypes">
+      <UniqueIdentifier>{cf598702-22e9-4a7a-9933-3dc63d4e84a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels\Entity Config">
+      <UniqueIdentifier>{909f48fd-2473-401e-afe0-5ee7e545b188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\PlayerControl">
       <UniqueIdentifier>{f07b1178-a991-45f9-8401-e333e8b14520}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -60,12 +66,6 @@
     <ClInclude Include="ScoreBoard.h">
       <Filter>Scoring</Filter>
     </ClInclude>
-    <ClInclude Include="Pistol.h">
-      <Filter>Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="RocketLauncher.h">
-      <Filter>Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="LevelManager.h">
       <Filter>Levels</Filter>
     </ClInclude>
@@ -81,21 +81,31 @@
     <ClInclude Include="GameEntityBuilder.h">
       <Filter>AssetConstruction</Filter>
     </ClInclude>
-    <ClInclude Include="EntityConfiguration.h">
-      <Filter>Levels</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityAttributeReader.h">
-      <Filter>Levels</Filter>
-    </ClInclude>
     <ClInclude Include="LevelConfiguration.h">
       <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="TopDownController.h">
-      <Filter>PlayerControl</Filter>
+      <Filter>Player\PlayerControl</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>PlayerControl</Filter>
+      <Filter>Player\PlayerControl</Filter>
     </ClInclude>
+    <ClInclude Include="GunInput.h">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Pistol.h">
+      <Filter>Gameplay\WeaponTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="RocketLauncher.h">
+      <Filter>Gameplay\WeaponTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityAttributeReader.h">
+      <Filter>Levels\Entity Config</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityConfiguration.h">
+      <Filter>Levels\Entity Config</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeSpan.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -126,12 +136,6 @@
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Scoring</Filter>
     </ClCompile>
-    <ClCompile Include="Pistol.cpp">
-      <Filter>Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="RocketLauncher.cpp">
-      <Filter>Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
@@ -147,20 +151,30 @@
     <ClCompile Include="GameEntityBuilder.cpp">
       <Filter>AssetConstruction</Filter>
     </ClCompile>
-    <ClCompile Include="EntityConfiguration.cpp">
-      <Filter>Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityAttributeReader.cpp">
-      <Filter>Levels</Filter>
-    </ClCompile>
     <ClCompile Include="LevelConfiguration.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="TopDownController.cpp">
-      <Filter>PlayerControl</Filter>
+      <Filter>Player\PlayerControl</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
-      <Filter>PlayerControl</Filter>
+      <Filter>Player\PlayerControl</Filter>
     </ClCompile>
+    <ClCompile Include="GunInput.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Pistol.cpp">
+      <Filter>Gameplay\WeaponTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketLauncher.cpp">
+      <Filter>Gameplay\WeaponTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityAttributeReader.cpp">
+      <Filter>Levels\Entity Config</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityConfiguration.cpp">
+      <Filter>Levels\Entity Config</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeSpan.cpp" />
   </ItemGroup>
 </Project>

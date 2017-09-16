@@ -159,6 +159,7 @@
     <ClInclude Include="EntityAttributeReader.h" />
     <ClInclude Include="EntityConfiguration.h" />
     <ClInclude Include="GameEntityBuilder.h" />
+    <ClInclude Include="GunInput.h" />
     <ClInclude Include="Launcher.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Gun.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="LevelConfiguration.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="LifeSpan.h" />
     <ClInclude Include="PhysicsEntityBuilder.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="Pistol.h" />
@@ -183,6 +185,7 @@
     <ClCompile Include="EntityAttributeReader.cpp" />
     <ClCompile Include="EntityConfiguration.cpp" />
     <ClCompile Include="GameEntityBuilder.cpp" />
+    <ClCompile Include="GunInput.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gun.cpp" />
@@ -190,6 +193,7 @@
     <ClCompile Include="LevelConfiguration.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LifeSpan.cpp" />
     <ClCompile Include="PhysicsEntityBuilder.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="Pistol.cpp" />

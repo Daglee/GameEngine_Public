@@ -38,6 +38,8 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 	rigidBody.collider = rb;
 	rigidBody.collider->position = rigidBody.lastPosition;
 
+	lifeSpan = LifeSpan(100.0f, 120);
+
 	//For the game logic FSM
 	vars->insert({ "colourr", &colourr });
 	vars->insert({ "colourg", &colourg });
@@ -45,7 +47,7 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 	vars->insert({ "coloura", &coloura });
 	vars->insert({ "timer", &timer });
 	vars->insert({ "collider", &collider });
-	vars->insert({ "health", &health });
+	vars->insert({ "health", lifeSpan.GetCurrentHealth() });
 	vars->insert({ "teamid", &teamid }); 
 	vars->insert({ "killstreak", &killstreak });
 	vars->insert({ "ypos", &rigidBody.lastPosition.y });
@@ -60,21 +62,14 @@ Player::~Player()
 {
 	delete playerModel;
 	delete controller;
+	delete gunInput;
 }
 
 
 void Player::ApplyInputs()
 {
 	if (!lockInputs) {
-		//if (input->Fired()) {
-		//	if (gun->Fire(rigidBody.lastPosition, input->rawRotation, idNumber)) {
-		//		Sound* shoot = new Sound("../Data/Sounds/14615__man__canon.wav"); //AudioManager will delete this.
-		//		AudioManager::GetInstance()->TemporaryPlay(shoot, SOUNDPRIORITY_MEDIUM);
-		//	}
-		//	MessageSystem::GetInstance()->Transmit(Log::Hash("player_fired"), false);
-		//}
-
-		//if (input->Reload()) gun->Reload();
+		gunInput->ApplyInputs();
 		controller->ApplyInputs();
 	}
 }
@@ -99,23 +94,21 @@ void Player::Update(const float& msec, const float& timer)
 
 void Player::CheckHealth()
 {
-	if (health <= 0) { //...YOU DIED...
-		if (deadFrames == 0) {
-			//Announce this player died.
-			MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "dead"), false);
-			Despawn(); //Get rid of the model + ragdoll.
-			deadFrames++;
+	if (lifeSpan.IsDead())
+	{
+		if (lifeSpan.HasNotBegunRespawn())
+		{
+			Despawn();
+			lifeSpan.IncrementFramesSpentDead();
 		}
-		else if (deadFrames == 120) { //Time to prepare to respawn.
-			std::random_device rd;
-			std::mt19937 rng(rd());
-			std::uniform_int_distribution<int> uni(0, spawnPoints.size() - 1);
-			auto spawnPoint = uni(rng);
-
-			//Move to a random spawn point.
-			Respawn(spawnPoints[spawnPoint]);
+		else if (lifeSpan.TimeToRespawn())
+		{
+			Respawn(spawnPoints[ChooseRandomSpawnPoint()]);
 		}
-		else deadFrames++;
+		else
+		{
+			lifeSpan.IncrementFramesSpentDead();
+		}
 	}
 }
 
@@ -138,6 +131,8 @@ void Player::CheckGunChange()
 		gun = new RocketLauncher(database, renderer, physicsEngine, gunMesh);
 		gun->parent = rigidBody.tag;
 
+		gunInput->SetWeapon(gun);
+
 		MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "hasrocketlauncher"), true);
 
 		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "hasmachinegun"));
@@ -154,6 +149,8 @@ void Player::CheckGunChange()
 		gun = new Pistol(database, renderer, physicsEngine, gunMesh);
 		gun->fireDelay = 150;
 		gun->parent = rigidBody.tag;
+
+		gunInput->SetWeapon(gun);
 
 		MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "hasmachinegun"), true);
 		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "hasrocketlauncher"));
@@ -183,6 +180,8 @@ void Player::DisplayHUD()
 
 void Player::Despawn()
 {
+	MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "dead"), false);
+
 	CheckRagdollLimits(); //Too many ragdolls out?
 	Ragdoll(); //Add a new one.
 
@@ -195,13 +194,24 @@ void Player::Despawn()
 
 void Player::Respawn(const Vector3& spawnPoint)
 {
-	health = 100;
-	deadFrames = 0;
+	lifeSpan.ResetHealth();
+	lifeSpan.ResetFramesSpentDead();
 	lockInputs = false;
 	coloura = 1;
 	rigidBody.gravity = PLAYER_GRAVITY;
 
 	rigidBody.UpdatePosition(spawnPoint);
+}
+
+auto Player::ChooseRandomSpawnPoint()
+{
+	std::random_device randomGenerator;
+	std::mt19937 mersenneTwister(randomGenerator());
+	std::uniform_int_distribution<int> range(0, spawnPoints.size() - 1);
+
+	auto randomSpawnPoint = range(mersenneTwister);
+
+	return randomSpawnPoint;
 }
 
 void Player::CheckRagdollLimits()
