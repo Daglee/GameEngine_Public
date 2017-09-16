@@ -12,6 +12,7 @@
 #include "PlayerController.h"
 #include "GunInput.h"
 #include "LifeSpan.h"
+#include "WeaponChange.h"
 
 class DataBase;
 class InputMapper;
@@ -102,11 +103,12 @@ public:
 protected:
 	void Despawn();
 	void Respawn(const Vector3& spawnPoint);
-	auto ChooseRandomSpawnPoint();
+	int ChooseRandomSpawnPoint();
 
 	CharacterModel* playerModel;
 	//InputMapper* input; //Updated in game loop
 	PlayerController* controller;
+	WeaponChange weaponChanger;
 	RigidBody rigidBody;
 	Matrix4 playerRotation;
 

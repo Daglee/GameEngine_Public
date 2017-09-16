@@ -125,36 +125,22 @@ void Player::AddPoints()
 
 void Player::CheckGunChange()
 {
-	//Which gun to add, if any?
-	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "rocketlauncher"))) {
-		delete gun;
-		gun = new RocketLauncher(database, renderer, physicsEngine, gunMesh);
-		gun->parent = rigidBody.tag;
+	if (weaponChanger.RocketLauncherAvailable(rigidBody.tag))
+	{
+		weaponChanger.SetToRocketLauncher(gun);
+		weaponChanger.AnnounceChange();
+		weaponChanger.StopPreviousEvents();
 
 		gunInput->SetWeapon(gun);
-
-		MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "hasrocketlauncher"), true);
-
-		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "hasmachinegun"));
-		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "rocketlauncher"));
 	}
 
-	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "machinegun"))) {
-		database = gun->database;
-		renderer = gun->rend;
-		physicsEngine = gun->phys;
-		gunMesh = gun->bulletMesh;
-
-		delete gun;
-		gun = new Pistol(database, renderer, physicsEngine, gunMesh);
-		gun->fireDelay = 150;
-		gun->parent = rigidBody.tag;
+	if (weaponChanger.MachineGunAvailable(rigidBody.tag))
+	{
+		weaponChanger.SetToMachineGun(gun);
+		weaponChanger.AnnounceChange();
+		weaponChanger.StopPreviousEvents();
 
 		gunInput->SetWeapon(gun);
-
-		MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "hasmachinegun"), true);
-		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "hasrocketlauncher"));
-		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "machinegun"));
 	}
 }
 
@@ -203,13 +189,13 @@ void Player::Respawn(const Vector3& spawnPoint)
 	rigidBody.UpdatePosition(spawnPoint);
 }
 
-auto Player::ChooseRandomSpawnPoint()
+int Player::ChooseRandomSpawnPoint()
 {
 	std::random_device randomGenerator;
 	std::mt19937 mersenneTwister(randomGenerator());
 	std::uniform_int_distribution<int> range(0, spawnPoints.size() - 1);
 
-	auto randomSpawnPoint = range(mersenneTwister);
+	int randomSpawnPoint = range(mersenneTwister);
 
 	return randomSpawnPoint;
 }

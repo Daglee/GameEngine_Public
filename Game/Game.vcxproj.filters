@@ -34,6 +34,9 @@
     <Filter Include="Player\PlayerControl">
       <UniqueIdentifier>{f07b1178-a991-45f9-8401-e333e8b14520}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player\Player Mechanics">
+      <UniqueIdentifier>{dcbee741-d567-452f-9eca-94b97adf9bff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h">
@@ -105,7 +108,10 @@
     <ClInclude Include="EntityConfiguration.h">
       <Filter>Levels\Entity Config</Filter>
     </ClInclude>
-    <ClInclude Include="LifeSpan.h" />
+    <ClInclude Include="LifeSpan.h">
+      <Filter>Player\Player Mechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponChange.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -175,6 +181,9 @@
     <ClCompile Include="EntityConfiguration.cpp">
       <Filter>Levels\Entity Config</Filter>
     </ClCompile>
-    <ClCompile Include="LifeSpan.cpp" />
+    <ClCompile Include="LifeSpan.cpp">
+      <Filter>Player\Player Mechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponChange.cpp" />
   </ItemGroup>
 </Project>
