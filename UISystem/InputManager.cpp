@@ -5,6 +5,7 @@
 #include "../Game/Pistol.h"
 #include "../Game/RocketLauncher.h"
 #include "../Game/TopDownController.h"
+#include "../Game/SpawnSystem.h"
 
 InputManager::InputManager(ThreadPool* t)
 {
@@ -12,6 +13,8 @@ InputManager::InputManager(ThreadPool* t)
 	players	= new Player*[6];
 
 	threadPool = t;
+
+	SpawnSystem::Initialise();
 }
 
 InputManager::~InputManager()
@@ -147,7 +150,7 @@ void InputManager::SetPlayerParameters(Player* p)
 	p->UpdateRenderer(renderer);
 
 	Vector3 spawnPos(-1 * (float)(50 * connectedPlayers.size()), 100, 1 * (float)(50 * connectedPlayers.size()));
-	p->AddSpawnPoint(spawnPos);
+	SpawnSystem::GetInstance()->AddSpawnPoint(spawnPos);
 
 	p->GetRigidBody()->UpdatePosition(spawnPos);
 

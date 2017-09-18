@@ -16,6 +16,7 @@
 #include "PerspectiveHeadsUpDisplay.h"
 #include "TextParagraph.h"
 #include "PlayerRagdollSet.h"
+#include "SpawnSystem.h"
 
 class DataBase;
 class InputMapper;
@@ -51,7 +52,6 @@ public:
 	RigidBody* GetRigidBody();
 	const int GetIDNumber() const;
 
-	void AddSpawnPoint(const Vector3 newPoint);
 	void UpdatePhysics(PhysicsEngine* newPhysicsEngine);
 	void UpdateRenderer(Renderer* newRenderer);
 
@@ -68,8 +68,7 @@ public:
 	GunInput* gunInput;
 protected:
 	void Despawn();
-	void Respawn(const Vector3& spawnPoint);
-	int ChooseRandomSpawnPoint();
+	void Respawn();
 
 	void PrepareHUD();
 	void UpdateHUD();
@@ -78,7 +77,6 @@ protected:
 	CharacterModel* playerModel;
 	RigidBody rigidBody;
 	Matrix4 playerRotation;
-	std::vector<Vector3> spawnPoints;
 
 	DataBase* database;
 	Renderer* renderer;

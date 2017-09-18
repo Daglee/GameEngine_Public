@@ -46,6 +46,9 @@
     <Filter Include="Player\Model">
       <UniqueIdentifier>{ef848d69-0734-4e19-ad51-596fba3330de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gameplay\Spawning">
+      <UniqueIdentifier>{0c3babc0-ac54-4977-b0b5-31dd6269273c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h">
@@ -132,7 +135,12 @@
     <ClInclude Include="Ragdoll.h">
       <Filter>Player\Model</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerRagdollSet.h" />
+    <ClInclude Include="PlayerRagdollSet.h">
+      <Filter>Player\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnSystem.h">
+      <Filter>Gameplay\Spawning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -217,6 +225,11 @@
     <ClCompile Include="Ragdoll.cpp">
       <Filter>Player\Model</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerRagdollSet.cpp" />
+    <ClCompile Include="PlayerRagdollSet.cpp">
+      <Filter>Player\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnSystem.cpp">
+      <Filter>Gameplay\Spawning</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

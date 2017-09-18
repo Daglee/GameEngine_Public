@@ -112,7 +112,7 @@ void Player::CheckHealth()
 		}
 		else if (lifeSpan.TimeToRespawn())
 		{
-			Respawn(spawnPoints[ChooseRandomSpawnPoint()]);
+			Respawn();
 		}
 		else
 		{
@@ -189,38 +189,22 @@ void Player::DisplayHUD()
 
 void Player::Despawn()
 {
-	MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "dead"), false);
-
 	ragdolls->SpawnNextRagdoll(database, controller->GetCurrentRotation());
 
-	//Move the player away from the screen and block inputs.
-	rigidBody.UpdatePosition(rigidBody.lastPosition + Vector3(0, 100000, 0));
-	rigidBody.gravity = 0;
+	SpawnSystem::GetInstance()->RemovePlayerFromGame(&rigidBody);
 
 	inputsLocked = true;
 }
 
-void Player::Respawn(const Vector3& spawnPoint)
+void Player::Respawn()
 {
 	lifeSpan.ResetHealth();
 	lifeSpan.ResetFramesSpentDead();
 
 	inputsLocked = false;
 	colour.w = 1;
-	rigidBody.gravity = PLAYER_GRAVITY;
 
-	rigidBody.UpdatePosition(spawnPoint);
-}
-
-int Player::ChooseRandomSpawnPoint()
-{
-	std::random_device randomGenerator;
-	std::mt19937 mersenneTwister(randomGenerator());
-	std::uniform_int_distribution<int> range(0, spawnPoints.size() - 1);
-
-	int randomSpawnPoint = range(mersenneTwister);
-
-	return randomSpawnPoint;
+	SpawnSystem::GetInstance()->ReturnPlayer(&rigidBody);
 }
 
 void Player::UpdatePhysics(PhysicsEngine* newPhysicsEngine)
@@ -258,11 +242,6 @@ PlayerController* Player::GetPlayerController() const
 RigidBody* Player::GetRigidBody()
 {
 	return &rigidBody;
-}
-
-void Player::AddSpawnPoint(const Vector3 newPoint)
-{
-	spawnPoints.push_back(newPoint);
 }
 
 const int Player::GetIDNumber() const

@@ -22,14 +22,13 @@ void Ragdoll::SpawnRagdoll(const DataBase* database, const Matrix4& playerRotati
 
 		limbCopy->GetRigidBody()->collider = new SphereCollider(1);
 		limbCopy->AddMesh(*database->OBJMeshes->Find("../Data/meshes/robotcube.obj"));
+
 		limbCopy->GetRigidBody()->parentMesh = limbCopy->GetSceneNode();
 		limbCopy->SetPosition(modelLimb->GetWorldTransform().GetPositionVector());
 		limbCopy->SetSize(modelLimb->GetModelScale());
 		limbCopy->GetSceneNode()->SetColour(modelLimb->GetColour());
-		limbCopy->GetRigidBody()->gravity = -0.01f;
-		limbCopy->GetRigidBody()->UpdateMass(100.0f);
-		limbCopy->GetRigidBody()->drag = 0.9f;
-		limbCopy->GetRigidBody()->atRest = false;
+
+		InitialiseRigidBody(limbCopy->GetRigidBody());
 		limbCopy->GetSceneNode()->SetTransform(playerModel->GetTransform());
 
 		ragdollLimbs.push_back(limbCopy);
@@ -52,4 +51,12 @@ void Ragdoll::RemoveLimbFromSubsystems(PhysicsObject* limb) const
 {
 	renderer->RemoveSceneNode(limb->GetSceneNode());
 	physicsEngine->RemoveRigidBody(limb->GetRigidBody());
+}
+
+void Ragdoll::InitialiseRigidBody(RigidBody* rigidBody)
+{
+	rigidBody->gravity = -0.01f;
+	rigidBody->UpdateMass(100.0f);
+	rigidBody->drag = 0.9f;
+	rigidBody->atRest = false;
 }

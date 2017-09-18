@@ -8,6 +8,7 @@ class DataBase;
 class Matrix4;
 class PhysicsObject;
 class CharacterModel;
+class RigidBody;
 
 class Ragdoll
 {
@@ -34,6 +35,8 @@ public:
 
 private:
 	void RemoveLimbFromSubsystems(PhysicsObject* limb) const;
+
+	void InitialiseRigidBody(RigidBody* rigidBody);
 
 	std::vector<PhysicsObject*> ragdollLimbs;
 
