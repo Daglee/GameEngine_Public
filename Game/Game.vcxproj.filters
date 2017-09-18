@@ -37,6 +37,15 @@
     <Filter Include="Player\Player Mechanics">
       <UniqueIdentifier>{dcbee741-d567-452f-9eca-94b97adf9bff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gameplay\Heads Up Display">
+      <UniqueIdentifier>{856d430e-7804-4c49-b43a-0e9e3570603a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gameplay\Weapon Control">
+      <UniqueIdentifier>{6bd8a705-0282-4fdf-9ff4-ac65c40821d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\Model">
+      <UniqueIdentifier>{ef848d69-0734-4e19-ad51-596fba3330de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h">
@@ -50,12 +59,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterModel.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Gun.h">
-      <Filter>Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="Subsystem.h">
       <Filter>SubSystems</Filter>
@@ -93,9 +96,6 @@
     <ClInclude Include="PlayerController.h">
       <Filter>Player\PlayerControl</Filter>
     </ClInclude>
-    <ClInclude Include="GunInput.h">
-      <Filter>Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="Pistol.h">
       <Filter>Gameplay\WeaponTypes</Filter>
     </ClInclude>
@@ -114,8 +114,25 @@
     <ClInclude Include="WeaponChange.h">
       <Filter>Player\Player Mechanics</Filter>
     </ClInclude>
-    <ClInclude Include="TextParagraph.h" />
-    <ClInclude Include="PerspectiveHeadsUpDisplay.h" />
+    <ClInclude Include="PerspectiveHeadsUpDisplay.h">
+      <Filter>Gameplay\Heads Up Display</Filter>
+    </ClInclude>
+    <ClInclude Include="TextParagraph.h">
+      <Filter>Gameplay\Heads Up Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Gameplay\Weapon Control</Filter>
+    </ClInclude>
+    <ClInclude Include="GunInput.h">
+      <Filter>Gameplay\Weapon Control</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterModel.h">
+      <Filter>Player\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ragdoll.h">
+      <Filter>Player\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRagdollSet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -130,12 +147,6 @@
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterModel.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="SubsystemManager.cpp">
       <Filter>SubSystems</Filter>
@@ -170,9 +181,6 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Player\PlayerControl</Filter>
     </ClCompile>
-    <ClCompile Include="GunInput.cpp">
-      <Filter>Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="Pistol.cpp">
       <Filter>Gameplay\WeaponTypes</Filter>
     </ClCompile>
@@ -191,7 +199,24 @@
     <ClCompile Include="WeaponChange.cpp">
       <Filter>Player\Player Mechanics</Filter>
     </ClCompile>
-    <ClCompile Include="TextParagraph.cpp" />
-    <ClCompile Include="PerspectiveHeadsUpDisplay.cpp" />
+    <ClCompile Include="PerspectiveHeadsUpDisplay.cpp">
+      <Filter>Gameplay\Heads Up Display</Filter>
+    </ClCompile>
+    <ClCompile Include="TextParagraph.cpp">
+      <Filter>Gameplay\Heads Up Display</Filter>
+    </ClCompile>
+    <ClCompile Include="GunInput.cpp">
+      <Filter>Gameplay\Weapon Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Gameplay\Weapon Control</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterModel.cpp">
+      <Filter>Player\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ragdoll.cpp">
+      <Filter>Player\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRagdollSet.cpp" />
   </ItemGroup>
 </Project>

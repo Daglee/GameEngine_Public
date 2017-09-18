@@ -13,8 +13,8 @@ public:
 	const bool RocketLauncherAvailable(const std::string& playerTag);
 	const bool MachineGunAvailable(const std::string& playerTag);
 
-	void SetToRocketLauncher(Gun* currentWeapon);
-	void SetToMachineGun(Gun* currentWeapon);
+	Gun* CopyToRocketLauncher(Gun* currentWeapon);
+	Gun* CopyToMachineGun(Gun* currentWeapon);
 
 	void AnnounceChange();
 	void StopPreviousEvents();

@@ -15,6 +15,7 @@
 #include "WeaponChange.h"
 #include "PerspectiveHeadsUpDisplay.h"
 #include "TextParagraph.h"
+#include "PlayerRagdollSet.h"
 
 class DataBase;
 class InputMapper;
@@ -43,8 +44,8 @@ public:
 	void AddPoints();
 	void CheckGunChange();
 
-	void CheckRagdollLimits();
-	void Ragdoll();
+	//void CheckRagdollLimits();
+	//void SpawnRagdoll();
 
 	void SetPlayerController(PlayerController* im)
 	{
@@ -70,12 +71,17 @@ public:
 	{
 		physicsEngine = p;
 		p->AddRigidBody(&rigidBody);
+
+		ragdolls->SetPhysicsEngine(p);
 	}
 
 	void UpdateRenderer(Renderer* r) 
 	{
 		renderer = r;
 		r->AddSceneNode(rigidBody.parentMesh);
+		
+		ragdolls->SetRenderer(r);
+		headsUpDisplay.SetRenderer(renderer);
 	}
 
 	void AddSpawnPoint(Vector3 newPoint)
@@ -125,7 +131,10 @@ protected:
 	PhysicsEngine* physicsEngine;
 	Mesh* gunMesh;
 
-	std::vector<PhysicsObject*> bodies;
+	//std::vector<PhysicsObject*> bodies;
+	//std::vector<Ragdoll*> ragdolls;
+	//int spawnedRagdollCount = 0;
+	PlayerRagdollSet* ragdolls;
 
 	//int deadFrames = 0;
 	int idNumber = -1;

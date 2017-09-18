@@ -20,7 +20,7 @@ const bool WeaponChange::MachineGunAvailable(const std::string& playerTag)
 	return MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(playerTag + "machinegun"));
 }
 
-void WeaponChange::SetToRocketLauncher(Gun* currentWeapon)
+Gun* WeaponChange::CopyToRocketLauncher(Gun* currentWeapon)
 {
 	std::string playerTag = currentWeapon->parent;
 	DataBase* database = currentWeapon->database;
@@ -29,15 +29,17 @@ void WeaponChange::SetToRocketLauncher(Gun* currentWeapon)
 	Mesh* weaponMesh = currentWeapon->bulletMesh;
 
 	delete currentWeapon;
-	currentWeapon = new RocketLauncher(database, renderer, physicsEngine, weaponMesh);
-	currentWeapon->parent = playerTag;
+	RocketLauncher* newweapon = new RocketLauncher(database, renderer, physicsEngine, weaponMesh);
+	newweapon->parent = playerTag;
 
 	newWeapon = playerTag + "hasrocketlauncher";
 	newWeaponAnnouncementToStop = playerTag + "hasmachinegun";
 	previousAnnouncement = playerTag + "rocketlauncher";
+
+	return newweapon;
 }
 
-void WeaponChange::SetToMachineGun(Gun* currentWeapon)
+Gun* WeaponChange::CopyToMachineGun(Gun* currentWeapon)
 {
 	std::string playerTag = currentWeapon->parent;
 	DataBase* database = currentWeapon->database;
@@ -46,13 +48,15 @@ void WeaponChange::SetToMachineGun(Gun* currentWeapon)
 	Mesh* weaponMesh = currentWeapon->bulletMesh;
 
 	delete currentWeapon;
-	currentWeapon = new Pistol(database, renderer, physicsEngine, weaponMesh);
-	currentWeapon->fireDelay = 150;
-	currentWeapon->parent = playerTag;
+	Pistol* newweapon = new Pistol(database, renderer, physicsEngine, weaponMesh);
+	newweapon->fireDelay = 150;
+	newweapon->parent = playerTag;
 
 	newWeapon = playerTag + "hasmachinegun";
 	newWeaponAnnouncementToStop = playerTag + "hasrocketlauncher";
 	previousAnnouncement = playerTag + "machinegun";
+
+	return newweapon;
 }
 
 void WeaponChange::AnnounceChange()

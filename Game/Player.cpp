@@ -61,6 +61,8 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 	headsUpDisplay.SetRenderer(renderer);
 	headsUpDisplay.SetText(&HUDText);
 
+	ragdolls = new PlayerRagdollSet(2, playerModel, renderer, physicsEngine);
+
 	this->SetResourceSize(sizeof(*this));
 }
 
@@ -69,6 +71,7 @@ Player::~Player()
 	delete playerModel;
 	delete controller;
 	delete gunInput;
+	delete ragdolls;
 }
 
 
@@ -134,7 +137,7 @@ void Player::CheckGunChange()
 {
 	if (weaponChanger.RocketLauncherAvailable(rigidBody.tag))
 	{
-		weaponChanger.SetToRocketLauncher(gun);
+		gun = weaponChanger.CopyToRocketLauncher(gun);
 		weaponChanger.AnnounceChange();
 		weaponChanger.StopPreviousEvents();
 
@@ -143,7 +146,7 @@ void Player::CheckGunChange()
 
 	if (weaponChanger.MachineGunAvailable(rigidBody.tag))
 	{
-		weaponChanger.SetToMachineGun(gun);
+		gun = weaponChanger.CopyToMachineGun(gun);
 		weaponChanger.AnnounceChange();
 		weaponChanger.StopPreviousEvents();
 
@@ -180,7 +183,6 @@ void Player::DisplayHUD()
 		HUDText.AppendLineToParagraph(isReloading);
 	}
 
-	headsUpDisplay.SetRenderer(renderer);
 	headsUpDisplay.Set3DPosition(playerModel->GetTransform().GetPositionVector());
 	headsUpDisplay.DisplayAllText();
 }
@@ -189,8 +191,7 @@ void Player::Despawn()
 {
 	MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody.tag + "dead"), false);
 
-	CheckRagdollLimits(); //Too many ragdolls out?
-	Ragdoll(); //Add a new one.
+	ragdolls->SpawnNextRagdoll(database, controller->GetCurrentRotation());
 
 	//Move the player away from the screen and block inputs.
 	rigidBody.UpdatePosition(rigidBody.lastPosition + Vector3(0, 100000, 0));
@@ -219,44 +220,6 @@ int Player::ChooseRandomSpawnPoint()
 	int randomSpawnPoint = range(mersenneTwister);
 
 	return randomSpawnPoint;
-}
-
-void Player::CheckRagdollLimits()
-{
-	if (bodies.size() == playerModel->modelParts.size() * 2) {
-		for each (PhysicsObject* obj in bodies)
-		{
-			renderer->RemoveSceneNode(obj->GetSceneNode());
-			physicsEngine->RemoveRigidBody(obj->GetRigidBody());
-			delete obj;
-		}
-
-		bodies.clear();
-	}
-}
-
-void Player::Ragdoll()
-{
-	//Just copy the character model data into a set of physics objects.
-	for each (SceneNode* modelpart in playerModel->modelParts)
-	{
-		PhysicsObject* part = new PhysicsObject(renderer, physicsEngine, false, true);
-		part->GetRigidBody()->collider = new SphereCollider(1);
-		part->AddMesh(*database->OBJMeshes->Find("../Data/meshes/robotcube.obj"));
-		part->GetRigidBody()->parentMesh = part->GetSceneNode();
-		part->SetPosition(modelpart->GetWorldTransform().GetPositionVector());
-		part->SetSize(modelpart->GetModelScale());
-		part->GetSceneNode()->SetColour(modelpart->GetColour());
-		part->GetRigidBody()->gravity = -0.01f;
-		part->GetRigidBody()->UpdateMass(100.0f);
-		part->GetRigidBody()->drag = 0.9f;
-		part->GetRigidBody()->atRest = false;
-		part->GetSceneNode()->SetTransform(Matrix4::Translation(
-			part->GetSceneNode()->GetTransform().GetPositionVector()) *
-			/*playerRotation*/controller->GetCurrentRotation());
-
-		bodies.push_back(part);
-	}
 }
 
 void Player::Read(string resourcename) 

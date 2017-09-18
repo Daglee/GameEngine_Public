@@ -161,6 +161,8 @@
     <ClInclude Include="EntityConfiguration.h" />
     <ClInclude Include="GameEntityBuilder.h" />
     <ClInclude Include="GunInput.h" />
+    <ClInclude Include="PlayerRagdollSet.h" />
+    <ClInclude Include="Ragdoll.h" />
     <ClInclude Include="TextParagraph.h" />
     <ClInclude Include="Launcher.h" />
     <ClInclude Include="GameObject.h" />
@@ -190,6 +192,8 @@
     <ClCompile Include="EntityConfiguration.cpp" />
     <ClCompile Include="GameEntityBuilder.cpp" />
     <ClCompile Include="GunInput.cpp" />
+    <ClCompile Include="PlayerRagdollSet.cpp" />
+    <ClCompile Include="Ragdoll.cpp" />
     <ClCompile Include="TextParagraph.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="GameObject.cpp" />
