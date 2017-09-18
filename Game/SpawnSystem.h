@@ -28,7 +28,7 @@ public:
 private:
 	SpawnSystem() {}
 
-	virtual ~SpawnSystem() 
+	virtual ~SpawnSystem()
 	{
 		Destroy();
 	}

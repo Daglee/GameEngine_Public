@@ -8,8 +8,7 @@
 
 Pistol::Pistol(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, float reloadSpeed, int bulletsPerMag,
 	float bulletSpeed, float fireDelay) : Gun(db, r, p, m, reloadSpeed, bulletsPerMag, bulletSpeed, fireDelay)
-{
-}
+{}
 
 bool Pistol::Fire(const Vector3& from, const Vector3& rotation, const int& id)
 {
@@ -20,7 +19,8 @@ bool Pistol::Fire(const Vector3& from, const Vector3& rotation, const int& id)
 	of input. Depends on fire rate.
 	*/
 	if (now - lastShotTime > fireDelay
-		&& lastReloadTime + reloadSpeed < now) {
+		&& lastReloadTime + reloadSpeed < now)
+	{
 
 		fired = true;
 
@@ -60,7 +60,7 @@ bool Pistol::Fire(const Vector3& from, const Vector3& rotation, const int& id)
 
 		if (bulletsFired == bulletsPerMag - 1) Reload();
 		else ++bulletsFired;
-		
+
 		lastShotTime = now;
 	}
 
@@ -71,15 +71,18 @@ void Pistol::Reload()
 {
 	reloading = true;
 	//Clear out the bullets that have been fired from the scene
-	if (bulletsFired != 0) {
-		for (int i = 0; i < bulletsFired; ++i) {
+	if (bulletsFired != 0)
+	{
+		for (int i = 0; i < bulletsFired; ++i)
+		{
 			phys->RemoveRigidBody(magazine.at(i)->GetRigidBody());
 			rend->RemoveSceneNode(magazine.at(i)->GetSceneNode());
 			database->PhysicsObjects->Unload(magazine.at(i)->GetRigidBody()->tag);
 		}
 	}
 
-	for (int i = 0; i < bulletsFired; ++i) {
+	for (int i = 0; i < bulletsFired; ++i)
+	{
 		delete magazine.at(i);
 	}
 

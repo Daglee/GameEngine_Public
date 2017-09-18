@@ -15,10 +15,6 @@ GameEntityBuilder::GameEntityBuilder(DataBase* database, std::vector<std::string
 	this->configurationTokens = configurationTokens;
 }
 
-GameEntityBuilder::~GameEntityBuilder()
-{
-}
-
 void GameEntityBuilder::Build()
 {
 	StoreEntityFromDatabase();

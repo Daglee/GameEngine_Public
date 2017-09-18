@@ -12,7 +12,7 @@ class GameEntityBuilder
 {
 public:
 	GameEntityBuilder(DataBase* database, std::vector<std::string> configurationTokens);
-	~GameEntityBuilder();
+	~GameEntityBuilder() {}
 
 	void Build();
 

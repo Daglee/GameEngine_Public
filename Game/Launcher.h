@@ -45,12 +45,12 @@ private:
 	void AttachGraphicsAndInput();
 
 	InputManager* inputManager;
-	DataBase*	database;
-	Renderer*	renderer;
-	Window*		window;
+	DataBase* database;
+	Renderer* renderer;
+	Window*	 window;
 
-	string		windowName;
-	string		rendererName;
+	string windowName;
+	string rendererName;
 
 	bool initialised = false;
 };

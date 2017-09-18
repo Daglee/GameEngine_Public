@@ -22,7 +22,7 @@ public:
 
 	void SpawnRagdoll(const DataBase* database, const Matrix4& playerRotation);
 	void DeleteRagdoll();
-	
+
 	void SetRenderer(Renderer* renderer)
 	{
 		this->renderer = renderer;
@@ -40,7 +40,7 @@ private:
 
 	std::vector<PhysicsObject*> ragdollLimbs;
 
-	Renderer* renderer; 
+	Renderer* renderer;
 	PhysicsEngine* physicsEngine;
 	CharacterModel* playerModel;
 };

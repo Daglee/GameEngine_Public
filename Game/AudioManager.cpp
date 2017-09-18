@@ -72,7 +72,8 @@ void AudioManager::StopPlay(SoundNode* gs)
 	*/
 	unique_lock<mutex> lock(update_mutex);
 
-	if (gs->GetLooping()) { //If currently playing...
+	if (gs->GetLooping())
+	{ //If currently playing...
 		gs->SetLooping(false);
 		gs->DetachSource();
 	}
@@ -115,7 +116,7 @@ void AudioManager::Update(float deltatime)
 
 	updateTimer.StartTimer();
 
-	ClearRemoveBuffer(); 
+	ClearRemoveBuffer();
 	this->SetResourceSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 
 	//Play the audio!
@@ -132,8 +133,10 @@ void AudioManager::Update(float deltatime)
 void AudioManager::ClearRemoveBuffer()
 {
 	vector<Sound*>::iterator iterator = remove_buffer.begin();
-	while (iterator != remove_buffer.end()) {
-		if ((*iterator)->sound->IsStreaming()) { //Is it currently playing?
+	while (iterator != remove_buffer.end())
+	{
+		if ((*iterator)->sound->IsStreaming())
+		{ //Is it currently playing?
 			delete *iterator;
 			iterator = remove_buffer.erase(iterator);
 		}

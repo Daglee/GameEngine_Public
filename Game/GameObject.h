@@ -79,8 +79,8 @@ public:
 	}
 
 protected:
-	SceneNode	node;
-	Vector3		scale;
-	Vector3		position;
+	SceneNode node;
+	Vector3	scale;
+	Vector3	position;
 };
 

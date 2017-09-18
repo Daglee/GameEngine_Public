@@ -39,7 +39,8 @@ void GameObject::SetBumpMap(const char& bmloc)
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS));
 }
 
-void GameObject::MakeQuad() {
+void GameObject::MakeQuad()
+{
 	Mesh* mesh = new Mesh();
 	mesh = mesh->GenerateQuad();
 	AddMesh(*mesh);

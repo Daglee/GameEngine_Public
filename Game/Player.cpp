@@ -22,19 +22,19 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 {
 	//Load in a character model
 	playerModel = new CharacterModel(rigidBody.tag, CHARCT_MODEL_LOC);
-	
+
 	//Just some default values in case game logic fails
-	playerModel->SetTransform(Vector3(0, 0, 0)); 
+	playerModel->SetTransform(Vector3(0, 0, 0));
 	playerModel->UpdateColour(Vector4(1, 1, 0, 1));
 
-	rigidBody = RigidBody(Vector3(), Vector3(), 
+	rigidBody = RigidBody(Vector3(), Vector3(),
 		PLAYER_MASS, PLAYER_DRAG, PLAYER_GRAVITY);
 	rigidBody.isStatic = false;
 	rigidBody.atRest = false;
 	rigidBody.parentMesh = playerModel;
 
 	SphereCollider* rb = new SphereCollider(playerModel->body.GetBoundingRadius()
-	+ (playerModel->uleftArm.GetBoundingRadius() + playerModel->urightArm.GetBoundingRadius()));
+		+ (playerModel->uleftArm.GetBoundingRadius() + playerModel->urightArm.GetBoundingRadius()));
 	rigidBody.collider = rb;
 	rigidBody.collider->position = rigidBody.lastPosition;
 
@@ -48,7 +48,7 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 	vars->insert({ "timer", &timer });
 	vars->insert({ "collider", &collider });
 	vars->insert({ "health", lifeSpan.GetCurrentHealth() });
-	vars->insert({ "teamid", &teamid }); 
+	vars->insert({ "teamid", &teamid });
 	vars->insert({ "killstreak", &killstreak });
 	vars->insert({ "ypos", &rigidBody.lastPosition.y });
 
@@ -83,12 +83,12 @@ void Player::ApplyInputs()
 	}
 }
 
-void Player::Move(const Vector3& pos) 
+void Player::Move(const Vector3& pos)
 {
 	rigidBody.UpdatePosition(pos);
 }
 
-void Player::Update(const float& msec, const float& timer) 
+void Player::Update(const float& msec, const float& timer)
 {
 	this->timer += msec / 1000.0f;
 
@@ -124,10 +124,11 @@ void Player::CheckHealth()
 void Player::AddPoints()
 {
 	//Add any points that are pending from the game logic.
-	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints"))) {
+	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints")))
+	{
 		ScoreBoard::GetInstance()->UpdateEntryScore(rigidBody.tag, killstreak);
 
-		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints")); 
+		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints"));
 	}
 }
 
@@ -249,12 +250,12 @@ const int Player::GetIDNumber() const
 	return idNumber;
 }
 
-void Player::Read(string resourcename) 
+void Player::Read(string resourcename)
 {
 	this->SetResourceName(resourcename);
 }
 
-void Player::ReadParams(string params) 
+void Player::ReadParams(string params)
 {
 	Read(params);
 }

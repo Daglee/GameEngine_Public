@@ -31,59 +31,31 @@ public:
 
 	~PhysicsObject() {}
 
-	void AddToPhysicsEngine(PhysicsEngine* p)
-	{
-		p->AddRigidBody(&rigidBody);
-	}
-
 	void SetEntity(RigidBody* rb, Renderer* renderer, PhysicsEngine* physics);
+	void AddToPhysicsEngine(PhysicsEngine* p);
 
 	inline void ApplyForce(const Vector3& newtons)
 	{
 		rigidBody.ApplyForce(newtons);
 	}
 
-	Vector3 GetPosition() const
-	{
-		return position;
-	}
+	Vector3 GetPosition() const;
+	void SetPosition(const Vector3& pos);
 
-	void SetPosition(const Vector3& pos)
-	{
-		position = pos;
-		rigidBody.UpdatePosition(position);
-	}
-
-	Vector3 GetSize() const
-	{
-		return scale;
-	}
-
+	Vector3 GetSize() const;
 	void SetSize(const Vector3& size);
 
-	bool IsMoveable() const
-	{
-		return moveable;
-	}
+	bool IsMoveable() const;
+	void SetIsMoveable(const bool& m);
 
-	 void SetIsMoveable(const bool& m)
-	{
-		moveable = m;
-		rigidBody.isStatic = m;
-	}
-
-	RigidBody* GetRigidBody()
-	{
-		return &rigidBody;
-	}
-
-	bool		isSphere;
+	RigidBody* GetRigidBody();
 
 	virtual void Read(string resourcename);
 	virtual void ReadParams(string params);
 
+	bool isSphere;
 protected:
-	bool		moveable;
-	RigidBody	rigidBody;
+	bool moveable;
+	RigidBody rigidBody;
 };
 

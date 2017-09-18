@@ -13,10 +13,6 @@ LevelLoader::LevelLoader()
 	database = nullptr;
 }
 
-LevelLoader::~LevelLoader()
-{
-}
-
 void LevelLoader::LoadFirstLevel(std::string level)
 {
 	LoadLevel(level);
@@ -34,7 +30,8 @@ void LevelLoader::LoadReplacementLevel(std::string level)
 
 void LevelLoader::ExitLevel()
 {
-	if (currentLevel != nullptr) {
+	if (currentLevel != nullptr)
+	{
 		database->GInputManager->Find("InputManager")->ClearAll();
 		currentLevel->UnloadLevel();
 		delete currentLevel;

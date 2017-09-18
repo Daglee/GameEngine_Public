@@ -10,7 +10,7 @@ class LevelLoader
 public:
 	LevelLoader(DataBase* database);
 	LevelLoader();
-	~LevelLoader();
+	~LevelLoader() {}
 
 	void LoadFirstLevel(std::string level);
 	void LoadReplacementLevel(std::string level);

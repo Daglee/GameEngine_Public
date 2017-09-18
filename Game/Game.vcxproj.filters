@@ -49,6 +49,9 @@
     <Filter Include="Gameplay\Spawning">
       <UniqueIdentifier>{0c3babc0-ac54-4977-b0b5-31dd6269273c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Levels\Level Config">
+      <UniqueIdentifier>{15134749-7cc6-47bc-8e92-f194aa7f04a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h">
@@ -75,23 +78,14 @@
     <ClInclude Include="ScoreBoard.h">
       <Filter>Scoring</Filter>
     </ClInclude>
-    <ClInclude Include="LevelManager.h">
-      <Filter>Levels</Filter>
-    </ClInclude>
     <ClInclude Include="Launcher.h">
       <Filter>Game Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelLoader.h">
-      <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsEntityBuilder.h">
       <Filter>AssetConstruction</Filter>
     </ClInclude>
     <ClInclude Include="GameEntityBuilder.h">
       <Filter>AssetConstruction</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelConfiguration.h">
-      <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="TopDownController.h">
       <Filter>Player\PlayerControl</Filter>
@@ -141,6 +135,15 @@
     <ClInclude Include="SpawnSystem.h">
       <Filter>Gameplay\Spawning</Filter>
     </ClInclude>
+    <ClInclude Include="LevelConfiguration.h">
+      <Filter>Levels\Level Config</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Levels\Level Config</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Levels\Level Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -165,23 +168,14 @@
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Scoring</Filter>
     </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
-      <Filter>Levels</Filter>
-    </ClCompile>
     <ClCompile Include="Launcher.cpp">
       <Filter>Game Structure</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsEntityBuilder.cpp">
       <Filter>AssetConstruction</Filter>
     </ClCompile>
     <ClCompile Include="GameEntityBuilder.cpp">
       <Filter>AssetConstruction</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelConfiguration.cpp">
-      <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="TopDownController.cpp">
       <Filter>Player\PlayerControl</Filter>
@@ -230,6 +224,15 @@
     </ClCompile>
     <ClCompile Include="SpawnSystem.cpp">
       <Filter>Gameplay\Spawning</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelConfiguration.cpp">
+      <Filter>Levels\Level Config</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Levels\Level Config</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Levels\Level Config</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -99,6 +99,6 @@ protected:
 	Vector4 colour;
 
 	bool inputsLocked = false;
-	bool transmitting	= false;
+	bool transmitting = false;
 };
 

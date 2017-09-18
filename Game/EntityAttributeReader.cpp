@@ -10,10 +10,6 @@ EntityAttributeReader::EntityAttributeReader(std::vector<std::string> tokens, Ga
 	this->entity = entity;
 }
 
-EntityAttributeReader::~EntityAttributeReader()
-{
-}
-
 void EntityAttributeReader::SetSize()
 {
 	float x = stof(tokens.at(1));

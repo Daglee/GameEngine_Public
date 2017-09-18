@@ -19,7 +19,7 @@ class LevelManager : public FSMUnit
 {
 public:
 	LevelManager(DataBase* database, std::string filename);
-	~LevelManager();
+	~LevelManager() {}
 
 	void LoadFirstLevel();
 

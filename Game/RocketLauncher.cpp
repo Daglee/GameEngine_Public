@@ -8,12 +8,7 @@
 
 RocketLauncher::RocketLauncher(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, float reloadSpeed, int bulletsPerMag,
 	float bulletSpeed, float fireDelay) : Gun(db, r, p, m, reloadSpeed, bulletsPerMag, bulletSpeed, fireDelay)
-{
-}
-
-RocketLauncher::~RocketLauncher()
-{
-}
+{}
 
 bool RocketLauncher::Fire(const Vector3& from, const Vector3& rotation, const int& id)
 {
@@ -24,7 +19,8 @@ bool RocketLauncher::Fire(const Vector3& from, const Vector3& rotation, const in
 	of input. Depends on fire rate.
 	*/
 	if (now - lastShotTime > fireDelay
-		&& lastReloadTime + reloadSpeed < now) {
+		&& lastReloadTime + reloadSpeed < now)
+	{
 
 		fired = true;
 
@@ -76,15 +72,18 @@ void RocketLauncher::Reload()
 {
 	reloading = true;
 	//Clear out the bullets that have been fired from the scene
-	if (bulletsFired != 0) {
-		for (int i = 0; i < bulletsFired; ++i) {
+	if (bulletsFired != 0)
+	{
+		for (int i = 0; i < bulletsFired; ++i)
+		{
 			phys->RemoveRigidBody(magazine.at(i)->GetRigidBody());
 			rend->RemoveSceneNode(magazine.at(i)->GetSceneNode());
 			database->PhysicsObjects->Unload(magazine.at(i)->GetRigidBody()->tag);
 		}
 	}
 
-	for (int i = 0; i < bulletsFired; ++i) {
+	for (int i = 0; i < bulletsFired; ++i)
+	{
 		delete magazine.at(i);
 	}
 

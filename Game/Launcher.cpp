@@ -4,9 +4,9 @@
 
 Launcher::Launcher(string rendName, string windName, DataBase* db)
 {
-	database		= db;
-	rendererName	= rendName;
-	windowName		= windName;
+	database = db;
+	rendererName = rendName;
+	windowName = windName;
 }
 
 void Launcher::Launch(string filename)
@@ -30,7 +30,7 @@ void Launcher::InitProfilerTimers()
 	profiler->AddSubSystemTimer("Input", &inputManager->updateTimer);
 	profiler->AddSubSystemTimer("Audio", &AudioManager::GetInstance()->updateTimer);
 
-	profiler->AddSubSystemTimer("PhysicsEngine", 
+	profiler->AddSubSystemTimer("PhysicsEngine",
 		&database->GPhysicsEngine->Find("PhysicsEngine")->updateTimer);
 	profiler->AddSubSystemTimer("Gamelogic",
 		&database->GFSMManager->Find("GFSMManager")->updateTimer);
@@ -82,7 +82,7 @@ bool Launcher::IsSubSystemNull(Subsystem* subsystem, std::string name)
 
 void Launcher::AttachGraphicsAndInput()
 {
-	renderer	 = database->GRenderer->Find(rendererName);
-	window		 = database->GWindow->Find(windowName);
+	renderer = database->GRenderer->Find(rendererName);
+	window = database->GWindow->Find(windowName);
 	inputManager = database->GInputManager->Find("InputManager");
 }

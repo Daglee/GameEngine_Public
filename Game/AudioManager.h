@@ -12,11 +12,11 @@
   Singleton AudioManager that acts as a wrapper
   around SoundSystem.
 
-  Maintains a record of all sounds that are going 
+  Maintains a record of all sounds that are going
   to be played/are stored. Use of hashmap ensures
   fast retrieval.
 */
-class AudioManager : public ResourceBase, 
+class AudioManager : public ResourceBase,
 	public Subsystem
 {
 public:
@@ -76,7 +76,8 @@ public:
 	{
 		SoundNode* sound = sounds.at(name);
 
-		if (sound == nullptr) {
+		if (sound == nullptr)
+		{
 			Log::Error("Sound " + name + " not found.");
 
 			return nullptr;
@@ -95,7 +96,7 @@ public:
 
 	void BeginBackgroundPlay(string name);
 	/*
-	  Used, for example, for gun shots. 
+	  Used, for example, for gun shots.
 	  Allows multiples of a single sound to be played,
 	  layering on top of eachother.
 

@@ -36,7 +36,7 @@ void TopDownController::UpdatePosition()
 
 	rigidBody->ApplyForce(movement);
 
-	if (MovementInputted(movement)) 
+	if (MovementInputted(movement))
 	{
 		AudioManager::GetInstance()->BeginPlay(movementSound);
 

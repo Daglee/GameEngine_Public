@@ -19,13 +19,20 @@ void ScoreBoard::DisplayScores()
 
 	for each (Entry* entry in entries)
 	{
-		std::string entryString = entry->name + " : " + std::to_string(entry->score);
+		std::string line = entry->name + " : " + std::to_string(entry->score);
+		DisplayText(line, yOffset);
 
-		Text entryText(entryString, Vector3(renderer->GetWidth() - XAXIS_OFFSET, yOffset, 0.0f), TEXT_SIZE);
 		yOffset += TEXT_SIZE;
-
-		renderer->textbuffer.push_back(entryText);
 	}
+}
+
+void ScoreBoard::DisplayText(const std::string& entry, const float& yPosition)
+{
+	Vector3 linePosition(renderer->GetWidth() - XAXIS_OFFSET, yPosition, 0.0f);
+
+	Text entryText(entry, linePosition, TEXT_SIZE);
+
+	renderer->textbuffer.push_back(entryText);
 }
 
 void ScoreBoard::OrderAscending()
@@ -37,7 +44,8 @@ void ScoreBoard::UpdateEntryScore(std::string name, int s)
 {
 	for each (Entry* entry in entries)
 	{
-		if (entry->name == name) {
+		if (entry->name == name)
+		{
 			entry->score = entry->score + s;
 
 			break;

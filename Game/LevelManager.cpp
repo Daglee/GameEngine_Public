@@ -20,10 +20,6 @@ LevelManager::LevelManager(DataBase* database, std::string filename) : FSMUnit("
 	loader = LevelLoader(database);
 }
 
-LevelManager::~LevelManager()
-{
-}
-
 void LevelManager::LoadFirstLevel()
 {
 	Update(0.0f);
@@ -32,7 +28,8 @@ void LevelManager::LoadFirstLevel()
 void LevelManager::Update(const float& msec)
 {
 	//Is it time to stop this level?
-	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash("ExitLevel"))) {
+	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash("ExitLevel")))
+	{
 		MessageSystem::GetInstance()->StopTransmitting(Log::Hash("ExitLevel"));
 		loader.ExitLevel();
 	}
@@ -52,11 +49,13 @@ void LevelManager::CheckLoadLevel()
 {
 	for (int i = 0; i < levelIDs.size(); ++i)
 	{
-		if (levelIDs[i] == INITIAL_LEVEL) {
+		if (levelIDs[i] == INITIAL_LEVEL)
+		{
 			loader.LoadFirstLevel(levels[i]);
 			levelIDs[i] = 0;
 		}
-		else if (levelIDs[i] == REPLACEMENT_LEVEL) {
+		else if (levelIDs[i] == REPLACEMENT_LEVEL)
+		{
 			loader.LoadReplacementLevel(levels[i]);
 			levelIDs[i] = 0;
 		}
@@ -69,7 +68,8 @@ void LevelManager::ConstructLevelList(std::string filename)
 	std::string line;
 
 	int levelCount = 0;
-	while (getline(file, line)) {
+	while (getline(file, line))
+	{
 		float id = 0;
 		std::string levelDirectory = line;
 

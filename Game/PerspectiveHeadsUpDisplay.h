@@ -17,7 +17,7 @@ public:
 	void SetRenderer(Renderer* newRenderer);
 	void SetText(TextParagraph* newText);
 	void Set3DPosition(const Vector3& currentPosition);
-	
+
 	void DisplayAllText();
 
 private:

@@ -31,7 +31,7 @@ public:
 	~GunInput() {}
 
 	void ApplyInputs();
-	
+
 	void SetWeapon(Gun* newWeapon);
 
 private:

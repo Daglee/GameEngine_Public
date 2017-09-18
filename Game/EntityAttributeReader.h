@@ -9,7 +9,7 @@ class EntityAttributeReader
 {
 public:
 	EntityAttributeReader(std::vector<std::string> tokens, GameObject* entity);
-	~EntityAttributeReader();
+	~EntityAttributeReader() {}
 
 	void SetTokens(std::vector<std::string> newTokens)
 	{

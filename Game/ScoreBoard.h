@@ -73,6 +73,7 @@ private:
 
 	//Using std::sort.
 	void OrderAscending();
+	void DisplayText(const std::string& entry, const float& yPosition);
 
 	std::vector<Entry*> entries;
 	Renderer* renderer;

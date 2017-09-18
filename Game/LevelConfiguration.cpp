@@ -36,7 +36,8 @@ void LevelConfiguration::ReadPhysicsObject(std::string filename)
 	std::ifstream file(filename);
 	int numObjectsToRead = ParseNumberOfEntitiesInFile(file);
 
-	for (int i = 0; i < numObjectsToRead; ++i) {
+	for (int i = 0; i < numObjectsToRead; ++i)
+	{
 		string resourceName;
 
 		getline(file, resourceName);
@@ -46,12 +47,14 @@ void LevelConfiguration::ReadPhysicsObject(std::string filename)
 	}
 }
 
-void LevelConfiguration::ReadGameObject(std::string filename) {
+void LevelConfiguration::ReadGameObject(std::string filename)
+{
 	std::ifstream file(filename);
 
 	int numItems = ParseNumberOfEntitiesInFile(file);
 
-	for (int i = 0; i < numItems; ++i) {
+	for (int i = 0; i < numItems; ++i)
+	{
 		string resourceName;
 
 		getline(file, resourceName);
@@ -93,7 +96,8 @@ void LevelConfiguration::InitialiseMusic(std::string filename)
 	std::ifstream file(filename);
 	string songFileName;
 
-	while (getline(file, songFileName)) {
+	while (getline(file, songFileName))
+	{
 		AudioManager::GetInstance()->AddBackgroundSound(songFileName);
 	}
 }
@@ -105,7 +109,8 @@ void LevelConfiguration::ConfigureAllEntityAttributes(std::ifstream& file, GameO
 	vector<string> emptyAttribute;
 	EntityConfiguration configuration(emptyAttribute, entity);
 
-	while (getline(file, attribute)) {
+	while (getline(file, attribute))
+	{
 		vector<string> tokens = Log::tokenise(attribute);
 
 		configuration.SetAttributeTokens(tokens);
