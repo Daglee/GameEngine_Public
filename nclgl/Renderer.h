@@ -22,7 +22,8 @@
 class DataBase;
 
 class Renderer : public OGLRenderer, public ResourceBase,
-	public Subsystem, FSMUnit {
+	public Subsystem, FSMUnit
+{
 public:
 	Renderer(DataBase* database, Window &parent);
 	~Renderer(void);
@@ -41,7 +42,11 @@ public:
 	void InitialiseLoadingScreen();
 	void RenderLoadingScreen(float current, float total);
 
-	void SetCamera(Camera* cam) {
+	void AddSceneNode(SceneNode* sn);
+	void RemoveSceneNode(SceneNode* sn);
+
+	void SetCamera(Camera* cam)
+	{
 		camera = cam;
 	}
 
@@ -50,11 +55,12 @@ public:
 		return camera;
 	}
 
-	void SetLight(Light* l) {
+	void SetLight(Light* l)
+	{
 		light = l;
 	}
 
-	const float GetWidth() const 
+	const float GetWidth() const
 	{
 		return width;
 	}
@@ -65,12 +71,14 @@ public:
 	}
 
 
-	inline void SwitchToPerspective() {
+	inline void SwitchToPerspective()
+	{
 		projMatrix = Matrix4::Perspective(1.0f, 15000.0f,
 			(float)width / (float)height, 45.0f);
 	}
 
-	inline void SwitchToOrthographic() {
+	inline void SwitchToOrthographic()
+	{
 		projMatrix = Matrix4::Orthographic(-1.0f, 10000.0f,
 			width / 2.0f, -width / 2.0f, height / 2.0f,
 			-height / 2.0f);

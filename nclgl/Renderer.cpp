@@ -3,7 +3,8 @@
 #include "../ResourceManagment/DataBase.h"
 
 Renderer::Renderer(DataBase* database, Window &parent) :
-	OGLRenderer(parent), ResourceBase(), FSMUnit("Renderer", database) {
+	OGLRenderer(parent), ResourceBase(), FSMUnit("Renderer", database)
+{
 	light = new Light(Vector3(700, 1000, -700), Vector4(1, 1, 1, 1), 30000.0f);
 
 	sceneShader = new Shader(SHADERDIR"shadowscenevert.glsl", SHADERDIR"shadowscenefrag.glsl");
@@ -68,7 +69,8 @@ Renderer::Renderer(DataBase* database, Window &parent) :
 	textRenderer = new TextRenderer(this);
 }
 
-Renderer::~Renderer(void) {
+Renderer::~Renderer(void)
+{
 	delete camera;
 	delete light;
 	delete basicFont;
@@ -78,7 +80,8 @@ Renderer::~Renderer(void) {
 	delete textRenderer;
 }
 
-void Renderer::Update(float deltatime) {
+void Renderer::Update(float deltatime)
+{
 	updateTimer.StartTimer();
 
 	UpdateScene(deltatime);
@@ -98,7 +101,8 @@ void Renderer::InitialiseLoadingScreen()
 	SwitchToOrthographic();
 }
 
-void Renderer::RenderLoadingScreen(float current, float total) {
+void Renderer::RenderLoadingScreen(float current, float total)
+{
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glUseProgram(currentShader->GetProgram());
@@ -114,7 +118,8 @@ void Renderer::RenderLoadingScreen(float current, float total) {
 	SwapBuffers();
 }
 
-void Renderer::RenderScene() {
+void Renderer::RenderScene()
+{
 	BuildNodeLists(&root);
 	SortNodeLists();
 
@@ -123,7 +128,8 @@ void Renderer::RenderScene() {
 	DrawShadowScene();
 	DrawCombinedScene();
 
-	if (!textRenderer->textbuffer.empty()) {
+	if (!textRenderer->textbuffer.empty())
+	{
 		DrawAllText();
 		textRenderer->textbuffer.clear();
 	}
@@ -175,14 +181,16 @@ void Renderer::DrawCombinedScene()
 	DrawNodes();
 }
 
-void Renderer::UpdateScene(float msec) {
+void Renderer::UpdateScene(float msec)
+{
 	++timer;
 	camera->UpdateCamera(msec);
 	viewMatrix = camera->BuildViewMatrix();
 	root.Update(msec);
 }
 
-void Renderer::DrawLoadingScreen(float current, float total) {
+void Renderer::DrawLoadingScreen(float current, float total)
+{
 	float progress = (current / total);
 	Vector3 scale((float)width * progress, 100, 100);
 	Vector3 pos(-((float)width * 0.5f) + scale.x, -((float)height * 0.5f) + scale.y, 0);
@@ -199,8 +207,10 @@ void Renderer::DrawLoadingScreen(float current, float total) {
 void Renderer::RenderOverlay()
 {
 	int overlayIndex = 0;
-	for each (float flag in overlayFlags) {
-		if (flag) {
+	for each (float flag in overlayFlags)
+	{
+		if (flag)
+		{
 			overlay->SetTexture(SOIL_load_OGL_texture(overlays[overlayIndex].c_str(),
 				SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS));
 			glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
@@ -230,8 +240,10 @@ void Renderer::DrawOverlay()
 	SwitchToPerspective();
 }
 
-void Renderer::DrawNode(SceneNode* n) {
-	if (n->GetMesh()) {
+void Renderer::DrawNode(SceneNode* n)
+{
+	if (n->GetMesh())
+	{
 		modelMatrix = n->GetWorldTransform()*
 			Matrix4::Scale(n->GetModelScale());
 
@@ -253,7 +265,8 @@ void Renderer::DrawNode(SceneNode* n) {
 	}
 }
 
-void Renderer::DrawAllText() {
+void Renderer::DrawAllText()
+{
 	textRenderer->DrawTextBuffer();
 
 	currentShader->LinkProgram();
@@ -263,41 +276,51 @@ void Renderer::DrawAllText() {
 	glDisable(GL_BLEND);
 }
 
-void Renderer::DrawNodes() {
+void Renderer::DrawNodes()
+{
 	for (vector<SceneNode*>::const_iterator i = nodeList.begin();
-	i != nodeList.end(); ++i) {
+		i != nodeList.end(); ++i)
+	{
 		DrawNode((*i));
 	}
 
 	for (vector<SceneNode*>::const_reverse_iterator i = transparentNodeList.rbegin();
-	i != transparentNodeList.rend(); ++i) {
+		i != transparentNodeList.rend(); ++i)
+	{
 		DrawNode((*i));
 	}
 }
 
-void Renderer::BuildNodeLists(SceneNode* from) {
-	if (frameFrustum.InsideFrustum(*from)) {
+void Renderer::BuildNodeLists(SceneNode* from)
+{
+	if (frameFrustum.InsideFrustum(*from))
+	{
 		Vector3 dir = from->GetWorldTransform().GetPositionVector() -
 			camera->GetPosition();
 		from->SetCameraDistance(Vector3::Dot(dir, dir));
 
-		if (from->GetColour().w < 1.0f) {
+		if (from->GetColour().w < 1.0f)
+		{
 			transparentNodeList.push_back(from);
 		}
-		else {
+		else
+		{
 			nodeList.push_back(from);
 		}
 	}
 
 	for (vector<SceneNode*>::const_iterator i =
 		from->GetChildIteratorStart();
-		i != from->GetChildIteratorEnd(); ++i) {
+		i != from->GetChildIteratorEnd(); ++i)
+	{
 		BuildNodeLists((*i));
 	}
+
 	this->SetResourceSize(sizeof(*this));
 }
 
-void Renderer::SortNodeLists() {
+void Renderer::SortNodeLists()
+{
 	std::sort(transparentNodeList.begin(),
 		transparentNodeList.end(),
 		SceneNode::CompareByCameraDistance);
@@ -307,7 +330,8 @@ void Renderer::SortNodeLists() {
 		SceneNode::CompareByCameraDistance);
 }
 
-void Renderer::ClearNodeLists() {
+void Renderer::ClearNodeLists()
+{
 	transparentNodeList.clear();
 	nodeList.clear();
 	this->SetResourceSize(sizeof(*this));
@@ -325,11 +349,13 @@ void Renderer::RemoveSceneNode(SceneNode* sn)
 	this->SetResourceSize(sizeof(*this));
 }
 
-void Renderer::Read(string resourcename) {
+void Renderer::Read(string resourcename)
+{
 	this->SetResourceName(resourcename);
 }
 
-void Renderer::ReadParams(string params) {
+void Renderer::ReadParams(string params)
+{
 	std::istringstream iss(params);
 	vector<string> tokens{ istream_iterator<string>{iss},
 		istream_iterator<string>{} };
