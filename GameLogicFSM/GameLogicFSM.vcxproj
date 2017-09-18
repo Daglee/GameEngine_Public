@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionFunction.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="FSMManager.h" />
     <ClInclude Include="FSMUnit.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="Transition.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionFunction.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="FSMManager.cpp" />
     <ClCompile Include="FSMUnit.cpp" />

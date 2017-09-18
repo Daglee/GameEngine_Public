@@ -2,41 +2,22 @@
 #include "../ResourceManagment/Log.h"
 #include "MessageSystem.h"
 #include "../Game/ScoreBoard.h"
+#include "ActionFunction.h"
 
-State::State(std::unordered_map<string, float*>* vars, int id)
+const string STRING_TYPE = "s:";
+
+State::State(std::unordered_map<string, float*>* properties, int id)
 {
 	this->id = id;
-	this->vars = vars;
+	this->properties = properties;
 }
 
 //Change some variables in the object vars is in
 void State::ExecuteAllActions()
 {
-	for each (Action a in actions) {
-		if (a.actoperator == "=") {
-			*vars->find(a.var)->second = a.action;
-		}	
-		else if (a.actoperator == "-=") {
-			*vars->find(a.var)->second -= a.action;
-		}
-		else if (a.actoperator == "+=") {
-			*vars->find(a.var)->second += a.action;
-		}
-		else if (a.actoperator == "*=") {
-			*vars->find(a.var)->second *= a.action;
-		}
-		else if (a.actoperator == "transmit") {
-			MessageSystem::GetInstance()->Transmit(a.action, false);
-		}
-		else if (a.actoperator == "newevent") {
-			MessageSystem::GetInstance()->Transmit(a.action, true);
-		}
-		else if (a.actoperator == "endevent") {
-			MessageSystem::GetInstance()->StopTransmitting(a.action);
-		}
-		else if (a.actoperator == "addpoints") {
-			ScoreBoard::GetInstance()->UpdateEntryScore(a.var, a.action);
-		}
+	for each (Action action in actions)
+	{
+		action.execute(&action);
 	}
 }
 
@@ -44,18 +25,26 @@ void State::ExecuteAllActions()
 //every frame.
 void State::ConstructAction()
 {
-	for each(string a in actionstrings) {
-		Action act;
-		vector<string> tokens = Log::tokenise(a);
+	for each(string actionName in actionNames)
+	{
+		Action action;
+		vector<string> tokens = Log::tokenise(actionName);
 
-		act.var = tokens.at(0);
-		act.actoperator = tokens.at(1);
+		action.property = tokens.at(0);
+		action.operatorName = tokens.at(1);
 
-		if (tokens.at(2).find("s:") != string::npos) {
-			act.action = Log::Hash(tokens.at(2).substr(2));
+		if (tokens.at(2).find(STRING_TYPE) != string::npos)
+		{
+			action.operand = Log::Hash(tokens.at(2).substr(2));
 		}
-		else act.action = stof(tokens.at(2).c_str());
+		else
+		{
+			action.operand = stof(tokens.at(2).c_str());
+		}
 
-		actions.push_back(act);
+		ActionFunction functionAssignment(&properties, &action);
+		functionAssignment.AssignExecution(action.operatorName);
+
+		actions.push_back(action);
 	}
 }
