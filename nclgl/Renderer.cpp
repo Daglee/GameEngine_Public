@@ -58,10 +58,10 @@ Renderer::Renderer(DataBase* database, Window &parent) :
 	overlays.push_back("../Data/Textures/Rotation.tga");
 	overlays.push_back("../Data/Textures/Shoot.tga");
 
-	vars->insert({ "overlay1", &overlayFlags[0] });
-	vars->insert({ "overlay2", &overlayFlags[1] });
-	vars->insert({ "overlay3", &overlayFlags[2] });
-	vars->insert({ "timer", &timer });
+	properties->insert({ "overlay1", &overlayFlags[0] });
+	properties->insert({ "overlay2", &overlayFlags[1] });
+	properties->insert({ "overlay3", &overlayFlags[2] });
+	properties->insert({ "timer", &timer });
 
 	wparent = &parent;
 }

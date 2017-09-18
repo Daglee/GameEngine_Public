@@ -84,9 +84,9 @@ void LevelManager::InitialiseFSM()
 {
 	for (int i = 0; i < levelIDs.size(); ++i)
 	{
-		vars->insert({ "arena" + std::to_string(i + 1), &levelIDs[i] });
+		properties->insert({ "arena" + std::to_string(i + 1), &levelIDs[i] });
 	}
 
-	vars->insert({ "timer", &timer });
-	vars->insert({ "matchLength", &matchLength });
+	properties->insert({ "timer", &timer });
+	properties->insert({ "matchLength", &matchLength });
 }

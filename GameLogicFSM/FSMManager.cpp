@@ -6,15 +6,16 @@
 
 FSMManager::FSMManager(int numFSMs) : ResourceBase()
 {
-	this->numFSMs	= numFSMs;
-	fsms			= new FSM*[numFSMs];
+	this->numFSMs = numFSMs;
+	fsms = new FSM*[numFSMs];
 
 	this->SetResourceSize(sizeof(*this));
 }
 
 
-FSMManager::~FSMManager(){
-	for (int i = 0; i < numAdded; ++i) 
+FSMManager::~FSMManager()
+{
+	for (int i = 0; i < numberOfFSMsAdded; ++i)
 	{
 		delete fsms[i];
 	}
@@ -25,30 +26,31 @@ FSMManager::~FSMManager(){
 void FSMManager::LateBuildFSM(string FSMName, string filename)
 {
 	//Multiple FSMs could use the same config file.
-	for each (FSM* fsm in notBuilt)
+	for each (FSM* fsm in fsmsNotBuilt)
 	{
-		if (fsm->FSMName == FSMName) {
+		if (fsm->FSMName == FSMName)
+		{
 			fsm->BuildFSM(filename);
 		}
 	}
 }
 
-void FSMManager::Update(float deltatime) 
+void FSMManager::Update(float deltatime)
 {
 	updateTimer.StartTimer();
 
-	this->SetResourceSize(sizeof(*this) + 
+	this->SetResourceSize(sizeof(*this) +
 		sizeof(*MessageSystem::GetInstance()));
 
 	//Update each FSM
-	for (int i = 0; i < numAdded; ++i)
+	for (int i = 0; i < numberOfFSMsAdded; ++i)
 	{
 		fsms[i]->Update();
 	}
 
 	ScoreBoard::GetInstance()->DisplayScores();
 
-	this->SetResourceSize(sizeof(*this) + 
+	this->SetResourceSize(sizeof(*this) +
 		sizeof(*MessageSystem::GetInstance()));
 
 	updateTimer.StopTimer();
@@ -65,11 +67,11 @@ void FSMManager::ReadParams(string params)
 	vector<string> tokens{ istream_iterator<string>{iss},
 		istream_iterator<string>{} };
 
-	string name		= tokens.at(0);
-	int num			= atoi(tokens.at(1).c_str());
+	string name = tokens.at(0);
+	int num = atoi(tokens.at(1).c_str());
 	this->SetResourceName(name);
-	
-	numFSMs			= num;
+
+	numFSMs = num;
 	fsms = new FSM*[numFSMs];
 	this->SetResourceSize(sizeof(*this));
 }

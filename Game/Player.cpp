@@ -41,16 +41,16 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 	lifeSpan = LifeSpan(100.0f, 120);
 
 	//For the game logic FSM
-	vars->insert({ "colourr", &colour.x });
-	vars->insert({ "colourg", &colour.y });
-	vars->insert({ "colourb", &colour.z });
-	vars->insert({ "coloura", &colour.w });
-	vars->insert({ "timer", &timer });
-	vars->insert({ "collider", &collider });
-	vars->insert({ "health", lifeSpan.GetCurrentHealth() });
-	vars->insert({ "teamid", &teamid });
-	vars->insert({ "killstreak", &killstreak });
-	vars->insert({ "ypos", &rigidBody.lastPosition.y });
+	properties->insert({ "colourr", &colour.x });
+	properties->insert({ "colourg", &colour.y });
+	properties->insert({ "colourb", &colour.z });
+	properties->insert({ "coloura", &colour.w });
+	properties->insert({ "timer", &timer });
+	properties->insert({ "collider", &collider });
+	properties->insert({ "health", lifeSpan.GetCurrentHealth() });
+	properties->insert({ "teamid", &teamid });
+	properties->insert({ "killstreak", &killstreak });
+	properties->insert({ "ypos", &rigidBody.lastPosition.y });
 
 	idNumber = id;
 	this->database = database;

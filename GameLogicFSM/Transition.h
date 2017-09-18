@@ -11,7 +11,8 @@
 
 using namespace std;
 
-struct Check {
+struct Check
+{
 	vector<string> tokens;	//Just in case for any extra work needed.
 	string	property;			//The tag of the variable it will modify.
 	string	boolOperator;	//The condition.
@@ -21,7 +22,7 @@ struct Check {
 
 /*
   Dictates when the state of a finite state machine should change.
-  Multiple of these could be attached and used. 
+  Multiple of these could be attached and used.
   FSM will read these in and construct them.
 */
 class Transition
@@ -43,6 +44,6 @@ public:
 	std::vector<struct Check> checks;
 
 	//Obtained from the object that the FSM will act on
-	std::unordered_map<string, float*>* properties; 
+	std::unordered_map<string, float*>* properties;
 };
 

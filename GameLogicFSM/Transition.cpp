@@ -14,18 +14,20 @@ Transition::Transition(std::unordered_map<string, float*>* properties, int start
 }
 
 //Is it time to transition to another state?
-bool Transition::Check() 
+bool Transition::Check()
 {
 	vector<bool> results;
 
-	for each (struct Check check in checks) {
+	for each (struct Check check in checks)
+	{
 		bool transition = check.execute(&check);
 		results.push_back(transition);
 	}
 
 	bool finalBool = false || results[0];
 
-	for (int i = 1; i < results.size(); ++i) {
+	for (int i = 1; i < results.size(); ++i)
+	{
 		finalBool = finalBool && results[i];
 	}
 
@@ -39,7 +41,8 @@ void Transition::ConstructCheck()
 	vector<string> tokens = Log::tokenise(checkstring);
 
 	int wordCount = -1;
-	for (int i = 0; i < tokens.size(); i += 4) {
+	for (int i = 0; i < tokens.size(); i += 4)
+	{
 		struct Check check;
 
 		check.property = tokens.at(i);
@@ -50,7 +53,8 @@ void Transition::ConstructCheck()
 		Typically for collider tags.
 		It's just hashed and put in the map.
 		*/
-		if (tokens.at(i + 2).find("s:") != string::npos) {
+		if (tokens.at(i + 2).find("s:") != string::npos)
+		{
 			string substring = tokens.at(i + 2).substr(2);
 			check.comparison = Log::Hash(substring);
 		}

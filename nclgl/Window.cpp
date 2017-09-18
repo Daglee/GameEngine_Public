@@ -127,8 +127,8 @@ Window::Window(DataBase* database, std::string title,
 	init = true;
 
 	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
-	vars->insert({ "timer", &elapsedMS });
-	vars->insert({ "running", &running });
+	properties->insert({ "timer", &elapsedMS });
+	properties->insert({ "running", &running });
 
 	this->SetResourceSize(sizeof(*this));
 	//	CSC3224 NCODE BLOCK ENDS
