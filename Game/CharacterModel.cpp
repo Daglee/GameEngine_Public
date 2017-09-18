@@ -214,7 +214,7 @@ void CharacterModel::Update(const float& msec)
 			Matrix4::Rotation(rightLegRotation, Vector3(1, 0, 0)));
 
 		animFrames = animFrames + (msec / 100);// 0.05f;
-		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(playertag + "moving"));
+		MessageSystem::GetInstance()->StopEvent(Log::Hash(playertag + "moving"));
 
 		animReset = false;
 	}

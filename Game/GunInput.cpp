@@ -39,7 +39,7 @@ void GunInput::FireWeapon()
 		Sound* shoot = new Sound("../Data/Sounds/14615__man__canon.wav"); //AudioManager will delete this.
 		AudioManager::GetInstance()->TemporaryPlay(shoot, SOUNDPRIORITY_MEDIUM);
 	}
-	MessageSystem::GetInstance()->Transmit(Log::Hash("player_fired"), false);
+	MessageSystem::GetInstance()->TransmitMessage(Log::Hash("player_fired"));
 }
 
 void GunInput::ReloadWeapon()

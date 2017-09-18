@@ -11,7 +11,7 @@ SpawnSystem* SpawnSystem::instance = NULL;
 
 void SpawnSystem::RemovePlayerFromGame(RigidBody* playerRigidBody)
 {
-	MessageSystem::GetInstance()->Transmit(Log::Hash(playerRigidBody->tag + "dead"), false);
+	MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerRigidBody->tag + "dead"));
 
 	playerRigidBody->UpdatePosition(playerRigidBody->lastPosition + Vector3(0, 100000, 0));
 	playerRigidBody->gravity = 0;

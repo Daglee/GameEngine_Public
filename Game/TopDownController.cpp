@@ -26,7 +26,7 @@ void TopDownController::ApplyRotation()
 	if (inputtedRotationInDegrees != 0)
 	{
 		currentRotation = rotation;
-		MessageSystem::GetInstance()->Transmit(Log::Hash("player_rotated"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("player_rotated"));
 	}
 }
 
@@ -40,8 +40,8 @@ void TopDownController::UpdatePosition()
 	{
 		AudioManager::GetInstance()->BeginPlay(movementSound);
 
-		MessageSystem::GetInstance()->Transmit(Log::Hash("player_moved"), false);
-		MessageSystem::GetInstance()->Transmit(Log::Hash(rigidBody->tag + "moving"), true);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("player_moved"));
+		MessageSystem::GetInstance()->BeginEvent(Log::Hash(rigidBody->tag + "moving"));
 	}
 	else
 	{

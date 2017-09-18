@@ -30,7 +30,7 @@ void LevelManager::Update(const float& msec)
 	//Is it time to stop this level?
 	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash("ExitLevel")))
 	{
-		MessageSystem::GetInstance()->StopTransmitting(Log::Hash("ExitLevel"));
+		MessageSystem::GetInstance()->StopEvent(Log::Hash("ExitLevel"));
 		loader.ExitLevel();
 	}
 

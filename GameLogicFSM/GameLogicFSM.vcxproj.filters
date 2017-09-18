@@ -22,7 +22,9 @@
     <ClInclude Include="Transition.h">
       <Filter>Finite State Machine\Transition</Filter>
     </ClInclude>
-    <ClInclude Include="TransitionCheck.h" />
+    <ClInclude Include="TransitionCheck.h">
+      <Filter>Finite State Machine\Transition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FSMManager.cpp">
@@ -46,7 +48,9 @@
     <ClCompile Include="Transition.cpp">
       <Filter>Finite State Machine\Transition</Filter>
     </ClCompile>
-    <ClCompile Include="TransitionCheck.cpp" />
+    <ClCompile Include="TransitionCheck.cpp">
+      <Filter>Finite State Machine\Transition</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Finite State Machine">

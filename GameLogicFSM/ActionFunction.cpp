@@ -65,7 +65,7 @@ void ActionFunction::AssignTransmit()
 {
 	action->execute = [](Action* action)
 	{
-		MessageSystem::GetInstance()->Transmit(action->operand, false);
+		MessageSystem::GetInstance()->TransmitMessage(action->operand);
 	};
 }
 
@@ -73,7 +73,7 @@ void ActionFunction::AssignNewEvent()
 {
 	action->execute = [](Action* action)
 	{
-		MessageSystem::GetInstance()->Transmit(action->operand, true);
+		MessageSystem::GetInstance()->BeginEvent(action->operand);
 	};
 }
 
@@ -81,7 +81,7 @@ void ActionFunction::AssignEndEvent()
 {
 	action->execute = [](Action* action)
 	{
-		MessageSystem::GetInstance()->StopTransmitting(action->operand);
+		MessageSystem::GetInstance()->StopEvent(action->operand);
 	};
 }
 

@@ -41,7 +41,7 @@ void MKMapper::FillInputs()
 	}
 
 	if (Window::GetKeyboard()->KeyDown(STOP_GAME)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash("stop_game"), true);
+		MessageSystem::GetInstance()->BeginEvent(Log::Hash("stop_game"));
 	}
 
 	//Key: LC - index - 4
@@ -55,19 +55,19 @@ void MKMapper::FillInputs()
 
 	//Team changing buttons
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_1)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash("Player1SwitchRedTeam"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchRedTeam"));
 	}
 
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_2)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash("Player1SwitchBlueTeam"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchBlueTeam"));
 	}
 
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_3)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash("Player1SwitchGreenTeam"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchGreenTeam"));
 	}
 
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_4)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash("Player1SwitchYellowTeam"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchYellowTeam"));
 	}
 
 	//Rotation - Y - 2 (pitch)

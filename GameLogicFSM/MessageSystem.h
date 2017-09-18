@@ -6,7 +6,7 @@
 #include <mutex>
 
 /*
-  A system for subsystems to transmit messages, read them, 
+  A system for subsystems to transmit messages, read them,
   and trigger events.
    - Messages last 1 frame.
    - Events stay until asked to to be removed.
@@ -17,7 +17,7 @@ class MessageSystem
 {
 public:
 	/*
-	  A mutex is needed in the update function to make sure no new 
+	  A mutex is needed in the update function to make sure no new
 	  messages are transmitted during any transmission checks.
 	  Performance loss is negligible.
 	*/
@@ -33,24 +33,32 @@ public:
 		return instance;
 	}
 
-	//Single frame message
-	inline void Transmit(float msg, bool isEvent)
-	{	
+	inline void TransmitMessage(float messaage)
+	{
 		/*
-		  Is the update busy? If not, transmit. If it is,
-		  then just wait.
+		Is the update busy? If not, transmit. If it is,
+		then just wait.
 		*/
 		unique_lock<mutex> lock(transmit_mutex);
 
-		if (isEvent) events.push_back(msg);
-		else messages.push_back(msg);
+		messages.push_back(messaage);
 	}
+
+	inline void BeginEvent(float messaage)
+	{
+		/*
+		Is the update busy? If not, transmit. If it is,
+		then just wait.
+		*/
+		unique_lock<mutex> lock(transmit_mutex);
+
+		events.push_back(messaage);
+	}
+
+	void StopEvent(float msgTitle);
 
 	//Is a message currently being transmitted?
 	bool MessageTransmitting(float msgTitle);
-
-	//Stop an event
-	void StopTransmitting(float msgTitle);
 
 	void ClearAllMessages()
 	{
@@ -63,10 +71,10 @@ public:
 		events.clear();
 	}
 
-protected:
+private:
 	MessageSystem() {}
 
-	virtual ~MessageSystem() 
+	virtual ~MessageSystem()
 	{
 		Destroy();
 	}
@@ -75,6 +83,9 @@ protected:
 	{
 		delete instance;
 	}
+
+	bool MessageExists(float messageToFind);
+	bool EventExists(float eventToFind);
 
 	static MessageSystem* instance;
 

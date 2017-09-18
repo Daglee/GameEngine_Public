@@ -44,19 +44,19 @@ void GamepadMapper::FillInputs()
 	string playerid = "Player" + std::to_string(id);
 
 	if (gamepad->GetButtonPressed(0)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash(playerid + "SwitchGreenTeam"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerid + "SwitchGreenTeam"));
 	}											
 										
 	if (gamepad->GetButtonPressed(2)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash(playerid + "SwitchBlueTeam"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerid + "SwitchBlueTeam"));
 	}
 
 	if (gamepad->GetButtonPressed(3)) {	 
-		MessageSystem::GetInstance()->Transmit(Log::Hash(playerid + "SwitchYellowTeam"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerid + "SwitchYellowTeam"));
 	}
 
 	if (gamepad->GetButtonPressed(1)) {
-		MessageSystem::GetInstance()->Transmit(Log::Hash(playerid + "SwitchRedTeam"), false);
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerid + "SwitchRedTeam"));
 	}
 
 	// 4 -5 = triggers

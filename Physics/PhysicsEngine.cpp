@@ -156,8 +156,8 @@ void PhysicsEngine::NarrowPhase(vector<CollisionPair> pairs)
 					if (collisionPair.r1->ignoreTag != collisionPair.r2->tag &&
 						collisionPair.r2->ignoreTag != collisionPair.r1->tag) {
 
-						MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag), true);
-						MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r2->tag + "_colliding_" + collisionPair.r1->tag), true);
+						MessageSystem::GetInstance()->BeginEvent(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
+						MessageSystem::GetInstance()->BeginEvent(Log::Hash(collisionPair.r2->tag + "_colliding_" + collisionPair.r1->tag));
 
 						if (collisionPair.r1->tag.find("bullet") != std::string::npos) {
 							delete_buffer.push_back(collisionPair.r1);
@@ -169,13 +169,13 @@ void PhysicsEngine::NarrowPhase(vector<CollisionPair> pairs)
 				}
 				else {
 					if (collisionPair.r1->secondarytag.find("pickup") != std::string::npos || collisionPair.r2->secondarytag.find("pickup") != std::string::npos) {
-						MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag), false);
-						MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r1->secondarytag), false);
-						MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r2->secondarytag), false);
+						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
+						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r1->secondarytag));
+						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r2->secondarytag));
 					}
 					else {
-						MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag), false);
-						MessageSystem::GetInstance()->Transmit(Log::Hash(collisionPair.r2->tag + "_colliding_" + collisionPair.r1->tag), false);
+						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
+						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r2->tag + "_colliding_" + collisionPair.r1->tag));
 					}
 				}
 
@@ -271,8 +271,8 @@ void PhysicsEngine::Explosion(CollisionPair collisionPair)
 
 			if (distance.Length() < Vector3(EXPLOSION_RADIUS, EXPLOSION_RADIUS, EXPLOSION_RADIUS).Length()) {
 				ExplosionResponse(explosion, r);
-				MessageSystem::GetInstance()->Transmit(Log::Hash(entity->tag + "_colliding_" + explosion->tag), false);
-				MessageSystem::GetInstance()->Transmit(Log::Hash(explosion->tag + "_colliding_" + entity->tag), false);
+				MessageSystem::GetInstance()->TransmitMessage(Log::Hash(entity->tag + "_colliding_" + explosion->tag));
+				MessageSystem::GetInstance()->TransmitMessage(Log::Hash(explosion->tag + "_colliding_" + entity->tag));
 			}
 		}
 	}

@@ -10,46 +10,20 @@ bool MessageSystem::MessageTransmitting(float msgTitle)
 	*/
 	lock_guard<mutex> lock(transmit_mutex);
 
-	//Check messages
-	for each(float msg in messages)
-	{
-		if (msg == msgTitle) {
-			return true;
-		}
-	}
-
-	//Check ongoing events
-	for each(float evnt in events)
-	{
-		if (evnt == msgTitle) {
-			return true;
-		}
-	}
-
-	return false;
+	return MessageExists(msgTitle) || EventExists(msgTitle);
 }
 
-void MessageSystem::StopTransmitting(float msgTitle)
+void MessageSystem::StopEvent(float msgTitle)
 {
-	/*
-	  LOCK! Nothing in the system is allowed
-	  to change until transmission stopped.
-	*/
-
-	bool msgExists = false;
-	for each(float evnt in events)
+	if (EventExists(msgTitle))
 	{
-		if (evnt == msgTitle) {
-			msgExists = true;
-		}
-	}
-
-	if (msgExists) {
 		lock_guard<mutex> lock(transmit_mutex);
 
 		for (vector<float>::iterator i = events.begin();
-			i != events.end();) {
-			if (*i == msgTitle) {
+			i != events.end();)
+		{
+			if (*i == msgTitle)
+			{
 				i = events.erase(i);
 
 				break;
@@ -57,4 +31,30 @@ void MessageSystem::StopTransmitting(float msgTitle)
 			else ++i;
 		}
 	}
+}
+
+bool MessageSystem::MessageExists(float messageToFind)
+{
+	for each(float message in messages)
+	{
+		if (message == messageToFind)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool MessageSystem::EventExists(float eventToFind)
+{
+	for each(float event in events)
+	{
+		if (event == eventToFind)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

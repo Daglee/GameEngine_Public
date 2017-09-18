@@ -61,11 +61,11 @@ Gun* WeaponChange::CopyToMachineGun(Gun* currentWeapon)
 
 void WeaponChange::AnnounceChange()
 {
-	MessageSystem::GetInstance()->Transmit(Log::Hash(newWeapon), true);
+	MessageSystem::GetInstance()->BeginEvent(Log::Hash(newWeapon));
 }
 
 void WeaponChange::StopPreviousEvents()
 {
-	MessageSystem::GetInstance()->StopTransmitting(Log::Hash(newWeaponAnnouncementToStop));
-	MessageSystem::GetInstance()->StopTransmitting(Log::Hash(previousAnnouncement));
+	MessageSystem::GetInstance()->StopEvent(Log::Hash(newWeaponAnnouncementToStop));
+	MessageSystem::GetInstance()->StopEvent(Log::Hash(previousAnnouncement));
 }
