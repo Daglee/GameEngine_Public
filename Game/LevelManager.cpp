@@ -42,7 +42,7 @@ void LevelManager::Update(const float& msec)
 	//How much time is left for this level
 	std::string mt = std::to_string((matchLength - timer));
 	Text matchTimer(mt, Vector3((renderer->GetWidth() / 2) - 15, 0, 0), 15.0f, false);
-	renderer->textbuffer.push_back(matchTimer);
+	renderer->AddText(matchTimer);
 }
 
 void LevelManager::CheckLoadLevel()

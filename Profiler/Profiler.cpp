@@ -61,23 +61,23 @@ void Profiler::UpdateProfiling()
 void Profiler::RenderToScreen()
 {
 	//MEMORY
-	renderer->textbuffer.push_back(Text(
+	renderer->AddText(Text(
 		("Used: " + std::to_string(memoryWatcher.percent) + "%"),
 		Vector3(0, 30, 0), TEXT_SIZE));
-	renderer->textbuffer.push_back(Text(
+	renderer->AddText(Text(
 		("B Left: " + std::to_string(memoryWatcher.bytesleft)),
 		Vector3(0, 50, 0), TEXT_SIZE));
 
 	//FPS COUNTER
 	fpsCounter.CalculateFPS(window->GetTimer()->GetMS());
-	renderer->textbuffer.push_back(Text(
+	renderer->AddText(Text(
 		("FPS: " + std::to_string(fpsCounter.fps)),
 		Vector3(0, 0, 0), TEXT_SIZE));
 
 	//TIMERS
 	float offset = 100.0f;
 	for each(std::pair<string, SubsystemTimer*> timer in timers) {
-		renderer->textbuffer.push_back(Text(
+		renderer->AddText(Text(
 			(timer.first + ":" + std::to_string(timer.second->timePassed)),
 			Vector3(0, offset, 0), TEXT_SIZE));
 		offset += 20.0f;
@@ -89,7 +89,7 @@ void Profiler::RenderToScreen()
 	  actually stopping the timer...
 	*/
 	updateTimer.StopTimer();
-	renderer->textbuffer.push_back(Text(
+	renderer->AddText(Text(
 		("Profiler:" + std::to_string(updateTimer.timePassed)),
 		Vector3(0, offset, 0), TEXT_SIZE));
 }

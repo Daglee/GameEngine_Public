@@ -39,6 +39,7 @@ struct Font {
 		this->xCount = xCount;
 		this->yCount = yCount;
 	}
+
 	~Font() {
 		glDeleteTextures(1, &texture);
 	}

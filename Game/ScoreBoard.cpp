@@ -32,7 +32,7 @@ void ScoreBoard::DisplayText(const std::string& entry, const float& yPosition)
 
 	Text entryText(entry, linePosition, TEXT_SIZE);
 
-	renderer->textbuffer.push_back(entryText);
+	renderer->AddText(entryText);
 }
 
 void ScoreBoard::OrderAscending()

@@ -67,6 +67,7 @@
     <ClCompile Include="Gamepad.cpp">
       <Filter>Some Input Things</Filter>
     </ClCompile>
+    <ClCompile Include="TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Text.h">
@@ -156,6 +157,7 @@
     <ClInclude Include="Gamepad.h">
       <Filter>Some Input Things</Filter>
     </ClInclude>
+    <ClInclude Include="TextRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Text">

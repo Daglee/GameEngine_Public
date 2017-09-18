@@ -10,20 +10,23 @@
 #include "../ResourceManagment/ResourceBase.h"
 #include "SceneNode.h"
 
-class Camera : public ResourceBase {
+class Camera : public ResourceBase
+{
 public:
-	Camera(void) : ResourceBase() {
-		yaw		= 0.0f;
-		pitch	= 0.0f;
+	Camera(void) : ResourceBase()
+	{
+		yaw = 0.0f;
+		pitch = 0.0f;
 
 		//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 		this->SetResourceSize(sizeof(*this));
 		//	CSC3224 NCODE BLOCK ENDS
 	};
 
-	Camera(float pitch, float yaw, Vector3 position) : ResourceBase(){
-		this->pitch		= pitch;
-		this->yaw		= yaw;
+	Camera(float pitch, float yaw, Vector3 position) : ResourceBase()
+	{
+		this->pitch = pitch;
+		this->yaw = yaw;
 
 		SetPosition(position);
 
@@ -32,8 +35,7 @@ public:
 		//	CSC3224 NCODE BLOCK ENDS
 	}
 
-	~Camera(void){
-	};
+	~Camera() {}
 
 	void UpdateCamera(float msec = 10.0f);
 
@@ -42,12 +44,14 @@ public:
 	Matrix4 BuildViewMatrix();
 
 	//Gets position in world space
-	Vector3 GetPosition() const { 
+	Vector3 GetPosition() const
+	{
 		return node.GetTransform().GetPositionVector();
 	}
 
 	//Sets position in world space
-	void	SetPosition(Vector3 val) { 
+	void SetPosition(Vector3 val)
+	{
 		node.SetTransform(node.GetTransform() * Matrix4::Translation(val));
 	}
 
@@ -57,14 +61,26 @@ public:
 	}
 
 	//Gets yaw, in degrees
-	float	GetYaw()   const { return yaw;}
+	float	GetYaw()   const
+	{
+		return yaw;
+	}
 	//Sets yaw, in degrees
-	void	SetYaw(float y) {yaw = y;}
+	void	SetYaw(float y)
+	{
+		yaw = y;
+	}
 
 	//Gets pitch, in degrees
-	float	GetPitch() const { return pitch;}
+	float	GetPitch() const
+	{
+		return pitch;
+	}
 	//Sets pitch, in degrees
-	void	SetPitch(float p) {pitch = p;}
+	void	SetPitch(float p)
+	{
+		pitch = p;
+	}
 
 	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	void Read(string resourcename);

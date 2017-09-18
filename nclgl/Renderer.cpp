@@ -64,6 +64,8 @@ Renderer::Renderer(DataBase* database, Window &parent) :
 	properties->insert({ "timer", &timer });
 
 	wparent = &parent;
+
+	textRenderer = new TextRenderer(this);
 }
 
 Renderer::~Renderer(void) {
@@ -73,6 +75,7 @@ Renderer::~Renderer(void) {
 	delete textShader;
 	delete sceneShader;
 	delete shadowShader;
+	delete textRenderer;
 }
 
 void Renderer::Update(float deltatime) {
@@ -83,6 +86,16 @@ void Renderer::Update(float deltatime) {
 	//DrawOverlay();
 
 	updateTimer.StopTimer();
+}
+
+void Renderer::InitialiseLoadingScreen()
+{
+	loadingBar = Mesh::GenerateQuad();
+
+	Shader* shader = new Shader(SHADERDIR"basicVertex.glsl", SHADERDIR"basicFragment.glsl");
+	shader->LinkProgram();
+	SetCurrentShader(shader);
+	SwitchToOrthographic();
 }
 
 void Renderer::RenderLoadingScreen(float current, float total) {
@@ -110,9 +123,9 @@ void Renderer::RenderScene() {
 	DrawShadowScene();
 	DrawCombinedScene();
 
-	if (!textbuffer.empty()) {
-		DrawTextBuffer();
-		textbuffer.clear();
+	if (!textRenderer->textbuffer.empty()) {
+		DrawAllText();
+		textRenderer->textbuffer.clear();
 	}
 
 	SwapBuffers();
@@ -240,69 +253,15 @@ void Renderer::DrawNode(SceneNode* n) {
 	}
 }
 
-void Renderer::DrawTextBuffer() {
-	//Store the old values (so we can switch back).
-	Matrix4 oldViewmatrix = viewMatrix;
-	Matrix4 oldProjmatrix = projMatrix;
+void Renderer::DrawAllText() {
+	textRenderer->DrawTextBuffer();
 
-	//Use text shader
-	Shader* oldshader = currentShader;
-	currentShader = textShader;
-	currentShader->LinkProgram();
-
-	glUseProgram(currentShader->GetProgram());
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-	glEnable(GL_BLEND);
-	textureMatrix.ToIdentity();
-
-	for each (Text textobj in textbuffer) {
-		DrawTextOBJ(textobj);
-	}
-
-	//Revert to the old matrices
-	viewMatrix = oldViewmatrix;
-	projMatrix = oldProjmatrix;
-
-	//Switch shader back
-	currentShader = oldshader;
 	currentShader->LinkProgram();
 
 	glUseProgram(currentShader->GetProgram());
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_BLEND);
-
 }
-
-/*<Author: Richard Davison--->*/
-void Renderer::DrawTextOBJ(const Text& textobj) {
-	TextMesh mesh(textobj.text, *basicFont);
-
-	//This just does simple matrix setup to render in either perspective or
-	//orthographic mode, there's nothing here that's particularly tricky.
-	if (textobj.perspective) {
-		modelMatrix = Matrix4::Translation(textobj.position) *
-			Matrix4::Scale(Vector3(textobj.size, textobj.size, 1));
-
-		viewMatrix = camera->BuildViewMatrix();
-		projMatrix = Matrix4::Perspective(1.0f, 10000.0f, (float)width / (float)height, 45.0f);
-	}
-	else {
-		//In ortho mode, we subtract the y from the height, so that a height of 0
-		//is at the top left of the screen, which is more intuitive
-		modelMatrix = Matrix4::Translation(Vector3(textobj.position.x,
-			height - textobj.position.y,
-			textobj.position.z))
-			* Matrix4::Scale(Vector3(textobj.size, textobj.size, 1));
-
-		viewMatrix.ToIdentity();
-		projMatrix = Matrix4::Orthographic(-1.0f, 1.0f, (float)width, 0.0f, (float)height, 0.0f);
-	}
-
-	//Either way, we update the matrices, and draw the mesh
-	UpdateShaderMatrices();
-	mesh.Draw();
-}
-/*<Author: by Richard Davison>*/
 
 void Renderer::DrawNodes() {
 	for (vector<SceneNode*>::const_iterator i = nodeList.begin();
@@ -342,6 +301,7 @@ void Renderer::SortNodeLists() {
 	std::sort(transparentNodeList.begin(),
 		transparentNodeList.end(),
 		SceneNode::CompareByCameraDistance);
+
 	std::sort(nodeList.begin(),
 		nodeList.end(),
 		SceneNode::CompareByCameraDistance);
@@ -350,6 +310,18 @@ void Renderer::SortNodeLists() {
 void Renderer::ClearNodeLists() {
 	transparentNodeList.clear();
 	nodeList.clear();
+	this->SetResourceSize(sizeof(*this));
+}
+
+void Renderer::AddSceneNode(SceneNode* sn)
+{
+	root.AddChild(sn);
+	this->SetResourceSize(sizeof(*this));
+}
+
+void Renderer::RemoveSceneNode(SceneNode* sn)
+{
+	root.RemoveChild(sn);
 	this->SetResourceSize(sizeof(*this));
 }
 

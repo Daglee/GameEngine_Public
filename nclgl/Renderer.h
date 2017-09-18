@@ -11,6 +11,7 @@
 #include "../Game/Subsystem.h"
 #include "Text.h"
 #include "TextMesh.h"
+#include "TextRenderer.h"
 
 #include <algorithm> //For std::sort
 #include <vector>
@@ -29,43 +30,40 @@ public:
 	void Update(float deltatime);
 	void UpdateScene(float msec);
 
-	void InitialiseScene() {
+	void InitialiseScene()
+	{
 		SwitchToPerspective();
 	}
+
 	void RenderScene();
 
-	void InitialiseLoadingScreen() {
-		loadingBar = Mesh::GenerateQuad();
 
-		Shader* shader = new Shader(SHADERDIR"basicVertex.glsl", SHADERDIR"basicFragment.glsl");
-		shader->LinkProgram();
-		SetCurrentShader(shader);
-		SwitchToOrthographic();
-	}
+	void InitialiseLoadingScreen();
 	void RenderLoadingScreen(float current, float total);
 
 	void SetCamera(Camera* cam) {
 		camera = cam;
 	}
 
+	Camera* GetCamera() const
+	{
+		return camera;
+	}
+
 	void SetLight(Light* l) {
 		light = l;
 	}
 
-	void AddSceneNode(SceneNode* sn) {
-		root.AddChild(sn);
-		this->SetResourceSize(sizeof(*this));
-	}
-
-	void RemoveSceneNode(SceneNode* sn) {
-		root.RemoveChild(sn);
-		this->SetResourceSize(sizeof(*this));
-	}
-
-	float GetWidth() const 
+	const float GetWidth() const 
 	{
 		return width;
 	}
+
+	const float GetHeight() const
+	{
+		return height;
+	}
+
 
 	inline void SwitchToPerspective() {
 		projMatrix = Matrix4::Perspective(1.0f, 15000.0f,
@@ -78,7 +76,11 @@ public:
 			-height / 2.0f);
 	}
 
-	vector<Text> textbuffer;
+	void AddText(const Text& text)
+	{
+		textRenderer->textbuffer.push_back(text);
+	}
+
 	Font* basicFont;
 
 	void Read(string resourcename);
@@ -89,10 +91,10 @@ public:
 	Mesh* loadingBar;
 	Mesh* overlay;
 protected:
+	TextRenderer* textRenderer;
 	Shader* textShader;
 
-	void DrawTextBuffer();
-	void DrawTextOBJ(const Text& textobj);
+	void DrawAllText();
 	void DrawLoadingScreen(float current, float total);
 
 	void RenderOverlay();

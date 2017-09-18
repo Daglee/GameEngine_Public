@@ -69,7 +69,7 @@ void PerspectiveHeadsUpDisplay::DisplayAdaptiveText()
 void PerspectiveHeadsUpDisplay::DisplayLine(const std::string& line, const Vector3& linePosition)
 {
 	Text text(line, PositionAfterOffset(linePosition), FONT_SIZE, PERSPECTIVE);
-	renderer->textbuffer.push_back(text);
+	renderer->AddText(text);
 }
 
 Vector3 PerspectiveHeadsUpDisplay::PositionAfterOffset(const Vector3& basePosition)
