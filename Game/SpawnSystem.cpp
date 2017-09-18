@@ -5,7 +5,7 @@
 
 #include <random>
 
-#define PLAYER_GRAVITY -0.1f
+const float PLAYER_GRAVITY = -0.1f;
 
 SpawnSystem* SpawnSystem::instance = NULL;
 

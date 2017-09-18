@@ -6,8 +6,8 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Renderer.h"
 
-#define INITIAL_LEVEL 1
-#define REPLACEMENT_LEVEL 2
+const int INITIAL_LEVEL = 1;
+const int REPLACEMENT_LEVEL = 2;
 
 LevelManager::LevelManager(DataBase* database, std::string filename) : FSMUnit("Levels", database)
 {

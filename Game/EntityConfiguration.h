@@ -5,7 +5,6 @@
 #include <functional>
 #include <vector>
 
-//class PhysicsObject;
 class GameObject;
 
 struct Property

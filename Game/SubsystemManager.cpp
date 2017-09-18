@@ -3,7 +3,16 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/MessageSystem.h"
 
-#define MESSAGE_LIFETIME 100
+enum SUBSYSTEM_INDEXES
+{
+	INPUT_MANAGER,
+	GAME_LOGIC,
+	PHYS_ENGINE,
+	PROFILER,
+	AUDIO_MNGR
+};
+
+const int MESSAGE_LIFETIME = 100;
 
 SubsystemManager::SubsystemManager(DataBase* database)
 {

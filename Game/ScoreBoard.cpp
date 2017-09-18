@@ -1,8 +1,8 @@
 #include "ScoreBoard.h"
 #include "../nclgl/Renderer.h"
 
-#define TEXT_SIZE 15.0f
-#define XAXIS_OFFSET 200.0f
+const float TEXT_SIZE = 15.0f;
+const float XAXIS_OFFSET = 200.0f;
 
 ScoreBoard* ScoreBoard::instance = NULL;
 

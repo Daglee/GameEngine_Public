@@ -47,7 +47,10 @@ int main()
 	database->InitialiseDataBase();
 	game->Launch("../Data/startup.txt");
 
-	if (!game->Initialised()) return -1;
+	if (!game->Initialised())
+	{
+		return -1;
+	}
 
 	Camera*	camera	= database->GCamera->Find("Camera");
 	Window*	win		= database->GWindow->Find("Window");
@@ -63,7 +66,8 @@ int main()
 	lvlManager->LoadFirstLevel();
 
 	//Game loop...
-	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running) {
+	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running) 
+	{
 		float deltatime = win->GetTimer()->GetTimedMS();
 
 		lvlManager->Update(deltatime);
@@ -71,7 +75,6 @@ int main()
 	}
 
 	//Game logic handles exiting the level.
-
 	delete database;
 
     return 0;

@@ -6,15 +6,6 @@
 
 class DataBase;
 
-enum
-{
-	INPUT_MANAGER,
-	GAME_LOGIC,
-	PHYS_ENGINE,
-	PROFILER,
-	AUDIO_MNGR
-};
-
 /*
   Updates the subsystems of the game on
   each iteration of the game loop.
@@ -34,8 +25,8 @@ private:
 	Renderer* renderer;
 	ThreadPool* threadPool;
 
+	enum class SUBSYSTEM_INDEXES;
 	Subsystem* subsystems[5];
-
 	int updateCount = 0;
 };
 
