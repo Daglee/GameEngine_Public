@@ -41,10 +41,10 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 	lifeSpan = LifeSpan(100.0f, 120);
 
 	//For the game logic FSM
-	vars->insert({ "colourr", &colourr });
-	vars->insert({ "colourg", &colourg });
-	vars->insert({ "colourb", &colourb });
-	vars->insert({ "coloura", &coloura });
+	vars->insert({ "colourr", &colour.x });
+	vars->insert({ "colourg", &colour.y });
+	vars->insert({ "colourb", &colour.z });
+	vars->insert({ "coloura", &colour.w });
 	vars->insert({ "timer", &timer });
 	vars->insert({ "collider", &collider });
 	vars->insert({ "health", lifeSpan.GetCurrentHealth() });
@@ -74,10 +74,10 @@ Player::~Player()
 	delete ragdolls;
 }
 
-
 void Player::ApplyInputs()
 {
-	if (!lockInputs) {
+	if (!inputsLocked)
+	{
 		gunInput->ApplyInputs();
 		controller->ApplyInputs();
 	}
@@ -92,13 +92,12 @@ void Player::Update(const float& msec, const float& timer)
 {
 	this->timer += msec / 1000.0f;
 
-	playerModel->UpdateColour(Vector4(colourr, colourg, colourb, coloura));
+	playerModel->UpdateColour(colour);
 	playerModel->Update(msec);
 
 	CheckHealth();
 	AddPoints();
 	CheckGunChange();
-	UpdateHUD();
 	DisplayHUD();
 }
 
@@ -128,7 +127,6 @@ void Player::AddPoints()
 	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints"))) {
 		ScoreBoard::GetInstance()->UpdateEntryScore(rigidBody.tag, killstreak);
 
-		//Stop the event.
 		MessageSystem::GetInstance()->StopTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints")); 
 	}
 }
@@ -175,6 +173,8 @@ void Player::UpdateHUD()
 
 void Player::DisplayHUD()
 {
+	UpdateHUD();
+
 	HUDText.ClearAppendedText();
 
 	if (gun->lastReloadTime + gun->reloadSpeed >= clock())
@@ -197,15 +197,16 @@ void Player::Despawn()
 	rigidBody.UpdatePosition(rigidBody.lastPosition + Vector3(0, 100000, 0));
 	rigidBody.gravity = 0;
 
-	lockInputs = true;
+	inputsLocked = true;
 }
 
 void Player::Respawn(const Vector3& spawnPoint)
 {
 	lifeSpan.ResetHealth();
 	lifeSpan.ResetFramesSpentDead();
-	lockInputs = false;
-	coloura = 1;
+
+	inputsLocked = false;
+	colour.w = 1;
 	rigidBody.gravity = PLAYER_GRAVITY;
 
 	rigidBody.UpdatePosition(spawnPoint);
@@ -220,6 +221,53 @@ int Player::ChooseRandomSpawnPoint()
 	int randomSpawnPoint = range(mersenneTwister);
 
 	return randomSpawnPoint;
+}
+
+void Player::UpdatePhysics(PhysicsEngine* newPhysicsEngine)
+{
+	physicsEngine = newPhysicsEngine;
+	newPhysicsEngine->AddRigidBody(&rigidBody);
+
+	ragdolls->SetPhysicsEngine(newPhysicsEngine);
+}
+
+void Player::UpdateRenderer(Renderer* newRenderer)
+{
+	renderer = newRenderer;
+	newRenderer->AddSceneNode(rigidBody.parentMesh);
+
+	ragdolls->SetRenderer(newRenderer);
+	headsUpDisplay.SetRenderer(renderer);
+}
+
+void Player::SetPlayerController(PlayerController* im)
+{
+	controller = im;
+}
+
+CharacterModel* Player::GetPlayerModel() const
+{
+	return playerModel;
+}
+
+PlayerController* Player::GetPlayerController() const
+{
+	return controller;
+}
+
+RigidBody* Player::GetRigidBody()
+{
+	return &rigidBody;
+}
+
+void Player::AddSpawnPoint(const Vector3 newPoint)
+{
+	spawnPoints.push_back(newPoint);
+}
+
+const int Player::GetIDNumber() const
+{
+	return idNumber;
 }
 
 void Player::Read(string resourcename) 

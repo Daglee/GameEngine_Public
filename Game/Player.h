@@ -44,58 +44,18 @@ public:
 	void AddPoints();
 	void CheckGunChange();
 
-	//void CheckRagdollLimits();
-	//void SpawnRagdoll();
+	void SetPlayerController(PlayerController* im);
 
-	void SetPlayerController(PlayerController* im)
-	{
-		controller = im;
-	}
+	CharacterModel* GetPlayerModel() const;
+	PlayerController* GetPlayerController() const;
+	RigidBody* GetRigidBody();
+	const int GetIDNumber() const;
 
-	CharacterModel* GetPlayerModel()
-	{
-		return playerModel;
-	}
-
-	PlayerController* GetPlayerController()
-	{
-		return controller;
-	}
-
-	RigidBody* GetRigidBody()
-	{
-		return &rigidBody;
-	}
-
-	void UpdatePhysics(PhysicsEngine* p) 
-	{
-		physicsEngine = p;
-		p->AddRigidBody(&rigidBody);
-
-		ragdolls->SetPhysicsEngine(p);
-	}
-
-	void UpdateRenderer(Renderer* r) 
-	{
-		renderer = r;
-		r->AddSceneNode(rigidBody.parentMesh);
-		
-		ragdolls->SetRenderer(r);
-		headsUpDisplay.SetRenderer(renderer);
-	}
-
-	void AddSpawnPoint(Vector3 newPoint)
-	{
-		spawnPoints.push_back(newPoint);
-	}
-
-	const int GetIDNumber() const
-	{
-		return idNumber;
-	}
+	void AddSpawnPoint(const Vector3 newPoint);
+	void UpdatePhysics(PhysicsEngine* newPhysicsEngine);
+	void UpdateRenderer(Renderer* newRenderer);
 
 	void Update(const float& msec, const float& timer = 0);
-	void PrepareHUD();
 
 	void Read(string resourcename);
 	void ReadParams(string params);
@@ -104,55 +64,43 @@ public:
 	Gun*	gun;
 	int		teamID;
 	string walkingSoundName;
-
 	Mesh* playerModelMesh;
-	std::vector<Vector3> spawnPoints;
 	GunInput* gunInput;
 protected:
 	void Despawn();
 	void Respawn(const Vector3& spawnPoint);
 	int ChooseRandomSpawnPoint();
 
+	void PrepareHUD();
 	void UpdateHUD();
 	void DisplayHUD();
 
 	CharacterModel* playerModel;
-	//InputMapper* input; //Updated in game loop
-	PlayerController* controller;
-	WeaponChange weaponChanger;
-	PerspectiveHeadsUpDisplay headsUpDisplay;
-	TextParagraph HUDText;
 	RigidBody rigidBody;
 	Matrix4 playerRotation;
+	std::vector<Vector3> spawnPoints;
 
-	//Gun Stuff
 	DataBase* database;
 	Renderer* renderer;
 	PhysicsEngine* physicsEngine;
 	Mesh* gunMesh;
 
-	//std::vector<PhysicsObject*> bodies;
-	//std::vector<Ragdoll*> ragdolls;
-	//int spawnedRagdollCount = 0;
+	LifeSpan lifeSpan;
+	PlayerController* controller;
 	PlayerRagdollSet* ragdolls;
+	WeaponChange weaponChanger;
+	PerspectiveHeadsUpDisplay headsUpDisplay;
+	TextParagraph HUDText;
 
-	//int deadFrames = 0;
 	int idNumber = -1;
-
 	float	teamid = 0;
-	//float	health = 100;
 	float	damage;
-	float	colourr = 1;
-	float	colourg = 0;
-	float	colourb = 1;
-	float	coloura = 1;
 	float	timer = 0;
 	float	collider = 0;
 	float	killstreak = 0;
+	Vector4 colour;
 
-	LifeSpan lifeSpan;
-
-	bool lockInputs		= false;
+	bool inputsLocked = false;
 	bool transmitting	= false;
 };
 
