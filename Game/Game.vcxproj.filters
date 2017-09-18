@@ -111,7 +111,11 @@
     <ClInclude Include="LifeSpan.h">
       <Filter>Player\Player Mechanics</Filter>
     </ClInclude>
-    <ClInclude Include="WeaponChange.h" />
+    <ClInclude Include="WeaponChange.h">
+      <Filter>Player\Player Mechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="TextParagraph.h" />
+    <ClInclude Include="PerspectiveHeadsUpDisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -184,6 +188,10 @@
     <ClCompile Include="LifeSpan.cpp">
       <Filter>Player\Player Mechanics</Filter>
     </ClCompile>
-    <ClCompile Include="WeaponChange.cpp" />
+    <ClCompile Include="WeaponChange.cpp">
+      <Filter>Player\Player Mechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextParagraph.cpp" />
+    <ClCompile Include="PerspectiveHeadsUpDisplay.cpp" />
   </ItemGroup>
 </Project>

@@ -165,6 +165,7 @@ void InputManager::SetPlayerParameters(Player* p)
 
 	p->gunInput = new GunInput(p->GetPlayerController()->GetInputMapper(), p->gun,
 		WeaponData(&p->GetRigidBody()->lastPosition, p->GetIDNumber()));
+	p->PrepareHUD();
 
 	SoundNode* walkingSound = new SoundNode(
 		new Sound("../Data/Sounds/41579__erdie__steps-on-stone01.wav"),

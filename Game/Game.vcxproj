@@ -156,10 +156,12 @@
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="CharacterModel.h" />
+    <ClInclude Include="PerspectiveHeadsUpDisplay.h" />
     <ClInclude Include="EntityAttributeReader.h" />
     <ClInclude Include="EntityConfiguration.h" />
     <ClInclude Include="GameEntityBuilder.h" />
     <ClInclude Include="GunInput.h" />
+    <ClInclude Include="TextParagraph.h" />
     <ClInclude Include="Launcher.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Gun.h" />
@@ -183,10 +185,12 @@
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="CharacterModel.cpp" />
+    <ClCompile Include="PerspectiveHeadsUpDisplay.cpp" />
     <ClCompile Include="EntityAttributeReader.cpp" />
     <ClCompile Include="EntityConfiguration.cpp" />
     <ClCompile Include="GameEntityBuilder.cpp" />
     <ClCompile Include="GunInput.cpp" />
+    <ClCompile Include="TextParagraph.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gun.cpp" />

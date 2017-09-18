@@ -55,6 +55,12 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 	idNumber = id;
 	this->database = database;
 
+	HUDText.SetNumberOfLinesInParagraph(2);
+	HUDText.AddAdaptiveLine(AdaptiveLine(&rigidBody.tag, Vector3(30, 70, 0)));
+
+	headsUpDisplay.SetRenderer(renderer);
+	headsUpDisplay.SetText(&HUDText);
+
 	this->SetResourceSize(sizeof(*this));
 }
 
@@ -89,6 +95,7 @@ void Player::Update(const float& msec, const float& timer)
 	CheckHealth();
 	AddPoints();
 	CheckGunChange();
+	UpdateHUD();
 	DisplayHUD();
 }
 
@@ -144,24 +151,38 @@ void Player::CheckGunChange()
 	}
 }
 
+void Player::PrepareHUD()
+{
+	HUDText.SetNumberOfLinesInParagraph(2);
+	UpdateHUD();
+}
+
+void Player::UpdateHUD()
+{
+	string bulletsLeft = std::to_string(gun->bulletsPerMag - gun->bulletsFired);
+	string maximumBullets = std::to_string(gun->bulletsPerMag);
+	string ammoCount = bulletsLeft + "/" + maximumBullets;
+
+	string timeUntilTeamChangeAvailable = std::to_string(5.0f - (std::max<float>)
+		(0, ((std::min<float>)(this->timer, 5))));
+
+	HUDText.SetLineOfParagraph(ammoCount, 0);
+	HUDText.SetLineOfParagraph(timeUntilTeamChangeAvailable, 1);
+}
+
 void Player::DisplayHUD()
 {
-	string ammo = std::to_string(gun->bulletsPerMag - gun->bulletsFired) + "/" + std::to_string(gun->bulletsPerMag);
-	Text hud(ammo, playerModel->GetTransform().GetPositionVector() + Vector3(0, 100, 0), 25.0f, true);
-	renderer->textbuffer.push_back(hud);
+	HUDText.ClearAppendedText();
 
-	string teamchangetimer = std::to_string(5.0f - (std::max<float>)(0, ((std::min<float>)(this->timer, 5))));
-	Text hudtimer(teamchangetimer.substr(0, 3), playerModel->GetTransform().GetPositionVector() + Vector3(0, 130, 0), 25.0f, true);
-	renderer->textbuffer.push_back(hudtimer);
-
-	if (gun->lastReloadTime + gun->reloadSpeed >= clock()) {
-		string r = "reloading";
-		Text reloading(r, playerModel->GetTransform().GetPositionVector() + Vector3(0, 160, 0), 25.0f, true);
-		renderer->textbuffer.push_back(reloading);
+	if (gun->lastReloadTime + gun->reloadSpeed >= clock())
+	{
+		string isReloading = "reloading";
+		HUDText.AppendLineToParagraph(isReloading);
 	}
 
-	Text name(rigidBody.tag, playerModel->GetTransform().GetPositionVector() + Vector3(30, 70, 0), 20.0f, true);
-	renderer->textbuffer.push_back(name);
+	headsUpDisplay.SetRenderer(renderer);
+	headsUpDisplay.Set3DPosition(playerModel->GetTransform().GetPositionVector());
+	headsUpDisplay.DisplayAllText();
 }
 
 void Player::Despawn()

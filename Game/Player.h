@@ -13,6 +13,8 @@
 #include "GunInput.h"
 #include "LifeSpan.h"
 #include "WeaponChange.h"
+#include "PerspectiveHeadsUpDisplay.h"
+#include "TextParagraph.h"
 
 class DataBase;
 class InputMapper;
@@ -40,7 +42,6 @@ public:
 	void CheckHealth();
 	void AddPoints();
 	void CheckGunChange();
-	void DisplayHUD();
 
 	void CheckRagdollLimits();
 	void Ragdoll();
@@ -88,6 +89,7 @@ public:
 	}
 
 	void Update(const float& msec, const float& timer = 0);
+	void PrepareHUD();
 
 	void Read(string resourcename);
 	void ReadParams(string params);
@@ -105,10 +107,15 @@ protected:
 	void Respawn(const Vector3& spawnPoint);
 	int ChooseRandomSpawnPoint();
 
+	void UpdateHUD();
+	void DisplayHUD();
+
 	CharacterModel* playerModel;
 	//InputMapper* input; //Updated in game loop
 	PlayerController* controller;
 	WeaponChange weaponChanger;
+	PerspectiveHeadsUpDisplay headsUpDisplay;
+	TextParagraph HUDText;
 	RigidBody rigidBody;
 	Matrix4 playerRotation;
 
