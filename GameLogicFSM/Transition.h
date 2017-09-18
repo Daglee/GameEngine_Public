@@ -7,14 +7,16 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <functional>
 
 using namespace std;
 
 struct Check {
 	vector<string> tokens;	//Just in case for any extra work needed.
-	string	var;			//The tag of the variable it will modify.
+	string	property;			//The tag of the variable it will modify.
 	string	boolOperator;	//The condition.
 	float	comparison;		//What we are comparing the variable to.
+	std::function<bool(Check*)> execute;
 };
 
 /*
@@ -25,8 +27,8 @@ struct Check {
 class Transition
 {
 public:
-	Transition(std::unordered_map<string, float*>* vars = NULL, int from = -1, 
-		int to = -1, string check = "");
+	Transition(std::unordered_map<string, float*>* properties = NULL, int startingState = -1,
+		int nextState = -1, string check = "");
 
 	~Transition() {}
 
@@ -35,13 +37,12 @@ public:
 	//Save the variables to save us from reading the string on each check
 	void ConstructCheck();
 
-	int to;				//State to move to
-	int from;			//Starting state
+	int nextState;				//State to move to
+	int startingState;			//Starting state
 	string checkstring;	//The condition itself, no parsing.
-	//struct Check check;
 	std::vector<struct Check> checks;
 
 	//Obtained from the object that the FSM will act on
-	std::unordered_map<string, float*>* vars; 
+	std::unordered_map<string, float*>* properties; 
 };
 

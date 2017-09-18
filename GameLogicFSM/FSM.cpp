@@ -57,7 +57,7 @@ void FSM::Update()
 
 		if (currentTransition->Check())
 		{
-			ChangeToState(currentTransition->to);
+			ChangeToState(currentTransition->nextState);
 			break;
 		}
 	}

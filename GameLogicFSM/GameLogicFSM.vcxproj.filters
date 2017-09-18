@@ -22,6 +22,7 @@
     <ClInclude Include="Transition.h">
       <Filter>Finite State Machine\Transition</Filter>
     </ClInclude>
+    <ClInclude Include="TransitionCheck.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FSMManager.cpp">
@@ -45,6 +46,7 @@
     <ClCompile Include="Transition.cpp">
       <Filter>Finite State Machine\Transition</Filter>
     </ClCompile>
+    <ClCompile Include="TransitionCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Finite State Machine">

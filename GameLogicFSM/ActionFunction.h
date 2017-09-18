@@ -2,8 +2,6 @@
 
 #include "State.h"
 
-#include <unordered_map>
-
 class ActionFunction
 {
 public:

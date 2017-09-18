@@ -1,11 +1,13 @@
 #include "Transition.h"
-#include "MessageSystem.h"
 
-Transition::Transition(std::unordered_map<string, float*>* vars, int from, int to, string check)
+#include "MessageSystem.h"
+#include "TransitionCheck.h"
+
+Transition::Transition(std::unordered_map<string, float*>* properties, int startingState, int nextState, string check)
 {
-	this->vars	= vars;
-	this->to	= to;
-	this->from	= from;
+	this->properties = properties;
+	this->nextState = nextState;
+	this->startingState = startingState;
 	this->checkstring = check;
 
 	ConstructCheck();
@@ -17,31 +19,8 @@ bool Transition::Check()
 	vector<bool> results;
 
 	for each (struct Check check in checks) {
-		if (check.boolOperator == "==") {
-			if (*vars->find(check.var)->second == check.comparison) results.push_back(true);
-			else results.push_back(false);
-		}
-		else if (check.boolOperator == "!=") {
-			if (*vars->find(check.var)->second != check.comparison) results.push_back(true);
-			else results.push_back(false);
-		}
-		else if (check.boolOperator == ">") {
-			if (*vars->find(check.var)->second > check.comparison) results.push_back(true);
-			else results.push_back(false);
-		}
-		else if (check.boolOperator == "<") {
-			if (*vars->find(check.var)->second < check.comparison) results.push_back(true);
-			else results.push_back(false);
-		}
-		else if (check.var == "exists_transmission") {
-			if (MessageSystem::GetInstance()->MessageTransmitting(check.comparison)) results.push_back(true);
-			else results.push_back(false);
-		}
-		else if (check.var == "!exists_transmission") {
-			if (!MessageSystem::GetInstance()->MessageTransmitting(check.comparison)) results.push_back(true);
-			else results.push_back(false);
-		}
-		else results.push_back(false);
+		bool transition = check.execute(&check);
+		results.push_back(transition);
 	}
 
 	bool finalBool = false || results[0];
@@ -63,7 +42,7 @@ void Transition::ConstructCheck()
 	for (int i = 0; i < tokens.size(); i += 4) {
 		struct Check check;
 
-		check.var = tokens.at(i);
+		check.property = tokens.at(i);
 		check.boolOperator = tokens.at(i + 1);
 
 		/*
@@ -76,6 +55,17 @@ void Transition::ConstructCheck()
 			check.comparison = Log::Hash(substring);
 		}
 		else check.comparison = stof(tokens.at(i + 2).c_str());
+
+		TransitionCheck checkAssignment(&properties, &check);
+
+		if (check.property == "exists_transmission" || check.property == "!exists_transmission")
+		{
+			checkAssignment.AssignCheck(check.property);
+		}
+		else
+		{
+			checkAssignment.AssignCheck(check.boolOperator);
+		}
 
 		checks.push_back(check);
 

@@ -26,6 +26,7 @@
     <ClInclude Include="MessageSystem.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Transition.h" />
+    <ClInclude Include="TransitionCheck.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActionFunction.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="MessageSystem.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Transition.cpp" />
+    <ClCompile Include="TransitionCheck.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3258E548-E244-4DAC-975C-3E0DE2691BB0}</ProjectGuid>
