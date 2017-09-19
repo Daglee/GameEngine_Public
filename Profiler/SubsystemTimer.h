@@ -25,8 +25,8 @@ public:
 
 	inline void StopTimer()
 	{
-		finish		= timer.GetMS();
-		timePassed	= (finish - start);
+		finish = timer.GetMS();
+		timePassed = (finish - start);
 	}
 
 	inline float TimePassed()
