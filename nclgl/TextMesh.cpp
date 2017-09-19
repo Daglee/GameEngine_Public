@@ -13,7 +13,8 @@ Each character of text will be kept in a quad 1 unit big one each axis,
 and each quad is right next to its neighbours, making it easy to work out
 how large a textmesh will be when scaled etc
 */
-TextMesh::TextMesh(const std::string &text, const Font &font) : font(font) {
+TextMesh::TextMesh(const std::string &text, const Font &font) : font(font)
+{
 	//Set our Mesh to have the font's texture, containing all of the
 	//individual characters we need.
 	SetTexture(font.texture);
@@ -43,7 +44,8 @@ TextMesh::TextMesh(const std::string &text, const Font &font) : font(font) {
 	(0,0) (top LEFT of the screen intuitively), the text
 	'hangs down' from the top left, and is visible.
 	*/
-	for (unsigned int i = 0; i < text.length(); ++i) {
+	for (unsigned int i = 0; i < text.length(); ++i)
+	{
 		unsigned int c = (unsigned int)text[i];
 
 		//We can use the modulus operator to wrap around the 
@@ -79,6 +81,7 @@ parent class destructor, which deletes the texture! (We could overload
 Draw instead to dereference texture every frame, but this way is slightly
 more elegant)
 */
-TextMesh::~TextMesh(void) {
+TextMesh::~TextMesh(void)
+{
 	texture = 0;
 }

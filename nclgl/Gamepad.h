@@ -55,7 +55,7 @@ public:
 	Gamepad(int index);
 	~Gamepad();
 
-	void Update(); 
+	void Update();
 	void RefreshState(); //Update button states for next frame
 
 

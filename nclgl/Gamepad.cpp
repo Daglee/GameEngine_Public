@@ -36,8 +36,8 @@ Gamepad::Gamepad() : ResourceBase()
 	//Iterate through all gamepad buttons
 	for (int i = 0; i < ButtonCount; i++)
 	{
-		bPrev_ButtonStates[i]	= false;
-		bButtonStates[i]		= false;
+		bPrev_ButtonStates[i] = false;
+		bButtonStates[i] = false;
 		bGamepad_ButtonsDown[i] = false;
 	}
 
@@ -52,15 +52,16 @@ Gamepad::Gamepad(int index) : ResourceBase()
 	//Iterate through all gamepad buttons
 	for (int i = 0; i < ButtonCount; i++)
 	{
-		bPrev_ButtonStates[i]	= false;
-		bButtonStates[i]		= false;
+		bPrev_ButtonStates[i] = false;
+		bButtonStates[i] = false;
 		bGamepad_ButtonsDown[i] = false;
 	}
 
 	this->SetResourceSize(sizeof(*this));
 }
 
-Gamepad::~Gamepad() {}
+Gamepad::~Gamepad()
+{}
 
 //Update gamepad state
 void Gamepad::Update()
@@ -96,13 +97,15 @@ bool Gamepad::LStickInDeadzone()
 
 	//X axis is outside of deadzone
 	if (sX > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE ||
-		sX < -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) {
+		sX < -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+	{
 		return false;
 	}
 
 	//Y axis is outside of deadzone
 	if (sY > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE ||
-		sY < -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) {
+		sY < -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+	{
 		return false;
 	}
 
@@ -119,13 +122,15 @@ bool Gamepad::RStickInDeadzone()
 
 	//X axis is outside of deadzone
 	if (sX > XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE ||
-		sX < -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE) {
+		sX < -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)
+	{
 		return false;
 	}
 
 	//Y axis is outside of deadzone
 	if (sY > XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE ||
-		sY < -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE) {
+		sY < -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)
+	{
 		return false;
 	}
 
@@ -174,7 +179,8 @@ float Gamepad::LeftTrigger()
 	//Obtain value of left trigger
 	BYTE Trigger = state.Gamepad.bLeftTrigger;
 
-	if (Trigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) {
+	if (Trigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+	{
 		return Trigger / 255.0f;
 	}
 	else return 0.0f; //Trigger was not pressed
@@ -185,7 +191,8 @@ float Gamepad::RightTrigger()
 	//Obtain value of right trigger
 	BYTE Trigger = state.Gamepad.bRightTrigger;
 
-	if (Trigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) {
+	if (Trigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+	{
 		return Trigger / 255.0f;
 	}
 	else return 0.0f; //Trigger was not pressed
@@ -245,7 +252,8 @@ int Gamepad::GetIndex()
 	return gamepadIndex;
 }
 
-void Gamepad::SetIndex(int index) {
+void Gamepad::SetIndex(int index)
+{
 	gamepadIndex = index;
 }
 
@@ -258,13 +266,15 @@ bool Gamepad::Connected()
 	//Get the state of the gamepad
 	DWORD Result = XInputGetState(gamepadIndex, &state);
 
-	if (Result == ERROR_SUCCESS) {
+	if (Result == ERROR_SUCCESS)
+	{
 		return true;  //The gamepad is connected
 	}
 	else return false; //The gamepad is not connected
 }
 
-void Gamepad::Read(string resourcename) {
+void Gamepad::Read(string resourcename)
+{
 	string name = resourcename;
 	string snum = name.substr(name.size() - 1, name.size());
 	int id = atoi(snum.c_str());
@@ -272,6 +282,7 @@ void Gamepad::Read(string resourcename) {
 	this->SetResourceName(resourcename);
 }
 
-void Gamepad::ReadParams(string params) {
+void Gamepad::ReadParams(string params)
+{
 	Read(params);
 }
