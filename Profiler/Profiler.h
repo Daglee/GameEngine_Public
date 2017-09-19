@@ -26,20 +26,7 @@ public:
 	void Update(float deltatime = 0);
 
 	//Name is used when displaying the information
-	void AddSubSystemTimer(string name, SubsystemTimer* t) {
-		if (numAdded == numTimers) {
-			Log::Error("No more subsystems can be added to the profiler.");
-		}
-		else if (name.empty()) {
-			Log::Error("Timer name cannot be empty.");
-		}
-		else {
-			timers.insert({ name, t });
-			numAdded++;
-
-			this->SetResourceSize(sizeof(*this));
-		}
-	}
+	void AddSubSystemTimer(string name, SubsystemTimer* timer);
 
 	void Read(string resourcename);
 	void ReadParams(string params);
@@ -47,6 +34,10 @@ public:
 private:
 	void UpdateProfiling();
 	void RenderToScreen();
+
+	void RenderMemory();
+	void RenderFPSCounter();
+	void RenderTimers();
 
 	int		numTimers;
 	int		numAdded = 0;

@@ -10,10 +10,10 @@
 
 Profiler::Profiler(DataBase* db, Window* win, int numTimers) : ResourceBase()
 {
-	window			= win;
-	database		= db;
-	memoryWatcher	= MemoryWatcher(database->MaxSize(), database);
-	fpsCounter		= FramerateCounter(window->GetTimer()->GetMS());
+	window = win;
+	database = db;
+	memoryWatcher = MemoryWatcher(database->MaxSize(), database);
+	fpsCounter = FramerateCounter(window->GetTimer()->GetMS());
 	renderer = database->GRenderer->Find("Renderer");
 
 	//Upper bound of how many timers can be added
@@ -22,7 +22,7 @@ Profiler::Profiler(DataBase* db, Window* win, int numTimers) : ResourceBase()
 	this->SetResourceSize(sizeof(*this));
 }
 
-Profiler::Profiler(DataBase* db) : ResourceBase() 
+Profiler::Profiler(DataBase* db) : ResourceBase()
 {
 	database = db;
 	memoryWatcher = MemoryWatcher(database->MaxSize(), database);
@@ -36,21 +36,50 @@ void Profiler::Update(float deltatime)
 	updateTimer.StartTimer();
 
 	/*
-	  Hard-coded to the "p" button...I don't know what the button in the 
-	  top left of the keyboard, below ESC, is called...(The one that brings up 
+	  Hard-coded to the "p" button...I don't know what the button in the
+	  top left of the keyboard, below ESC, is called...(The one that brings up
 	  the console to activate godmode on Fallout 3...).
 	*/
-	if (window->GetKeyboard()->KeyTriggered(KEYBOARD_P)) renderingEnabled = !renderingEnabled;
+	if (window->GetKeyboard()->KeyTriggered(KEYBOARD_P))
+	{
+		renderingEnabled = !renderingEnabled;
+	}
 
 	UpdateProfiling();
-	if (renderingEnabled)	RenderToScreen();
-	else					updateTimer.StopTimer();
+
+	if (renderingEnabled)
+	{
+		RenderToScreen();
+	}
+	else
+	{
+		updateTimer.StopTimer();
+	}
 
 	//Timer is stopped in the render function if that is enabled.
 	//So it can time itself, with a minimal loss of accuracy.
 }
 
-void Profiler::UpdateProfiling() 
+void Profiler::AddSubSystemTimer(string name, SubsystemTimer* timer)
+{
+	if (numAdded == numTimers)
+	{
+		Log::Error("No more subsystems can be added to the profiler.");
+	}
+	else if (name.empty())
+	{
+		Log::Error("Timer name cannot be empty.");
+	}
+	else
+	{
+		timers.insert({ name, timer });
+		numAdded++;
+
+		this->SetResourceSize(sizeof(*this));
+	}
+}
+
+void Profiler::UpdateProfiling()
 {
 	++fpsCounter.frames;
 
@@ -60,23 +89,34 @@ void Profiler::UpdateProfiling()
 
 void Profiler::RenderToScreen()
 {
-	//MEMORY
+	RenderMemory();
+	RenderFPSCounter();
+	RenderTimers();
+}
+
+void Profiler::RenderMemory()
+{
 	renderer->AddText(Text(
 		("Used: " + std::to_string(memoryWatcher.percent) + "%"),
 		Vector3(0, 30, 0), TEXT_SIZE));
 	renderer->AddText(Text(
 		("B Left: " + std::to_string(memoryWatcher.bytesleft)),
 		Vector3(0, 50, 0), TEXT_SIZE));
+}
 
-	//FPS COUNTER
+void Profiler::RenderFPSCounter()
+{
 	fpsCounter.CalculateFPS(window->GetTimer()->GetMS());
 	renderer->AddText(Text(
 		("FPS: " + std::to_string(fpsCounter.fps)),
 		Vector3(0, 0, 0), TEXT_SIZE));
+}
 
-	//TIMERS
+void Profiler::RenderTimers()
+{
 	float offset = 100.0f;
-	for each(std::pair<string, SubsystemTimer*> timer in timers) {
+	for each(std::pair<string, SubsystemTimer*> timer in timers)
+	{
 		renderer->AddText(Text(
 			(timer.first + ":" + std::to_string(timer.second->timePassed)),
 			Vector3(0, offset, 0), TEXT_SIZE));
@@ -84,9 +124,9 @@ void Profiler::RenderToScreen()
 	}
 
 	/*
-	  Very slight loss in accuracy of the Profiler's own timer.
-	  Couldnt think of another way to display a timer without
-	  actually stopping the timer...
+	Very slight loss in accuracy of the Profiler's own timer.
+	Couldnt think of another way to display a timer without
+	actually stopping the timer...
 	*/
 	updateTimer.StopTimer();
 	renderer->AddText(Text(
