@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="ExplosionSet.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="RigidBody.h" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ExplosionSet.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="RigidBody.cpp" />

@@ -16,6 +16,11 @@ public:
 	void ApplyForce(Vector3 momentum);
 	void UpdatePosition	(Vector3 pos);
 
+	inline bool Ignores(std::string rigidBodyTag)
+	{
+		return ignoreTag == rigidBodyTag;
+	}
+
 	Vector3 acceleration;
 	Vector3 velocity;
 	Vector3 lastPosition;

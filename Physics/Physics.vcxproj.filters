@@ -16,6 +16,9 @@
     <ClInclude Include="PhysicsEngine.h">
       <Filter>PhysicsEngine 2.0\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="ExplosionSet.h">
+      <Filter>PhysicsEngine 2.0\Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SphereCollider.cpp">
@@ -33,6 +36,9 @@
     <ClCompile Include="Collider.cpp">
       <Filter>PhysicsEngine 2.0\Colliders</Filter>
     </ClCompile>
+    <ClCompile Include="ExplosionSet.cpp">
+      <Filter>PhysicsEngine 2.0\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PhysicsEngine 2.0">
@@ -46,6 +52,9 @@
     </Filter>
     <Filter Include="PhysicsEngine 2.0\Engine">
       <UniqueIdentifier>{d4c91a91-158d-45da-a563-fb4a13f796e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine 2.0\Gameplay">
+      <UniqueIdentifier>{1fe9eb20-7307-4534-956a-268330d4e074}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

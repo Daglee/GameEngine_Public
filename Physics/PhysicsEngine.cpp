@@ -5,47 +5,44 @@
 #include "../nclgl/Renderer.h"
 #include "../ResourceManagment/DataBase.h"
 
-#define EXPLOSION_RADIUS 100
-#define EXPLOSION_FORCE 1000
+const int FRAMES_UNTIL_AT_REST = 10;
+const float MAX_AT_REST_VELOCITY = 0.001f;
 
-PhysicsEngine::PhysicsEngine(Renderer* rend, DataBase* db) : ResourceBase()
+PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : ResourceBase()
 {
-	renderer = rend;
-	database = db;
+	this->renderer = renderer;
+	this->database = database;
+
+	explosions = new ExplosionSet(renderer, database);
 
 	this->SetResourceSize(sizeof(*this));
 }
 
-void PhysicsEngine::AddRigidBody(RigidBody* r) 
+void PhysicsEngine::AddRigidBody(RigidBody* rigidBody)
 {
-	//	BEGIN EXT
 	/*
 	  Is the update busy? If not, add. If it is,
 	  then just wait.
 	*/
 	unique_lock<mutex> lock(update_mutex);
-	//	END EXT
 
-	rigidBodies.push_back(r);
+	rigidBodies.push_back(rigidBody);
 }
 
-void PhysicsEngine::RemoveRigidBody(RigidBody* r) 
+void PhysicsEngine::RemoveRigidBody(RigidBody* rigidBody)
 {
-	//	BEGIN EXT
 	/*
-	  Is the update busy? If not, remove. If it is, 
+	  Is the update busy? If not, remove. If it is,
 	  then just wait.
 	*/
 	unique_lock<mutex> lock(update_mutex);
-	//	END EXT
 
 	rigidBodies.erase(std::remove(rigidBodies.begin(),
-		rigidBodies.end(), r), rigidBodies.end());
+		rigidBodies.end(), rigidBody), rigidBodies.end());
 }
 
 void PhysicsEngine::Update(float sec)
 {
-	//	BEGIN EXT
 	/*
 	  LOCK! Nothing in the engine is allowed
 	  to change until the update is done.
@@ -53,156 +50,124 @@ void PhysicsEngine::Update(float sec)
 	lock_guard<mutex> lock(update_mutex);
 
 	updateTimer.StartTimer();
-	//	END EXT
 
-	updatePositions(sec);
-
-	/*
-	  Narrow phase performed on the rigidbody 
-	  pairs that broad phase collected
-	*/
+	UpdatePositions(sec);
 	NarrowPhase(BroadPhase());
+	explosions->RenderAllExplosions();
 
-	RenderExplosions();
-
-	//	BEGIN EXT
 	updateTimer.StopTimer();
-	//	END EXT
 }
 
-void PhysicsEngine::updatePositions(float sec) 
+void PhysicsEngine::UpdatePositions(float msec)
 {
-	for each (RigidBody* r in rigidBodies) {
-		if (!(r->isStatic || r->atRest)) {
-			semiImplicitEuler(*r, Vector3(0, r->gravity, 0), sec);
+	for each (RigidBody* rigidBody in rigidBodies)
+	{
+		if (!(rigidBody->isStatic || rigidBody->atRest))
+		{
+			SemiImplicitEuler(*rigidBody, Vector3(0, rigidBody->gravity, 0), msec);
 		}
 	}
 }
 
-void PhysicsEngine::semiImplicitEuler(RigidBody& r, Vector3 gravity, float deltaTime) 
+void PhysicsEngine::SemiImplicitEuler(RigidBody& rigidBody, Vector3 gravity, float deltaTime)
 {
-	r.velocity = (r.velocity + ((r.acceleration + gravity) * deltaTime)) * r.drag;
+	rigidBody.velocity = (rigidBody.velocity + ((rigidBody.acceleration + gravity) * deltaTime)) * rigidBody.drag;
 
 	//We need to precalculate what the new displacement will be to use it in our rest
 	//detection, but we only apply it if the body is not now considered at rest.
-	Vector3 disp = r.collider->position + (r.velocity * deltaTime);
+	Vector3 displacement = rigidBody.collider->position + (rigidBody.velocity * deltaTime);
 
 	//If the object has barely moved for 10 frames then set it to rest
-	if (((disp - r.lastPosition) / deltaTime).sqrLength() < AT_REST)
+	if (((displacement - rigidBody.lastPosition) / deltaTime).sqrLength() < MAX_AT_REST_VELOCITY)
 	{
-		++r.restFrames;
-		if (r.restFrames > 10)
+		++rigidBody.restFrames;
+
+		if (rigidBody.restFrames > FRAMES_UNTIL_AT_REST)
 		{
-			//r.atRest = true;
 			return;
 		}
 	}
-	else r.restFrames = 0;
+	else
+	{
+		rigidBody.restFrames = 0;
+	}
 
 	//if the object is not at rest, then update it's position and last displacement
-	r.UpdatePosition(disp);
-	r.lastPosition = r.collider->position;
+	rigidBody.UpdatePosition(displacement);
+	rigidBody.lastPosition = rigidBody.collider->position;
 }
 
 //Sort and Sweep
-vector<CollisionPair> PhysicsEngine::BroadPhase() 
+vector<CollisionPair> PhysicsEngine::BroadPhase()
 {
-	vector<CollisionPair> pairs;
+	vector<CollisionPair> collisionPairs;
+	
+	SortRigidBodiesAlongAxis(Vector3(1, 0, 0));
 
-	for each (RigidBody* r in rigidBodies) {
-		r->collider->ProjectOnAxis(Vector3(1, 0, 0));
-	}
+	int numberOfRigidBodies = rigidBodies.size();
 
-	std::sort(rigidBodies.begin(), rigidBodies.end(), compareRigidBodies);
-
-	for (unsigned x = 0; x < rigidBodies.size(); ++x) {
-		for (unsigned y = x + 1; y < rigidBodies.size(); ++y) {
-
+	for (unsigned x = 0; x < numberOfRigidBodies; ++x)
+	{
+		for (unsigned y = x + 1; y < numberOfRigidBodies; ++y)
+		{
 			//Are they possibly colliding?
-			if (rigidBodies[x]->collider->objbounds.max > rigidBodies[y]->collider->objbounds.min) {
-
+			if (rigidBodies[x]->collider->objbounds.max > rigidBodies[y]->collider->objbounds.min)
+			{
 				//Yes, get Narrow phase to check this pair properly...
 				CollisionPair p;
 				p.r1 = rigidBodies[x];
 				p.r2 = rigidBodies[y];
-				pairs.push_back(p);
+
+				collisionPairs.push_back(p);
 			}
 		}
 	}
-	return pairs;
+
+	return collisionPairs;
 }
 
-bool PhysicsEngine::compareRigidBodies(RigidBody* a, RigidBody* b) 
+void PhysicsEngine::SortRigidBodiesAlongAxis(Vector3& axis)
+{
+	for each (RigidBody* rigidBody in rigidBodies)
+	{
+		rigidBody->collider->ProjectOnAxis(axis);
+	}
+
+	std::sort(rigidBodies.begin(), rigidBodies.end(), compareRigidBodies);
+}
+
+bool PhysicsEngine::compareRigidBodies(RigidBody* a, RigidBody* b)
 {
 	return a->collider->objbounds.min < b->collider->objbounds.min;
 }
 
 void PhysicsEngine::NarrowPhase(vector<CollisionPair> pairs)
 {
-	vector<RigidBody*> delete_buffer;
-
 	for each (CollisionPair collisionPair in pairs)
 	{
 		Vector3 contactNormal;
 		float penetrationDepth;
 
-		if (collisionPair.r1->collider->IsColliding(contactNormal, *(collisionPair.r2->collider), penetrationDepth)) {
-			//	BEGIN EXT
-			//Add them to the game logic in case anything else needs to happen.
-			if (collisionPair.r1->tag != "" && //If they dont have a tag then they're probably not needed!
-				collisionPair.r2->tag != "") {
+		if (collisionPair.r1->collider->IsColliding(contactNormal, *(collisionPair.r2->collider), penetrationDepth))
+		{
+			AnnounceAndDeleteBasicCollisions(collisionPair);
 
-				if (collisionPair.r1->ignoreTag != "" || collisionPair.r2->ignoreTag != "") {
-					if (collisionPair.r1->ignoreTag != collisionPair.r2->tag &&
-						collisionPair.r2->ignoreTag != collisionPair.r1->tag) {
-
-						MessageSystem::GetInstance()->BeginEvent(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
-						MessageSystem::GetInstance()->BeginEvent(Log::Hash(collisionPair.r2->tag + "_colliding_" + collisionPair.r1->tag));
-
-						if (collisionPair.r1->tag.find("bullet") != std::string::npos) {
-							delete_buffer.push_back(collisionPair.r1);
-						}
-						else if (collisionPair.r2->tag.find("bullet") != std::string::npos) {
-							delete_buffer.push_back(collisionPair.r2);
-						}
-					}
-				}
-				else {
-					if (collisionPair.r1->secondarytag.find("pickup") != std::string::npos || collisionPair.r2->secondarytag.find("pickup") != std::string::npos) {
-						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
-						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r1->secondarytag));
-						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r2->secondarytag));
-					}
-					else {
-						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r1->tag + "_colliding_" + collisionPair.r2->tag));
-						MessageSystem::GetInstance()->TransmitMessage(Log::Hash(collisionPair.r2->tag + "_colliding_" + collisionPair.r1->tag));
-					}
-				}
-
-			}//	END EXT
-
-			if (collisionPair.r1->secondarytag == "explosion" || collisionPair.r2->secondarytag == "explosion") {
-				if (collisionPair.r1->ignoreTag != collisionPair.r2->tag &&
-					collisionPair.r2->ignoreTag != collisionPair.r1->tag) {
-					Explosion(collisionPair);
-
-					if (collisionPair.r1->secondarytag == "explosion") delete_buffer.push_back(collisionPair.r1);
-					else delete_buffer.push_back(collisionPair.r2);
-				}
+			if (collisionPair.r1->secondarytag == "explosion" || collisionPair.r2->secondarytag == "explosion")
+			{
+				ExplodeIfNotIgnore(collisionPair);
 			}
-			else ImpulseResponse(collisionPair, contactNormal, penetrationDepth);
+			else
+			{
+				ImpulseResponse(collisionPair, contactNormal, penetrationDepth);
+			}
 		}
 	}
 
-	for each (RigidBody* rb in delete_buffer)
-	{
-		rigidBodies.erase(std::remove(rigidBodies.begin(),
-			rigidBodies.end(), rb), rigidBodies.end());
-	}
+	ClearNarrowPhaseDeleteBuffer();
 }
 
-void PhysicsEngine::ImpulseResponse(CollisionPair collisionPair, Vector3 contactNormal, 
-	float penetrationDepth) 
+void PhysicsEngine::ImpulseResponse(CollisionPair collisionPair, Vector3 contactNormal,
+	float penetrationDepth)
 {
 	Vector3 vab = collisionPair.r1->velocity - collisionPair.r2->velocity;
 
@@ -225,23 +190,30 @@ void PhysicsEngine::ImpulseResponse(CollisionPair collisionPair, Vector3 contact
 	collisionPair.r2->velocity -= bVelocity;
 
 	//No longer at rest?
-	if (aVelocity.sqrLength() > AT_REST) collisionPair.r1->atRest = false;
-	if (bVelocity.sqrLength() > AT_REST) collisionPair.r2->atRest = false;
+	if (aVelocity.sqrLength() > MAX_AT_REST_VELOCITY)
+	{
+		collisionPair.r1->atRest = false;
+	}
+
+	if (bVelocity.sqrLength() > MAX_AT_REST_VELOCITY)
+	{
+		collisionPair.r2->atRest = false;
+	}
 }
 
-void PhysicsEngine::ProjectionResponse(CollisionPair collisionPair, Vector3 contactNormal, 
-	float penetrationDepth, float aInverseMass, float bInverseMass) 
+void PhysicsEngine::ProjectionResponse(CollisionPair collisionPair, Vector3 contactNormal,
+	float penetrationDepth, float aInverseMass, float bInverseMass)
 {
-	float moveratio = aInverseMass / (aInverseMass + bInverseMass);
+	float moveRatio = aInverseMass / (aInverseMass + bInverseMass);
 
-	Vector3 xPos = collisionPair.r1->collider->position;
-	Vector3 xOff = xPos - (contactNormal * penetrationDepth * moveratio);
+	Vector3 xPosition = collisionPair.r1->collider->position;
+	Vector3 xOffset = xPosition - (contactNormal * penetrationDepth * moveRatio);
 
-	Vector3 yPos = collisionPair.r2->collider->position;
-	Vector3 yOff = yPos + (contactNormal * penetrationDepth * (1.0f - moveratio));
+	Vector3 yPosition = collisionPair.r2->collider->position;
+	Vector3 yOffset = yPosition + (contactNormal * penetrationDepth * (1.0f - moveRatio));
 
-	collisionPair.r1->UpdatePosition(xOff);
-	collisionPair.r2->UpdatePosition(yOff);
+	collisionPair.r1->UpdatePosition(xOffset);
+	collisionPair.r2->UpdatePosition(yOffset);
 }
 
 //	BEGIN EXT
@@ -251,90 +223,107 @@ void PhysicsEngine::Explosion(CollisionPair collisionPair)
 	RigidBody* entity;
 
 	//Which one is the explosion?
-	if (collisionPair.r1->secondarytag == "explosion") {
+	if (collisionPair.r1->secondarytag == "explosion")
+	{
 		explosion = collisionPair.r1;
 		entity = collisionPair.r2;
 	}
-	else {
+	else
+	{
 		explosion = collisionPair.r2;
 		entity = collisionPair.r1;
 	}
 
 	//Find any rigidbodies within its radius.
-	for each (RigidBody* r in rigidBodies)
+	for each (RigidBody* rigidBody in rigidBodies)
 	{
-		if (r != explosion) {
-			Vector3 distance = explosion->lastPosition - r->lastPosition;
-			distance.x = std::abs(distance.x);
-			distance.y = std::abs(distance.y);
-			distance.z = std::abs(distance.z);
-
-			if (distance.Length() < Vector3(EXPLOSION_RADIUS, EXPLOSION_RADIUS, EXPLOSION_RADIUS).Length()) {
-				ExplosionResponse(explosion, r);
-				MessageSystem::GetInstance()->TransmitMessage(Log::Hash(entity->tag + "_colliding_" + explosion->tag));
-				MessageSystem::GetInstance()->TransmitMessage(Log::Hash(explosion->tag + "_colliding_" + entity->tag));
+		if (rigidBody != explosion)
+		{
+			if (explosions->InRadiusOfExplosion(explosion, rigidBody))
+			{
+				explosions->ExplosionResponse(explosion, rigidBody);
 			}
 		}
 	}
 
-	InitialiseExplosion(explosion->lastPosition, EXPLOSION_RADIUS);
+	MessageSystem::GetInstance()->TransmitMessage(Log::Hash(entity->tag + "_colliding_" + explosion->tag));
+	MessageSystem::GetInstance()->TransmitMessage(Log::Hash(explosion->tag + "_colliding_" + entity->tag));
+
+	explosions->InitialiseExplosion(explosion->lastPosition);
 }
 
-void PhysicsEngine::ExplosionResponse(RigidBody* explosion, RigidBody* rb)
+void PhysicsEngine::AnnounceAndDeleteBasicCollisions(const CollisionPair& collisionPair)
 {
-	Vector3 direction = rb->lastPosition - explosion->lastPosition;
-
-	float length = direction.Length();
-	Vector3 unit = direction / length;
-
-	//Apply force away from centre of explosion.
-	rb->ApplyForce(unit * EXPLOSION_FORCE);
-}
-
-void PhysicsEngine::InitialiseExplosion(Vector3 Position, float radius)
-{
-	GameObject* ex = new GameObject(*renderer);
-	ex->AddMesh(*database->OBJMeshes->Find("../Data/Meshes/sphere.obj"));
-	ex->SetPosition(Position);
-	ex->SetSize(Vector3(30, 30, 30));
-	ex->GetSceneNode()->SetColour(Vector4(1, 0, 0, 1));
-
-	explosions.push_back(ex);
-}
-
-void PhysicsEngine::RenderExplosions()
-{
-	//Set a starting size and colour.
-	for each (GameObject* explosion in explosions)
+	if (collisionPair.r1->tag != "" && collisionPair.r2->tag != "")
 	{
-		explosion->SetSize(explosion->GetSize() + Vector3(0.3f, 0.3f, 0.3f));
-		explosion->GetSceneNode()->SetColour(explosion->GetSceneNode()->GetColour() - Vector4(0, -0.002f, 0, 1.0f));
-	}
-
-	//If its reached its size limit, delete it.
-	vector <GameObject*> delete_buffer;
-	for each (GameObject* explosion in explosions)
-	{
-		if (explosion->GetSize().Length() >= Vector3(EXPLOSION_RADIUS, EXPLOSION_RADIUS, EXPLOSION_RADIUS).Length()) {
-			delete_buffer.push_back(explosion);
+		if (collisionPair.r1->ignoreTag != "" || collisionPair.r2->ignoreTag != "")
+		{
+			if (!collisionPair.r1->Ignores(collisionPair.r2->tag) &&
+				!collisionPair.r2->Ignores(collisionPair.r1->tag))
+			{
+				AnnounceCollision(collisionPair.r1->tag, collisionPair.r2->tag);
+				DeleteRigidBodyIfColliderContains(collisionPair, "bullet");
+			}
+		}
+		else
+		{
+			AnnounceCollision(collisionPair.r1->tag, collisionPair.r2->tag);
 		}
 	}
+}
 
-	for each (GameObject* explosion in delete_buffer)
+void PhysicsEngine::ExplodeIfNotIgnore(const CollisionPair& collisionPair)
+{
+	if (!collisionPair.r1->Ignores(collisionPair.r2->tag) && !collisionPair.r2->Ignores(collisionPair.r1->tag))
 	{
-		explosions.erase(std::remove(explosions.begin(),
-			explosions.end(), explosion), explosions.end());
-		renderer->RemoveSceneNode(explosion->GetSceneNode());
+		Explosion(collisionPair);
+
+		if (collisionPair.r1->secondarytag == "explosion")
+		{
+			narrowPhaseDeleteBuffer.push_back(collisionPair.r1);
+		}
+		else
+		{
+			narrowPhaseDeleteBuffer.push_back(collisionPair.r2);
+		}
 	}
 }
 
+void PhysicsEngine::AnnounceCollision(const std::string& aTag, const std::string& bTag)
+{
+	MessageSystem::GetInstance()->BeginEvent(Log::Hash(aTag + "_colliding_" + bTag));
+	MessageSystem::GetInstance()->BeginEvent(Log::Hash(bTag + "_colliding_" + aTag));
+}
+
+void PhysicsEngine::DeleteRigidBodyIfColliderContains(const CollisionPair& collisionPair, const std::string& colliderTag)
+{
+	if (collisionPair.r1->tag.find(colliderTag) != std::string::npos)
+	{
+		narrowPhaseDeleteBuffer.push_back(collisionPair.r1);
+	}
+	else if (collisionPair.r2->tag.find(colliderTag) != std::string::npos)
+	{
+		narrowPhaseDeleteBuffer.push_back(collisionPair.r2);
+	}
+}
+
+void PhysicsEngine::ClearNarrowPhaseDeleteBuffer()
+{
+	for each (RigidBody* rigidBody in narrowPhaseDeleteBuffer)
+	{
+		rigidBodies.erase(std::remove(rigidBodies.begin(),
+			rigidBodies.end(), rigidBody), rigidBodies.end());
+	}
+
+	narrowPhaseDeleteBuffer.clear();
+}
 
 void PhysicsEngine::Read(string resourcename)
 {
 	this->SetResourceName(resourcename);
 }
 
-void PhysicsEngine::ReadParams(string params) 
+void PhysicsEngine::ReadParams(string params)
 {
 	Read(params);
 }
