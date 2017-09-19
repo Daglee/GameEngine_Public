@@ -20,16 +20,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GamepadMapper.cpp" />
+    <ClCompile Include="IngamePlayer.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MKMapper.cpp" />
     <ClCompile Include="PlayerConfiguration.cpp" />
+    <ClCompile Include="PlayerInputConnection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamepadMapper.h" />
+    <ClInclude Include="IngamePlayer.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputMapper.h" />
     <ClInclude Include="MKMapper.h" />
     <ClInclude Include="PlayerConfiguration.h" />
+    <ClInclude Include="PlayerInputConnection.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2A259EBD-69BB-4536-B42E-320D5C558794}</ProjectGuid>

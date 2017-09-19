@@ -8,6 +8,7 @@
 #include "../Game/Subsystem.h"
 #include "../ResourceManagment/ResourceBase.h"
 #include "PlayerConfiguration.h"
+#include "IngamePlayer.h"
 
 class DataBase;
 class ThreadPool;
@@ -62,22 +63,15 @@ private:
 	Gamepad** gamepads;
 	Player** players;
 	DataBase* database;
-	Window* window;
 
 	//Previously connected gamepads (updated on last ConnectedGamePads() or UpdateConnections() call)
 	std::vector<Gamepad*> connectedGPads;
+
 	//Previously connected players (updated on last ConnectedGamePads() or UpdateConnections() call)
 	std::vector<Player*> connectedPlayers;
 
-	/*
-	  These are stored to save the database from
-	  searching for them on every additional player.
-	*/
-	//Mesh* defaultBulletMesh;
-	//Mesh* defaultPlayerMesh;
-	//Renderer* renderer;
-	//PhysicsEngine* physicsEngine;
-
+	Subsystems systems;
+	Window* window;
 	PlayerConfiguration* playerConfig;
 };
 

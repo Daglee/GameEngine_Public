@@ -6,6 +6,7 @@
 #include "../Game/RocketLauncher.h"
 #include "../Game/TopDownController.h"
 #include "../Game/SpawnSystem.h"
+#include "PlayerInputConnection.h"
 
 const int MAX_CONTROLLERS = 3;
 
@@ -55,7 +56,13 @@ void InputManager::ConnectToDataBase(DataBase* databaseToConnect)
 
 	//There must always be a player 1 (M&K)
 	connectedPlayers.push_back(players[0]);
-	playerConfig->ConnectPlayerToKeyboard(players[0]);
+
+	PlayerInputConnection connection(players[0]);
+	connection.ConnectPlayerToKeyboard(window, threadPool);
+
+	IngamePlayer ingamePlayer(systems);
+	ingamePlayer.AddPlayerToGame(players[0]);
+
 	playerConfig->InitialisePlayer(players[0], connectedPlayers.size());
 }
 
@@ -65,7 +72,6 @@ void InputManager::StoreDatabase()
 	components.defaultBulletMesh = database->OBJMeshes->Find("../Data/Meshes/sphere.obj");
 	components.defaultPlayerMesh = database->OBJMeshes->Find("../Data/Meshes/cube.obj");
 
-	Subsystems systems;
 	systems.renderer = database->GRenderer->Find("Renderer");
 	systems.physicsEngine = database->GPhysicsEngine->Find("PhysicsEngine");
 	systems.window = database->GWindow->Find("Window");
@@ -74,7 +80,7 @@ void InputManager::StoreDatabase()
 
 	this->window = systems.window;
 
-	playerConfig = new PlayerConfiguration(systems, components);
+	playerConfig = new PlayerConfiguration(components);
 }
 
 /*
@@ -97,7 +103,13 @@ std::vector<Gamepad*>* InputManager::ConnectGamepads(bool reconnection)
 				if (!reconnection)
 				{
 					Player* playerToConnect = players[i + 1];
-					playerConfig->ConnectPlayerToController(playerToConnect, gamepads[i]);
+
+					PlayerInputConnection connection(playerToConnect);
+					connection.ConnectPlayerToController(gamepads[i]);
+
+					IngamePlayer ingamePlayer(systems);
+					ingamePlayer.AddPlayerToGame(playerToConnect);
+
 					playerConfig->InitialisePlayer(playerToConnect, connectedPlayers.size());
 				}
 			}

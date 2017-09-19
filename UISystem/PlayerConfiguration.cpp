@@ -10,52 +10,21 @@
 #include "../Game/ScoreBoard.h"
 #include "../Game/AudioManager.h"
 
-PlayerConfiguration::PlayerConfiguration(Subsystems subsystems, BasePlayerSystems playerComponents)
+PlayerConfiguration::PlayerConfiguration(BasePlayerSystems playerComponents)
 {
 	this->playerComponents = playerComponents;
-	this->subsystems = subsystems;
 }
 
 PlayerConfiguration::~PlayerConfiguration()
 {}
 
-void PlayerConfiguration::ConnectPlayerToController(Player* player, Gamepad* gamepad)
-{
-	GamepadMapper* input = new GamepadMapper();
-	input->SetGamePad(gamepad);
-
-	player->SetPlayerController(new TopDownController(input));
-	player->GetPlayerController()->SetInputMapper(input);
-
-	player->gun = new Pistol(subsystems.database, subsystems.renderer,
-		subsystems.physicsEngine, playerComponents.defaultBulletMesh);
-}
-
-void PlayerConfiguration::ConnectPlayerToKeyboard(Player* player)
-{
-	MKMapper* input = new MKMapper(subsystems.window, "../Data/ButtonMapping/MKMap.txt");
-	player->SetPlayerController(new TopDownController(input));
-	player->GetPlayerController()->SetInputMapper(input);
-
-	subsystems.threadPool->pauseButton = input->PAUSE;
-
-	player->gun = new Pistol(subsystems.database, subsystems.renderer,
-		subsystems.physicsEngine, playerComponents.defaultBulletMesh);
-}
-
 void PlayerConfiguration::InitialisePlayer(Player* player, int playerNumber)
 {
-	SetSubsystems(player);
 	SetBasicProperties(player, playerNumber);
-	SetPlayerController(player);
-	SetGameplayComponents(player);
-}
 
-void PlayerConfiguration::SetSubsystems(Player* player)
-{
-	player->GetPlayerModel()->UpdateMesh(playerComponents.defaultPlayerMesh);
-	player->UpdatePhysics(subsystems.physicsEngine);
-	player->UpdateRenderer(subsystems.renderer);
+	player->GetPlayerController()->UpdatePropertiesFromPlayer(player);
+
+	SetGameplayComponents(player);
 }
 
 void PlayerConfiguration::SetBasicProperties(Player* player, int playerNumber)
@@ -73,14 +42,9 @@ void PlayerConfiguration::SetBasicProperties(Player* player, int playerNumber)
 	player->walkingSoundName = "walkingsound" + tag;
 	player->gun->parent = tag;
 
+	player->GetPlayerModel()->UpdateMesh(playerComponents.defaultPlayerMesh);
+	player->gun->bulletMesh = playerComponents.defaultBulletMesh;
 	player->playerModelMesh = playerComponents.defaultPlayerMesh;
-}
-
-void PlayerConfiguration::SetPlayerController(Player* player)
-{
-	player->GetPlayerController()->SetCharacterModel(player->GetPlayerModel());
-	player->GetPlayerController()->SetRigidBody(player->GetRigidBody());
-	player->GetPlayerController()->SetMovementSound(player->walkingSoundName);
 }
 
 void PlayerConfiguration::SetGameplayComponents(Player* player)

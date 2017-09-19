@@ -13,6 +13,12 @@
     <ClCompile Include="PlayerConfiguration.cpp">
       <Filter>Input Managment\Player Config</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerInputConnection.cpp">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClCompile>
+    <ClCompile Include="IngamePlayer.cpp">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamepadMapper.h">
@@ -28,6 +34,12 @@
       <Filter>Mouse &amp; Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="PlayerConfiguration.h">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInputConnection.h">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClInclude>
+    <ClInclude Include="IngamePlayer.h">
       <Filter>Input Managment\Player Config</Filter>
     </ClInclude>
   </ItemGroup>

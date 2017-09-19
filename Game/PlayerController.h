@@ -5,6 +5,8 @@
 #include "CharacterModel.h"
 #include "../Physics/RigidBody.h"
 
+class Player;
+
 class PlayerController
 {
 public:
@@ -15,6 +17,8 @@ public:
 
 	const Matrix4 GetCurrentRotation() const;
 	InputMapper* GetInputMapper() const;
+
+	void UpdatePropertiesFromPlayer(Player* player);
 
 	void SetInputMapper(InputMapper* inputMapper);
 	void SetCharacterModel(CharacterModel* newModel);

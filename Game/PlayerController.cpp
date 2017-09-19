@@ -1,5 +1,7 @@
 #include "PlayerController.h"
 
+#include "Player.h"
+
 void PlayerController::ApplyInputs()
 {
 	ApplyRotation();
@@ -14,6 +16,13 @@ const Matrix4 PlayerController::GetCurrentRotation() const
 InputMapper* PlayerController::GetInputMapper() const
 {
 	return input;
+}
+
+void PlayerController::UpdatePropertiesFromPlayer(Player* player)
+{
+	SetCharacterModel(player->GetPlayerModel());
+	SetRigidBody(player->GetRigidBody());
+	SetMovementSound(player->walkingSoundName);
 }
 
 void PlayerController::SetInputMapper(InputMapper* inputMapper)
