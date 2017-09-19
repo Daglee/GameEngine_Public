@@ -1,6 +1,7 @@
 #include "SphereCollider.h"
 
-bool SphereCollider::IsColliding(Vector3& contactNormal, Collider& collider, float& penetrationDepth){
+bool SphereCollider::IsColliding(Vector3& contactNormal, Collider& collider, float& penetrationDepth)
+{
 	return collider.IsColliding(contactNormal, *this, penetrationDepth);
 }
 
@@ -14,7 +15,8 @@ bool SphereCollider::IsColliding(Vector3& contactNormal, PlaneCollider& collider
 	return PlaneSphereCollision(*this, collider, contactNormal, penetrationDepth);
 }
 
-Bounds SphereCollider::ProjectOnAxis(Vector3& axis){
+Bounds SphereCollider::ProjectOnAxis(Vector3& axis)
+{
 	float dot = Vector3::Dot(axis, position);
 
 	Bounds b;

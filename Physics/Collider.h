@@ -16,12 +16,12 @@ struct Bounds
 class Collider
 {
 public:
-	Collider() {};
-	virtual ~Collider() {};
+	Collider() {}
+	virtual ~Collider() {}
 
-	virtual bool IsColliding(Vector3& contactNormal, Collider& collider,		float& penetrationDepth) = 0;
-	virtual bool IsColliding(Vector3& contactNormal, SphereCollider& collider,	float& penetrationDepth) = 0;
-	virtual bool IsColliding(Vector3& contactNormal, PlaneCollider& collider,	float& penetrationDepth) = 0;
+	virtual bool IsColliding(Vector3& contactNormal, Collider& collider, float& penetrationDepth) = 0;
+	virtual bool IsColliding(Vector3& contactNormal, SphereCollider& collider, float& penetrationDepth) = 0;
+	virtual bool IsColliding(Vector3& contactNormal, PlaneCollider& collider, float& penetrationDepth) = 0;
 
 	bool SphereSphereCollision(SphereCollider& a,
 		SphereCollider& b, Vector3& contactNormal, float& penetrationDepth);
@@ -33,5 +33,5 @@ public:
 
 	Vector3	position;
 	Vector3 parentsize;
-	Bounds	objbounds;
+	Bounds objbounds;
 };
