@@ -27,7 +27,7 @@ public:
 	bool Fired();
 	bool Reload();
 
-	float* GetInputs() 
+	float* GetInputs()
 	{
 		return inputs;
 	}
@@ -37,6 +37,8 @@ public:
 
 	KeyboardKeys PAUSE;
 private:
+	void AnnounceTeamChanges();
+
 	float inputs[6];
 	Window* window;
 

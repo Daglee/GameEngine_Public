@@ -1,14 +1,15 @@
 #include "MKMapper.h"
 #include "../GameLogicFSM/MessageSystem.h"
 
-//Using macros for array indexes 
-//to make it more readable...
-#define MOVEMENT_X	0
-#define MOVEMENT_Z	1
-#define ROTATION_X	3
-#define ROTATION_Y	2
-#define FIRED		4
-#define RELOAD		5
+enum BASIC_CONTROL
+{
+	MOVEMENT_X,
+	MOVEMENT_Z,
+	ROTATION_X,
+	ROTATION_Y,
+	FIRED,
+	RELOAD
+};
 
 MKMapper::MKMapper(Window* w, std::string filename) : InputMapper()
 {
@@ -18,70 +19,85 @@ MKMapper::MKMapper(Window* w, std::string filename) : InputMapper()
 	ReadMapping(filename);
 }
 
-void MKMapper::FillInputs() 
+void MKMapper::FillInputs()
 {
 	//Key: W - index: 1
-	if (Window::GetKeyboard()->KeyDown(NEG_MOVEMENT_Z)) {
+	if (Window::GetKeyboard()->KeyDown(NEG_MOVEMENT_Z))
+	{
 		inputs[MOVEMENT_Z] = inputs[MOVEMENT_Z] - 1.1f;
 	}
 
 	//Key: A - index: 0
-	if (Window::GetKeyboard()->KeyDown(NEG_MOVEMENT_X)) {
+	if (Window::GetKeyboard()->KeyDown(NEG_MOVEMENT_X))
+	{
 		inputs[MOVEMENT_X] = inputs[MOVEMENT_X] - 1.1f;
 	}
 
 	//Key: S - index: 1
-	if (Window::GetKeyboard()->KeyDown(POS_MOVEMENT_Z)) {
+	if (Window::GetKeyboard()->KeyDown(POS_MOVEMENT_Z))
+	{
 		inputs[MOVEMENT_Z] = inputs[MOVEMENT_Z] + 1.1f;
 	}
 
 	//Key: D - index: 0
-	if (Window::GetKeyboard()->KeyDown(POS_MOVEMENT_X)) {
+	if (Window::GetKeyboard()->KeyDown(POS_MOVEMENT_X))
+	{
 		inputs[MOVEMENT_X] = inputs[MOVEMENT_X] + 1.1f;
 	}
 
-	if (Window::GetKeyboard()->KeyDown(STOP_GAME)) {
+	if (Window::GetKeyboard()->KeyDown(STOP_GAME))
+	{
 		MessageSystem::GetInstance()->BeginEvent(Log::Hash("stop_game"));
 	}
 
 	//Key: LC - index - 4
-	if (Window::GetMouse()->ButtonDown(FIRE_BUTTON)) {
+	if (Window::GetMouse()->ButtonDown(FIRE_BUTTON))
+	{
 		inputs[FIRED] = 1;
 	}
 
-	if (Window::GetKeyboard()->KeyDown(RELOAD_BUTTON)) {
+	if (Window::GetKeyboard()->KeyDown(RELOAD_BUTTON))
+	{
 		inputs[RELOAD] = 1;
 	}
 
 	//Team changing buttons
-	if (Window::GetKeyboard()->KeyDown(KEYBOARD_1)) {
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchRedTeam"));
-	}
-
-	if (Window::GetKeyboard()->KeyDown(KEYBOARD_2)) {
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchBlueTeam"));
-	}
-
-	if (Window::GetKeyboard()->KeyDown(KEYBOARD_3)) {
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchGreenTeam"));
-	}
-
-	if (Window::GetKeyboard()->KeyDown(KEYBOARD_4)) {
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchYellowTeam"));
-	}
+	AnnounceTeamChanges();
 
 	//Rotation - Y - 2 (pitch)
 	inputs[ROTATION_Y] = Window::GetMouse()->GetRelativePosition().y / 10;
 
 	//Rotation - X - 3 (yaw)
 	inputs[ROTATION_X] = Window::GetMouse()->GetRelativePosition().x / 10;
-
-
 }
 
-void MKMapper::ClearInputs() 
+void MKMapper::AnnounceTeamChanges()
 {
-	for (int i = 0; i < 6; i++) {
+	if (Window::GetKeyboard()->KeyDown(KEYBOARD_1))
+	{
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchRedTeam"));
+	}
+
+	if (Window::GetKeyboard()->KeyDown(KEYBOARD_2))
+	{
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchBlueTeam"));
+	}
+
+	if (Window::GetKeyboard()->KeyDown(KEYBOARD_3))
+	{
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchGreenTeam"));
+	}
+
+	if (Window::GetKeyboard()->KeyDown(KEYBOARD_4))
+	{
+		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchYellowTeam"));
+	}
+}
+
+void MKMapper::ClearInputs()
+{
+	for (int i = 0; i < 6; i++)
+	{
 		inputs[i] = 0;
 	}
 }
@@ -93,13 +109,15 @@ Vector3 MKMapper::GetMovement()
 	return pos;
 }
 
-float MKMapper::GetRotation() 
+float MKMapper::GetRotation()
 {
-	if (inputs[ROTATION_Y] != 0 || inputs[ROTATION_X] != 0) {
+	if (inputs[ROTATION_Y] != 0 || inputs[ROTATION_X] != 0)
+	{
 		float rotation = atan2(inputs[ROTATION_X], inputs[ROTATION_Y])
 			* (float)(180.0 / M_PI);
 
-		if (rotation < 0) {
+		if (rotation < 0)
+		{
 			rotation = 360 - (-rotation);
 		}
 
@@ -111,7 +129,10 @@ float MKMapper::GetRotation()
 
 		return newRotation;
 	}
-	else return 0;
+	else
+	{
+		return 0;
+	}
 }
 
 bool MKMapper::Fired()

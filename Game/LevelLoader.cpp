@@ -18,7 +18,7 @@ void LevelLoader::LoadFirstLevel(std::string level)
 	LoadLevel(level);
 
 	database->GInputManager->Find("InputManager")->ConnectToDataBase(database);
-	database->GInputManager->Find("InputManager")->ConnectedGamePads(false);
+	database->GInputManager->Find("InputManager")->ConnectGamepads(false);
 }
 
 void LevelLoader::LoadReplacementLevel(std::string level)

@@ -7,6 +7,7 @@
 #include <vector>
 #include "../Game/Subsystem.h"
 #include "../ResourceManagment/ResourceBase.h"
+#include "PlayerConfiguration.h"
 
 class DataBase;
 class ThreadPool;
@@ -22,7 +23,7 @@ public:
 	~InputManager();
 
 	//Return the number of controllers connected -- max 6
-	std::vector<Gamepad*>* ConnectedGamePads(bool reconnection);
+	std::vector<Gamepad*>* ConnectGamepads(bool reconnection);
 
 	//Players match up with controller. eg Gamepad2 = Player2
 	std::vector<Player*>* GetConnectedPlayers()
@@ -31,7 +32,7 @@ public:
 	}
 
 	//Fill collections with what is loaded for the current level/game
-	void ConnectToDataBase(DataBase* db);
+	void ConnectToDataBase(DataBase* databaseToConnect);
 
 	/*
 	  Check if the players that were previously connected, still are.
@@ -55,16 +56,10 @@ public:
 	ThreadPool* threadPool;
 
 private:
-	//For players using a controller
-	void InitialisePlayer(Player* p, Gamepad* gp);
+	void StoreDatabase();
+	void StoreGamepadPlayer(int index);
 
-	//For player 1 - which uses M&K
-	void InitialisePlayer(Player* p);
-
-	//General set of parameters used for both types of player
-	void SetPlayerParameters(Player* p);
-
-	Gamepad** gpad;
+	Gamepad** gamepads;
 	Player** players;
 	DataBase* database;
 	Window* window;
@@ -78,9 +73,11 @@ private:
 	  These are stored to save the database from
 	  searching for them on every additional player.
 	*/
-	Mesh* defaultBulletMesh;
-	Mesh* defaultPlayerMesh;
-	Renderer* renderer;
-	PhysicsEngine* physicsEngine;
+	//Mesh* defaultBulletMesh;
+	//Mesh* defaultPlayerMesh;
+	//Renderer* renderer;
+	//PhysicsEngine* physicsEngine;
+
+	PlayerConfiguration* playerConfig;
 };
 

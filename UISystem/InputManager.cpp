@@ -7,10 +7,12 @@
 #include "../Game/TopDownController.h"
 #include "../Game/SpawnSystem.h"
 
+const int MAX_CONTROLLERS = 3;
+
 InputManager::InputManager(ThreadPool* t)
 {
-	gpad	= new Gamepad*[6];
-	players	= new Player*[6];
+	gamepads = new Gamepad*[6];
+	players = new Player*[6];
 
 	threadPool = t;
 
@@ -19,43 +21,60 @@ InputManager::InputManager(ThreadPool* t)
 
 InputManager::~InputManager()
 {
-	delete gpad;
+	delete gamepads;
 	delete players;
+	delete playerConfig;
 }
 
 /*
-  vector of players and gamepads point to all 
-  memory addresses of players and gamepads 
+  vector of players and gamepads point to all
+  memory addresses of players and gamepads
   that have been loaded into the database
 */
-void InputManager::ConnectToDataBase(DataBase* db)
+void InputManager::ConnectToDataBase(DataBase* databaseToConnect)
 {
-	database = db;
+	this->database = databaseToConnect;
 
 	//Retrieve everything from the database
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 6; i++)
+	{
 		string id = std::to_string(i);
 
 		string name = "gamepad" + id;
-		gpad[i] = database->Gamepads->Find(name);;
+		gamepads[i] = database->Gamepads->Find(name);;
 
 		name = "player" + id;
 		players[i] = database->Players->Find(name);
 	}
 
 	/*
-	  Store these pointers so we dont have to retrieve 
+	  Store these pointers so we dont have to retrieve
 	  them again every time a player is added.
 	*/
-	defaultBulletMesh	= database->OBJMeshes->Find("../Data/Meshes/sphere.obj");
-	defaultPlayerMesh	= database->OBJMeshes->Find("../Data/Meshes/cube.obj");
-	renderer			= database->GRenderer->Find("Renderer");
-	physicsEngine		= database->GPhysicsEngine->Find("PhysicsEngine");
-	window				= database->GWindow->Find("Window");
+	StoreDatabase();
 
 	//There must always be a player 1 (M&K)
 	connectedPlayers.push_back(players[0]);
-	InitialisePlayer(players[0]);
+	playerConfig->ConnectPlayerToKeyboard(players[0]);
+	playerConfig->InitialisePlayer(players[0], connectedPlayers.size());
+}
+
+void InputManager::StoreDatabase()
+{
+	BasePlayerSystems components;
+	components.defaultBulletMesh = database->OBJMeshes->Find("../Data/Meshes/sphere.obj");
+	components.defaultPlayerMesh = database->OBJMeshes->Find("../Data/Meshes/cube.obj");
+
+	Subsystems systems;
+	systems.renderer = database->GRenderer->Find("Renderer");
+	systems.physicsEngine = database->GPhysicsEngine->Find("PhysicsEngine");
+	systems.window = database->GWindow->Find("Window");
+	systems.threadPool = threadPool;
+	systems.database = database;
+
+	this->window = systems.window;
+
+	playerConfig = new PlayerConfiguration(systems, components);
 }
 
 /*
@@ -63,17 +82,24 @@ void InputManager::ConnectToDataBase(DataBase* db)
   If this gamepad was not previously connected,
   a new player is initialised
 */
-std::vector<Gamepad*>* InputManager::ConnectedGamePads(bool reconnection)
+std::vector<Gamepad*>* InputManager::ConnectGamepads(bool reconnection)
 {
-	for (int i = 0; i < 3; i++) {
-		if (gpad[i]->Connected()) {
-
+	for (int i = 0; i < MAX_CONTROLLERS; i++)
+	{
+		if (gamepads[i]->Connected())
+		{
 			//Check if the gamepad is already connected and inside the vector
-			if (std::find(connectedGPads.begin(), connectedGPads.end(), gpad[i]) == connectedGPads.end()) {
-				//Not found, therefore add them
-				connectedGPads.push_back(gpad[i]);
-				connectedPlayers.push_back(players[i + 1]);
-				if(!reconnection) InitialisePlayer(players[i + 1], gpad[i]);
+			bool gamepadNotStored = std::find(connectedGPads.begin(), connectedGPads.end(), gamepads[i]) == connectedGPads.end();
+			if (gamepadNotStored)
+			{
+				StoreGamepadPlayer(i);
+
+				if (!reconnection)
+				{
+					Player* playerToConnect = players[i + 1];
+					playerConfig->ConnectPlayerToController(playerToConnect, gamepads[i]);
+					playerConfig->InitialisePlayer(playerToConnect, connectedPlayers.size());
+				}
 			}
 
 		}
@@ -88,12 +114,18 @@ std::vector<Gamepad*>* InputManager::ConnectedGamePads(bool reconnection)
 */
 void InputManager::UpdateConnections()
 {
-	vector<Gamepad*>::iterator i = connectedGPads.begin();
-	while (i != connectedGPads.end()) {
-		if (!(*i)->Connected()) {
-			i = connectedGPads.erase(i);
+	vector<Gamepad*>::iterator iterator = connectedGPads.begin();
+
+	while (iterator != connectedGPads.end())
+	{
+		if (!(*iterator)->Connected())
+		{
+			iterator = connectedGPads.erase(iterator);
 		}
-		else ++i;
+		else
+		{
+			++iterator;
+		}
 	}
 }
 
@@ -106,76 +138,17 @@ void InputManager::ReInitialisePlayers()
 
 	ScoreBoard::GetInstance()->AddEntry(new Entry(players[0]->GetRigidBody()->tag, 0));
 
-	ConnectedGamePads(true);
-	for (int i = 1; i < connectedPlayers.size(); ++i) {
+	ConnectGamepads(true);
+	for (int i = 1; i < connectedPlayers.size(); ++i)
+	{
 		ScoreBoard::GetInstance()->AddEntry(new Entry("player" + std::to_string(i + 1), 0));
 	}
 }
 
-/*
-  Initialise players with default settings.
-  Attach a gamepad to each player and send to appropraite renderer and physics engine.
-  Player2 = Gamepad2 etc
-*/
-void InputManager::InitialisePlayer(Player* p, Gamepad* gp) 
+void InputManager::StoreGamepadPlayer(int index)
 {
-	GamepadMapper* gm = new GamepadMapper();
-	gm->SetGamePad(gp);
-	p->SetPlayerController(new TopDownController(gm));
-	p->GetPlayerController()->SetInputMapper(gm);
-	p->gun = new Pistol(database, renderer, physicsEngine, defaultBulletMesh);
-	SetPlayerParameters(p);
-}
-
-/*
-  M&K player has different inputs, therefore different parameters required 
-  for gameplay mechanics such as Gun.
-*/
-void InputManager::InitialisePlayer(Player* p)
-{
-	MKMapper* mkm = new MKMapper(window, "../Data/ButtonMapping/MKMap.txt");
-	p->SetPlayerController(new TopDownController(mkm));
-	p->GetPlayerController()->SetInputMapper(mkm);
-
-	threadPool->pauseButton = mkm->PAUSE;
-
-	p->gun = new Pistol(database, renderer, physicsEngine, defaultBulletMesh);
-	SetPlayerParameters(p);
-}
-
-void InputManager::SetPlayerParameters(Player* p)
-{
-	p->GetPlayerModel()->UpdateMesh(defaultPlayerMesh);
-	p->UpdatePhysics(physicsEngine);
-	p->UpdateRenderer(renderer);
-
-	Vector3 spawnPos(-1 * (float)(50 * connectedPlayers.size()), 100, 1 * (float)(50 * connectedPlayers.size()));
-	SpawnSystem::GetInstance()->AddSpawnPoint(spawnPos);
-
-	p->GetRigidBody()->UpdatePosition(spawnPos);
-
-	p->teamID = connectedPlayers.size(); //Just for now (free for all)...
-	string tag = "player" + std::to_string(connectedPlayers.size());
-	p->GetRigidBody()->tag = tag;
-	p->GetPlayerModel()->playertag = tag;
-	p->walkingSoundName = "walkingsound" + tag;
-	p->gun->parent = tag;
-	p->playerModelMesh = defaultPlayerMesh;
-
-	p->GetPlayerController()->SetCharacterModel(p->GetPlayerModel());
-	p->GetPlayerController()->SetRigidBody(p->GetRigidBody());
-	p->GetPlayerController()->SetMovementSound(p->walkingSoundName);
-
-	p->gunInput = new GunInput(p->GetPlayerController()->GetInputMapper(), p->gun,
-		WeaponData(&p->GetRigidBody()->lastPosition, p->GetIDNumber()));
-
-	SoundNode* walkingSound = new SoundNode(
-		new Sound("../Data/Sounds/41579__erdie__steps-on-stone01.wav"),
-		p->GetPlayerModel());
-
-	AudioManager::GetInstance()->AddSound("walkingsound" + tag, walkingSound);
-
-	ScoreBoard::GetInstance()->AddEntry(new Entry(tag, 0));
+	connectedGPads.push_back(gamepads[index]);
+	connectedPlayers.push_back(players[index + 1]);
 }
 
 //Fill the buffers and use them!
@@ -183,12 +156,13 @@ void InputManager::Update(float deltatime)
 {
 	updateTimer.StartTimer();
 
-	for (vector<Player*>::iterator i = connectedPlayers.begin();
-		i != connectedPlayers.end(); i++) {
-		(*i)->Update(deltatime, window->GetTimer()->GetMS());
-		(*i)->GetPlayerController()->GetInputMapper()->ClearInputs();
-		(*i)->GetPlayerController()->GetInputMapper()->FillInputs();
-		(*i)->ApplyInputs();
+	for (vector<Player*>::iterator player = connectedPlayers.begin();
+		player != connectedPlayers.end(); player++)
+	{
+		(*player)->Update(deltatime, window->GetTimer()->GetMS());
+		(*player)->GetPlayerController()->GetInputMapper()->ClearInputs();
+		(*player)->GetPlayerController()->GetInputMapper()->FillInputs();
+		(*player)->ApplyInputs();
 	}
 
 	updateTimer.StopTimer();
@@ -200,12 +174,12 @@ void InputManager::ClearAll()
 	connectedGPads.clear();
 }
 
-void InputManager::Read(string resourcename) 
+void InputManager::Read(string resourcename)
 {
 	this->SetResourceName(resourcename);
 }
 
-void InputManager::ReadParams(string params) 
+void InputManager::ReadParams(string params)
 {
 	Read(params);
 }

@@ -22,12 +22,14 @@
     <ClCompile Include="GamepadMapper.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MKMapper.cpp" />
+    <ClCompile Include="PlayerConfiguration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamepadMapper.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputMapper.h" />
     <ClInclude Include="MKMapper.h" />
+    <ClInclude Include="PlayerConfiguration.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2A259EBD-69BB-4536-B42E-320D5C558794}</ProjectGuid>

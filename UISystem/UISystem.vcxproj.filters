@@ -10,6 +10,9 @@
     <ClCompile Include="MKMapper.cpp">
       <Filter>Mouse &amp; Keyboard</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerConfiguration.cpp">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamepadMapper.h">
@@ -24,6 +27,9 @@
     <ClInclude Include="MKMapper.h">
       <Filter>Mouse &amp; Keyboard</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerConfiguration.h">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Gamepad">
@@ -34,6 +40,9 @@
     </Filter>
     <Filter Include="Mouse &amp; Keyboard">
       <UniqueIdentifier>{3cea07e0-7127-44fd-ac52-e912a877851a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input Managment\Player Config">
+      <UniqueIdentifier>{bc2caa25-3060-4fae-bebb-3e3a375ab1d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
