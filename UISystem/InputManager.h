@@ -22,7 +22,7 @@ public:
 	~InputManager();
 
 	//Return the number of controllers connected -- max 6
-	std::vector<Gamepad*>* ConnectedGamePads(bool reconnection); 
+	std::vector<Gamepad*>* ConnectedGamePads(bool reconnection);
 
 	//Players match up with controller. eg Gamepad2 = Player2
 	std::vector<Player*>* GetConnectedPlayers()
@@ -53,7 +53,8 @@ public:
 	void ReadParams(string params);
 
 	ThreadPool* threadPool;
-protected:
+
+private:
 	//For players using a controller
 	void InitialisePlayer(Player* p, Gamepad* gp);
 
@@ -69,13 +70,12 @@ protected:
 	Window* window;
 
 	//Previously connected gamepads (updated on last ConnectedGamePads() or UpdateConnections() call)
-	std::vector<Gamepad*> connectedGPads; 
+	std::vector<Gamepad*> connectedGPads;
 	//Previously connected players (updated on last ConnectedGamePads() or UpdateConnections() call)
 	std::vector<Player*> connectedPlayers;
 
-private:
 	/*
-	  These are stored to save the database from 
+	  These are stored to save the database from
 	  searching for them on every additional player.
 	*/
 	Mesh* defaultBulletMesh;

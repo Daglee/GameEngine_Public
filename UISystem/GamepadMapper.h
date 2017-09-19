@@ -33,13 +33,17 @@ public:
 	bool Fired();
 	bool Reload();
 
-	void SetGamePad(Gamepad* gp) 
+	void SetGamePad(Gamepad* newGamepad)
 	{
-		gamepad = gp;
+		gamepad = newGamepad;
 		id = gamepad->gamepadIndex + 2;
 	}
 
 private:
+	void AnnounceTeamChanges();
+
+	enum class BASIC_CONTROL;
+	enum class RHS_BUTTONS;
 	int id;
 	Gamepad* gamepad;
 	float inputs[6];

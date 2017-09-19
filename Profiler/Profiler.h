@@ -39,14 +39,14 @@ private:
 	void RenderFPSCounter();
 	void RenderTimers();
 
-	int		numTimers;
-	int		numAdded = 0;
-	bool	renderingEnabled = false;
+	int	numTimers;
+	int	numAdded = 0;
+	bool renderingEnabled = false;
 
-	Window*			 window;
-	DataBase*		 database;
-	Renderer*		 renderer;
-	MemoryWatcher	 memoryWatcher;
+	Window*	window;
+	DataBase* database;
+	Renderer* renderer;
+	MemoryWatcher memoryWatcher;
 	FramerateCounter fpsCounter;
 	map<string, SubsystemTimer*> timers;
 };
