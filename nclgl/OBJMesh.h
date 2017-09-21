@@ -151,7 +151,7 @@ public:
 
 	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	virtual void Read(string resourcename) {
-		this->SetResourceName(resourcename);
+		this->SetName(resourcename);
 		LoadOBJMesh(resourcename);
 	}
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "PhysicsObject.h"
 #include <vector>
 
@@ -11,7 +11,7 @@ class DataBase;
   before the second hand in.
   Just spawns physics objects and launches them in a direction.
 */
-class Gun : public ResourceBase
+class Gun : public Resource
 {
 public:
 	Gun(DataBase* db, Renderer* rend, PhysicsEngine* p, Mesh* m, float reloadSpeed = 2000.0f,

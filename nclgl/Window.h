@@ -17,7 +17,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "GameTimer.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "../GameLogicFSM/FSMUnit.h"
 
 #define WIN32_LEAN_AND_MEAN
@@ -28,7 +28,7 @@ class OGLRenderer;
 class Database;
 
 class Window :/*	CSC3224 NCODE [Kiyavash Kandar] [140245239] */ 
-	public ResourceBase, FSMUnit /*CSC3224 NCODE BLOCK ENDS*/ {
+	public Resource, FSMUnit /*CSC3224 NCODE BLOCK ENDS*/ {
 public:
 	Window(DataBase* database = nullptr, std::string title = "OpenGL Framework", 
 		int sizeX = 800, int sizeY = 600, bool fullScreen = false);

@@ -5,20 +5,20 @@
 
 AudioManager* AudioManager::instance = NULL;
 
-AudioManager::AudioManager(SceneNode* camNode) : ResourceBase()
+AudioManager::AudioManager(SceneNode* camNode) : Resource()
 {
 	//The SoundSystem singleton is managed in this class.
 	SoundSystem::Initialise();
 	SoundSystem::GetSoundSystem()->SetListener(camNode);
 
-	this->SetResourceSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
+	this->SetSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 }
 
-AudioManager::AudioManager() : ResourceBase()
+AudioManager::AudioManager() : Resource()
 {
 	SoundSystem::Initialise();
 
-	this->SetResourceSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
+	this->SetSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 }
 
 AudioManager::~AudioManager()
@@ -98,7 +98,7 @@ void AudioManager::TemporaryPlay(Sound* gs, enum SoundPriority sp)
 {
 	remove_buffer.push_back(gs);
 	SoundSystem::GetSoundSystem()->PlaySound(gs, sp);
-	this->SetResourceSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
+	this->SetSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 }
 
 void AudioManager::TemporaryPlay(string name, enum SoundPriority sp)
@@ -117,7 +117,7 @@ void AudioManager::Update(float deltatime)
 	updateTimer.StartTimer();
 
 	ClearRemoveBuffer();
-	this->SetResourceSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
+	this->SetSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 
 	//Play the audio!
 	for each (std::pair<string, SoundNode*> bsound in backgroundSounds)
@@ -146,7 +146,7 @@ void AudioManager::ClearRemoveBuffer()
 
 void AudioManager::Read(string resourcename)
 {
-	SetResourceName(resourcename);
+	SetName(resourcename);
 }
 
 void AudioManager::ReadParams(string params)

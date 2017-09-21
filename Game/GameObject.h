@@ -3,7 +3,7 @@
 #include "../nclgl/Vector3.h"
 #include "../nclgl/SceneNode.h"
 #include "../nclgl/Mesh.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 
 class Renderer;
 
@@ -13,7 +13,7 @@ class Renderer;
   No physics aplied to this. GameObjects are static unless
   SetPosition(...) is called.
 */
-class GameObject : public ResourceBase
+class GameObject : public Resource
 {
 public:
 	GameObject(Renderer& r);
@@ -70,7 +70,7 @@ public:
 
 	virtual void Read(string resourcename)
 	{
-		this->SetResourceName(resourcename);
+		this->SetName(resourcename);
 	}
 
 	virtual void ReadParams(string params)

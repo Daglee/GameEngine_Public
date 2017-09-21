@@ -8,14 +8,14 @@
 const int FRAMES_UNTIL_AT_REST = 10;
 const float MAX_AT_REST_VELOCITY = 0.001f;
 
-PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : ResourceBase()
+PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : Resource()
 {
 	this->renderer = renderer;
 	this->database = database;
 
 	explosions = new ExplosionSet(renderer, database);
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void PhysicsEngine::AddRigidBody(RigidBody* rigidBody)
@@ -320,7 +320,7 @@ void PhysicsEngine::ClearNarrowPhaseDeleteBuffer()
 
 void PhysicsEngine::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void PhysicsEngine::ReadParams(string params)

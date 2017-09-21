@@ -1,14 +1,14 @@
 #include "ThreadPool.h"
 
-ThreadPool::ThreadPool(const int numThreads) : ResourceBase() 
+ThreadPool::ThreadPool(const int numThreads) : Resource() 
 {
 	running = true;
 	InitialiseWorkers(numThreads);
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
-ThreadPool::ThreadPool() : ResourceBase()
+ThreadPool::ThreadPool() : Resource()
 {
 	running = true;
 
@@ -17,7 +17,7 @@ ThreadPool::ThreadPool() : ResourceBase()
 
 	InitialiseWorkers(numThreads);
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void ThreadPool::InitialiseWorkers(int numWorkers)
@@ -51,7 +51,7 @@ void ThreadPool::JoinAll()
 
 void ThreadPool::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void ThreadPool::ReadParams(string params) 

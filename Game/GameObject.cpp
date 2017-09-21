@@ -1,15 +1,15 @@
 #include "GameObject.h"
 #include "../nclgl/Renderer.h"
 
-GameObject::GameObject(Renderer& r) : ResourceBase()
+GameObject::GameObject(Renderer& r) : Resource()
 {
 	r.AddSceneNode(&node);
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
-GameObject::GameObject() : ResourceBase()
+GameObject::GameObject() : Resource()
 {
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void GameObject::AddToRenderer(Renderer& r)

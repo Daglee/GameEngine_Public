@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "../Physics/RigidBody.h"
 #include "../Game/Subsystem.h"
 #include "FSM.h"
@@ -15,7 +15,7 @@
   have a map of any modifiable variables - pair<string, float>
   called "vars". Inheritance has been avoided to reduce overhead.
 */
-class FSMManager : public ResourceBase, public Subsystem
+class FSMManager : public Resource, public Subsystem
 {
 public:
 	FSMManager(int numFSMs = 0);

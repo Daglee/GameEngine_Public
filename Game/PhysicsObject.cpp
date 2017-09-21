@@ -11,7 +11,7 @@ PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
 	rigidBody.parentMesh = &node;
 
 	p->AddRigidBody(&rigidBody);
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
@@ -24,7 +24,7 @@ PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
 	this->isSphere = isSphere;
 
 	p->AddRigidBody(&rigidBody);
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 PhysicsObject::PhysicsObject() : GameObject()
@@ -35,7 +35,7 @@ PhysicsObject::PhysicsObject() : GameObject()
 	this->isSphere = true;
 	rigidBody.parentMesh = &node;
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void PhysicsObject::SetEntity(RigidBody* rb, Renderer* renderer, PhysicsEngine* physics)
@@ -114,7 +114,7 @@ RigidBody* PhysicsObject::GetRigidBody()
 
 void PhysicsObject::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void PhysicsObject::ReadParams(string params)

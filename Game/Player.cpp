@@ -18,7 +18,7 @@ const float PLAYER_MASS = 500.0f;
 const float PLAYER_DRAG = 0.7f;
 const float PLAYER_GRAVITY = -0.1f;
 
-Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + to_string(id), database)
+Player::Player(DataBase* database, int id) : Resource(), FSMUnit("player" + to_string(id), database)
 {
 	//Load in a character model
 	playerModel = new CharacterModel(rigidBody.tag, CHARCT_MODEL_LOC);
@@ -63,7 +63,7 @@ Player::Player(DataBase* database, int id) : ResourceBase(), FSMUnit("player" + 
 
 	ragdolls = new PlayerRagdollSet(2, playerModel, renderer, physicsEngine);
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 Player::~Player()
@@ -252,7 +252,7 @@ const int Player::GetIDNumber() const
 
 void Player::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void Player::ReadParams(string params)

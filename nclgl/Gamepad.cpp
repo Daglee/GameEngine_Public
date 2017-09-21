@@ -31,7 +31,7 @@ XButtonIDs::XButtonIDs()
 	Back = 13;
 }
 
-Gamepad::Gamepad() : ResourceBase()
+Gamepad::Gamepad() : Resource()
 {
 	//Iterate through all gamepad buttons
 	for (int i = 0; i < ButtonCount; i++)
@@ -41,10 +41,10 @@ Gamepad::Gamepad() : ResourceBase()
 		bGamepad_ButtonsDown[i] = false;
 	}
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
-Gamepad::Gamepad(int index) : ResourceBase()
+Gamepad::Gamepad(int index) : Resource()
 {
 	//index or 1, 2, 3 etc matches to 0, 1, 2 etc
 	gamepadIndex = index - 1;
@@ -57,7 +57,7 @@ Gamepad::Gamepad(int index) : ResourceBase()
 		bGamepad_ButtonsDown[i] = false;
 	}
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 Gamepad::~Gamepad()
@@ -273,16 +273,16 @@ bool Gamepad::Connected()
 	else return false; //The gamepad is not connected
 }
 
-void Gamepad::Read(string resourcename)
+void Gamepad::Read(std::string resourcename)
 {
-	string name = resourcename;
-	string snum = name.substr(name.size() - 1, name.size());
+	std::string name = resourcename;
+	std::string snum = name.substr(name.size() - 1, name.size());
 	int id = atoi(snum.c_str());
 	gamepadIndex = id;
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
-void Gamepad::ReadParams(string params)
+void Gamepad::ReadParams(std::string params)
 {
 	Read(params);
 }

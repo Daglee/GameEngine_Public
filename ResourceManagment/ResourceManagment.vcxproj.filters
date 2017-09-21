@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Log.h" />
-    <ClInclude Include="ResourceBase.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Resources</Filter>
     </ClInclude>
@@ -17,10 +14,15 @@
     <ClInclude Include="resource1.h">
       <Filter>Random Things</Filter>
     </ClInclude>
+    <ClInclude Include="GameEntityDatabaseEntryFile.h">
+      <Filter>Identifiers</Filter>
+    </ClInclude>
     <ClInclude Include="TemporaryDatabaseIdentifier.h">
+      <Filter>Identifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="GameEntityDatabaseEntryFile.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resources">
@@ -32,15 +34,23 @@
     <Filter Include="Random Things">
       <UniqueIdentifier>{49d6153c-c8dd-40eb-abf2-4a68288aa724}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Identifiers">
+      <UniqueIdentifier>{9d24bab5-04b5-498f-a332-20fd9aed1f76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataBase.cpp">
       <Filter>Database</Filter>
     </ClCompile>
+    <ClCompile Include="GameEntityDatabaseEntryFile.cpp">
+      <Filter>Identifiers</Filter>
+    </ClCompile>
     <ClCompile Include="TemporaryDatabaseIdentifier.cpp">
+      <Filter>Identifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="GameEntityDatabaseEntryFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ResourceManagment.rc">

@@ -5,7 +5,7 @@
 
 #include "../nclgl/Vector3.h"
 #include "CharacterModel.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "Gun.h"
 #include "AudioManager.h"
 #include "../GameLogicFSM/FSMUnit.h"
@@ -32,7 +32,7 @@ class RigidBody;
   Physics entity wrapper.
   Contains gameplay mechanics focused on the player.
 */
-class Player : public ResourceBase, public FSMUnit
+class Player : public Resource, public FSMUnit
 {
 public:
 	Player(DataBase* database, int id);

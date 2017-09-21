@@ -36,7 +36,7 @@ Matrix4 Camera::BuildViewMatrix()
 
 void Camera::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void Camera::ReadParams(string params)
@@ -56,6 +56,6 @@ void Camera::ReadParams(string params)
 	this->yaw = yaw;
 	this->SetPosition(Vector3(xPos, yPos, zPos));
 
-	this->SetResourceName(name);
-	this->SetResourceSize(sizeof(*this));
+	this->SetName(name);
+	this->SetSize(sizeof(*this));
 }

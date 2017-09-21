@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-Mesh::Mesh(void) : ResourceBase()
+Mesh::Mesh(void) : Resource()
 {
 	for (int i = 0; i < MAX_BUFFER; ++i) {
 		bufferObject[i] = 0;
@@ -21,7 +21,7 @@ Mesh::Mesh(void) : ResourceBase()
 	type			= GL_TRIANGLES;
 
 	//ResourceBase();
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 

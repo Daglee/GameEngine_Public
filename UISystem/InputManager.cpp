@@ -42,7 +42,7 @@ void InputManager::Update(float deltatime)
 
 void InputManager::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void InputManager::ReadParams(string params)

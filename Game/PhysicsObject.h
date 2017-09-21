@@ -6,7 +6,7 @@
 #include "../Physics/SphereCollider.h"
 #include "../Physics/PhysicsEngine.h"
 #include "../Physics/RigidBody.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "GameObject.h"
 
 #include <algorithm>

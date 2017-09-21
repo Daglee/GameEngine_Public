@@ -6,7 +6,7 @@
 #include "Frustum.h"
 #include "OBJMesh.h"
 #include "Mesh.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "../GameLogicFSM/FSMUnit.h"
 #include "../Game/Subsystem.h"
 #include "Text.h"
@@ -21,7 +21,7 @@
 
 class DataBase;
 
-class Renderer : public OGLRenderer, public ResourceBase,
+class Renderer : public OGLRenderer, public Resource,
 	public Subsystem, FSMUnit
 {
 public:

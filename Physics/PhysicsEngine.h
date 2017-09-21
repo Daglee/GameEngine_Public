@@ -11,7 +11,7 @@
 #include "RigidBody.h"
 #include "SphereCollider.h"
 #include "PlaneCollider.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "../Game/Subsystem.h"
 #include "ExplosionSet.h"
 
@@ -28,7 +28,7 @@ struct CollisionPair
 	RigidBody* r2;
 };
 
-class PhysicsEngine : public ResourceBase, public Subsystem
+class PhysicsEngine : public Resource, public Subsystem
 {
 public:
 	/*

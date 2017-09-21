@@ -3,7 +3,7 @@
 #include "MemoryWatcher.h"
 #include "FramerateCounter.h"
 #include "../Game/Subsystem.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "../nclgl/Text.h"
 #include <map>
 
@@ -15,7 +15,7 @@ class Renderer;
   Handles the framerate counter, memory watcher
   and subsystem timers in one update function.
 */
-class Profiler : public Subsystem, public ResourceBase
+class Profiler : public Subsystem, public Resource
 {
 public:
 	Profiler(DataBase* db, Window* win, int numTimers);

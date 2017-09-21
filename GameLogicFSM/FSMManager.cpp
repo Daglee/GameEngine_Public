@@ -4,12 +4,12 @@
 #include "../Game/ScoreBoard.h"
 #include "MessageSystem.h"
 
-FSMManager::FSMManager(int numFSMs) : ResourceBase()
+FSMManager::FSMManager(int numFSMs) : Resource()
 {
 	this->numFSMs = numFSMs;
 	fsms = new FSM*[numFSMs];
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 
@@ -39,7 +39,7 @@ void FSMManager::Update(float deltatime)
 {
 	updateTimer.StartTimer();
 
-	this->SetResourceSize(sizeof(*this) +
+	this->SetSize(sizeof(*this) +
 		sizeof(*MessageSystem::GetInstance()));
 
 	//Update each FSM
@@ -50,7 +50,7 @@ void FSMManager::Update(float deltatime)
 
 	ScoreBoard::GetInstance()->DisplayScores();
 
-	this->SetResourceSize(sizeof(*this) +
+	this->SetSize(sizeof(*this) +
 		sizeof(*MessageSystem::GetInstance()));
 
 	updateTimer.StopTimer();
@@ -58,7 +58,7 @@ void FSMManager::Update(float deltatime)
 
 void FSMManager::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void FSMManager::ReadParams(string params)
@@ -69,9 +69,9 @@ void FSMManager::ReadParams(string params)
 
 	string name = tokens.at(0);
 	int num = atoi(tokens.at(1).c_str());
-	this->SetResourceName(name);
+	this->SetName(name);
 
 	numFSMs = num;
 	fsms = new FSM*[numFSMs];
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }

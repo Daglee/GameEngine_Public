@@ -10,7 +10,7 @@ Mouse*Window::mouse			= NULL;
 //GameTimer*Window::timer		= NULL;
 
 Window::Window(DataBase* database, std::string title, 
-	int sizeX, int sizeY, bool fullScreen) : ResourceBase(), FSMUnit("Window", database) {
+	int sizeX, int sizeY, bool fullScreen) : Resource(), FSMUnit("Window", database) {
 	renderer		= NULL;
 	window			= this;
 	forceQuit		= false;
@@ -130,7 +130,7 @@ Window::Window(DataBase* database, std::string title,
 	properties->insert({ "timer", &elapsedMS });
 	properties->insert({ "running", &running });
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 	//	CSC3224 NCODE BLOCK ENDS
 
 
@@ -337,7 +337,7 @@ void	Window::ShowOSPointer(bool show)	{
 }
 
 void Window::Read(string resourcename) {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void Window::ReadParams(string params) {
@@ -353,6 +353,6 @@ void Window::ReadParams(string params) {
 	size.y = (float)resY;
 	fullScreen = fullscreen;
 
-	this->SetResourceSize(sizeof(*this));
-	this->SetResourceName(name);
+	this->SetSize(sizeof(*this));
+	this->SetName(name);
 }

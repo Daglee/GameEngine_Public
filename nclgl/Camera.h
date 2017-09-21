@@ -7,23 +7,23 @@
 #include "Window.h"
 #include "Matrix4.h"
 #include "Vector3.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "SceneNode.h"
 
-class Camera : public ResourceBase
+class Camera : public Resource
 {
 public:
-	Camera(void) : ResourceBase()
+	Camera(void) : Resource()
 	{
 		yaw = 0.0f;
 		pitch = 0.0f;
 
 		//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
-		this->SetResourceSize(sizeof(*this));
+		this->SetSize(sizeof(*this));
 		//	CSC3224 NCODE BLOCK ENDS
 	};
 
-	Camera(float pitch, float yaw, Vector3 position) : ResourceBase()
+	Camera(float pitch, float yaw, Vector3 position) : Resource()
 	{
 		this->pitch = pitch;
 		this->yaw = yaw;
@@ -31,7 +31,7 @@ public:
 		SetPosition(position);
 
 		//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
-		this->SetResourceSize(sizeof(*this));
+		this->SetSize(sizeof(*this));
 		//	CSC3224 NCODE BLOCK ENDS
 	}
 

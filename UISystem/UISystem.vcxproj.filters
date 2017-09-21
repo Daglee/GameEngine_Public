@@ -4,9 +4,6 @@
     <ClCompile Include="GamepadMapper.cpp">
       <Filter>Gamepad</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Input Managment</Filter>
-    </ClCompile>
     <ClCompile Include="MKMapper.cpp">
       <Filter>Mouse &amp; Keyboard</Filter>
     </ClCompile>
@@ -19,17 +16,16 @@
     <ClCompile Include="IngamePlayer.cpp">
       <Filter>Input Managment\Player Config</Filter>
     </ClCompile>
-    <ClCompile Include="Playerbase.cpp" />
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Input Managment\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Playerbase.cpp">
+      <Filter>Input Managment\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamepadMapper.h">
       <Filter>Gamepad</Filter>
-    </ClInclude>
-    <ClInclude Include="InputMapper.h">
-      <Filter>Input Managment</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Input Managment</Filter>
     </ClInclude>
     <ClInclude Include="MKMapper.h">
       <Filter>Mouse &amp; Keyboard</Filter>
@@ -43,7 +39,15 @@
     <ClInclude Include="IngamePlayer.h">
       <Filter>Input Managment\Player Config</Filter>
     </ClInclude>
-    <ClInclude Include="Playerbase.h" />
+    <ClInclude Include="InputManager.h">
+      <Filter>Input Managment\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMapper.h">
+      <Filter>Input Managment\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Playerbase.h">
+      <Filter>Input Managment\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Gamepad">
@@ -52,11 +56,14 @@
     <Filter Include="Input Managment">
       <UniqueIdentifier>{f9c68836-5d73-48a7-908c-e14688ec8835}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Mouse &amp; Keyboard">
-      <UniqueIdentifier>{3cea07e0-7127-44fd-ac52-e912a877851a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Input Managment\Player Config">
       <UniqueIdentifier>{bc2caa25-3060-4fae-bebb-3e3a375ab1d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input Managment\Input">
+      <UniqueIdentifier>{dcf2d160-c3ec-4997-b9a3-21909d23563e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mouse &amp; Keyboard">
+      <UniqueIdentifier>{3cea07e0-7127-44fd-ac52-e912a877851a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "../ResourceManagment/Log.h"
 #include "../nclgl/SoundNode.h"
 #include "../Game/Subsystem.h"
@@ -16,7 +16,7 @@
   to be played/are stored. Use of hashmap ensures
   fast retrieval.
 */
-class AudioManager : public ResourceBase,
+class AudioManager : public Resource,
 	public Subsystem
 {
 public:
@@ -58,7 +58,7 @@ public:
 		if (gs == nullptr) Log::Error("SoundNode " + name + " is null. Cannot be added.");
 		else sounds.insert({ name, gs });
 
-		this->SetResourceSize(sizeof(*instance));
+		this->SetSize(sizeof(*instance));
 	}
 
 	void AddBackgroundSound(string filename)
@@ -68,7 +68,7 @@ public:
 
 		backgroundSounds.insert({ filename, backgroundSound });
 
-		this->SetResourceSize(sizeof(*instance));
+		this->SetSize(sizeof(*instance));
 	}
 
 	//Get the sound by name to do things with it...

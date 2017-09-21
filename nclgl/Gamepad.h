@@ -2,7 +2,8 @@
 
 #include <windows.h>
 #include <Xinput.h>
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
+#include <string>
 
 // XInput Button values
 static const WORD XINPUT_Buttons[] = {
@@ -48,7 +49,7 @@ struct XButtonIDs
 	int Back;  // 'BACK' button
 };
 
-class Gamepad : public ResourceBase
+class Gamepad : public Resource
 {
 public:
 	Gamepad();
@@ -85,8 +86,8 @@ public:
 	void SetIndex(int index);
 	bool Connected();
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(std::string resourcename);
+	void ReadParams(std::string params);
 
 	// Vibrate the gamepad (0.0f none, 1.0f max speed)
 	void Rumble(float a_fLeftMotor = 0.0f, float a_fRightMotor = 0.0f);

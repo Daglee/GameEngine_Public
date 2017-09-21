@@ -8,7 +8,7 @@
 #define FRAME_MIN 1
 #define TEXT_SIZE 15.0f
 
-Profiler::Profiler(DataBase* db, Window* win, int numTimers) : ResourceBase()
+Profiler::Profiler(DataBase* db, Window* win, int numTimers) : Resource()
 {
 	window = win;
 	database = db;
@@ -19,16 +19,16 @@ Profiler::Profiler(DataBase* db, Window* win, int numTimers) : ResourceBase()
 	//Upper bound of how many timers can be added
 	this->numTimers = numTimers;
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
-Profiler::Profiler(DataBase* db) : ResourceBase()
+Profiler::Profiler(DataBase* db) : Resource()
 {
 	database = db;
 	memoryWatcher = MemoryWatcher(database->MaxSize(), database);
 	renderer = database->GRenderer->Find("Renderer");
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void Profiler::Update(float deltatime)
@@ -75,7 +75,7 @@ void Profiler::AddSubSystemTimer(string name, SubsystemTimer* timer)
 		timers.insert({ name, timer });
 		numAdded++;
 
-		this->SetResourceSize(sizeof(*this));
+		this->SetSize(sizeof(*this));
 	}
 }
 
@@ -136,7 +136,7 @@ void Profiler::RenderTimers()
 
 void Profiler::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void Profiler::ReadParams(string params)
@@ -153,6 +153,6 @@ void Profiler::ReadParams(string params)
 	window = database->GWindow->Find(windowname);
 	fpsCounter = FramerateCounter(window->GetTimer()->GetMS());
 
-	this->SetResourceSize(sizeof(*this));
-	this->SetResourceName(name);
+	this->SetSize(sizeof(*this));
+	this->SetName(name);
 }

@@ -3,7 +3,7 @@
 #include "../ResourceManagment/DataBase.h"
 
 Renderer::Renderer(DataBase* database, Window &parent) :
-	OGLRenderer(parent), ResourceBase(), FSMUnit("Renderer", database)
+	OGLRenderer(parent), Resource(), FSMUnit("Renderer", database)
 {
 	light = new Light(Vector3(700, 1000, -700), Vector4(1, 1, 1, 1), 30000.0f);
 
@@ -50,7 +50,7 @@ Renderer::Renderer(DataBase* database, Window &parent) :
 	glEnable(GL_DEPTH_TEST);
 
 	init = true;
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 
 	overlay = Mesh::GenerateQuad();
 	overlay->SetTexture(0);
@@ -316,7 +316,7 @@ void Renderer::BuildNodeLists(SceneNode* from)
 		BuildNodeLists((*i));
 	}
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void Renderer::SortNodeLists()
@@ -334,24 +334,24 @@ void Renderer::ClearNodeLists()
 {
 	transparentNodeList.clear();
 	nodeList.clear();
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void Renderer::AddSceneNode(SceneNode* sn)
 {
 	root.AddChild(sn);
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void Renderer::RemoveSceneNode(SceneNode* sn)
 {
 	root.RemoveChild(sn);
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void Renderer::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void Renderer::ReadParams(string params)

@@ -3,7 +3,7 @@
 #include "ThreadQueue.h"
 #include "ThreadTask.h"
 #include "TaskFuture.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 #include "../nclgl/Window.h"
 
 #include <algorithm>
@@ -19,7 +19,7 @@
 /*
   Bunch of threads ready to carry tasks out.
 */
-class ThreadPool : public ResourceBase
+class ThreadPool : public Resource
 {
 public:
 	/*

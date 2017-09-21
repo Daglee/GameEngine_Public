@@ -7,7 +7,7 @@
 #include <time.h>
 
 Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, float reloadSpeed, int bulletsPerMag,
-	float bulletSpeed, float fireDelay) : ResourceBase()
+	float bulletSpeed, float fireDelay) : Resource()
 {
 	rend = r;
 	phys = p;
@@ -26,12 +26,12 @@ Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, float reloadSpeed
 	bulletsFired = 0;
 	lastShotTime = 0;
 
-	this->SetResourceSize(sizeof(*this));
+	this->SetSize(sizeof(*this));
 }
 
 void Gun::Read(string resourcename)
 {
-	this->SetResourceName(resourcename);
+	this->SetName(resourcename);
 }
 
 void Gun::ReadParams(string params)

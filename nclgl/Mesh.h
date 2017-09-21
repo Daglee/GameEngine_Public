@@ -4,7 +4,7 @@
 	KIYAVASH KANDAR WHERE SPECIFIED
 */
 #include "OGLRenderer.h"
-#include "../ResourceManagment/ResourceBase.h"
+#include "../ResourceManagment/Resource.h"
 
 enum MeshBuffer {
 	VERTEX_BUFFER, COLOUR_BUFFER, 
@@ -13,7 +13,7 @@ enum MeshBuffer {
 	MAX_BUFFER
 };
 
-class Mesh : public ResourceBase
+class Mesh : public Resource
 {
 public:
 	Mesh(void);
@@ -58,7 +58,7 @@ protected:
 	
 	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
 	virtual void Read(string resourcename) {
-		this->SetResourceName(resourcename);
+		this->SetName(resourcename);
 	}
 
 	virtual void ReadParams(string params) {
