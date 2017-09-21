@@ -11,14 +11,14 @@ AudioManager::AudioManager(SceneNode* camNode) : Resource()
 	SoundSystem::Initialise();
 	SoundSystem::GetSoundSystem()->SetListener(camNode);
 
-	this->SetSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
+	this->SetSizeInBytes(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 }
 
 AudioManager::AudioManager() : Resource()
 {
 	SoundSystem::Initialise();
 
-	this->SetSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
+	this->SetSizeInBytes(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 }
 
 AudioManager::~AudioManager()
@@ -98,7 +98,7 @@ void AudioManager::TemporaryPlay(Sound* gs, enum SoundPriority sp)
 {
 	remove_buffer.push_back(gs);
 	SoundSystem::GetSoundSystem()->PlaySound(gs, sp);
-	this->SetSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
+	this->SetSizeInBytes(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 }
 
 void AudioManager::TemporaryPlay(string name, enum SoundPriority sp)
@@ -117,7 +117,7 @@ void AudioManager::Update(float deltatime)
 	updateTimer.StartTimer();
 
 	ClearRemoveBuffer();
-	this->SetSize(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
+	this->SetSizeInBytes(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 
 	//Play the audio!
 	for each (std::pair<string, SoundNode*> bsound in backgroundSounds)

@@ -57,5 +57,5 @@ void Camera::ReadParams(string params)
 	this->SetPosition(Vector3(xPos, yPos, zPos));
 
 	this->SetName(name);
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }

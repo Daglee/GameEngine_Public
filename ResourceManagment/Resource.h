@@ -22,10 +22,10 @@ public:
 	virtual ~Resource() {}
 
 	virtual void SetName(std::string name);
-	virtual void SetSize(size_t size);
+	virtual void SetSizeInBytes(size_t size);
 
 	virtual std::string GetName();
-	virtual size_t GetSize();
+	virtual size_t GetSizeInBytes();
 	virtual int GetReferencesCount();
 
 	virtual void Read(std::string resourcename) = 0;

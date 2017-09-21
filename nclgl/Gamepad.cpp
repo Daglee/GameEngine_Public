@@ -41,7 +41,7 @@ Gamepad::Gamepad() : Resource()
 		bGamepad_ButtonsDown[i] = false;
 	}
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 Gamepad::Gamepad(int index) : Resource()
@@ -57,7 +57,7 @@ Gamepad::Gamepad(int index) : Resource()
 		bGamepad_ButtonsDown[i] = false;
 	}
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 Gamepad::~Gamepad()

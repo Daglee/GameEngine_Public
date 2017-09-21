@@ -54,7 +54,7 @@ public:
 		if (resourcename.empty()) Log::Error("Empty filename not allowed");
 
 		std::string ResourceName = Log::TrimAndLower(resourcename);
-		resourceObj->SetResourceName(ResourceName);
+		resourceObj->SetName(ResourceName);
 
 		//Check if this is first object to be added. 
 		//If so, update sizes according to first object being added
@@ -83,18 +83,18 @@ public:
 		}
 
 		//Check if adding the new item would lead to exceeding the managers size limit
-		if (currentSize + resourceObj->GetResourceSize() <= maxManagerSize)
+		if (currentSize + resourceObj->GetSizeInBytes() <= maxManagerSize)
 		{
 			//Insert into the map
 			//Insert into first bin that has enough space
 			for (std::vector<ResourceMap<T>*>::iterator mapit = resourceMaps.begin();
 				mapit != resourceMaps.end(); mapit++) 
 			{
-				if ((*mapit)->FreeSpace() >= resourceObj->GetResourceSize())
+				if ((*mapit)->FreeSpace() >= resourceObj->GetSizeInBytes())
 				{
 					//There is enough space. Insert.
 					(*mapit)->Add(resourcename, resourceObj);
-					currentSize = currentSize + resourceObj->GetResourceSize();
+					currentSize = currentSize + resourceObj->GetSizeInBytes();
 					return resourceObj;
 				}
 			}
@@ -104,7 +104,7 @@ public:
 			newMap->Initialise("Map" + std::to_string(binNumber), verbose, allowDuplicates, newBinSize);
 			AddResourceMap(newMap);
 			newMap->Add(resourcename, resourceObj);
-			currentSize = currentSize + resourceObj->GetResourceSize();
+			currentSize = currentSize + resourceObj->GetSizeInBytes();
 		}
 		else Log::Error(Name + " Cannot add item - would exceed limit");
 
@@ -114,7 +114,7 @@ public:
 	//Add an item but the resource name has already been defined
 	T* Load(T* resourceObj)
 	{
-		const std::string name = resourceObj->GetResourceName();
+		const std::string name = resourceObj->GetName();
 
 		Load(name, resourceObj);
 
@@ -135,7 +135,7 @@ public:
 			if ((*mapit)->Get(name) != nullptr)
 			{
 				//Found
-				currentSize = currentSize - (*mapit)->Get(name)->GetResourceSize();
+				currentSize = currentSize - (*mapit)->Get(name)->GetSizeInBytes();
 				(*mapit)->Remove(name);
 
 				return true;

@@ -5,7 +5,7 @@ ThreadPool::ThreadPool(const int numThreads) : Resource()
 	running = true;
 	InitialiseWorkers(numThreads);
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 ThreadPool::ThreadPool() : Resource()
@@ -17,7 +17,7 @@ ThreadPool::ThreadPool() : Resource()
 
 	InitialiseWorkers(numThreads);
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void ThreadPool::InitialiseWorkers(int numWorkers)

@@ -50,7 +50,7 @@ Renderer::Renderer(DataBase* database, Window &parent) :
 	glEnable(GL_DEPTH_TEST);
 
 	init = true;
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 
 	overlay = Mesh::GenerateQuad();
 	overlay->SetTexture(0);
@@ -316,7 +316,7 @@ void Renderer::BuildNodeLists(SceneNode* from)
 		BuildNodeLists((*i));
 	}
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void Renderer::SortNodeLists()
@@ -334,19 +334,19 @@ void Renderer::ClearNodeLists()
 {
 	transparentNodeList.clear();
 	nodeList.clear();
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void Renderer::AddSceneNode(SceneNode* sn)
 {
 	root.AddChild(sn);
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void Renderer::RemoveSceneNode(SceneNode* sn)
 {
 	root.RemoveChild(sn);
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void Renderer::Read(string resourcename)

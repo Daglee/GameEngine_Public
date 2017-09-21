@@ -45,7 +45,7 @@ bool RocketLauncher::Fire(const Vector3& from, const Vector3& rotation, const in
 
 		//To help with reloading
 		magazine.push_back(b);
-		this->SetSize(sizeof(*this));
+		this->SetSizeInBytes(sizeof(*this));
 
 		displacement.y = 20;
 		Vector3 direction = pos - displacement;
@@ -91,7 +91,7 @@ void RocketLauncher::Reload()
 	magazine.clear();
 	lastReloadTime = clock();
 	reloadSpeed = tempReloadSpeed;
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void RocketLauncher::InitialiseBullet(PhysicsObject* b)

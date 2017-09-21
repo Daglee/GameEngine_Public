@@ -44,7 +44,7 @@ bool Pistol::Fire(const Vector3& from, const Vector3& rotation, const int& id)
 
 		//To help with reloading
 		magazine.push_back(b);
-		this->SetSize(sizeof(*this));
+		this->SetSizeInBytes(sizeof(*this));
 
 		displacement.y = 20;
 		Vector3 direction = pos - displacement;
@@ -90,7 +90,7 @@ void Pistol::Reload()
 	magazine.clear();
 	lastReloadTime = clock();
 	reloadSpeed = tempReloadSpeed;
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void Pistol::InitialiseBullet(PhysicsObject* b)

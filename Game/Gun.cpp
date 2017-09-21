@@ -26,7 +26,7 @@ Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, float reloadSpeed
 	bulletsFired = 0;
 	lastShotTime = 0;
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void Gun::Read(string resourcename)

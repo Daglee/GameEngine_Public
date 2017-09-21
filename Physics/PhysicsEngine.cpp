@@ -15,7 +15,7 @@ PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : Resource(
 
 	explosions = new ExplosionSet(renderer, database);
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void PhysicsEngine::AddRigidBody(RigidBody* rigidBody)

@@ -29,7 +29,7 @@ void Resource::SetName(std::string name)
 	this->name = name;
 }
 
-void Resource::SetSize(size_t size)
+void Resource::SetSizeInBytes(size_t size)
 {
 	if (size == 0)
 	{
@@ -49,7 +49,7 @@ int Resource::GetReferencesCount()
 	return references;
 }
 
-size_t Resource::GetSize()
+size_t Resource::GetSizeInBytes()
 {
 	return size;
 }

@@ -58,7 +58,7 @@ public:
 		if (gs == nullptr) Log::Error("SoundNode " + name + " is null. Cannot be added.");
 		else sounds.insert({ name, gs });
 
-		this->SetSize(sizeof(*instance));
+		this->SetSizeInBytes(sizeof(*instance));
 	}
 
 	void AddBackgroundSound(string filename)
@@ -68,7 +68,7 @@ public:
 
 		backgroundSounds.insert({ filename, backgroundSound });
 
-		this->SetSize(sizeof(*instance));
+		this->SetSizeInBytes(sizeof(*instance));
 	}
 
 	//Get the sound by name to do things with it...

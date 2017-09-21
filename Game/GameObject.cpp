@@ -4,12 +4,12 @@
 GameObject::GameObject(Renderer& r) : Resource()
 {
 	r.AddSceneNode(&node);
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 GameObject::GameObject() : Resource()
 {
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void GameObject::AddToRenderer(Renderer& r)

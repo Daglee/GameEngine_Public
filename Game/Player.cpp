@@ -63,7 +63,7 @@ Player::Player(DataBase* database, int id) : Resource(), FSMUnit("player" + to_s
 
 	ragdolls = new PlayerRagdollSet(2, playerModel, renderer, physicsEngine);
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 Player::~Player()

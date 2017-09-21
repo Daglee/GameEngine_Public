@@ -19,7 +19,7 @@ public:
 		pitch = 0.0f;
 
 		//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
-		this->SetSize(sizeof(*this));
+		this->SetSizeInBytes(sizeof(*this));
 		//	CSC3224 NCODE BLOCK ENDS
 	};
 
@@ -31,7 +31,7 @@ public:
 		SetPosition(position);
 
 		//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
-		this->SetSize(sizeof(*this));
+		this->SetSizeInBytes(sizeof(*this));
 		//	CSC3224 NCODE BLOCK ENDS
 	}
 

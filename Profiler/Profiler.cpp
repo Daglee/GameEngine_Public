@@ -19,7 +19,7 @@ Profiler::Profiler(DataBase* db, Window* win, int numTimers) : Resource()
 	//Upper bound of how many timers can be added
 	this->numTimers = numTimers;
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 Profiler::Profiler(DataBase* db) : Resource()
@@ -28,7 +28,7 @@ Profiler::Profiler(DataBase* db) : Resource()
 	memoryWatcher = MemoryWatcher(database->MaxSize(), database);
 	renderer = database->GRenderer->Find("Renderer");
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 void Profiler::Update(float deltatime)
@@ -75,7 +75,7 @@ void Profiler::AddSubSystemTimer(string name, SubsystemTimer* timer)
 		timers.insert({ name, timer });
 		numAdded++;
 
-		this->SetSize(sizeof(*this));
+		this->SetSizeInBytes(sizeof(*this));
 	}
 }
 
@@ -153,6 +153,6 @@ void Profiler::ReadParams(string params)
 	window = database->GWindow->Find(windowname);
 	fpsCounter = FramerateCounter(window->GetTimer()->GetMS());
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 	this->SetName(name);
 }

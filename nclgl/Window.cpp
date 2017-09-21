@@ -130,7 +130,7 @@ Window::Window(DataBase* database, std::string title,
 	properties->insert({ "timer", &elapsedMS });
 	properties->insert({ "running", &running });
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 	//	CSC3224 NCODE BLOCK ENDS
 
 
@@ -353,6 +353,6 @@ void Window::ReadParams(string params) {
 	size.y = (float)resY;
 	fullScreen = fullscreen;
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 	this->SetName(name);
 }

@@ -9,7 +9,7 @@ FSMManager::FSMManager(int numFSMs) : Resource()
 	this->numFSMs = numFSMs;
 	fsms = new FSM*[numFSMs];
 
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 
@@ -39,7 +39,7 @@ void FSMManager::Update(float deltatime)
 {
 	updateTimer.StartTimer();
 
-	this->SetSize(sizeof(*this) +
+	this->SetSizeInBytes(sizeof(*this) +
 		sizeof(*MessageSystem::GetInstance()));
 
 	//Update each FSM
@@ -50,7 +50,7 @@ void FSMManager::Update(float deltatime)
 
 	ScoreBoard::GetInstance()->DisplayScores();
 
-	this->SetSize(sizeof(*this) +
+	this->SetSizeInBytes(sizeof(*this) +
 		sizeof(*MessageSystem::GetInstance()));
 
 	updateTimer.StopTimer();
@@ -73,5 +73,5 @@ void FSMManager::ReadParams(string params)
 
 	numFSMs = num;
 	fsms = new FSM*[numFSMs];
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }

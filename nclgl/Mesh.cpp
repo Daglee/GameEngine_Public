@@ -21,7 +21,7 @@ Mesh::Mesh(void) : Resource()
 	type			= GL_TRIANGLES;
 
 	//ResourceBase();
-	this->SetSize(sizeof(*this));
+	this->SetSizeInBytes(sizeof(*this));
 }
 
 
