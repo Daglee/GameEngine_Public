@@ -10,6 +10,8 @@
 #include "PlayerConfiguration.h"
 #include "IngamePlayer.h"
 
+#include "Playerbase.h"
+
 class DataBase;
 class ThreadPool;
 
@@ -20,28 +22,8 @@ class ThreadPool;
 class InputManager : public Subsystem, public ResourceBase
 {
 public:
-	InputManager(ThreadPool* t);
+	InputManager(Playerbase* playerbase, Window* window);
 	~InputManager();
-
-	//Return the number of controllers connected -- max 6
-	std::vector<Gamepad*>* ConnectGamepads(bool reconnection);
-
-	//Players match up with controller. eg Gamepad2 = Player2
-	std::vector<Player*>* GetConnectedPlayers()
-	{
-		return &connectedPlayers;
-	}
-
-	//Fill collections with what is loaded for the current level/game
-	void ConnectToDataBase(DataBase* databaseToConnect);
-
-	/*
-	  Check if the players that were previously connected, still are.
-	  Can be done selectively, rather than polling
-	  every frame.
-	*/
-	void UpdateConnections();
-	void ReInitialisePlayers();
 
 	/*
 	  Fill the input arrays/buffers...
@@ -49,29 +31,17 @@ public:
 	*/
 	void Update(float deltatime);
 
-	void ClearAll();
+	Playerbase* GetPlayerbase()
+	{
+		return playerbase;
+	}
 
 	void Read(string resourcename);
 	void ReadParams(string params);
 
-	ThreadPool* threadPool;
-
 private:
-	void StoreDatabase();
-	void StoreGamepadPlayer(int index);
-
-	Gamepad** gamepads;
-	Player** players;
-	DataBase* database;
-
-	//Previously connected gamepads (updated on last ConnectedGamePads() or UpdateConnections() call)
-	std::vector<Gamepad*> connectedGPads;
-
-	//Previously connected players (updated on last ConnectedGamePads() or UpdateConnections() call)
-	std::vector<Player*> connectedPlayers;
-
-	Subsystems systems;
+	std::vector<Player*>* connectedPlayers;
+	Playerbase* playerbase;
 	Window* window;
-	PlayerConfiguration* playerConfig;
 };
 

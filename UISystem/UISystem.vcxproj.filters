@@ -19,6 +19,7 @@
     <ClCompile Include="IngamePlayer.cpp">
       <Filter>Input Managment\Player Config</Filter>
     </ClCompile>
+    <ClCompile Include="Playerbase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamepadMapper.h">
@@ -42,6 +43,7 @@
     <ClInclude Include="IngamePlayer.h">
       <Filter>Input Managment\Player Config</Filter>
     </ClInclude>
+    <ClInclude Include="Playerbase.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Gamepad">

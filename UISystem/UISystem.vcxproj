@@ -23,6 +23,7 @@
     <ClCompile Include="IngamePlayer.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MKMapper.cpp" />
+    <ClCompile Include="Playerbase.cpp" />
     <ClCompile Include="PlayerConfiguration.cpp" />
     <ClCompile Include="PlayerInputConnection.cpp" />
   </ItemGroup>
@@ -32,6 +33,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputMapper.h" />
     <ClInclude Include="MKMapper.h" />
+    <ClInclude Include="Playerbase.h" />
     <ClInclude Include="PlayerConfiguration.h" />
     <ClInclude Include="PlayerInputConnection.h" />
   </ItemGroup>

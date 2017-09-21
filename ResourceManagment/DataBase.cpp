@@ -138,15 +138,16 @@ void DataBase::StartUp(string filename, bool rendererInitialised, bool renderLoa
 		}
 	}
 
-	auto readloop1 = GThreadPool->Find("ThreadPool")->SubmitJob([](
+	std::vector<TaskFuture<void>> updates;
+	updates.push_back(GThreadPool->Find("ThreadPool")->SubmitJob([](
 		DataBase& db, vector<vector<string>> tokenshold, vector<string> lines, int linenum) {
 		db.ReadLoop(tokenshold, lines, linenum);
-	}, std::ref(*this), tokensHolder0, lines0, mid);
+	}, std::ref(*this), tokensHolder0, lines0, mid));
 
-	auto readloop2 = GThreadPool->Find("ThreadPool")->SubmitJob([](
+	updates.push_back(GThreadPool->Find("ThreadPool")->SubmitJob([](
 		DataBase& db, vector<vector<string>> tokenshold, vector<string> lines, int linenum) {
 		db.ReadLoop(tokenshold, lines, linenum);
-	}, std::ref(*this), tokensHolder1, lines1, threadCount - mid);
+	}, std::ref(*this), tokensHolder1, lines1, threadCount - mid));
 
 	file.close();
 }
@@ -215,7 +216,7 @@ void DataBase::InitialiseFunctionMap()
 
 void DataBase::AddToGInputManager(string resourcename)
 {
-	InputManager* inputManager = new InputManager(GThreadPool->Find("ThreadPool"));
+	InputManager* inputManager = new InputManager(new Playerbase(this), GWindow->Find("Window"));
 	GInputManager->Load(resourcename, inputManager);
 }
 

@@ -17,22 +17,22 @@ void LevelLoader::LoadFirstLevel(std::string level)
 {
 	LoadLevel(level);
 
-	database->GInputManager->Find("InputManager")->ConnectToDataBase(database);
-	database->GInputManager->Find("InputManager")->ConnectGamepads(false);
+	database->GInputManager->Find("InputManager")->GetPlayerbase()->RetrieveGamepadsAndPlayers(database);
+	database->GInputManager->Find("InputManager")->GetPlayerbase()->ConnectGamepads(false);
 }
 
 void LevelLoader::LoadReplacementLevel(std::string level)
 {
 	LoadLevel(level);
 
-	database->GInputManager->Find("InputManager")->ReInitialisePlayers();
+	database->GInputManager->Find("InputManager")->GetPlayerbase()->ReInitialisePlayers();
 }
 
 void LevelLoader::ExitLevel()
 {
 	if (currentLevel != nullptr)
 	{
-		database->GInputManager->Find("InputManager")->ClearAll();
+		database->GInputManager->Find("InputManager")->GetPlayerbase()->ClearAll();
 		currentLevel->UnloadLevel();
 		delete currentLevel;
 	}
