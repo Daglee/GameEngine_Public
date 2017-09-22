@@ -15,8 +15,8 @@ class ResourceManager
 public:
 	ResourceManager(bool verbose = false, bool allowDuplicates = false)
 	{
-		this->verbose			= verbose;
-		this->allowDuplicates	= allowDuplicates;
+		this->verbose = verbose;
+		this->allowDuplicates = allowDuplicates;
 	}
 
 	~ResourceManager()
@@ -24,78 +24,76 @@ public:
 		ReleaseAll();
 	}
 
-	void Initialise(const std::string &name, size_t maxNewBinSize, int maxNumberBins)	
+	void Initialise(const std::string &name, size_t maxNewBinSize, int maxNumberBins)
 	{
-		if (name.empty()) Log::Error("Empty Resource Manager name not allowed");
+		Log::ExitIfEmpty(name, "Empty Resource Manager name not allowed");
 
-		Name			= Log::TrimAndLower(name);
-		newBinSize		= maxNewBinSize;
-		maxNumBins		= maxNumberBins;
-		maxManagerSize	= (maxNumBins * newBinSize) + sizeof(*this);
-		currentSize		= sizeof(*this);
+		Name = Log::TrimAndLower(name);
+		newBinSize = maxNewBinSize;
+		maxNumBins = maxNumberBins;
+
+		maxManagerSize = (maxNumBins * newBinSize) + sizeof(*this);
+		currentSize = sizeof(*this);
 	}
 
 	//Must be updated based on first object being added
 	void Initialise(const std::string &name, int maxNumItemsPerBin, int maxNumberBins)
 	{
-		if (name.empty()) Log::Error("Empty Resource Manager name not allowed");
+		Log::ExitIfEmpty(name, "Empty Resource Manager name not allowed");
 
-		Name			= Log::TrimAndLower(name);
-		newBinSize		= 0;
-		maxNumBins		= maxNumberBins;
-		maxManagerSize	= 0;
-		currentSize		= 0;
-		maxItemsPerBin	= maxNumItemsPerBin;
+		Name = Log::TrimAndLower(name);
+		maxNumBins = maxNumberBins;
+		maxItemsPerBin = maxNumItemsPerBin;
+
+		newBinSize = 0;
+		maxManagerSize = 0;
+		currentSize = 0;
 	}
 
 	//Add an item to the database
-	T *Load(const std::string &resourcename, T* resourceObj)
+	T *Load(const std::string &resourceName, T* resource)
 	{
-		if (resourcename.empty()) Log::Error("Empty filename not allowed");
+		Log::ExitIfEmpty(resourceName, "Empty filename not allowed");
 
-		std::string ResourceName = Log::TrimAndLower(resourcename);
-		resourceObj->SetName(ResourceName);
+		std::string formattedResourceName = Log::TrimAndLower(resourceName);
+		resource->SetName(formattedResourceName);
 
-		//Check if this is first object to be added. 
-		//If so, update sizes according to first object being added
-		if (newBinSize == 0)
-		{
-			//newBinSize = resourceObj->GetResourceSize() * maxItemsPerBin;
-			//maxManagerSize = maxNumBins * newBinSize;
-		}
-
-		//Check for duplicate
 		if (!allowDuplicates)
 		{
-			std::vector<ResourceMap<T>*>::iterator mapit;
-			for (mapit = resourceMaps.begin();
-				mapit != resourceMaps.end(); mapit++) {
+			std::vector<ResourceMap<T>*>::iterator mapIterator;
+			for (mapIterator = resourceMaps.begin(); mapIterator != resourceMaps.end(); mapIterator++)
+			{
+				T* duplicate = (*mapIterator)->Get(resourceName);
 
-				T* res = (*mapit)->Get(resourcename);
-				if (res != nullptr) 
+				if (duplicate != nullptr)
 				{
 					//Already loaded
-					if (verbose) cout << "Resource already exists" << endl;
-					return res;
+					if (verbose)
+					{
+						cout << "Resource already exists" << endl;
+					}
+
+					return duplicate;
 				}
 
 			}
 		}
 
 		//Check if adding the new item would lead to exceeding the managers size limit
-		if (currentSize + resourceObj->GetSizeInBytes() <= maxManagerSize)
+		if (currentSize + resource->GetSizeInBytes() <= maxManagerSize)
 		{
 			//Insert into the map
 			//Insert into first bin that has enough space
-			for (std::vector<ResourceMap<T>*>::iterator mapit = resourceMaps.begin();
-				mapit != resourceMaps.end(); mapit++) 
+			std::vector<ResourceMap<T>*>::iterator iterator;
+			for (iterator = resourceMaps.begin(); iterator != resourceMaps.end(); iterator++)
 			{
-				if ((*mapit)->FreeSpace() >= resourceObj->GetSizeInBytes())
+				if ((*iterator)->FreeSpace() >= resource->GetSizeInBytes())
 				{
 					//There is enough space. Insert.
-					(*mapit)->Add(resourcename, resourceObj);
-					currentSize = currentSize + resourceObj->GetSizeInBytes();
-					return resourceObj;
+					(*iterator)->Add(resourceName, resource);
+					currentSize = currentSize + resource->GetSizeInBytes();
+
+					return resource;
 				}
 			}
 
@@ -103,28 +101,32 @@ public:
 			ResourceMap<T>* newMap = new ResourceMap<T>;
 			newMap->Initialise("Map" + std::to_string(binNumber), verbose, allowDuplicates, newBinSize);
 			AddResourceMap(newMap);
-			newMap->Add(resourcename, resourceObj);
-			currentSize = currentSize + resourceObj->GetSizeInBytes();
+			newMap->Add(resourceName, resource);
+			
+			currentSize = currentSize + resource->GetSizeInBytes();
 		}
-		else Log::Error(Name + " Cannot add item - would exceed limit");
+		else
+		{
+			Log::Error(Name + " Cannot add item - would exceed limit");
+		}
 
-		return resourceObj;
+		return resource;
 	}
 
 	//Add an item but the resource name has already been defined
-	T* Load(T* resourceObj)
+	T* Load(T* resource)
 	{
-		const std::string name = resourceObj->GetName();
+		const std::string name = resource->GetName();
 
-		Load(name, resourceObj);
+		Load(name, resource);
 
-		return resourceObj;
+		return resource;
 	}
 
 	//Delete an item
 	bool Unload(const std::string &resourcename)
 	{
-		if (resourcename.empty()) Log::Error("Empty resource name not allowed");
+		Log::ExitIfEmpty(resourcename, "Empty resource name not allowed");
 
 		std::string name = Log::TrimAndLower(resourcename);
 
@@ -149,9 +151,9 @@ public:
 	}
 
 	//Retrieve an item
-	T* Find(const std::string &resourcename) 
+	T* Find(const std::string &resourcename)
 	{
-		if (resourcename.empty()) Log::Error("Empty filename not allowed");
+		Log::ExitIfEmpty(resourcename, "Empty resource name not allowed");
 
 		std::string ResourceName = Log::TrimAndLower(resourcename);
 
@@ -161,17 +163,17 @@ public:
 		  Best case:  O(1) -- First item!
 		*/
 		for (std::vector<ResourceMap<T>*>::iterator mapit = resourceMaps.begin();
-			mapit != resourceMaps.end(); mapit++) 
+			mapit != resourceMaps.end(); mapit++)
 		{
 			T* res = (*mapit)->Get(resourcename);
-			if (res != nullptr) 
+			if (res != nullptr)
 			{
 				//Found
 				return res;
 			}
 
 		}
-		
+
 		return nullptr;
 	}
 
@@ -185,10 +187,10 @@ public:
 	}
 
 	//Return string containing info on items inside a bin(s)
-	std::string Dump(int mapIndex = -1) 
+	std::string Dump(int mapIndex = -1)
 	{
 		if (mapIndex == -1) //Print all
-		{ 
+		{
 			std::string results;
 
 			for (vector<ResourceMap<T>*>::iterator i = resourceMaps.begin(); i != resourceMaps.end(); i++)
@@ -206,7 +208,7 @@ public:
 	}
 
 	//Return string containing statistics about the resourcemanager
-	std::string DumpStatistics() 
+	std::string DumpStatistics()
 	{
 		string results = "\n-----------------" + Name + "-----------------";
 
@@ -219,20 +221,27 @@ public:
 		return results;
 	}
 
-	const std::string &GetName() const { return Name; }
-	const int Size() const { return Map.size(); }
+	const std::string &GetName() const
+	{
+		return Name;
+	}
+	const int Size() const
+	{
+		return Map.size();
+	}
 
 	size_t GetMaxSize() const
 	{
 		return maxManagerSize;
 	}
 
-	size_t GetCurrentSize() const 
+	size_t GetCurrentSize() const
 	{
 		size_t size = 0;
 		std::vector<ResourceMap<T>*>::const_iterator it = resourceMaps.begin();
 
-		while (it != resourceMaps.end()){
+		while (it != resourceMaps.end())
+		{
 			size += (*it)->GetCurrentSize();
 			it++;
 		}
@@ -241,8 +250,12 @@ public:
 	}
 
 private:
-	ResourceManager(const ResourceManager&) { };
-	ResourceManager &operator = (const ResourceManager&) { return *this; }
+	ResourceManager(const ResourceManager&)
+	{};
+	ResourceManager &operator = (const ResourceManager&)
+	{
+		return *this;
+	}
 
 	//Force removal for each map
 	void ReleaseAll()

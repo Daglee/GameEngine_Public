@@ -28,10 +28,7 @@ public:
 
 	void Initialise(const std::string &name, bool verbosity, bool duplicates, size_t maximumSize)
 	{
-		if (name.empty())
-		{
-			Log::Error(mapName + " : Array name cannot be empty");
-		}
+		Log::ExitIfEmpty(name, mapName + " : Array name cannot be empty");
 
 		mapName = Log::TrimAndLower(name);
 
@@ -58,10 +55,7 @@ public:
 	//Add a new element!
 	T *Add(const std::string &resourceName, T* resource)
 	{
-		if (resourceName.empty())
-		{
-			Log::Error(mapName + " : resource name cannot be empty");
-		}
+		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
 
 		std::string formattedResourceName = Log::TrimAndLower(resourceName);
 
@@ -72,30 +66,27 @@ public:
 
 		size_t hash = std::hash <std::string>{}(formattedResourceName);
 
-		resources.insert(std::pair<size_t, T*>(hash, resourceObj));
+		resources.insert(std::pair<size_t, T*>(hash, resource));
 
-		currentSize = currentSize + resourceObj->GetSizeInBytes();
+		currentSize = currentSize + resource->GetSizeInBytes();
 
-		return resourceObj;
+		return resource;
 	}
 
 
 	//Delete an element using resourcename
-	void Remove(const std::string &resourcename)
+	void Remove(const std::string &resourceName)
 	{
-		if (resourcename.empty())
-		{
-			Log::Error(mapName + " : resource name cannot be empty");
-		}
+		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
 
-		std::string ResourceName = Log::TrimAndLower(resourcename);
+		std::string formattedResourceName = Log::TrimAndLower(resourceName);
 
 		if (verbose)
 		{
-			std::cout << ("Removing " + ResourceName) << std::endl;
+			std::cout << ("Removing " + formattedResourceName) << std::endl;
 		}
 
-		size_t hash = std::hash <std::string>{}(ResourceName);
+		size_t hash = std::hash <std::string>{}(formattedResourceName);
 
 		currentSize = currentSize - resources.at(hash)->GetSizeInBytes();
 
@@ -138,10 +129,7 @@ public:
 	//Retrieves element using resource name -- Hashed
 	T* Get(const std::string &resourceName)
 	{
-		if (resourceName.empty())
-		{
-			Log::Error(mapName + " : resource name cannot be empty");
-		}
+		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
 
 		std::string formattedResourceName = Log::TrimAndLower(resourceName);
 		size_t hash = std::hash <std::string>{}(formattedResourceName);

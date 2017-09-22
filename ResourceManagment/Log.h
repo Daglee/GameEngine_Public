@@ -33,6 +33,14 @@ public:
 		return newString;
 	}
 
+	static void ExitIfEmpty(string stringToCheck, string errorMessage)
+	{
+		if (stringToCheck.empty())
+		{
+			Error(errorMessage);
+		}
+	}
+
 	static void Error(string s) 
 	{
 		try 
