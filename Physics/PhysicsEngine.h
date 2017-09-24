@@ -15,17 +15,31 @@
 #include "../Game/Subsystem.h"
 #include "ExplosionSet.h"
 
+#include <atomic>
 #include <mutex>
 #include <vector>
 #include <algorithm>
 
 class Renderer;
 class DataBase;
+#include "../Threading/ThreadPool.h"
 
 struct CollisionPair
 {
 	RigidBody* r1;
 	RigidBody* r2;
+
+	CollisionPair()
+	{
+		r1 = nullptr;
+		r2 = nullptr;
+	}
+
+	CollisionPair(RigidBody* r1, RigidBody* r2)
+	{
+		this->r1 = r1;
+		this->r2 = r2;
+	}
 };
 
 class PhysicsEngine : public Resource, public Subsystem
@@ -63,14 +77,14 @@ private:
 	DataBase* database;
 
 	vector<RigidBody*> rigidBodies;
-	//vector<GameObject*> explosions;
 	vector<RigidBody*> narrowPhaseDeleteBuffer;
 
 	void UpdatePositions(float msec);
 
-	vector<CollisionPair> BroadPhase(); //Sort and sweep!
+	void BroadPhase(); //Sort and sweep!
+	void BroadPhaseChunk(const int& start, const int& end);
 	void SortRigidBodiesAlongAxis(Vector3& axis);
-	void NarrowPhase(vector<CollisionPair> pairs);
+	void NarrowPhase();
 
 	static bool compareRigidBodies(RigidBody* a, RigidBody* b);
 
@@ -87,5 +101,10 @@ private:
 	void DeleteRigidBodyIfColliderContains(const CollisionPair& collisionPair, const std::string& colliderTag);
 
 	void ClearNarrowPhaseDeleteBuffer();
+
+	ThreadPool* threadPool;
+	std::atomic<int> collisionPairCounter;
+	vector<CollisionPair> collisionPairs;
+	int broadPhaseChunkSize;
 };
 

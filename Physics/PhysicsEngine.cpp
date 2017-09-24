@@ -4,9 +4,13 @@
 #include "../GameLogicFSM/MessageSystem.h"
 #include "../nclgl/Renderer.h"
 #include "../ResourceManagment/DataBase.h"
+#include "../Threading/TaskFuture.h"
+
+#include <functional>
 
 const int FRAMES_UNTIL_AT_REST = 10;
 const float MAX_AT_REST_VELOCITY = 0.001f;
+const int BROAD_PHASE_THREADS = 3;
 
 PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : Resource()
 {
@@ -14,6 +18,8 @@ PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : Resource(
 	this->database = database;
 
 	explosions = new ExplosionSet(renderer, database);
+
+	threadPool = static_cast<ThreadPool*>(database->GetTable("GThreadPool")->GetResources()->Find("ThreadPool"));
 
 	this->SetSizeInBytes(sizeof(*this));
 }
@@ -27,6 +33,10 @@ void PhysicsEngine::AddRigidBody(RigidBody* rigidBody)
 	unique_lock<mutex> lock(update_mutex);
 
 	rigidBodies.push_back(rigidBody);
+
+	collisionPairs = vector<CollisionPair>(rigidBodies.size() * rigidBodies.size(), CollisionPair());
+
+	broadPhaseChunkSize = rigidBodies.size() / BROAD_PHASE_THREADS;
 }
 
 void PhysicsEngine::RemoveRigidBody(RigidBody* rigidBody)
@@ -39,6 +49,10 @@ void PhysicsEngine::RemoveRigidBody(RigidBody* rigidBody)
 
 	rigidBodies.erase(std::remove(rigidBodies.begin(),
 		rigidBodies.end(), rigidBody), rigidBodies.end());
+
+	collisionPairs = vector<CollisionPair>(rigidBodies.size() * rigidBodies.size(), CollisionPair());
+
+	broadPhaseChunkSize = rigidBodies.size() / BROAD_PHASE_THREADS;
 }
 
 void PhysicsEngine::Update(float sec)
@@ -52,7 +66,8 @@ void PhysicsEngine::Update(float sec)
 	updateTimer.StartTimer();
 
 	UpdatePositions(sec);
-	NarrowPhase(BroadPhase());
+	BroadPhase();
+	NarrowPhase();
 	explosions->RenderAllExplosions();
 
 	updateTimer.StopTimer();
@@ -98,32 +113,53 @@ void PhysicsEngine::SemiImplicitEuler(RigidBody& rigidBody, Vector3 gravity, flo
 }
 
 //Sort and Sweep
-vector<CollisionPair> PhysicsEngine::BroadPhase()
+void PhysicsEngine::BroadPhase()
 {
-	vector<CollisionPair> collisionPairs;
-	
 	SortRigidBodiesAlongAxis(Vector3(1, 0, 0));
 
-	int numberOfRigidBodies = rigidBodies.size();
+	vector<TaskFuture<void>> threads;
+	collisionPairCounter = 0;
 
-	for (unsigned x = 0; x < numberOfRigidBodies; ++x)
+	int startIndex = 0;
+	int endIndex = broadPhaseChunkSize;
+
+	for (int i = 0; i < BROAD_PHASE_THREADS - 1; ++i)
 	{
-		for (unsigned y = x + 1; y < numberOfRigidBodies; ++y)
+		threads.push_back(threadPool->SubmitJob([](PhysicsEngine& physicsEngine, int start, int end)
+		{
+			physicsEngine.BroadPhaseChunk(start, end);
+		}, std::ref(*this), startIndex, endIndex));
+
+		startIndex = endIndex;
+		endIndex = startIndex + (broadPhaseChunkSize) - 1;
+	}
+
+	threads.push_back(threadPool->SubmitJob([](PhysicsEngine& physicsEngine, int start, int end)
+	{
+		physicsEngine.BroadPhaseChunk(start, end);
+	}, std::ref(*this), startIndex, rigidBodies.size()));
+	
+	for (auto& task : threads)
+	{
+		task.Complete();
+	}
+}
+
+void PhysicsEngine::BroadPhaseChunk(const int& start, const int& end)
+{
+	for (unsigned x = start; x < end; ++x)
+	{
+		for (unsigned y = x + 1; y < rigidBodies.size(); ++y)
 		{
 			//Are they possibly colliding?
 			if (rigidBodies[x]->collider->objbounds.max > rigidBodies[y]->collider->objbounds.min)
 			{
 				//Yes, get Narrow phase to check this pair properly...
-				CollisionPair p;
-				p.r1 = rigidBodies[x];
-				p.r2 = rigidBodies[y];
-
-				collisionPairs.push_back(p);
+				collisionPairs[collisionPairCounter.load()] = CollisionPair(rigidBodies[x], rigidBodies[y]);
+				collisionPairCounter++;
 			}
 		}
 	}
-
-	return collisionPairs;
 }
 
 void PhysicsEngine::SortRigidBodiesAlongAxis(Vector3& axis)
@@ -141,10 +177,14 @@ bool PhysicsEngine::compareRigidBodies(RigidBody* a, RigidBody* b)
 	return a->collider->objbounds.min < b->collider->objbounds.min;
 }
 
-void PhysicsEngine::NarrowPhase(vector<CollisionPair> pairs)
+void PhysicsEngine::NarrowPhase()
 {
-	for each (CollisionPair collisionPair in pairs)
+	//for each (CollisionPair collisionPair in pairs)
+
+	for (int i = 0; i < collisionPairCounter.load(); ++i)
 	{
+		CollisionPair collisionPair = collisionPairs[i];
+
 		Vector3 contactNormal;
 		float penetrationDepth;
 
