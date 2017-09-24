@@ -2,6 +2,7 @@
 
 #include "Launcher.h"
 #include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/FSMManager.h"
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Renderer.h"
@@ -13,9 +14,13 @@ LevelManager::LevelManager(DataBase* database, std::string filename) : FSMUnit("
 {
 	ConstructLevelList(filename);
 	InitialiseFSM();
-	database->GFSMManager->Find("GFSMManager")->LateBuildFSM("Levels", "../Data/GameLogic/Levels.txt");
 
-	renderer = database->GRenderer->Find("Renderer");
+	FSMManager* fsmManager = static_cast<FSMManager*>(database->GetTable("GFSMManager")->GetResources()
+		->Find("GFSMManager"));
+
+	fsmManager->LateBuildFSM("Levels", "../Data/GameLogic/Levels.txt");
+
+	renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
 
 	loader = LevelLoader(database);
 }

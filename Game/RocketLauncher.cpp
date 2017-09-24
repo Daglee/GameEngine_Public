@@ -36,7 +36,7 @@ bool RocketLauncher::Fire(const Vector3& from, const Vector3& rotation, const in
 		string tag = "bullet" + to_string(id);// +to_string(bulletsFired);
 
 		PhysicsObject* b = new PhysicsObject(rend, phys, false, true);
-		database->PhysicsObjects->Load(tag, b);
+		database->GetTable("PhysicsObjects")->GetResources()->Load(tag, b);
 		InitialiseBullet(b);
 		b->SetPosition(pos);
 		b->GetRigidBody()->tag = tag;
@@ -78,7 +78,7 @@ void RocketLauncher::Reload()
 		{
 			phys->RemoveRigidBody(magazine.at(i)->GetRigidBody());
 			rend->RemoveSceneNode(magazine.at(i)->GetSceneNode());
-			database->PhysicsObjects->Unload(magazine.at(i)->GetRigidBody()->tag);
+			database->GetTable("PhysicsObjects")->GetResources()->Unload(magazine.at(i)->GetRigidBody()->tag);
 		}
 	}
 

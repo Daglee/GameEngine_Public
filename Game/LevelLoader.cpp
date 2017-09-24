@@ -2,6 +2,7 @@
 #include "Level.h"
 #include "ScoreBoard.h"
 #include "../ResourceManagment/DataBase.h"
+#include "../UISystem/InputManager.h"
 
 LevelLoader::LevelLoader(DataBase* database)
 {
@@ -17,22 +18,31 @@ void LevelLoader::LoadFirstLevel(std::string level)
 {
 	LoadLevel(level);
 
-	database->GInputManager->Find("InputManager")->GetPlayerbase()->RetrieveGamepadsAndPlayers(database);
-	database->GInputManager->Find("InputManager")->GetPlayerbase()->ConnectGamepads(false);
+	InputManager* inputManager =
+		static_cast<InputManager*>(database->GetTable("GInputManager")->GetResources()->Find("InputManager"));
+
+	inputManager->GetPlayerbase()->RetrieveGamepadsAndPlayers(database);
+	inputManager->GetPlayerbase()->ConnectGamepads(false);
 }
 
 void LevelLoader::LoadReplacementLevel(std::string level)
 {
 	LoadLevel(level);
 
-	database->GInputManager->Find("InputManager")->GetPlayerbase()->ReInitialisePlayers();
+	InputManager* inputManager =
+		static_cast<InputManager*>(database->GetTable("GInputManager")->GetResources()->Find("InputManager"));
+
+	inputManager->GetPlayerbase()->ReInitialisePlayers();
 }
 
 void LevelLoader::ExitLevel()
 {
 	if (currentLevel != nullptr)
 	{
-		database->GInputManager->Find("InputManager")->GetPlayerbase()->ClearAll();
+		InputManager* inputManager =
+			static_cast<InputManager*>(database->GetTable("GInputManager")->GetResources()->Find("InputManager"));
+
+		inputManager->GetPlayerbase()->ClearAll();
 		currentLevel->UnloadLevel();
 		delete currentLevel;
 	}
@@ -41,9 +51,11 @@ void LevelLoader::ExitLevel()
 
 void LevelLoader::LoadLevel(std::string level)
 {
+	Renderer* renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
+
 	currentLevel = new Level(database);
 	currentLevel->LoadAndInitialiseAssets(level);
 
-	database->GRenderer->Find("Renderer")->InitialiseScene();
-	ScoreBoard::Initialise(database->GRenderer->Find("Renderer"));
+	renderer->InitialiseScene();
+	ScoreBoard::Initialise(renderer);
 }

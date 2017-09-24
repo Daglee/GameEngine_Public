@@ -28,8 +28,10 @@ public:
 	virtual size_t GetSizeInBytes();
 	virtual int GetReferencesCount();
 
-	virtual void Read(std::string resourcename) = 0;
-	virtual void ReadParams(std::string params) = 0;
+	virtual void Read(std::string resourcename)
+	{}
+	virtual void ReadParams(std::string params)
+	{}
 
 protected:
 	Resource(const Resource& object) {}

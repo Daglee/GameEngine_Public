@@ -12,6 +12,8 @@
 #include "../GameLogicFSM/MessageSystem.h"
 #include "LevelManager.h"
 
+#include "../ResourceManagment/TableCreation.h"
+
 /*  
 	Important Notes:
 	Up to 5 players supported. Player 1 will use mouse and keyboard.
@@ -46,20 +48,20 @@ int main()
 	DataBase* database = new DataBase();
 	Launcher* game = new Launcher("Renderer", "Window", database);
 
-	database->InitialiseDataBase();
+	TableCreation tables(database);
+	tables.AddTablesToDatabase();
+
+	database->ReserveMemoryForAllTables();
+
 	game->Launch("../Data/startup.txt");
 
-	//if (!game->Initialised())
-	//{
-	//	return -1;
-	//}
+	Camera*	camera	= static_cast<Camera*>(database->GetTable("GCamera")->GetResources()->Find("Camera"));
+	Window*	window	= static_cast<Window*>(database->GetTable("GWindow")->GetResources()->Find("Window"));
+	Renderer* renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
 
-	Camera*	camera	= database->GCamera->Find("Camera");
-	Window*	win		= database->GWindow->Find("Window");
-	database->GRenderer->Find("Renderer")->SetCamera(camera);
+	renderer->SetCamera(camera);
 	AudioManager::GetInstance()->SetListener(camera->GetSceneNode());
 
-	//Set up any timers we want displayed on screen...
 	game->InitProfilerTimers();
 
 	SubsystemManager subsystems(database);
@@ -68,9 +70,9 @@ int main()
 	lvlManager->LoadFirstLevel();
 
 	//Game loop...
-	while (game->GetWindow()->UpdateWindow() && game->GetWindow()->running) 
+	while (window->UpdateWindow() && window->running)
 	{
-		float deltatime = win->GetTimer()->GetTimedMS();
+		float deltatime = window->GetTimer()->GetTimedMS();
 
 		lvlManager->Update(deltatime);
 		subsystems.Update(deltatime);
@@ -81,66 +83,3 @@ int main()
 
     return 0;
 }
-
-//#include <ctime>
-
-/*
-int main()
-{
-	ThreadPool threadPool;
-
-	std::vector<float>* floats = new std::vector<float>;
-	double secondsPassed;
-
-	for (int i = 0; i < 10000; ++i)
-	{
-		floats->push_back((float)i);
-	}
-
-	std::vector<TaskFuture<void>> updates;
-
-	clock_t startTime = clock();
-	for (int i = 0; i < 10000; i++)
-	{
-		updates.push_back(threadPool.SubmitJob([](std::vector<float>* floats, const int& i)
-		{
-			//float q = (float)i / 123.0213f / 12.0213172f / 123148923894.2f * 1238656.0821f;
-			//floats->operator[](i) = std::sqrtf((floats->operator[](i)) * 10.0f / 123.0f / q + q);
-
-			//double* d = new double(15.0);
-
-			//double e = *d;
-
-			//delete d;
-
-		}, floats, i));
-	}
-
-	//for (auto& task : updates)
-	//{
-	//	task.Complete();
-	//}
-
-	secondsPassed = (clock() - startTime) / (double)CLOCKS_PER_SEC;
-	std::cout << "Threaded: " << secondsPassed <<std::endl;
-
-	startTime = clock();
-
-	for (int i = 0; i < 10000; i++)
-	{
-		//float q = (float)i / 123.0213f / 12.0213172f / 123148923894.2f * 1238656.0821f;
-		//floats->operator[](i) = std::sqrtf((floats->operator[](i)) * 10.0f / 123.0f / q + q);
-		//double* d = new double(15.0);
-
-		//double e = *d;
-
-		//delete d;
-	}
-
-	secondsPassed = (clock() - startTime) / (double)CLOCKS_PER_SEC;
-	std::cout << "Sequential: " << secondsPassed << std::endl;
-
-
-	delete floats;
-}
-*/

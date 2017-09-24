@@ -8,9 +8,6 @@
     <ClInclude Include="ResourceMap.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="DataBase.h">
-      <Filter>Database</Filter>
-    </ClInclude>
     <ClInclude Include="resource1.h">
       <Filter>Random Things</Filter>
     </ClInclude>
@@ -22,6 +19,15 @@
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="TableCreation.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Database</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -39,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataBase.cpp">
-      <Filter>Database</Filter>
-    </ClCompile>
     <ClCompile Include="GameEntityDatabaseEntryFile.cpp">
       <Filter>Identifiers</Filter>
     </ClCompile>
@@ -50,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="Resource.cpp">
       <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="TableCreation.cpp">
+      <Filter>Database</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

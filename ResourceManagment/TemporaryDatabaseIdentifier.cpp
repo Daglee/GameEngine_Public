@@ -1,6 +1,8 @@
 #include "TemporaryDatabaseIdentifier.h"
 
 #include "DataBase.h"
+#include "../Game/GameObject.h"
+#include "../Game/PhysicsObject.h"
 
 TemporaryDatabaseIdentifier::TemporaryDatabaseIdentifier(std::string resourceManager, std::string resourceName)
 {
@@ -30,27 +32,32 @@ void TemporaryDatabaseIdentifier::UnloadFromDatabase(DataBase* database)
 
 void TemporaryDatabaseIdentifier::OBJMeshUnload(DataBase* database)
 {
-	database->OBJMeshes->Unload(resourceName);
+	database->GetTable("OBJMeshes")->GetResources()->Unload(resourceName);
 }
 
 void TemporaryDatabaseIdentifier::GameEntityUnload(DataBase* database)
 {
-	SceneNode* node = database->GameObjects->Find(resourceName)->GetSceneNode();
-	database->GRenderer->Find("Renderer")->RemoveSceneNode(node);
+	GameObject* entity = static_cast<GameObject*>(database->GetTable("GameObjects")->GetResources()->Find(resourceName));
+	SceneNode* node = entity->GetSceneNode();
 
-	database->GameObjects->Unload(resourceName);
+	Renderer* renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
+	renderer->RemoveSceneNode(node);
+
+	database->GetTable("GameObjects")->GetResources()->Unload(resourceName);
 }
 
 void TemporaryDatabaseIdentifier::PhysicsEntityUnload(DataBase* database)
 {
-	Renderer* renderer = database->GRenderer->Find("Renderer");
-	PhysicsEngine* physicsEngine = database->GPhysicsEngine->Find("PhysicsEngine");
+	Renderer* renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
+	PhysicsEngine* physicsEngine = static_cast<PhysicsEngine*>(database->GetTable("PhysicsEngine")->GetResources()->Find("PhysicsEngine"));
 
-	SceneNode* node = database->PhysicsObjects->Find(resourceName)->GetSceneNode();
-	RigidBody* rigidBody = database->PhysicsObjects->Find(resourceName)->GetRigidBody();
+	PhysicsObject* entity = static_cast<PhysicsObject*>(database->GetTable("PhysicsObjects")->GetResources()->Find(resourceName));
+
+	SceneNode* node = entity->GetSceneNode();
+	RigidBody* rigidBody = entity->GetRigidBody();
 
 	renderer->RemoveSceneNode(node);
 	physicsEngine->RemoveRigidBody(rigidBody);
 
-	database->PhysicsObjects->Unload(resourceName);
+	database->GetTable("PhysicsObjects")->GetResources()->Unload(resourceName);
 }

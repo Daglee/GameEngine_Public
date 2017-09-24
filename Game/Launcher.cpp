@@ -1,6 +1,8 @@
 #include "Launcher.h"
 #include "../ResourceManagment/DataBase.h"
 #include "ScoreBoard.h"
+#include "../Profiler/Profiler.h"
+#include "../GameLogicFSM/FSMManager.h"
 
 Launcher::Launcher(string rendName, string windName, DataBase* db)
 {
@@ -24,17 +26,15 @@ void Launcher::Launch(string filename)
 void Launcher::InitProfilerTimers()
 {
 	//Retrieve everything from the database and hook it up.
-	Profiler* profiler = database->GProfiler->Find("Profiler");
+	Profiler* profiler = static_cast<Profiler*>(database->GetTable("GProfiler")->GetResources()->Find("Profiler"));
+	PhysicsEngine* physicsEngine = static_cast<PhysicsEngine*>(database->GetTable("PhysicsEngine")->GetResources()->Find("PhysicsEngine"));
+	FSMManager* fsmManager = static_cast<FSMManager*>(database->GetTable("GFSMManager")->GetResources()->Find("GFSMManager"));
 
 	profiler->AddSubSystemTimer("Renderer", &renderer->updateTimer);
 	profiler->AddSubSystemTimer("Input", &inputManager->updateTimer);
 	profiler->AddSubSystemTimer("Audio", &AudioManager::GetInstance()->updateTimer);
-
-	profiler->AddSubSystemTimer("PhysicsEngine",
-		&database->GPhysicsEngine->Find("PhysicsEngine")->updateTimer);
-	profiler->AddSubSystemTimer("Gamelogic",
-		&database->GFSMManager->Find("GFSMManager")->updateTimer);
-
+	profiler->AddSubSystemTimer("PhysicsEngine", &physicsEngine->updateTimer);
+	profiler->AddSubSystemTimer("Gamelogic", &fsmManager->updateTimer);
 }
 
 bool Launcher::GraphicsExists()
@@ -82,7 +82,7 @@ bool Launcher::IsSubSystemNull(Subsystem* subsystem, std::string name)
 
 void Launcher::AttachGraphicsAndInput()
 {
-	renderer = database->GRenderer->Find(rendererName);
-	window = database->GWindow->Find(windowName);
-	inputManager = database->GInputManager->Find("InputManager");
+	renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find(rendererName));
+	window = static_cast<Window*>(database->GetTable("GWindow")->GetResources()->Find(windowName));
+	inputManager = static_cast<InputManager*>(database->GetTable("GInputManager")->GetResources()->Find("InputManager"));
 }

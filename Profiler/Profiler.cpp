@@ -14,7 +14,8 @@ Profiler::Profiler(DataBase* db, Window* win, int numTimers) : Resource()
 	database = db;
 	memoryWatcher = MemoryWatcher(database->MaxSize(), database);
 	fpsCounter = FramerateCounter(window->GetTimer()->GetMS());
-	renderer = database->GRenderer->Find("Renderer");
+
+	renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
 
 	//Upper bound of how many timers can be added
 	this->numTimers = numTimers;
@@ -26,7 +27,7 @@ Profiler::Profiler(DataBase* db) : Resource()
 {
 	database = db;
 	memoryWatcher = MemoryWatcher(database->MaxSize(), database);
-	renderer = database->GRenderer->Find("Renderer");
+	renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
 
 	this->SetSizeInBytes(sizeof(*this));
 }
@@ -150,7 +151,7 @@ void Profiler::ReadParams(string params)
 	int num = atoi(tokens.at(2).c_str());
 
 	numTimers = num;
-	window = database->GWindow->Find(windowname);
+	window = static_cast<Window*>(database->GetTable("GWindow")->GetResources()->Find("Window"));
 	fpsCounter = FramerateCounter(window->GetTimer()->GetMS());
 
 	this->SetSizeInBytes(sizeof(*this));

@@ -4,6 +4,7 @@
 #include "../GameLogicFSM/MessageSystem.h"
 #include "../Game/GameObject.h"
 #include "../ResourceManagment/DataBase.h"
+#include "../nclgl/Renderer.h"
 
 const float EXPLOSION_RADIUS = 100.0f;
 const float EXPLOSION_FORCE = 1000.0f;
@@ -53,7 +54,7 @@ void ExplosionSet::RenderAllExplosions()
 void ExplosionSet::InitialiseExplosion(const Vector3& Position)
 {
 	GameObject* ex = new GameObject(*renderer);
-	ex->AddMesh(*database->OBJMeshes->Find("../Data/Meshes/sphere.obj"));
+	ex->AddMesh(*static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find("../Data/Meshes/sphere.obj")));
 	ex->SetPosition(Position);
 	ex->SetSize(Vector3(30, 30, 30));
 	ex->GetSceneNode()->SetColour(Vector4(1, 0, 0, 1));

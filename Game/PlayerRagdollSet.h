@@ -17,7 +17,7 @@ public:
 		Renderer* renderer, PhysicsEngine* physicsEngine);
 	~PlayerRagdollSet();
 
-	void SpawnNextRagdoll(const DataBase* database, const Matrix4& playerRotation);
+	void SpawnNextRagdoll(DataBase* database, const Matrix4& playerRotation);
 
 	void SetRenderer(Renderer* renderer);
 	void SetPhysicsEngine(PhysicsEngine* physicsEngine);

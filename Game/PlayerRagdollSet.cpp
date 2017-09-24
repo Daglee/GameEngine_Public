@@ -27,7 +27,7 @@ PlayerRagdollSet::~PlayerRagdollSet()
 	}
 }
 
-void PlayerRagdollSet::SpawnNextRagdoll(const DataBase* database, const Matrix4& playerRotation)
+void PlayerRagdollSet::SpawnNextRagdoll(DataBase* database, const Matrix4& playerRotation)
 {
 	if (MaxRagdollsSpawned())
 	{

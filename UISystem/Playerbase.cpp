@@ -1,8 +1,12 @@
 #include "Playerbase.h"
 
-#include "../ResourceManagment/DataBase.h"
 #include "PlayerInputConnection.h"
+#include "MKMapper.h"
+#include "../ResourceManagment/DataBase.h"
 #include "../Game/ScoreBoard.h"
+#include "../Game/Player.h"
+#include "../nclgl/Gamepad.h"
+#include "../Threading/ThreadPool.h"
 
 #include <string>
 
@@ -32,10 +36,10 @@ void Playerbase::RetrieveGamepadsAndPlayers(DataBase* db)
 		std::string id = std::to_string(i);
 
 		std::string gamepad = "gamepad" + id;
-		gamepads[i] = database->Gamepads->Find(gamepad);
-
+		gamepads[i] = static_cast<Gamepad*>(database->GetTable("Gamepads")->GetResources()->Find(gamepad));
+		
 		std::string player = "player" + id;
-		players[i] = database->Players->Find(player);
+		players[i] = static_cast<Player*>(database->GetTable("Players")->GetResources()->Find(player));
 	}
 
 	StoreDatabase();
@@ -49,15 +53,15 @@ void Playerbase::RetrieveGamepadsAndPlayers(DataBase* db)
 
 void Playerbase::StoreDatabase()
 {
-	systems.renderer = database->GRenderer->Find("Renderer");
-	systems.physicsEngine = database->GPhysicsEngine->Find("PhysicsEngine");
-	systems.window = database->GWindow->Find("Window");
-	systems.threadPool = database->GThreadPool->Find("ThreadPool");
+	systems.renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
+	systems.physicsEngine = static_cast<PhysicsEngine*>(database->GetTable("PhysicsEngine")->GetResources()->Find("PhysicsEngine"));
+	systems.window = static_cast<Window*>(database->GetTable("GWindow")->GetResources()->Find("Window"));
+	systems.threadPool = static_cast<ThreadPool*>(database->GetTable("GThreadPool")->GetResources()->Find("ThreadPool"));
 	systems.database = database;
 
 	BasePlayerSystems components;
-	components.defaultBulletMesh = database->OBJMeshes->Find("../Data/Meshes/sphere.obj");
-	components.defaultPlayerMesh = database->OBJMeshes->Find("../Data/Meshes/cube.obj");
+	components.defaultBulletMesh = static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find("../Data/Meshes/sphere.obj"));
+	components.defaultPlayerMesh = static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find("../Data/Meshes/cube.obj"));
 
 	playerConfig = new PlayerConfiguration(components);
 }

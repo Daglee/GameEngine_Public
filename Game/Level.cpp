@@ -49,7 +49,7 @@ void Level::LoadLevelAssets(std::string filename)
 
 		if (resourcesToAdd.numberInDatabase == 1)
 		{
-			database->AddToResourceManager(resourcesToAdd.resourceManager, resourcesToAdd.resourceName);
+			database->AddResourceToTable(resourcesToAdd.resourceManager, resourcesToAdd.resourceName);
 		}
 		else
 		{
@@ -65,7 +65,7 @@ void Level::AddAssetsAndAppendNumberToName(ResourceIdentifier entry)
 	for (int i = 0; i < entry.numberInDatabase; i++)
 	{
 		string nameWithAppendedNumber = entry.resourceName + std::to_string(i);
-		database->AddToResourceManager(entry.resourceManager, nameWithAppendedNumber);
+		database->AddResourceToTable(entry.resourceManager, nameWithAppendedNumber);
 	}
 }
 

@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "../ResourceManagment/DataBase.h"
+#include "../nclgl/Renderer.h"
 
 const int ASSET_NAME = 1;
 const int X_POSITION = 2;
@@ -28,12 +29,14 @@ void GameEntityBuilder::Build()
 void GameEntityBuilder::StoreEntityFromDatabase()
 {
 	std::string name = configurationTokens.at(ASSET_NAME);
-	entity = database->GameObjects->Find(name);
+	entity = static_cast<GameObject*>(database->GetTable("GameObjects")->GetResources()->Find(name));
 }
 
 void GameEntityBuilder::AddStoredGameEntity()
 {
-	entity->AddToRenderer(*database->GRenderer->Find("Renderer"));
+	Renderer* renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
+
+	entity->AddToRenderer(*renderer);
 }
 
 Vector3 GameEntityBuilder::ReadPosition()
@@ -47,5 +50,7 @@ Vector3 GameEntityBuilder::ReadPosition()
 
 void GameEntityBuilder::AddMeshFromAssetName()
 {
-	entity->AddMesh(*database->OBJMeshes->Find(configurationTokens.at(MESH)));
+	OBJMesh* mesh = static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find(configurationTokens.at(MESH)));
+
+	entity->AddMesh(*mesh);
 }

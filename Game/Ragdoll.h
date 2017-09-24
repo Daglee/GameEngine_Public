@@ -20,7 +20,7 @@ public:
 		DeleteRagdoll();
 	}
 
-	void SpawnRagdoll(const DataBase* database, const Matrix4& playerRotation);
+	void SpawnRagdoll(DataBase* database, const Matrix4& playerRotation);
 	void DeleteRagdoll();
 
 	void SetRenderer(Renderer* renderer)

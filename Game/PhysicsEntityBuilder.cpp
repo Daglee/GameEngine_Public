@@ -36,13 +36,13 @@ void PhysicsEntityBuilder::Build()
 void PhysicsEntityBuilder::StoreEntityFromDatabase()
 {
 	std::string name = configurationTokens.at(ASSET_NAME);
-	entity = database->PhysicsObjects->Find(name);
+	entity = static_cast<PhysicsObject*>(database->GetTable("PhysicsObjects")->GetResources()->Find(name));
 }
 
 void PhysicsEntityBuilder::AddStoredPhysicsEntity()
 {
-	entity->AddToPhysicsEngine(database->GPhysicsEngine->Find("PhysicsEngine"));
-	entity->AddToRenderer(*database->GRenderer->Find("Renderer"));
+	entity->AddToPhysicsEngine(static_cast<PhysicsEngine*>(database->GetTable("PhysicsEngine")->GetResources()->Find("PhysicsEngine")));
+	entity->AddToRenderer(*static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer")));
 }
 
 void PhysicsEntityBuilder::ReadShapeAndBuild()
@@ -81,7 +81,9 @@ void PhysicsEntityBuilder::ConstructSphere()
 void PhysicsEntityBuilder::AddMeshFromAssetName(int meshToken)
 {
 	std::string meshAssetName = configurationTokens.at(meshToken);
-	entity->AddMesh(*database->OBJMeshes->Find(meshAssetName));
+
+	OBJMesh* mesh = static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find(meshAssetName));
+	entity->AddMesh(*mesh);
 }
 
 Vector3 PhysicsEntityBuilder::ReadPosition()

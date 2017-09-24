@@ -38,7 +38,7 @@ void GameEntityDatabaseEntryFile::FillDatabaseFromFile(std::string fileName)
 		threadLine++;
 	}
 
-	ThreadPool* threadPool = database->GThreadPool->Find("ThreadPool");
+	ThreadPool* threadPool = static_cast<ThreadPool*>(database->GetTable("GThreadPool")->GetResources()->Find("ThreadPool"));
 	vector<TaskFuture<void>> threads;
 
 	threads.push_back(threadPool->SubmitJob([](GameEntityDatabaseEntryFile& parser, vector<string> lines, int linenum) {

@@ -1,11 +1,14 @@
 #include "FSMUnit.h"
 
 #include "../ResourceManagment/DataBase.h"
+#include "FSMManager.h"
 
 FSMUnit::FSMUnit(std::string FSMName, DataBase* database)
 {
 	properties = new std::unordered_map<std::string, float*>;
 	fsm = new FSM(FSMName, properties);
 
-	database->GFSMManager->Find("GFSMManager")->AddFSM(fsm, false);
+
+	FSMManager* fsmm = static_cast<FSMManager*>(database->GetTable("GFSMManager")->GetResources()->Find("GFSMManager"));
+	fsmm->AddFSM(fsm, false);
 }

@@ -1,9 +1,12 @@
 #include "LevelConfiguration.h"
+
 #include "PhysicsObject.h"
 #include "GameObject.h"
 #include "EntityConfiguration.h"
+#include "AudioManager.h"
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"
+#include "../GameLogicFSM/FSMManager.h"
 
 LevelConfiguration::LevelConfiguration(DataBase* database, std::string directory)
 {
@@ -41,7 +44,7 @@ void LevelConfiguration::ReadPhysicsObject(std::string filename)
 		string resourceName;
 
 		getline(file, resourceName);
-		PhysicsObject* entity = database->PhysicsObjects->Find(resourceName);
+		PhysicsObject* entity = static_cast<PhysicsObject*>(database->GetTable("PhysicsObjects")->GetResources()->Find(resourceName));
 
 		ConfigureAllEntityAttributes(file, entity);
 	}
@@ -58,7 +61,7 @@ void LevelConfiguration::ReadGameObject(std::string filename)
 		string resourceName;
 
 		getline(file, resourceName);
-		GameObject* entity = database->GameObjects->Find(resourceName);
+		GameObject* entity = static_cast<GameObject*>(database->GetTable("GameObjects")->GetResources()->Find(resourceName));
 
 		ConfigureAllEntityAttributes(file, entity);
 	}
@@ -79,7 +82,7 @@ void LevelConfiguration::InitialiseGameLogic(std::string filename)
 	std::ifstream file(filename);
 	string line;
 
-	FSMManager* fsmManager = database->GFSMManager->Find("GFSMManager");
+	FSMManager* fsmManager = static_cast<FSMManager*>(database->GetTable("GFSMManager")->GetResources()->Find("GFSMManager"));
 
 	while (getline(file, line))
 	{

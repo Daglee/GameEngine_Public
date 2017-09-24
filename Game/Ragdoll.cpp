@@ -14,14 +14,16 @@ Ragdoll::Ragdoll(CharacterModel* playerModel, Renderer* renderer, PhysicsEngine*
 	this->playerModel = playerModel;
 }
 
-void Ragdoll::SpawnRagdoll(const DataBase* database, const Matrix4& playerRotation)
+void Ragdoll::SpawnRagdoll(DataBase* database, const Matrix4& playerRotation)
 {
 	for each (SceneNode* modelLimb in playerModel->modelParts)
 	{
 		PhysicsObject* limbCopy = new PhysicsObject(renderer, physicsEngine, false, true);
 
 		limbCopy->GetRigidBody()->collider = new SphereCollider(1);
-		limbCopy->AddMesh(*database->OBJMeshes->Find("../Data/meshes/robotcube.obj"));
+
+		OBJMesh* mesh = static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find("../Data/meshes/robotcube.obj"));
+		limbCopy->AddMesh(*mesh);
 
 		limbCopy->GetRigidBody()->parentMesh = limbCopy->GetSceneNode();
 		limbCopy->SetPosition(modelLimb->GetWorldTransform().GetPositionVector());

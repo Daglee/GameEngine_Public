@@ -150,6 +150,8 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ResourceMap.h" />
+    <ClInclude Include="Table.h" />
+    <ClInclude Include="TableCreation.h" />
     <ClInclude Include="TemporaryDatabaseIdentifier.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +161,7 @@
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="GameEntityDatabaseEntryFile.cpp" />
     <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="TableCreation.cpp" />
     <ClCompile Include="TemporaryDatabaseIdentifier.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

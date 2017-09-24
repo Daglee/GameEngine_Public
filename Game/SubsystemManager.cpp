@@ -2,6 +2,10 @@
 
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/MessageSystem.h"
+#include "../UISystem/InputManager.h"
+#include "../GameLogicFSM/FSMManager.h"
+#include "../Physics/PhysicsEngine.h"
+#include "../Profiler/Profiler.h"
 
 enum SUBSYSTEM_INDEXES
 {
@@ -16,13 +20,13 @@ const int MESSAGE_LIFETIME = 100;
 
 SubsystemManager::SubsystemManager(DataBase* database)
 {
-	this->renderer = database->GRenderer->Find("Renderer");
-	this->threadPool = database->GThreadPool->Find("ThreadPool");
+	this->renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
+	this->threadPool = static_cast<ThreadPool*>(database->GetTable("GThreadPool")->GetResources()->Find("ThreadPool"));
 
-	subsystems[INPUT_MANAGER] = database->GInputManager->Find("InputManager");
-	subsystems[GAME_LOGIC] = database->GFSMManager->Find("GFSMManager");
-	subsystems[PHYS_ENGINE] = database->GPhysicsEngine->Find("PhysicsEngine");
-	subsystems[PROFILER] = database->GProfiler->Find("Profiler");
+	subsystems[INPUT_MANAGER] = static_cast<InputManager*>(database->GetTable("GInputManager")->GetResources()->Find("InputManager"));
+	subsystems[GAME_LOGIC] = static_cast<FSMManager*>(database->GetTable("GFSMManager")->GetResources()->Find("GFSMManager"));
+	subsystems[PHYS_ENGINE] = static_cast<PhysicsEngine*>(database->GetTable("PhysicsEngine")->GetResources()->Find("PhysicsEngine"));
+	subsystems[PROFILER] = static_cast<Profiler*>(database->GetTable("GProfiler")->GetResources()->Find("Profiler"));
 	subsystems[AUDIO_MNGR] = AudioManager::GetInstance();
 }
 
