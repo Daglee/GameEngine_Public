@@ -8,16 +8,16 @@ class DataBase;
 class LevelLoader
 {
 public:
-	LevelLoader(DataBase* database);
+	explicit LevelLoader(DataBase* database);
 	LevelLoader();
 	~LevelLoader() {}
 
-	void LoadFirstLevel(std::string level);
-	void LoadReplacementLevel(std::string level);
-	void ExitLevel();
+	void LoadFirstLevel(const std::string level);
+	void LoadReplacementLevel(const std::string level);
+	void ExitLevel() const;
 
 private:
-	void LoadLevel(std::string level);
+	void LoadLevel(const std::string level);
 
 	Level* currentLevel;
 	DataBase* database;

@@ -3,13 +3,8 @@
 
 #include "../NCLGL/window.h"
 #include "../UISystem/InputManager.h"
-#include "../ResourceManagment/Log.h"
 #include "Subsystem.h"
 #include "Player.h"
-#include "Level.h"
-
-#include <fstream>
-#include <vector>
 
 class DataBase;
 
@@ -21,12 +16,12 @@ class DataBase;
 class Launcher
 {
 public:
-	Launcher(string rendererName, string windowName, DataBase* db);
+	Launcher(const string rendererName, const string windowName, DataBase* db);
 	~Launcher() {}
 
-	void Launch(string directory);
+	void Launch(const string directory);
 
-	void InitProfilerTimers();
+	void InitProfilerTimers() const;
 
 	Window* GetWindow() const
 	{
@@ -41,7 +36,7 @@ public:
 private:
 	bool GraphicsExists();
 	bool IsGraphicsInitialised();
-	bool IsSubSystemNull(Subsystem* subsystem, std::string name);
+	bool IsSubSystemNull(Subsystem* subsystem, const string name);
 	void AttachGraphicsAndInput();
 
 	InputManager* inputManager;

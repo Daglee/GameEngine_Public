@@ -3,6 +3,8 @@
 #include "DataBase.h"
 #include "../Game/GameObject.h"
 #include "../Game/PhysicsObject.h"
+#include "../nclgl/Renderer.h"
+#include "../Physics/PhysicsEngine.h"
 
 TemporaryDatabaseIdentifier::TemporaryDatabaseIdentifier(std::string resourceManager, std::string resourceName)
 {

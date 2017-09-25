@@ -18,9 +18,9 @@ TopDownController::TopDownController(InputMapper* input, CharacterModel* playerM
 
 void TopDownController::ApplyRotation()
 {
-	float inputtedRotationInDegrees = input->GetRotation();
+	const float inputtedRotationInDegrees = input->GetRotation();
 
-	Matrix4 rotation = Matrix4::Rotation(inputtedRotationInDegrees, Y_ROTATION_AXIS);
+	const Matrix4 rotation = Matrix4::Rotation(inputtedRotationInDegrees, Y_ROTATION_AXIS);
 	playerModel->SetTransform(playerModel->GetTransform() * rotation);
 
 	if (inputtedRotationInDegrees != 0)
@@ -32,7 +32,7 @@ void TopDownController::ApplyRotation()
 
 void TopDownController::UpdatePosition()
 {
-	Vector3 movement = input->GetMovement() * speedMultiplier;
+	const Vector3 movement = input->GetMovement() * speedMultiplier;
 
 	rigidBody->ApplyForce(movement);
 

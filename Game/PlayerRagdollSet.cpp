@@ -8,7 +8,7 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Matrix4.h"
 
-PlayerRagdollSet::PlayerRagdollSet(int ragdollLimit, CharacterModel* playerModel,
+PlayerRagdollSet::PlayerRagdollSet(const int ragdollLimit, CharacterModel* playerModel,
 	Renderer* renderer, PhysicsEngine* physicsEngine)
 {
 	this->ragdollLimit = ragdollLimit;
@@ -38,7 +38,7 @@ void PlayerRagdollSet::SpawnNextRagdoll(DataBase* database, const Matrix4& playe
 	++numberOfSpawnedRagdolls;
 }
 
-bool PlayerRagdollSet::MaxRagdollsSpawned()
+bool PlayerRagdollSet::MaxRagdollsSpawned() const
 {
 	return numberOfSpawnedRagdolls == ragdollLimit;
 }
@@ -53,7 +53,7 @@ void PlayerRagdollSet::DespawnRagdolls()
 	numberOfSpawnedRagdolls = 0;
 }
 
-void PlayerRagdollSet::SetRenderer(Renderer* renderer)
+void PlayerRagdollSet::SetRenderer(Renderer* renderer) const
 {
 	for each (Ragdoll* body in ragdolls)
 	{
@@ -61,7 +61,7 @@ void PlayerRagdollSet::SetRenderer(Renderer* renderer)
 	}
 }
 
-void PlayerRagdollSet::SetPhysicsEngine(PhysicsEngine* physicsEngine)
+void PlayerRagdollSet::SetPhysicsEngine(PhysicsEngine* physicsEngine) const
 {
 	for each (Ragdoll* body in ragdolls)
 	{

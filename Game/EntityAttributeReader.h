@@ -11,7 +11,7 @@ public:
 	EntityAttributeReader(std::vector<std::string> tokens, GameObject* entity);
 	~EntityAttributeReader() {}
 
-	void SetTokens(std::vector<std::string> newTokens)
+	void SetTokens(const std::vector<std::string> newTokens)
 	{
 		tokens = newTokens;
 	}

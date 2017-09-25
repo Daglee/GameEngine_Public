@@ -10,10 +10,12 @@ const int Y_POSITION = 3;
 const int Z_POSITION = 4;
 const int MESH = 5;
 
-GameEntityBuilder::GameEntityBuilder(DataBase* database, std::vector<std::string> configurationTokens)
+GameEntityBuilder::GameEntityBuilder(DataBase* database, const vector<string> configurationTokens)
 {
 	this->database = database;
 	this->configurationTokens = configurationTokens;
+
+	entity = nullptr;
 }
 
 void GameEntityBuilder::Build()
@@ -28,22 +30,22 @@ void GameEntityBuilder::Build()
 
 void GameEntityBuilder::StoreEntityFromDatabase()
 {
-	std::string name = configurationTokens.at(ASSET_NAME);
+	const string name = configurationTokens.at(ASSET_NAME);
 	entity = static_cast<GameObject*>(database->GetTable("GameObjects")->GetResources()->Find(name));
 }
 
-void GameEntityBuilder::AddStoredGameEntity()
+void GameEntityBuilder::AddStoredGameEntity() const
 {
 	Renderer* renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
 
 	entity->AddToRenderer(*renderer);
 }
 
-Vector3 GameEntityBuilder::ReadPosition()
+Vector3 GameEntityBuilder::ReadPosition() const
 {
-	float xPosition = strtof(configurationTokens.at(X_POSITION).c_str(), 0);
-	float yPosition = strtof(configurationTokens.at(Y_POSITION).c_str(), 0);
-	float zPosition = strtof(configurationTokens.at(Z_POSITION).c_str(), 0);
+	const float xPosition = strtof(configurationTokens.at(X_POSITION).c_str(), 0);
+	const float yPosition = strtof(configurationTokens.at(Y_POSITION).c_str(), 0);
+	const float zPosition = strtof(configurationTokens.at(Z_POSITION).c_str(), 0);
 
 	return Vector3(xPosition, yPosition, zPosition);
 }

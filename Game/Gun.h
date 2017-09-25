@@ -14,20 +14,20 @@ class DataBase;
 class Gun : public Resource
 {
 public:
-	Gun(DataBase* db, Renderer* rend, PhysicsEngine* p, Mesh* m, float reloadSpeed = 2000.0f,
-		int bulletsPerMag = 20, float bulletSpeed = 8.0f, float frate = 450.0f);
+	Gun(DataBase* db, Renderer* rend, PhysicsEngine* p, Mesh* m, const float reloadSpeed = 2000.0f,
+		const int bulletsPerMag = 20, const float bulletSpeed = 8.0f, const float frate = 450.0f);
 
 	virtual ~Gun() {}
 
 	virtual bool Fire(const Vector3& from, const Vector3& rotation, const int& id) = 0;
 	virtual void Reload() = 0;
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	virtual void Read(string resourcename) override;
+	virtual void ReadParams(string params) override;
 
 	float fireDelay;
 
-	std::string parent = "";
+	string parent = "";
 
 	DataBase*		database;
 	Renderer*		rend;
@@ -47,5 +47,9 @@ public:
 	float	reloadSpeed;
 	float	tempReloadSpeed = 0;
 	bool reloading = false;
+
+private:
+	void CheckReloadSpeed(const float reloadSpeed);
+	void CheckFireDelay(const float fireDelay);
 };
 

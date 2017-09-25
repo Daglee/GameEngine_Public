@@ -3,7 +3,7 @@
 #include "../ResourceManagment/DataBase.h"
 #include "FSMManager.h"
 
-FSMUnit::FSMUnit(std::string FSMName, DataBase* database)
+FSMUnit::FSMUnit(const string FSMName, DataBase* database)
 {
 	properties = new std::unordered_map<std::string, float*>;
 	fsm = new FSM(FSMName, properties);

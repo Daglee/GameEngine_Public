@@ -10,7 +10,7 @@ struct AdaptiveLine
 	std::string* line;
 	Vector3 position;
 
-	AdaptiveLine(std::string* line, Vector3 position)
+	AdaptiveLine(std::string* line, const Vector3 position)
 	{
 		this->line = line;
 		this->position = position;
@@ -20,7 +20,7 @@ struct AdaptiveLine
 class TextParagraph
 {
 public:
-	TextParagraph(int numberOfLines);
+	explicit TextParagraph(const int numberOfLines);
 	TextParagraph();
 	~TextParagraph() {}
 

@@ -48,8 +48,3 @@ void RigidBody::UpdatePosition(const Vector3& pos)
 
 	collider->position = pos;
 }
-
-inline bool RigidBody::Ignores(const string rigidBodyTag) const
-{
-	return ignoreTag == rigidBodyTag;
-}

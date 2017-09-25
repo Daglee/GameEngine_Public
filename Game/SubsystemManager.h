@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../nclgl/Renderer.h"
 #include "Subsystem.h"
-#include "../Threading/ThreadPool.h"
 
+class Renderer;
+class ThreadPool;
 class DataBase;
 
 /*
@@ -13,13 +13,13 @@ class DataBase;
 class SubsystemManager
 {
 public:
-	SubsystemManager(DataBase* database);
+	explicit SubsystemManager(DataBase* database);
 
 	~SubsystemManager() {}
 
 	//Iterates the game loop
 	void ThreadedUpdate(float deltatime);
-	void Update(float deltatime);
+	void Update(float deltatime) const;
 
 private:
 	Renderer* renderer;

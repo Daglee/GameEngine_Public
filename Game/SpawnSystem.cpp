@@ -7,7 +7,7 @@
 
 const float PLAYER_GRAVITY = -0.1f;
 
-SpawnSystem* SpawnSystem::instance = NULL;
+SpawnSystem* SpawnSystem::instance = nullptr;
 
 void SpawnSystem::RemovePlayerFromGame(RigidBody* playerRigidBody)
 {
@@ -21,7 +21,7 @@ void SpawnSystem::ReturnPlayer(RigidBody* playerRigidBody)
 {
 	playerRigidBody->gravity = PLAYER_GRAVITY;
 
-	int spawnPointIndex = ChooseRandomSpawnPoint();
+	const int spawnPointIndex = ChooseRandomSpawnPoint();
 	playerRigidBody->UpdatePosition(spawnPoints[spawnPointIndex]);
 }
 
@@ -38,13 +38,13 @@ void SpawnSystem::AddSpawnPoints(std::vector<Vector3> spawnPoints)
 	}
 }
 
-int SpawnSystem::ChooseRandomSpawnPoint()
+int SpawnSystem::ChooseRandomSpawnPoint() const
 {
-	std::random_device randomGenerator;
-	std::mt19937 mersenneTwister(randomGenerator());
-	std::uniform_int_distribution<int> range(0, spawnPoints.size() - 1);
+	random_device randomGenerator;
+	mt19937 mersenneTwister(randomGenerator());
+	const uniform_int_distribution<int> range(0, spawnPoints.size() - 1);
 
-	int randomSpawnPoint = range(mersenneTwister);
+	const int randomSpawnPoint = range(mersenneTwister);
 
 	return randomSpawnPoint;
 }

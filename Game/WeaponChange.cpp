@@ -22,7 +22,7 @@ const bool WeaponChange::MachineGunAvailable(const std::string& playerTag)
 
 Gun* WeaponChange::CopyToRocketLauncher(Gun* currentWeapon)
 {
-	std::string playerTag = currentWeapon->parent;
+	const string playerTag = currentWeapon->parent;
 	DataBase* database = currentWeapon->database;
 	Renderer* renderer = currentWeapon->rend;
 	PhysicsEngine* physicsEngine = currentWeapon->phys;
@@ -41,7 +41,7 @@ Gun* WeaponChange::CopyToRocketLauncher(Gun* currentWeapon)
 
 Gun* WeaponChange::CopyToMachineGun(Gun* currentWeapon)
 {
-	std::string playerTag = currentWeapon->parent;
+	const string playerTag = currentWeapon->parent;
 	DataBase* database = currentWeapon->database;
 	Renderer* renderer = currentWeapon->rend;
 	PhysicsEngine* physicsEngine = currentWeapon->phys;
@@ -59,12 +59,12 @@ Gun* WeaponChange::CopyToMachineGun(Gun* currentWeapon)
 	return newweapon;
 }
 
-void WeaponChange::AnnounceChange()
+void WeaponChange::AnnounceChange() const
 {
 	MessageSystem::GetInstance()->BeginEvent(Log::Hash(newWeapon));
 }
 
-void WeaponChange::StopPreviousEvents()
+void WeaponChange::StopPreviousEvents() const
 {
 	MessageSystem::GetInstance()->StopEvent(Log::Hash(newWeaponAnnouncementToStop));
 	MessageSystem::GetInstance()->StopEvent(Log::Hash(previousAnnouncement));

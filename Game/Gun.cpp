@@ -2,12 +2,9 @@
 
 #include "../ResourceManagment/DataBase.h"
 #include "../ResourceManagment/Log.h"
-#include "../nclgl/Vector3.h"
 
-#include <time.h>
-
-Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, float reloadSpeed, int bulletsPerMag,
-	float bulletSpeed, float fireDelay) : Resource()
+Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, const float reloadSpeed, const int bulletsPerMag,
+	const float bulletSpeed, const float fireDelay) : Resource()
 {
 	rend = r;
 	phys = p;
@@ -17,11 +14,8 @@ Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, float reloadSpeed
 	this->bulletSpeed = bulletSpeed;
 	this->bulletMesh = m;
 
-	if (reloadSpeed < 1000)	Log::Error("Reload Speed is too low.");
-	else	this->tempReloadSpeed = reloadSpeed;
-
-	if (fireDelay < 150)	Log::Error("Fire Rate is too high.");
-	else	this->fireDelay = fireDelay;
+	CheckReloadSpeed(reloadSpeed);
+	CheckFireDelay(fireDelay);
 
 	bulletsFired = 0;
 	lastShotTime = 0;
@@ -37,4 +31,28 @@ void Gun::Read(string resourcename)
 void Gun::ReadParams(string params)
 {
 	Read(params);
+}
+
+void Gun::CheckReloadSpeed(const float reloadSpeed)
+{
+	if (reloadSpeed < 1000)
+	{
+		Log::Error("Reload Speed is too low.");
+	}
+	else
+	{
+		this->tempReloadSpeed = reloadSpeed;
+	}
+}
+
+void Gun::CheckFireDelay(const float fireDelay)
+{
+	if (fireDelay < 150)
+	{
+		Log::Error("Fire Rate is too high.");
+	}
+	else
+	{
+		this->fireDelay = fireDelay;
+	}
 }

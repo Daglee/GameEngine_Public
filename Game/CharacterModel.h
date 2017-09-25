@@ -22,8 +22,8 @@ public:
 	CharacterModel();
 	~CharacterModel() {}
 
-	void UpdateMesh(Mesh* m);
-	void UpdateColour(const Vector4& col);
+	void UpdateMesh(Mesh* m) const;
+	void UpdateColour(const Vector4& col) const;
 	void ReadFile(string file);
 	virtual void Update(const float& msec);
 

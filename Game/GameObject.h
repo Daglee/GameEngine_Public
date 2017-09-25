@@ -16,7 +16,7 @@ class Renderer;
 class GameObject : public Resource
 {
 public:
-	GameObject(Renderer& r);
+	explicit GameObject(Renderer& r);
 	GameObject();
 
 	virtual ~GameObject() {}
@@ -25,15 +25,12 @@ public:
 
 	void AddMesh(const string& meshLocation);
 	void AddMesh(Mesh& m);
-	void SetTexture(const char& texloc);
-	void SetBumpMap(const char& bmLoc);
+	void SetTexture(const char& texloc) const;
+	void SetBumpMap(const char& bmLoc) const;
 
 	void MakeQuad();
 
-	inline virtual Vector3 GetPosition() const
-	{
-		return position;
-	}
+	inline virtual Vector3 GetPosition() const;
 
 	virtual Vector3 GetSize() const
 	{
@@ -45,35 +42,25 @@ public:
 		return &node;
 	}
 
-	Mesh GetMesh()
+	Mesh GetMesh() const
 	{
 		return *node.GetMesh();
 	}
 
-	inline virtual void SetPosition(const Vector3& pos)
-	{
-		position = pos;
-		node.SetTransform(pos);
-	}
-
-	inline virtual void SetSize(const Vector3& size)
-	{
-		scale = size;
-		node.SetModelScale(scale);
-		node.AutoSetBoundingRadius();
-	}
+	inline virtual void SetPosition(const Vector3& pos);
+	inline virtual void SetSize(const Vector3& size);
 
 	void SetSceneNode(SceneNode& sn)
 	{
 		node = sn;
 	}
 
-	virtual void Read(string resourcename)
+	virtual void Read(const string resourcename) override
 	{
 		this->SetName(resourcename);
 	}
 
-	virtual void ReadParams(string params)
+	virtual void ReadParams(const string params) override
 	{
 		Read(params);
 	}

@@ -12,7 +12,7 @@ struct Action
 	string	property;		//The tag of the variable it will modify.
 	string	operatorName;	//The operator.
 	float	operand;		//What we are going to set the variable to.
-	std::function<void(Action*)> execute;
+	function<void(Action*)> execute;
 };
 
 /*
@@ -23,7 +23,7 @@ struct Action
 class State
 {
 public:
-	State(std::unordered_map<string, float*>* properties, int id = -1);
+	State(unordered_map<string, float*>* properties, const int id = -1);
 
 	virtual ~State() {}
 
@@ -38,9 +38,9 @@ public:
 	vector<struct Action> actions; //To be executed on each update.
 
 	//Obtained from the object that the FSM will act on
-	std::unordered_map<string, float*>* properties;
+	unordered_map<string, float*>* properties;
 
-	std::vector<Transition*> transitions;
+	vector<Transition*> transitions;
 
 	bool isTemp = false;
 };

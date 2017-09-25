@@ -1,8 +1,12 @@
 #include "PhysicsObject.h"
 
+#include "../NCLGL/Vector3.h"
+#include "../NCLGL/Renderer.h"
+#include "../Physics/PhysicsEngine.h"
+#include "../Physics/SphereCollider.h"
 
-PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
-	bool isStatic, bool isSphere) : GameObject(*r)
+PhysicsObject::PhysicsObject(Renderer* renderer, PhysicsEngine* physicsEngine,
+	const bool isStatic, const bool isSphere) : GameObject(*renderer)
 {
 	moveable = isStatic;
 
@@ -10,12 +14,12 @@ PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
 	this->isSphere = isSphere;
 	rigidBody.parentMesh = &node;
 
-	p->AddRigidBody(&rigidBody);
+	physicsEngine->AddRigidBody(&rigidBody);
 	this->SetSizeInBytes(sizeof(*this));
 }
 
-PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
-	bool isStatic, bool isSphere, RigidBody* rb) : GameObject(*r)
+PhysicsObject::PhysicsObject(Renderer* renderer, PhysicsEngine* physicsEngine,
+	const bool isStatic, const bool isSphere, RigidBody* rb) : GameObject(*renderer)
 {
 	moveable = isStatic;
 	rigidBody = *rb;
@@ -23,7 +27,7 @@ PhysicsObject::PhysicsObject(Renderer* r, PhysicsEngine* p,
 	rigidBody.isStatic = isStatic;
 	this->isSphere = isSphere;
 
-	p->AddRigidBody(&rigidBody);
+	physicsEngine->AddRigidBody(&rigidBody);
 	this->SetSizeInBytes(sizeof(*this));
 }
 

@@ -6,7 +6,7 @@
 
 const string STRING_TYPE = "s:";
 
-State::State(std::unordered_map<string, float*>* properties, int id)
+State::State(std::unordered_map<string, float*>* properties, const int id)
 {
 	this->id = id;
 	this->properties = properties;

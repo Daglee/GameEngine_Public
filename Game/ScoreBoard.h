@@ -57,10 +57,10 @@ public:
 	}
 
 	//Adds the parameter score to the current score.
-	void UpdateEntryScore(std::string name, int score);
+	void UpdateEntryScore(std::string name, int score) const;
 
 private:
-	ScoreBoard(Renderer* renderer);
+	explicit ScoreBoard(Renderer* renderer);
 	~ScoreBoard()
 	{
 		Destroy();
@@ -73,7 +73,7 @@ private:
 
 	//Using std::sort.
 	void OrderAscending();
-	void DisplayText(const std::string& entry, const float& yPosition);
+	void DisplayText(const std::string& entry, const float& yPosition) const;
 
 	std::vector<Entry*> entries;
 	Renderer* renderer;

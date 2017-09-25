@@ -4,7 +4,7 @@
 const float TEXT_SIZE = 15.0f;
 const float XAXIS_OFFSET = 200.0f;
 
-ScoreBoard* ScoreBoard::instance = NULL;
+ScoreBoard* ScoreBoard::instance = nullptr;
 
 ScoreBoard::ScoreBoard(Renderer* renderer)
 {
@@ -19,28 +19,28 @@ void ScoreBoard::DisplayScores()
 
 	for each (Entry* entry in entries)
 	{
-		std::string line = entry->name + " : " + std::to_string(entry->score);
+		string line = entry->name + " : " + to_string(entry->score);
 		DisplayText(line, yOffset);
 
 		yOffset += TEXT_SIZE;
 	}
 }
 
-void ScoreBoard::DisplayText(const std::string& entry, const float& yPosition)
+void ScoreBoard::DisplayText(const string& entry, const float& yPosition) const
 {
-	Vector3 linePosition(renderer->GetWidth() - XAXIS_OFFSET, yPosition, 0.0f);
+	const Vector3 linePosition(renderer->GetWidth() - XAXIS_OFFSET, yPosition, 0.0f);
 
-	Text entryText(entry, linePosition, TEXT_SIZE);
+	const Text entryText(entry, linePosition, TEXT_SIZE);
 
 	renderer->AddText(entryText);
 }
 
 void ScoreBoard::OrderAscending()
 {
-	std::sort(entries.begin(), entries.end(), Comparison());
+	sort(entries.begin(), entries.end(), Comparison());
 }
 
-void ScoreBoard::UpdateEntryScore(std::string name, int s)
+void ScoreBoard::UpdateEntryScore(string name, int s) const
 {
 	for each (Entry* entry in entries)
 	{

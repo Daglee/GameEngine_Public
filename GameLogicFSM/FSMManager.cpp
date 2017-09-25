@@ -4,7 +4,7 @@
 #include "../Game/ScoreBoard.h"
 #include "MessageSystem.h"
 
-FSMManager::FSMManager(int numFSMs) : Resource()
+FSMManager::FSMManager(const int numFSMs) : Resource()
 {
 	this->numFSMs = numFSMs;
 	fsms = new FSM*[numFSMs];
@@ -23,7 +23,7 @@ FSMManager::~FSMManager()
 	delete fsms;
 }
 
-void FSMManager::LateBuildFSM(string FSMName, string filename)
+void FSMManager::LateBuildFSM(string FSMName, string filename) const
 {
 	//Multiple FSMs could use the same config file.
 	for each (FSM* fsm in fsmsNotBuilt)
@@ -67,8 +67,8 @@ void FSMManager::ReadParams(string params)
 	vector<string> tokens{ istream_iterator<string>{iss},
 		istream_iterator<string>{} };
 
-	string name = tokens.at(0);
-	int num = atoi(tokens.at(1).c_str());
+	const string name = tokens.at(0);
+	const int num = atoi(tokens.at(1).c_str());
 	this->SetName(name);
 
 	numFSMs = num;

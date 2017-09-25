@@ -1,6 +1,6 @@
 #include "TextParagraph.h"
 
-TextParagraph::TextParagraph(int numberOfLines)
+TextParagraph::TextParagraph(const int numberOfLines)
 {
 	this->numberOfLines = numberOfLines;
 	paragraph = std::vector<std::string>(numberOfLines, "");

@@ -11,6 +11,8 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/MessageSystem.h"
 #include "LevelManager.h"
+#include "../nclgl/Camera.h"
+#include "../nclgl/Renderer.h"
 
 #include "../ResourceManagment/TableCreation.h"
 
@@ -79,6 +81,8 @@ int main()
 	}
 
 	//Game logic handles exiting the level.
+	delete game;
+	delete lvlManager;
 	delete database;
 
     return 0;

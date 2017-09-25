@@ -4,15 +4,16 @@
 #define NOMINMAX
 
 #include "../ResourceManagment/DataBase.h"
-#include "../UISystem/InputMapper.h"
 #include "../Physics/PhysicsEngine.h"
-#include "../Physics/RigidBody.h"
 #include "../../nclgl/Renderer.h"
 #include "../GameLogicFSM/MessageSystem.h"
 #include "ScoreBoard.h"
-
-#include "RocketLauncher.h"
-#include "Pistol.h"
+#include "Gun.h"
+#include "PlayerController.h"
+#include "GunInput.h"
+#include "PlayerRagdollSet.h"
+#include "SpawnSystem.h"
+#include "../Physics/SphereCollider.h"
 
 const float PLAYER_MASS = 500.0f;
 const float PLAYER_DRAG = 0.7f;
@@ -74,7 +75,7 @@ Player::~Player()
 	delete ragdolls;
 }
 
-void Player::ApplyInputs()
+void Player::ApplyInputs() const
 {
 	if (!inputsLocked)
 	{
@@ -121,7 +122,7 @@ void Player::CheckHealth()
 	}
 }
 
-void Player::AddPoints()
+void Player::AddPoints() const
 {
 	//Add any points that are pending from the game logic.
 	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints")))
@@ -161,11 +162,11 @@ void Player::PrepareHUD()
 
 void Player::UpdateHUD()
 {
-	string bulletsLeft = std::to_string(gun->bulletsPerMag - gun->bulletsFired);
-	string maximumBullets = std::to_string(gun->bulletsPerMag);
-	string ammoCount = bulletsLeft + "/" + maximumBullets;
+	const string bulletsLeft = std::to_string(gun->bulletsPerMag - gun->bulletsFired);
+	const string maximumBullets = std::to_string(gun->bulletsPerMag);
+	const string ammoCount = bulletsLeft + "/" + maximumBullets;
 
-	string timeUntilTeamChangeAvailable = std::to_string(5.0f - (std::max<float>)
+	const string timeUntilTeamChangeAvailable = std::to_string(5.0f - (std::max<float>)
 		(0, ((std::min<float>)(this->timer, 5))));
 
 	HUDText.SetLineOfParagraph(ammoCount, 0);
@@ -180,7 +181,7 @@ void Player::DisplayHUD()
 
 	if (gun->lastReloadTime + gun->reloadSpeed >= clock())
 	{
-		string isReloading = "reloading";
+		const string isReloading = "reloading";
 		HUDText.AppendLineToParagraph(isReloading);
 	}
 

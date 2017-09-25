@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <mutex>
 
 class DataBase;
 class GameObject;
@@ -24,7 +23,7 @@ struct ResourceIdentifier
 class Level
 {
 public:
-	Level(DataBase* db);
+	explicit Level(DataBase* db);
 	~Level() {}
 
 	/*
@@ -33,15 +32,15 @@ public:
 	   - positions file (where should each asset be placed for now)
 	   These are sent to seperate functions.
 	*/
-	void LoadAndInitialiseAssets(std::string directory);
+	void LoadAndInitialiseAssets(const std::string directory);
 
 	void UnloadLevel();
 private:
-	void LoadLevelAssets(std::string filename);
-	void InitialiseObjects(std::string filename);
+	void LoadLevelAssets(const std::string filename);
+	void InitialiseObjects(const std::string filename) const;
 
-	void AddAssetsAndAppendNumberToName(ResourceIdentifier entry);
-	void UnloadSetOfAssets(ResourceIdentifier entry);
+	void AddAssetsAndAppendNumberToName(const ResourceIdentifier entry) const;
+	void UnloadSetOfAssets(const ResourceIdentifier entry) const;
 
 	ResourceIdentifier ReadResourceIdentifier(std::vector<std::string> tokens);
 

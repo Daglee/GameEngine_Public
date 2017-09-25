@@ -15,7 +15,7 @@ class SceneNode
 {
 public:
 	SceneNode(Mesh* m = NULL, Vector4 colour = Vector4(1,1,1,1));
-	~SceneNode(void);
+	virtual ~SceneNode(void);
 
 	void  SetTransform(const Matrix4 &matrix) { transform = matrix; }
 	void	SetTransform(Vector3 pos) {

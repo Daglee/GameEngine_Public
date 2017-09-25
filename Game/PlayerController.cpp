@@ -1,6 +1,8 @@
 #include "PlayerController.h"
 
 #include "Player.h"
+#include "CharacterModel.h"
+#include "../Physics/RigidBody.h"
 
 void PlayerController::ApplyInputs()
 {
@@ -40,7 +42,7 @@ void PlayerController::SetRigidBody(RigidBody* newRigidBody)
 	rigidBody = newRigidBody;
 }
 
-void PlayerController::SetMovementSound(std::string newMovementSound)
+void PlayerController::SetMovementSound(const string newMovementSound)
 {
 	this->movementSound = newMovementSound;
 }

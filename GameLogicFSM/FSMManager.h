@@ -18,10 +18,10 @@
 class FSMManager : public Resource, public Subsystem
 {
 public:
-	FSMManager(int numFSMs = 0);
+	explicit FSMManager(const int numFSMs = 0);
 	~FSMManager();
 
-	void AddFSM(FSM* fsm, bool alreadyBuilt)
+	void AddFSM(FSM* fsm, const bool alreadyBuilt)
 	{
 		fsms[numberOfFSMsAdded] = fsm;
 
@@ -34,9 +34,9 @@ public:
 	}
 
 	//Can be called to construct a FSM that has not been built yet.
-	void LateBuildFSM(string FSMName, string filename);
+	void LateBuildFSM(string FSMName, string filename) const;
 
-	void Update(float deltatime = 0); //For state changes
+	void Update(float deltatime = 0) override; //For state changes
 
 	FSM** fsms;				//Array of FSMs.
 	vector<FSM*> fsmsNotBuilt;	//FSMs that have yet to be constructed.
@@ -44,7 +44,7 @@ public:
 	int numFSMs;	//upper bounds of how many FSMs can be added
 	int numberOfFSMsAdded = 0;
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(string resourcename) override;
+	void ReadParams(string params) override;
 };
 

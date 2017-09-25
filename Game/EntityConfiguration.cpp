@@ -3,23 +3,23 @@
 
 #include "PhysicsObject.h"
 
-EntityConfiguration::EntityConfiguration(std::vector<std::string> attributeTokens, GameObject* entity)
+EntityConfiguration::EntityConfiguration(const vector<string> attributeTokens, GameObject* entity)
 {
 	this->attributeTokens = attributeTokens;
 	this->entity = entity;
 
 	attributeReader = new EntityAttributeReader(attributeTokens, entity);
 
-	properties.push_back(Property("size", std::bind(&EntityAttributeReader::SetSize, attributeReader)));
-	properties.push_back(Property("colour", std::bind(&EntityAttributeReader::SetColour, attributeReader)));
-	properties.push_back(Property("texture", std::bind(&EntityAttributeReader::SetTexture, attributeReader)));
-	properties.push_back(Property("gravity", std::bind(&EntityAttributeReader::SetGravity, attributeReader)));
-	properties.push_back(Property("mass", std::bind(&EntityAttributeReader::SetMass, attributeReader)));
-	properties.push_back(Property("damping", std::bind(&EntityAttributeReader::SetDamping, attributeReader)));
-	properties.push_back(Property("isMoveable", std::bind(&EntityAttributeReader::SetMoveable, attributeReader)));
-	properties.push_back(Property("atRest", std::bind(&EntityAttributeReader::SetAtRest, attributeReader)));
-	properties.push_back(Property("tag", std::bind(&EntityAttributeReader::SetTag, attributeReader)));
-	properties.push_back(Property("rotation", std::bind(&EntityAttributeReader::SetRotation, attributeReader)));
+	properties.push_back(Property("size", bind(&EntityAttributeReader::SetSize, attributeReader)));
+	properties.push_back(Property("colour", bind(&EntityAttributeReader::SetColour, attributeReader)));
+	properties.push_back(Property("texture", bind(&EntityAttributeReader::SetTexture, attributeReader)));
+	properties.push_back(Property("gravity", bind(&EntityAttributeReader::SetGravity, attributeReader)));
+	properties.push_back(Property("mass", bind(&EntityAttributeReader::SetMass, attributeReader)));
+	properties.push_back(Property("damping", bind(&EntityAttributeReader::SetDamping, attributeReader)));
+	properties.push_back(Property("isMoveable", bind(&EntityAttributeReader::SetMoveable, attributeReader)));
+	properties.push_back(Property("atRest", bind(&EntityAttributeReader::SetAtRest, attributeReader)));
+	properties.push_back(Property("tag", bind(&EntityAttributeReader::SetTag, attributeReader)));
+	properties.push_back(Property("rotation", bind(&EntityAttributeReader::SetRotation, attributeReader)));
 }
 
 void EntityConfiguration::ConfigureEntityWithAttribute()
@@ -35,7 +35,7 @@ void EntityConfiguration::ConfigureEntityWithAttribute()
 	}
 }
 
-bool EntityConfiguration::IsFinished()
+const bool EntityConfiguration::IsFinished() const
 {
 	return currentAttribute == "-";
 }

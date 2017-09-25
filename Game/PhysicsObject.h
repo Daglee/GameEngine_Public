@@ -1,15 +1,12 @@
 #pragma once
 
-#include "../NCLGL/Vector3.h"
-#include "../NCLGL/Mesh.h"
-#include "../NCLGL/Renderer.h"
-#include "../Physics/SphereCollider.h"
-#include "../Physics/PhysicsEngine.h"
-#include "../Physics/RigidBody.h"
-#include "../ResourceManagment/Resource.h"
 #include "GameObject.h"
+#include "../Physics/RigidBody.h"
 
-#include <algorithm>
+class RigidBody;
+class PhysicsEngine;
+class Renderer;
+class Vector3;
 
 /*
   Wrapper for physics entity.
@@ -20,11 +17,11 @@
 class PhysicsObject : public GameObject
 {
 public:
-	PhysicsObject(Renderer* r, PhysicsEngine* p,
-		bool isStatic, bool isSphere);
+	PhysicsObject(Renderer* renderer, PhysicsEngine* physicsEngine,
+		const bool isStatic, const bool isSphere);
 
-	PhysicsObject(Renderer* r, PhysicsEngine* p,
-		bool isStatic, bool isSphere,
+	PhysicsObject(Renderer* renderer, PhysicsEngine* physicsEngine,
+		const bool isStatic, const bool isSphere,
 		RigidBody* rb);
 
 	PhysicsObject();
@@ -39,19 +36,19 @@ public:
 		rigidBody.ApplyForce(newtons);
 	}
 
-	Vector3 GetPosition() const;
-	void SetPosition(const Vector3& pos);
+	Vector3 GetPosition() const override;
+	void SetPosition(const Vector3& pos) override;
 
-	Vector3 GetSize() const;
-	void SetSize(const Vector3& size);
+	Vector3 GetSize() const override;
+	void SetSize(const Vector3& size) override;
 
 	bool IsMoveable() const;
 	void SetIsMoveable(const bool& m);
 
 	RigidBody* GetRigidBody();
 
-	virtual void Read(string resourcename);
-	virtual void ReadParams(string params);
+	void Read(string resourcename) override;
+	void ReadParams(string params) override;
 
 	bool isSphere;
 protected:

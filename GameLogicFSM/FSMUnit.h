@@ -17,7 +17,7 @@ class FSMUnit
 {
 public:
 
-	FSMUnit(std::string FSMName = "", DataBase* database = nullptr);
+	FSMUnit(const string FSMName = "", DataBase* database = nullptr);
 	virtual ~FSMUnit() {}
 
 	std::unordered_map<std::string, float*>* properties;

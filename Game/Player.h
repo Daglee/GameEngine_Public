@@ -1,31 +1,27 @@
-
 #define NOMINMAX
 #pragma once
 #define NOMINMAX
 
-#include "../nclgl/Vector3.h"
-#include "CharacterModel.h"
-#include "../ResourceManagment/Resource.h"
-#include "Gun.h"
 #include "AudioManager.h"
-#include "../GameLogicFSM/FSMUnit.h"
-#include "PlayerController.h"
-#include "GunInput.h"
+#include "CharacterModel.h"
 #include "LifeSpan.h"
 #include "WeaponChange.h"
 #include "PerspectiveHeadsUpDisplay.h"
 #include "TextParagraph.h"
-#include "PlayerRagdollSet.h"
-#include "SpawnSystem.h"
+#include "../Physics/RigidBody.h"
+#include "../ResourceManagment/Resource.h"
+#include "../nclgl/Vector3.h"
+#include "../GameLogicFSM/FSMUnit.h"
 
+class Gun;
+class PlayerController;
+class GunInput;
+class PlayerRagdollSet;
 class DataBase;
 class InputMapper;
 class PhysicsEngine;
 class Renderer;
-class RigidBody;
 
-#include <random>
-#include <map>
 #define CHARCT_MODEL_LOC "../Data/CharacterModel/PlayerModel.txt"
 
 /*
@@ -38,11 +34,11 @@ public:
 	Player(DataBase* database, int id);
 	~Player();
 
-	void ApplyInputs();
+	void ApplyInputs() const;
 	void Move(const Vector3& pos);
 
 	void CheckHealth();
-	void AddPoints();
+	void AddPoints() const;
 	void CheckGunChange();
 
 	void SetPlayerController(PlayerController* im);
@@ -57,8 +53,8 @@ public:
 
 	void Update(const float& msec, const float& timer = 0);
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(string resourcename) override;
+	void ReadParams(string params) override;
 
 	Vector3 rotation;
 	Gun*	gun;
@@ -66,6 +62,7 @@ public:
 	string walkingSoundName;
 	Mesh* playerModelMesh;
 	GunInput* gunInput;
+
 protected:
 	void Despawn();
 	void Respawn();

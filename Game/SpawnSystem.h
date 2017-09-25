@@ -38,7 +38,7 @@ private:
 		delete instance;
 	}
 
-	int ChooseRandomSpawnPoint();
+	int ChooseRandomSpawnPoint() const;
 
 	static SpawnSystem* instance;
 	std::vector<Vector3> spawnPoints;

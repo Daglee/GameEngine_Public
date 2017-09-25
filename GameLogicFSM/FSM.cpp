@@ -6,7 +6,7 @@ const int PERMANENT_STATE_LINE_LENGTH = 2;
 const string ACTION_DELIMITER = "--";
 const string STATE_DELIMITER = "-";
 
-FSM::FSM(string FSMName, std::unordered_map<string, float*>* properties, string filename)
+FSM::FSM(const string FSMName, std::unordered_map<string, float*>* properties, const string filename)
 {
 	this->properties = properties;
 	this->filename = filename;
@@ -15,7 +15,7 @@ FSM::FSM(string FSMName, std::unordered_map<string, float*>* properties, string 
 	BuildFSM();
 }
 
-FSM::FSM(string FSMName, std::unordered_map<string, float*>* properties)
+FSM::FSM(const string FSMName, std::unordered_map<string, float*>* properties)
 {
 	this->properties = properties;
 	this->FSMName = FSMName;
@@ -29,7 +29,7 @@ FSM::~FSM()
 	}
 }
 
-void FSM::BuildFSM(string newFileName)
+void FSM::BuildFSM(const string newFileName)
 {
 	if (newFileName != "")
 	{
@@ -63,7 +63,7 @@ void FSM::Update()
 	}
 }
 
-void FSM::ChangeToState(int nextStateIndex)
+void FSM::ChangeToState(const int nextStateIndex)
 {
 	State* nextState = states[nextStateIndex];
 
@@ -80,7 +80,7 @@ void FSM::ChangeToState(int nextStateIndex)
 	}
 }
 
-void FSM::ReadStates(ifstream& file)
+void FSM::ReadStates(ifstream& file) 
 {
 	string line;
 	getline(file, line);
@@ -89,7 +89,7 @@ void FSM::ReadStates(ifstream& file)
 	{
 		vector<string> tokens = Log::tokenise(line);
 
-		int stateID = atoi(tokens.at(1).c_str());
+		const int stateID = atoi(tokens.at(1).c_str());
 
 		State* state = new State(properties, stateID);
 
@@ -107,21 +107,21 @@ void FSM::ReadStates(ifstream& file)
 	}
 }
 
-void FSM::ReadActions(ifstream& file, State* state)
+void FSM::ReadActions(ifstream& file, State* state) const
 {
 	string line;
 	getline(file, line);
 
 	while (line.find(ACTION_DELIMITER) == string::npos)
 	{
-		string action = line;
+		const string action = line;
 		state->actionNames.push_back(action);
 
 		getline(file, line);
 	}
 }
 
-void FSM::ReadTransitions(ifstream& file)
+void FSM::ReadTransitions(ifstream& file) const
 {
 	string line;
 	getline(file, line);
@@ -131,11 +131,11 @@ void FSM::ReadTransitions(ifstream& file)
 		getline(file, line);
 		vector<string> tokens = Log::tokenise(line);
 
-		int startingState = atoi(tokens.at(0).c_str());
-		int stateToMoveTo = atoi(tokens.at(2).c_str());
+		const int startingState = atoi(tokens.at(0).c_str());
+		const int stateToMoveTo = atoi(tokens.at(2).c_str());
 
 		getline(file, line);
-		string check = line;
+		const string check = line;
 
 		Transition* transition = new Transition(properties, startingState, stateToMoveTo, check);
 		states[startingState]->transitions.push_back(transition);

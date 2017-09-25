@@ -2,7 +2,8 @@
 #include <unordered_map>
 #include <vector>
 #include "ResourceMap.h"
-#include <mutex>
+
+#include "Log.h"
 
 /*
   Manages a series of bins for one type of object.

@@ -4,7 +4,6 @@
 #include "LevelLoader.h"
 
 #include <string>
-#include <map>
 #include <vector>
 
 class Launcher;
@@ -18,23 +17,24 @@ class Renderer;
 class LevelManager : public FSMUnit
 {
 public:
-	LevelManager(DataBase* database, std::string filename);
+	LevelManager(DataBase* database, const string filename);
 	~LevelManager() {}
 
 	void LoadFirstLevel();
 
 	void Update(const float& msec);
+
 private:
 	void CheckLoadLevel();
 
-	void ConstructLevelList(std::string filename);
+	void ConstructLevelList(const string filename);
 	void InitialiseFSM();
 
-	Renderer*	renderer;
+	Renderer* renderer;
 	LevelLoader loader;
 
-	std::vector<float>			levelIDs;
-	std::vector<std::string>	levels;
+	vector<float> levelIDs;
+	vector<string> levels;
 
 	float timer;
 	float matchLength;

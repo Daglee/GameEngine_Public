@@ -3,7 +3,8 @@
 #include "MessageSystem.h"
 #include "TransitionCheck.h"
 
-Transition::Transition(std::unordered_map<string, float*>* properties, int startingState, int nextState, string check)
+Transition::Transition(std::unordered_map<string, float*>* properties, const int startingState,
+	const int nextState, const string check)
 {
 	this->properties = properties;
 	this->nextState = nextState;
@@ -40,7 +41,6 @@ void Transition::ConstructCheck()
 {
 	vector<string> tokens = Log::tokenise(checkstring);
 
-	int wordCount = -1;
 	for (int i = 0; i < tokens.size(); i += 4)
 	{
 		struct Check check;
@@ -55,7 +55,7 @@ void Transition::ConstructCheck()
 		*/
 		if (tokens.at(i + 2).find("s:") != string::npos)
 		{
-			string substring = tokens.at(i + 2).substr(2);
+			const string substring = tokens.at(i + 2).substr(2);
 			check.comparison = Log::Hash(substring);
 		}
 		else check.comparison = stof(tokens.at(i + 2).c_str());
@@ -72,7 +72,5 @@ void Transition::ConstructCheck()
 		}
 
 		checks.push_back(check);
-
-		wordCount = -1;
 	}
 }

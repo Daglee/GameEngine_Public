@@ -1,14 +1,10 @@
 #include "Level.h"
 #include "../ResourceManagment/DataBase.h"
-#include "PhysicsObject.h"
-#include "GameObject.h"
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/TemporaryDatabaseIdentifier.h"
 #include "../ResourceManagment/GameEntityDatabaseEntryFile.h"
 #include "LevelConfiguration.h"
 
-#include <sstream>
-#include <iostream>
 #include <fstream>
 
 Level::Level(DataBase* db)
@@ -16,15 +12,15 @@ Level::Level(DataBase* db)
 	database = db;
 }
 
-void Level::LoadAndInitialiseAssets(std::string directory)
+void Level::LoadAndInitialiseAssets(const string directory)
 {
 	//Directory file contains locations of the assets file and positions file
-	std::ifstream file(directory);
+	ifstream file(directory);
 	string path;
 
 	getline(file, path);
-	string assetsFile = path + "/assets.txt";
-	string positionsFile = path + "/positions.txt";
+	const string assetsFile = path + "/assets.txt";
+	const string positionsFile = path + "/positions.txt";
 
 	this->assetsfile = assetsFile; ////!!!!!!!!!!!!!!!!!
 	LoadLevelAssets(assetsFile);
@@ -34,9 +30,9 @@ void Level::LoadAndInitialiseAssets(std::string directory)
 	configuration.ConfigureFromAllExistingFiles();
 }
 
-void Level::LoadLevelAssets(std::string filename)
+void Level::LoadLevelAssets(const string filename)
 {
-	std::ifstream file(filename);
+	ifstream file(filename);
 	string line;
 
 	getline(file, line);
@@ -44,8 +40,8 @@ void Level::LoadLevelAssets(std::string filename)
 
 	while (getline(file, line))
 	{
-		vector<string> identifierTokens = Log::tokenise(line);
-		ResourceIdentifier resourcesToAdd = ReadResourceIdentifier(identifierTokens);
+		const vector<string> identifierTokens = Log::tokenise(line);
+		const ResourceIdentifier resourcesToAdd = ReadResourceIdentifier(identifierTokens);
 
 		if (resourcesToAdd.numberInDatabase == 1)
 		{
@@ -60,16 +56,16 @@ void Level::LoadLevelAssets(std::string filename)
 	file.close();
 }
 
-void Level::AddAssetsAndAppendNumberToName(ResourceIdentifier entry)
+void Level::AddAssetsAndAppendNumberToName(const ResourceIdentifier entry) const
 {
 	for (int i = 0; i < entry.numberInDatabase; i++)
 	{
-		string nameWithAppendedNumber = entry.resourceName + std::to_string(i);
+		const string nameWithAppendedNumber = entry.resourceName + to_string(i);
 		database->AddResourceToTable(entry.resourceManager, nameWithAppendedNumber);
 	}
 }
 
-void Level::InitialiseObjects(std::string filename)
+void Level::InitialiseObjects(const string filename) const
 {
 	GameEntityDatabaseEntryFile newEntry(database);
 	newEntry.FillDatabaseFromFile(filename);
@@ -85,8 +81,8 @@ void Level::UnloadLevel()
 
 	while (getline(file, line))
 	{
-		vector<string> identifierTokens = Log::tokenise(line);
-		ResourceIdentifier entryToRemove = ReadResourceIdentifier(identifierTokens);
+		const vector<string> identifierTokens = Log::tokenise(line);
+		const ResourceIdentifier entryToRemove = ReadResourceIdentifier(identifierTokens);
 
 		if (entryToRemove.numberInDatabase == 1)
 		{
@@ -102,18 +98,18 @@ void Level::UnloadLevel()
 	file.close();
 }
 
-void Level::UnloadSetOfAssets(ResourceIdentifier entry)
+void Level::UnloadSetOfAssets(const ResourceIdentifier entry) const
 {
 	for (int i = 0; i < entry.numberInDatabase; i++)
 	{
-		string resourceNameAndNumber = entry.resourceName + std::to_string(i);
+		const string resourceNameAndNumber = entry.resourceName + std::to_string(i);
 
 		TemporaryDatabaseIdentifier item(entry.resourceManager, resourceNameAndNumber);
 		item.UnloadFromDatabase(database);
 	}
 }
 
-ResourceIdentifier Level::ReadResourceIdentifier(std::vector<std::string> tokens)
+ResourceIdentifier Level::ReadResourceIdentifier(vector<string> tokens)
 {
 	ResourceIdentifier resource;
 

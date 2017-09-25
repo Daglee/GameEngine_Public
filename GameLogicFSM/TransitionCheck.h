@@ -5,20 +5,20 @@
 class TransitionCheck
 {
 public:
-	TransitionCheck(std::unordered_map<string, float*>** properties, Check* check);
+	TransitionCheck(unordered_map<string, float*>** properties, Check* check);
 	~TransitionCheck() {}
 
-	void AssignCheck(std::string operatorName);
+	void AssignCheck(const string operatorName);
 private:
 	void AssignEqual();
 	void AssignNotEqual();
 	void AssignGreaterThan();
 	void AssignLessThan();
-	void AssignExistsTransmission();
-	void AssignDoesNotExistTransmission();
+	void AssignExistsTransmission() const;
+	void AssignDoesNotExistTransmission() const;
 
 	Check* check;
-	std::unordered_map<std::string, std::function<void()>> assignments;
-	std::unordered_map<string, float*>** properties;
+	unordered_map<string, function<void()>> assignments;
+	unordered_map<string, float*>** properties;
 };
 

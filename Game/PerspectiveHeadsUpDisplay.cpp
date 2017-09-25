@@ -1,5 +1,6 @@
 #include "PerspectiveHeadsUpDisplay.h"
 
+#include "TextParagraph.h"
 #include "../nclgl/Renderer.h"
 #include "../nclgl/Text.h"
 
@@ -15,6 +16,7 @@ PerspectiveHeadsUpDisplay::PerspectiveHeadsUpDisplay(Renderer* renderer, TextPar
 PerspectiveHeadsUpDisplay::PerspectiveHeadsUpDisplay(Renderer* renderer)
 {
 	this->renderer = renderer;
+	linesOfText = nullptr;
 }
 
 void PerspectiveHeadsUpDisplay::SetRenderer(Renderer* newRenderer)
@@ -32,13 +34,13 @@ void PerspectiveHeadsUpDisplay::Set3DPosition(const Vector3& currentPosition)
 	startingTextPosition = currentPosition;
 }
 
-void PerspectiveHeadsUpDisplay::DisplayAllText()
+void PerspectiveHeadsUpDisplay::DisplayAllText() const
 {
 	DisplayParagraph();
 	DisplayAdaptiveText();
 }
 
-void PerspectiveHeadsUpDisplay::DisplayParagraph()
+void PerspectiveHeadsUpDisplay::DisplayParagraph() const
 {
 	Vector3 initialPosition(0, 70, 0);
 	Vector3 lineSpacing(0, 30, 0);
@@ -58,7 +60,7 @@ void PerspectiveHeadsUpDisplay::DisplayParagraph()
 	}
 }
 
-void PerspectiveHeadsUpDisplay::DisplayAdaptiveText()
+void PerspectiveHeadsUpDisplay::DisplayAdaptiveText() const
 {
 	for each(AdaptiveLine adaptiveLine in *linesOfText->GetPositionedLines())
 	{
@@ -66,13 +68,13 @@ void PerspectiveHeadsUpDisplay::DisplayAdaptiveText()
 	}
 }
 
-void PerspectiveHeadsUpDisplay::DisplayLine(const std::string& line, const Vector3& linePosition)
+void PerspectiveHeadsUpDisplay::DisplayLine(const std::string& line, const Vector3& linePosition) const
 {
-	Text text(line, PositionAfterOffset(linePosition), FONT_SIZE, PERSPECTIVE);
+	const Text text(line, PositionAfterOffset(linePosition), FONT_SIZE, PERSPECTIVE);
 	renderer->AddText(text);
 }
 
-Vector3 PerspectiveHeadsUpDisplay::PositionAfterOffset(const Vector3& basePosition)
+Vector3 PerspectiveHeadsUpDisplay::PositionAfterOffset(const Vector3& basePosition) const
 {
 	return startingTextPosition + basePosition;
 }

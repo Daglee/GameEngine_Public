@@ -8,14 +8,14 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/FSMManager.h"
 
-LevelConfiguration::LevelConfiguration(DataBase* database, std::string directory)
+LevelConfiguration::LevelConfiguration(DataBase* database, const string directory)
 {
 	this->database = database;
 
-	std::string physicsObjectsConfigFile = directory + "/PhysicsObjects.txt";
-	std::string gameObjectsConfigFile = directory + "/GameObjects.txt";
-	std::string gamelogicFile = directory + "/GameLogic.txt";
-	std::string musicListFile = directory + "/Music.txt";
+	string physicsObjectsConfigFile = directory + "/PhysicsObjects.txt";
+	string gameObjectsConfigFile = directory + "/GameObjects.txt";
+	string gamelogicFile = directory + "/GameLogic.txt";
+	string musicListFile = directory + "/Music.txt";
 
 	configFiles.push_back(ConfigurationFile(physicsObjectsConfigFile, std::bind(&LevelConfiguration::ReadPhysicsObject, this, physicsObjectsConfigFile)));
 	configFiles.push_back(ConfigurationFile(gameObjectsConfigFile, std::bind(&LevelConfiguration::ReadGameObject, this, gameObjectsConfigFile)));
@@ -23,7 +23,7 @@ LevelConfiguration::LevelConfiguration(DataBase* database, std::string directory
 	configFiles.push_back(ConfigurationFile(musicListFile, std::bind(&LevelConfiguration::InitialiseMusic, this, musicListFile)));
 }
 
-void LevelConfiguration::ConfigureFromAllExistingFiles()
+void LevelConfiguration::ConfigureFromAllExistingFiles() const
 {
 	for each (ConfigurationFile configFile in configFiles)
 	{
@@ -34,10 +34,10 @@ void LevelConfiguration::ConfigureFromAllExistingFiles()
 	}
 }
 
-void LevelConfiguration::ReadPhysicsObject(std::string filename)
+void LevelConfiguration::ReadPhysicsObject(const string filename)
 {
-	std::ifstream file(filename);
-	int numObjectsToRead = ParseNumberOfEntitiesInFile(file);
+	ifstream file(filename);
+	const int numObjectsToRead = ParseNumberOfEntitiesInFile(file);
 
 	for (int i = 0; i < numObjectsToRead; ++i)
 	{
@@ -50,11 +50,11 @@ void LevelConfiguration::ReadPhysicsObject(std::string filename)
 	}
 }
 
-void LevelConfiguration::ReadGameObject(std::string filename)
+void LevelConfiguration::ReadGameObject(const string filename)
 {
-	std::ifstream file(filename);
+	ifstream file(filename);
 
-	int numItems = ParseNumberOfEntitiesInFile(file);
+	const int numItems = ParseNumberOfEntitiesInFile(file);
 
 	for (int i = 0; i < numItems; ++i)
 	{
@@ -67,19 +67,19 @@ void LevelConfiguration::ReadGameObject(std::string filename)
 	}
 }
 
-int LevelConfiguration::ParseNumberOfEntitiesInFile(std::ifstream& file)
+const int LevelConfiguration::ParseNumberOfEntitiesInFile(ifstream& file) const
 {
 	string attribute;
 	getline(file, attribute);
 
-	int numObjectsToRead = std::atoi(attribute.c_str());
+	const int numObjectsToRead = atoi(attribute.c_str());
 
 	return numObjectsToRead;
 }
 
-void LevelConfiguration::InitialiseGameLogic(std::string filename)
+void LevelConfiguration::InitialiseGameLogic(const string filename) const
 {
-	std::ifstream file(filename);
+	ifstream file(filename);
 	string line;
 
 	FSMManager* fsmManager = static_cast<FSMManager*>(database->GetTable("GFSMManager")->GetResources()->Find("GFSMManager"));
@@ -87,16 +87,16 @@ void LevelConfiguration::InitialiseGameLogic(std::string filename)
 	while (getline(file, line))
 	{
 		vector<std::string> tokens = Log::tokenise(line);
-		std::string FSMName = tokens.at(0);
-		std::string FSMConfigurationFile = tokens.at(1);
+		const string FSMName = tokens.at(0);
+		const string FSMConfigurationFile = tokens.at(1);
 
 		fsmManager->LateBuildFSM(FSMName, FSMConfigurationFile);
 	}
 }
 
-void LevelConfiguration::InitialiseMusic(std::string filename)
+void LevelConfiguration::InitialiseMusic(const string filename) const
 {
-	std::ifstream file(filename);
+	ifstream file(filename);
 	string songFileName;
 
 	while (getline(file, songFileName))
@@ -105,16 +105,16 @@ void LevelConfiguration::InitialiseMusic(std::string filename)
 	}
 }
 
-void LevelConfiguration::ConfigureAllEntityAttributes(std::ifstream& file, GameObject* entity)
+void LevelConfiguration::ConfigureAllEntityAttributes(std::ifstream& file, GameObject* entity) const
 {
 	string attribute;
 
-	vector<string> emptyAttribute;
+	const vector<string> emptyAttribute;
 	EntityConfiguration configuration(emptyAttribute, entity);
 
 	while (getline(file, attribute))
 	{
-		vector<string> tokens = Log::tokenise(attribute);
+		const vector<string> tokens = Log::tokenise(attribute);
 
 		configuration.SetAttributeTokens(tokens);
 		configuration.ConfigureEntityWithAttribute();

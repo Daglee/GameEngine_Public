@@ -11,16 +11,16 @@ class GameObject;
 class GameEntityBuilder
 {
 public:
-	GameEntityBuilder(DataBase* database, std::vector<std::string> configurationTokens);
+	GameEntityBuilder(DataBase* database, const std::vector<std::string> configurationTokens);
 	~GameEntityBuilder() {}
 
 	void Build();
 
 private:
 	void StoreEntityFromDatabase();
-	void AddStoredGameEntity();
+	void AddStoredGameEntity() const;
 
-	Vector3 ReadPosition();
+	Vector3 ReadPosition() const;
 	void AddMeshFromAssetName();
 
 	GameObject* entity;

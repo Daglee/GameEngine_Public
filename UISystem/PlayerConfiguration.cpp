@@ -1,14 +1,15 @@
 #include "PlayerConfiguration.h"
 
-#include "../Game/Player.h"
-#include "../nclgl/Gamepad.h"
-#include "GamepadMapper.h"
 #include "MKMapper.h"
+#include "../nclgl/Gamepad.h"
+#include "../Game/Player.h"
 #include "../Game/TopDownController.h"
 #include "../Game/Pistol.h"
 #include "../Threading/ThreadPool.h"
 #include "../Game/ScoreBoard.h"
 #include "../Game/AudioManager.h"
+#include "../Game/SpawnSystem.h"
+#include "../Game/GunInput.h"
 
 PlayerConfiguration::PlayerConfiguration(BasePlayerSystems playerComponents)
 {

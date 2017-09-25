@@ -3,18 +3,21 @@
 #include "ScoreBoard.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../UISystem/InputManager.h"
+#include "../nclgl/Renderer.h"
 
 LevelLoader::LevelLoader(DataBase* database)
 {
 	this->database = database;
+	currentLevel = nullptr;
 }
 
 LevelLoader::LevelLoader()
 {
 	database = nullptr;
+	currentLevel = nullptr;
 }
 
-void LevelLoader::LoadFirstLevel(std::string level)
+void LevelLoader::LoadFirstLevel(const string level)
 {
 	LoadLevel(level);
 
@@ -25,7 +28,7 @@ void LevelLoader::LoadFirstLevel(std::string level)
 	inputManager->GetPlayerbase()->ConnectGamepads(false);
 }
 
-void LevelLoader::LoadReplacementLevel(std::string level)
+void LevelLoader::LoadReplacementLevel(const string level)
 {
 	LoadLevel(level);
 
@@ -35,7 +38,7 @@ void LevelLoader::LoadReplacementLevel(std::string level)
 	inputManager->GetPlayerbase()->ReInitialisePlayers();
 }
 
-void LevelLoader::ExitLevel()
+void LevelLoader::ExitLevel() const
 {
 	if (currentLevel != nullptr)
 	{
@@ -49,7 +52,7 @@ void LevelLoader::ExitLevel()
 	else Log::Error("Trying to unload a level that has not been loaded!");
 }
 
-void LevelLoader::LoadLevel(std::string level)
+void LevelLoader::LoadLevel(const string level)
 {
 	Renderer* renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
 

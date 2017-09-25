@@ -6,6 +6,8 @@
 #include "../GameLogicFSM/FSMManager.h"
 #include "../Physics/PhysicsEngine.h"
 #include "../Profiler/Profiler.h"
+#include "../Threading/ThreadPool.h"
+#include "../nclgl/Renderer.h"
 
 enum SUBSYSTEM_INDEXES
 {
@@ -70,7 +72,7 @@ void SubsystemManager::ThreadedUpdate(float deltatime)
 	++updateCount;
 }
 
-void SubsystemManager::Update(float deltatime)
+void SubsystemManager::Update(float deltatime) const
 {
 	renderer->Update(deltatime);
 

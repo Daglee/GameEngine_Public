@@ -1,9 +1,5 @@
 #pragma once
 
-#include "../ResourceManagment/Log.h"
-
-#include <sstream>
-#include <iterator>
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -17,7 +13,7 @@ struct Check
 	string	property;			//The tag of the variable it will modify.
 	string	boolOperator;	//The condition.
 	float	comparison;		//What we are comparing the variable to.
-	std::function<bool(Check*)> execute;
+	function<bool(Check*)> execute;
 };
 
 /*
@@ -28,8 +24,8 @@ struct Check
 class Transition
 {
 public:
-	Transition(std::unordered_map<string, float*>* properties = NULL, int startingState = -1,
-		int nextState = -1, string check = "");
+	Transition(std::unordered_map<string, float*>* properties = nullptr, const int startingState = -1,
+		const int nextState = -1, const string check = "");
 
 	~Transition() {}
 

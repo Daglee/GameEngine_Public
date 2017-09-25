@@ -1,8 +1,8 @@
 #include "MessageSystem.h"
 
-MessageSystem* MessageSystem::instance = NULL;
+MessageSystem* MessageSystem::instance = nullptr;
 
-bool MessageSystem::MessageTransmitting(float msgTitle)
+bool MessageSystem::MessageTransmitting(const float msgTitle)
 {
 	/*
 	  LOCK! Nothing in the system is allowed
@@ -13,27 +13,28 @@ bool MessageSystem::MessageTransmitting(float msgTitle)
 	return MessageExists(msgTitle) || EventExists(msgTitle);
 }
 
-void MessageSystem::StopEvent(float msgTitle)
+void MessageSystem::StopEvent(const float msgTitle)
 {
 	if (EventExists(msgTitle))
 	{
 		lock_guard<mutex> lock(transmit_mutex);
 
-		for (vector<float>::iterator i = events.begin();
-			i != events.end();)
+		for (vector<float>::iterator message = events.begin();
+			message != events.end();)
 		{
-			if (*i == msgTitle)
+			if (*message == msgTitle)
 			{
-				i = events.erase(i);
+				message = events.erase(message);
 
 				break;
 			}
-			else ++i;
+			
+			++message;
 		}
 	}
 }
 
-bool MessageSystem::MessageExists(float messageToFind)
+bool MessageSystem::MessageExists(float messageToFind) const
 {
 	for each(float message in messages)
 	{
@@ -46,7 +47,7 @@ bool MessageSystem::MessageExists(float messageToFind)
 	return false;
 }
 
-bool MessageSystem::EventExists(float eventToFind)
+bool MessageSystem::EventExists(float eventToFind) const
 {
 	for each(float event in events)
 	{

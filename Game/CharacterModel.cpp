@@ -180,7 +180,7 @@ void CharacterModel::ReadFile(string filename)
 }
 
 //Applies to all nodes
-void CharacterModel::UpdateMesh(Mesh* m)
+void CharacterModel::UpdateMesh(Mesh* m) const
 {
 	for each (std::pair<std::string, SceneNode*> nodepair in nodeMap)
 	{
@@ -189,7 +189,7 @@ void CharacterModel::UpdateMesh(Mesh* m)
 }
 
 //Applies to all nodes
-void CharacterModel::UpdateColour(const Vector4& col)
+void CharacterModel::UpdateColour(const Vector4& col) const
 {
 	for each (std::pair<std::string, SceneNode*> nodepair in nodeMap)
 	{

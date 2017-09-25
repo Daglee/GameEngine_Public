@@ -1,6 +1,5 @@
 #include "LevelManager.h"
 
-#include "Launcher.h"
 #include "../GameLogicFSM/MessageSystem.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../ResourceManagment/Log.h"
@@ -10,7 +9,7 @@
 const int INITIAL_LEVEL = 1;
 const int REPLACEMENT_LEVEL = 2;
 
-LevelManager::LevelManager(DataBase* database, std::string filename) : FSMUnit("Levels", database)
+LevelManager::LevelManager(DataBase* database, const string filename) : FSMUnit("Levels", database)
 {
 	ConstructLevelList(filename);
 	InitialiseFSM();
@@ -45,8 +44,9 @@ void LevelManager::Update(const float& msec)
 	timer += msec / 1000.0f;
 
 	//How much time is left for this level
-	std::string mt = std::to_string((matchLength - timer));
-	Text matchTimer(mt, Vector3((renderer->GetWidth() / 2) - 15, 0, 0), 15.0f, false);
+	const string mt = to_string((matchLength - timer));
+	const Text matchTimer(mt, Vector3((renderer->GetWidth() / 2) - 15, 0, 0), 15.0f, false);
+
 	renderer->AddText(matchTimer);
 }
 
@@ -67,16 +67,15 @@ void LevelManager::CheckLoadLevel()
 	}
 }
 
-void LevelManager::ConstructLevelList(std::string filename)
+void LevelManager::ConstructLevelList(const string filename)
 {
-	std::ifstream file(filename);
-	std::string line;
+	ifstream file(filename);
+	string line;
 
 	int levelCount = 0;
 	while (getline(file, line))
 	{
-		float id = 0;
-		std::string levelDirectory = line;
+		const string levelDirectory = line;
 
 		levels.push_back(levelDirectory);
 		levelIDs.push_back(0);
@@ -89,7 +88,7 @@ void LevelManager::InitialiseFSM()
 {
 	for (int i = 0; i < levelIDs.size(); ++i)
 	{
-		properties->insert({ "arena" + std::to_string(i + 1), &levelIDs[i] });
+		properties->insert({ "arena" + to_string(i + 1), &levelIDs[i] });
 	}
 
 	properties->insert({ "timer", &timer });

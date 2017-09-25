@@ -1,16 +1,23 @@
 #pragma once
 
 #include "../UISystem/InputMapper.h"
+#include "../nclgl/Matrix4.h"
 
-#include "CharacterModel.h"
-#include "../Physics/RigidBody.h"
+#include <string>
 
+class RigidBody;
+class CharacterModel;
 class Player;
 
 class PlayerController
 {
 public:
-	PlayerController(InputMapper* input) : input(input) {}
+	explicit PlayerController(InputMapper* input) : input(input)
+	{
+		playerModel = nullptr;
+		rigidBody = nullptr;
+	}
+
 	virtual ~PlayerController() {}
 
 	void ApplyInputs();
@@ -23,7 +30,7 @@ public:
 	void SetInputMapper(InputMapper* inputMapper);
 	void SetCharacterModel(CharacterModel* newModel);
 	void SetRigidBody(RigidBody* newRigidBody);
-	void SetMovementSound(std::string newMovementSound);
+	void SetMovementSound(const std::string newMovementSound);
 
 protected:
 	virtual void ApplyRotation() = 0;

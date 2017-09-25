@@ -12,7 +12,7 @@ struct Property
 	std::string name;
 	std::function<void()> configurator;
 
-	Property(std::string name, std::function<void()> configurator)
+	Property(const std::string name, std::function<void()> configurator)
 	{
 		this->name = name;
 		this->configurator = configurator;
@@ -22,21 +22,22 @@ struct Property
 class EntityConfiguration
 {
 public:
-	EntityConfiguration(std::vector<std::string> attributeTokens, GameObject* entity);
+	EntityConfiguration(const std::vector<std::string> attributeTokens, GameObject* entity);
 
 	~EntityConfiguration()
 	{
 		delete attributeReader;
 	}
 
-	void SetAttributeTokens(std::vector<std::string> newAttributeTokens)
+	void SetAttributeTokens(const std::vector<std::string> newAttributeTokens)
 	{
 		attributeTokens = newAttributeTokens;
 		attributeReader->SetTokens(newAttributeTokens);
 	}
 
 	void ConfigureEntityWithAttribute();
-	bool IsFinished();
+	const bool IsFinished() const;
+
 private:
 	std::string currentAttribute;
 

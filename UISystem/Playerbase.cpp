@@ -5,7 +5,10 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../Game/ScoreBoard.h"
 #include "../Game/Player.h"
+#include "../Game/PlayerController.h"
 #include "../nclgl/Gamepad.h"
+#include "../nclgl/Renderer.h"
+#include "../Physics/PhysicsEngine.h"
 #include "../Threading/ThreadPool.h"
 
 #include <string>

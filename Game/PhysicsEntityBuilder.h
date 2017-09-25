@@ -11,12 +11,12 @@ class PhysicsObject;
 class PhysicsEntityBuilder
 {
 public:
-	PhysicsEntityBuilder(DataBase* database, std::vector<std::string> configurationTokens);
+	PhysicsEntityBuilder(DataBase* database, const std::vector<std::string> configurationTokens);
 	PhysicsEntityBuilder(DataBase* database);
 
 	~PhysicsEntityBuilder() {}
 
-	void SetConfigurationTokens(std::vector<std::string> newTokens)
+	void SetConfigurationTokens(const std::vector<std::string> newTokens)
 	{
 		configurationTokens = newTokens;
 	}
@@ -25,16 +25,16 @@ public:
 
 private:
 	void StoreEntityFromDatabase();
-	void AddStoredPhysicsEntity();
+	void AddStoredPhysicsEntity() const;
 
 	void ReadShapeAndBuild();
 
-	void ConstructSphere();
-	void ConstructPlane();
+	void ConstructSphere() const;
+	void ConstructPlane() const;
 
-	void AddMeshFromAssetName(int meshToken);
+	void AddMeshFromAssetName(const int meshToken);
 
-	Vector3 ReadPosition();
+	Vector3 ReadPosition() const;
 
 	PhysicsObject* entity;
 	DataBase* database;

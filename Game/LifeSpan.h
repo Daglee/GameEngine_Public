@@ -2,7 +2,7 @@
 class LifeSpan
 {
 public:
-	LifeSpan(float maxHealth, int numberOfFramesUntilRespawn);
+	LifeSpan(const float maxHealth, const int numberOfFramesUntilRespawn);
 	LifeSpan();
 	~LifeSpan() {}
 

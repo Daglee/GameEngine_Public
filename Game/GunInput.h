@@ -10,7 +10,7 @@ struct WeaponData
 	Vector3* firingPosition;
 	int weaponID;
 
-	WeaponData(Vector3* firingPosition, int weaponID)
+	WeaponData(Vector3* firingPosition, const int weaponID)
 	{
 		this->firingPosition = firingPosition;
 		this->weaponID = weaponID;
@@ -26,17 +26,17 @@ struct WeaponData
 class GunInput
 {
 public:
-	GunInput(InputMapper* input, WeaponData weaponData);
-	GunInput(InputMapper* input, Gun* weapon, WeaponData weaponData);
+	GunInput(InputMapper* input, const WeaponData weaponData);
+	GunInput(InputMapper* input, Gun* weapon, const WeaponData weaponData);
 	~GunInput() {}
 
-	void ApplyInputs();
+	void ApplyInputs() const;
 
 	void SetWeapon(Gun* newWeapon);
 
 private:
-	void FireWeapon();
-	void ReloadWeapon();
+	void FireWeapon() const;
+	void ReloadWeapon() const;
 
 	Gun* weapon;
 	InputMapper* input;

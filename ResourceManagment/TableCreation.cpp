@@ -11,6 +11,7 @@
 #include "../nclgl/Gamepad.h"
 #include "../nclgl/OBJMesh.h"
 #include "../nclgl/Mesh.h"
+#include "../nclgl/Renderer.h"
 #include "../Game/PhysicsObject.h"
 #include "../Game/GameObject.h"
 #include "../Game/Player.h"

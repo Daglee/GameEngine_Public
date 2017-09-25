@@ -33,7 +33,7 @@ public:
 		return instance;
 	}
 
-	inline void TransmitMessage(float messaage)
+	inline void TransmitMessage(const float messaage)
 	{
 		/*
 		Is the update busy? If not, transmit. If it is,
@@ -44,7 +44,7 @@ public:
 		messages.push_back(messaage);
 	}
 
-	inline void BeginEvent(float messaage)
+	inline void BeginEvent(const float messaage)
 	{
 		/*
 		Is the update busy? If not, transmit. If it is,
@@ -55,10 +55,10 @@ public:
 		events.push_back(messaage);
 	}
 
-	void StopEvent(float msgTitle);
+	void StopEvent(const float msgTitle);
 
 	//Is a message currently being transmitted?
-	bool MessageTransmitting(float msgTitle);
+	bool MessageTransmitting(const float msgTitle);
 
 	void ClearAllMessages()
 	{
@@ -84,8 +84,8 @@ private:
 		delete instance;
 	}
 
-	bool MessageExists(float messageToFind);
-	bool EventExists(float eventToFind);
+	bool MessageExists(float messageToFind) const;
+	bool EventExists(float eventToFind) const;
 
 	static MessageSystem* instance;
 

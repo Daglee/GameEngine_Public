@@ -3,24 +3,24 @@
 #include "MessageSystem.h"
 #include "../Game/ScoreBoard.h"
 
-ActionFunction::ActionFunction(std::unordered_map<string, float*>** properties, Action* action)
+ActionFunction::ActionFunction(unordered_map<string, float*>** properties, Action* action)
 {
 	this->properties = properties;
 	this->action = action;
 
-	assignments.insert({ "=", std::bind(&ActionFunction::AssignEquals, this)});
-	assignments.insert({ "-=", std::bind(&ActionFunction::AssignMinus, this) });
-	assignments.insert({ "+=", std::bind(&ActionFunction::AssignPlus, this) });
-	assignments.insert({ "*=", std::bind(&ActionFunction::AssignMultiply, this) });
-	assignments.insert({ "transmit", std::bind(&ActionFunction::AssignTransmit, this) });
-	assignments.insert({ "newevent", std::bind(&ActionFunction::AssignNewEvent, this) });
-	assignments.insert({ "endevent", std::bind(&ActionFunction::AssignEndEvent, this) });
-	assignments.insert({ "addpoints", std::bind(&ActionFunction::AssignAddPoints, this) });
+	assignments.insert({ "=", bind(&ActionFunction::AssignEquals, this)});
+	assignments.insert({ "-=", bind(&ActionFunction::AssignMinus, this) });
+	assignments.insert({ "+=", bind(&ActionFunction::AssignPlus, this) });
+	assignments.insert({ "*=", bind(&ActionFunction::AssignMultiply, this) });
+	assignments.insert({ "transmit", bind(&ActionFunction::AssignTransmit, this) });
+	assignments.insert({ "newevent", bind(&ActionFunction::AssignNewEvent, this) });
+	assignments.insert({ "endevent", bind(&ActionFunction::AssignEndEvent, this) });
+	assignments.insert({ "addpoints", bind(&ActionFunction::AssignAddPoints, this) });
 }
 
-void ActionFunction::AssignExecution(std::string operatorName)
+void ActionFunction::AssignExecution(const string operatorName)
 {
-	std::unordered_map<std::string, std::function<void()>>::const_iterator iterator = 
+	const unordered_map<string, function<void()>>::const_iterator iterator =
 		assignments.find(operatorName);
 
 	if (iterator != assignments.end())
@@ -61,15 +61,15 @@ void ActionFunction::AssignMultiply()
 	};
 }
 
-void ActionFunction::AssignTransmit()
+void ActionFunction::AssignTransmit() const
 {
-	action->execute = [](Action* action)
+	action->execute = [](Action* action) 
 	{
 		MessageSystem::GetInstance()->TransmitMessage(action->operand);
 	};
 }
 
-void ActionFunction::AssignNewEvent()
+void ActionFunction::AssignNewEvent() const
 {
 	action->execute = [](Action* action)
 	{
@@ -77,7 +77,7 @@ void ActionFunction::AssignNewEvent()
 	};
 }
 
-void ActionFunction::AssignEndEvent()
+void ActionFunction::AssignEndEvent() const
 {
 	action->execute = [](Action* action)
 	{
@@ -85,7 +85,7 @@ void ActionFunction::AssignEndEvent()
 	};
 }
 
-void ActionFunction::AssignAddPoints()
+void ActionFunction::AssignAddPoints() const
 {
 	action->execute = [](Action* action)
 	{

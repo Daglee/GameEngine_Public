@@ -3,19 +3,21 @@
 #include "ScoreBoard.h"
 #include "../Profiler/Profiler.h"
 #include "../GameLogicFSM/FSMManager.h"
+#include "../Physics/PhysicsEngine.h"
+#include "../nclgl/Renderer.h"
 
-Launcher::Launcher(string rendName, string windName, DataBase* db)
+Launcher::Launcher(const string rendName, const string windName, DataBase* db)
 {
 	database = db;
 	rendererName = rendName;
 	windowName = windName;
 }
 
-void Launcher::Launch(string filename)
+void Launcher::Launch(const string directory)
 {
 	if (!GraphicsExists())
 	{
-		database->StartUp(filename, false, true);
+		database->StartUp(directory, false, true);
 
 		AttachGraphicsAndInput();
 	}
@@ -23,7 +25,7 @@ void Launcher::Launch(string filename)
 	initialised = IsGraphicsInitialised();
 }
 
-void Launcher::InitProfilerTimers()
+void Launcher::InitProfilerTimers() const
 {
 	//Retrieve everything from the database and hook it up.
 	Profiler* profiler = static_cast<Profiler*>(database->GetTable("GProfiler")->GetResources()->Find("Profiler"));
@@ -68,9 +70,11 @@ bool Launcher::IsGraphicsInitialised()
 		Log::Error("Renderer not succesfully initialised.");
 		return false;
 	}
+
+	return true;
 }
 
-bool Launcher::IsSubSystemNull(Subsystem* subsystem, std::string name)
+bool Launcher::IsSubSystemNull(Subsystem* subsystem, const string name)
 {
 	if (subsystem == nullptr)
 	{

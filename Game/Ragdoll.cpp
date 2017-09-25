@@ -6,6 +6,7 @@
 #include "CharacterModel.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Matrix4.h"
+#include "../Physics/SphereCollider.h"
 
 Ragdoll::Ragdoll(CharacterModel* playerModel, Renderer* renderer, PhysicsEngine* physicsEngine)
 {

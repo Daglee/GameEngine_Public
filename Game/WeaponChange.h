@@ -16,8 +16,8 @@ public:
 	Gun* CopyToRocketLauncher(Gun* currentWeapon);
 	Gun* CopyToMachineGun(Gun* currentWeapon);
 
-	void AnnounceChange();
-	void StopPreviousEvents();
+	void AnnounceChange() const;
+	void StopPreviousEvents() const;
 
 private:
 	std::string previousAnnouncement;

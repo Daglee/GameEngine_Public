@@ -2,7 +2,7 @@
 
 const float NO_HEALTH = 0.0f;
 
-LifeSpan::LifeSpan(float maxHealth, int numberOfFramesUntilRespawn)
+LifeSpan::LifeSpan(const float maxHealth, const int numberOfFramesUntilRespawn)
 {
 	this->maxHealth = maxHealth;
 	this->numberOfFramesUntilRespawn = numberOfFramesUntilRespawn;

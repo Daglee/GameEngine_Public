@@ -13,17 +13,17 @@ class Matrix4;
 class PlayerRagdollSet
 {
 public:
-	PlayerRagdollSet(int ragdollLimit, CharacterModel* playerModel,
+	PlayerRagdollSet(const int ragdollLimit, CharacterModel* playerModel,
 		Renderer* renderer, PhysicsEngine* physicsEngine);
 	~PlayerRagdollSet();
 
 	void SpawnNextRagdoll(DataBase* database, const Matrix4& playerRotation);
 
-	void SetRenderer(Renderer* renderer);
-	void SetPhysicsEngine(PhysicsEngine* physicsEngine);
+	void SetRenderer(Renderer* renderer) const;
+	void SetPhysicsEngine(PhysicsEngine* physicsEngine) const;
 
 private:
-	bool MaxRagdollsSpawned();
+	bool MaxRagdollsSpawned() const;
 	void DespawnRagdolls();
 
 	std::vector<Ragdoll*> ragdolls;

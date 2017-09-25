@@ -5,21 +5,21 @@
 #include "AudioManager.h"
 #include "../GameLogicFSM/MessageSystem.h"
 
-GunInput::GunInput(InputMapper* input, WeaponData weaponData)
+GunInput::GunInput(InputMapper* input, const WeaponData weaponData)
 {
 	this->input = input;
 	this->weapon = nullptr;
 	this->weaponData = weaponData;
 }
 
-GunInput::GunInput(InputMapper* input, Gun* weapon, WeaponData weaponData)
+GunInput::GunInput(InputMapper* input, Gun* weapon, const WeaponData weaponData)
 {
 	this->input = input;
 	this->weapon = weapon;
 	this->weaponData = weaponData;
 }
 
-void GunInput::ApplyInputs()
+void GunInput::ApplyInputs() const
 {
 	if (input->Fired())
 	{
@@ -32,7 +32,7 @@ void GunInput::ApplyInputs()
 	}
 }
 
-void GunInput::FireWeapon()
+void GunInput::FireWeapon() const
 {
 	if (weapon->Fire(*weaponData.firingPosition, input->rawRotation, weaponData.weaponID))
 	{
@@ -42,7 +42,7 @@ void GunInput::FireWeapon()
 	MessageSystem::GetInstance()->TransmitMessage(Log::Hash("player_fired"));
 }
 
-void GunInput::ReloadWeapon()
+void GunInput::ReloadWeapon() const
 {
 	weapon->Reload();
 }

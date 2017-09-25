@@ -2,7 +2,7 @@
 
 #include "MessageSystem.h"
 
-TransitionCheck::TransitionCheck(std::unordered_map<string, float*>** properties, Check* check)
+TransitionCheck::TransitionCheck(unordered_map<string, float*>** properties, Check* check)
 {
 	this->properties = properties;
 	this->check = check;
@@ -15,9 +15,9 @@ TransitionCheck::TransitionCheck(std::unordered_map<string, float*>** properties
 	assignments.insert({ "!exists_transmission", std::bind(&TransitionCheck::AssignDoesNotExistTransmission, this) });
 }
 
-void TransitionCheck::AssignCheck(std::string operatorName)
+void TransitionCheck::AssignCheck(const string operatorName)
 {
-	std::unordered_map<std::string, std::function<void()>>::const_iterator iterator =
+	const unordered_map<std::string, std::function<void()>>::const_iterator iterator =
 		assignments.find(operatorName);
 
 	if (iterator != assignments.end())
@@ -59,7 +59,7 @@ void TransitionCheck::AssignLessThan()
 	};
 }
 
-void TransitionCheck::AssignExistsTransmission()
+void TransitionCheck::AssignExistsTransmission() const
 {
 	check->execute = [](Check* check)
 	{
@@ -67,7 +67,7 @@ void TransitionCheck::AssignExistsTransmission()
 	};
 }
 
-void TransitionCheck::AssignDoesNotExistTransmission()
+void TransitionCheck::AssignDoesNotExistTransmission() const
 {
 	check->execute = [](Check* check)
 	{

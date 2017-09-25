@@ -3,6 +3,9 @@
 #include "PhysicsObject.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../Physics/PlaneCollider.h"
+#include "../Physics/SphereCollider.h"
+#include "../Physics/PhysicsEngine.h"
+#include "../nclgl/Renderer.h"
 
 const int ASSET_NAME = 1;
 const int X_POSITION = 2;
@@ -15,15 +18,17 @@ const int Z_PLANE = 9;
 const int PLANE_MESH = 10;
 const int SPHERE_MESH = 7;
 
-PhysicsEntityBuilder::PhysicsEntityBuilder(DataBase* database, std::vector<std::string> configurationTokens)
+PhysicsEntityBuilder::PhysicsEntityBuilder(DataBase* database, const vector<string> configurationTokens)
 {
 	this->database = database;
 	this->configurationTokens = configurationTokens;
+	entity = nullptr;
 }
 
 PhysicsEntityBuilder::PhysicsEntityBuilder(DataBase* database)
 {
 	this->database = database;
+	entity = nullptr;
 }
 
 void PhysicsEntityBuilder::Build()
@@ -36,11 +41,11 @@ void PhysicsEntityBuilder::Build()
 
 void PhysicsEntityBuilder::StoreEntityFromDatabase()
 {
-	std::string name = configurationTokens.at(ASSET_NAME);
+	const string name = configurationTokens.at(ASSET_NAME);
 	entity = static_cast<PhysicsObject*>(database->GetTable("PhysicsObjects")->GetResources()->Find(name));
 }
 
-void PhysicsEntityBuilder::AddStoredPhysicsEntity()
+void PhysicsEntityBuilder::AddStoredPhysicsEntity() const
 {
 	entity->AddToPhysicsEngine(static_cast<PhysicsEngine*>(database->GetTable("PhysicsEngine")->GetResources()->Find("PhysicsEngine")));
 	entity->AddToRenderer(*static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer")));
@@ -64,34 +69,34 @@ void PhysicsEntityBuilder::ReadShapeAndBuild()
 	entity->SetPosition(ReadPosition());
 }
 
-void PhysicsEntityBuilder::ConstructPlane()
+void PhysicsEntityBuilder::ConstructPlane() const
 {
-	float x = stof(configurationTokens.at(X_PLANE));
-	float y = stof(configurationTokens.at(Y_PLANE));
-	float z = stof(configurationTokens.at(Z_PLANE));
+	const float x = stof(configurationTokens.at(X_PLANE));
+	const float y = stof(configurationTokens.at(Y_PLANE));
+	const float z = stof(configurationTokens.at(Z_PLANE));
 
-	Vector3 colliderPosition(x, y, z);
+	const Vector3 colliderPosition(x, y, z);
 	entity->GetRigidBody()->collider = new PlaneCollider(colliderPosition);
 }
 
-void PhysicsEntityBuilder::ConstructSphere()
+void PhysicsEntityBuilder::ConstructSphere() const
 {
 	entity->GetRigidBody()->collider = new SphereCollider(1);
 }
 
-void PhysicsEntityBuilder::AddMeshFromAssetName(int meshToken)
+void PhysicsEntityBuilder::AddMeshFromAssetName(const int meshToken)
 {
-	std::string meshAssetName = configurationTokens.at(meshToken);
+	const string meshAssetName = configurationTokens.at(meshToken);
 
 	OBJMesh* mesh = static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find(meshAssetName));
 	entity->AddMesh(*mesh);
 }
 
-Vector3 PhysicsEntityBuilder::ReadPosition()
+Vector3 PhysicsEntityBuilder::ReadPosition() const
 {
-	float xPosition = strtof(configurationTokens.at(X_POSITION).c_str(), 0);
-	float yPosition = strtof(configurationTokens.at(Y_POSITION).c_str(), 0);
-	float zPosition = strtof(configurationTokens.at(Z_POSITION).c_str(), 0);
+	const float xPosition = strtof(configurationTokens.at(X_POSITION).c_str(), 0);
+	const float yPosition = strtof(configurationTokens.at(Y_POSITION).c_str(), 0);
+	const float zPosition = strtof(configurationTokens.at(Z_POSITION).c_str(), 0);
 
 	return Vector3(xPosition, yPosition, zPosition);
 }
