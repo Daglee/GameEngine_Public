@@ -9,17 +9,14 @@ class Collider;
 class RigidBody
 {
 public:
-	RigidBody(Vector3 acceleration = Vector3(), Vector3 velocity = Vector3(), float mass = 1,
-		float drag = 0.99f, float gravity = -0.00001f, std::string tag = "");
+	RigidBody(const Vector3 acceleration = Vector3(), const Vector3 velocity = Vector3(), const float mass = 1,
+	          const float drag = 0.99f, const float gravity = -0.00001f, const string tag = "");
 	virtual ~RigidBody();
 
-	void ApplyForce(Vector3 momentum);
-	void UpdatePosition	(Vector3 pos);
+	void ApplyForce(const Vector3& momentum);
+	void UpdatePosition(const Vector3& pos);
 
-	inline bool Ignores(std::string rigidBodyTag)
-	{
-		return ignoreTag == rigidBodyTag;
-	}
+	inline bool Ignores(const std::string rigidBodyTag) const;
 
 	Vector3 acceleration;
 	Vector3 velocity;
@@ -27,7 +24,7 @@ public:
 
 	Collider* collider;
 	SceneNode* parentMesh;
-	
+
 	float gravity;
 	float drag;
 	float inverseMass;
@@ -35,20 +32,19 @@ public:
 	bool atRest;
 
 	int restFrames = 0;
-	
-	std::string tag;
-	std::string secondarytag = "";
-	std::string ignoreTag = "";
+
+	string tag;
+	string secondarytag = "";
+	string ignoreTag = "";
 
 	bool initialised;
 
-	void UpdateMass(float m) 
+	void UpdateMass(const float newMass)
 	{
-		mass = m;
-		inverseMass = 1 / m;
+		mass = newMass;
+		inverseMass = 1 / newMass;
 	}
 
 private:
 	float mass;
 };
-

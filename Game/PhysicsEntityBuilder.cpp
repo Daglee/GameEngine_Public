@@ -2,6 +2,7 @@
 
 #include "PhysicsObject.h"
 #include "../ResourceManagment/DataBase.h"
+#include "../Physics/PlaneCollider.h"
 
 const int ASSET_NAME = 1;
 const int X_POSITION = 2;

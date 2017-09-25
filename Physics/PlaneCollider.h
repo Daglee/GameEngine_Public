@@ -6,18 +6,20 @@
 class PlaneCollider : public Collider
 {
 public:
-	PlaneCollider(Vector3 normal)
+	explicit PlaneCollider(const Vector3 normal)
 	{
 		this->normal = normal;
 	}
 
-	~PlaneCollider() {}
+	~PlaneCollider()
+	{
+	}
 
-	virtual bool IsColliding(Vector3& contactNormal, Collider& collider, float& penetrationDepth);
-	virtual bool IsColliding(Vector3& contactNormal, SphereCollider& collider, float& penetrationDepth);
-	virtual bool IsColliding(Vector3& contactNormal, PlaneCollider& collider, float& penetrationDepth);
+	bool IsColliding(Vector3& contactNormal, Collider& collider, float& penetrationDepth) override;
+	bool IsColliding(Vector3& contactNormal, SphereCollider& collider, float& penetrationDepth) override;
+	bool IsColliding(Vector3& contactNormal, PlaneCollider& collider, float& penetrationDepth) override;
 
-	virtual Bounds ProjectOnAxis(Vector3& axis);
+	Bounds ProjectOnAxis(const Vector3& axis) override;
 
 	Vector3 normal;
 };

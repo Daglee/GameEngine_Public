@@ -4,37 +4,33 @@
 #include "PlaneCollider.h"
 
 bool Collider::SphereSphereCollision(SphereCollider& a,
-	SphereCollider& b, Vector3& contactNormal, float& penetrationDepth)
+                                     SphereCollider& b, Vector3& contactNormal, float& penetrationDepth)
 {
-	float combinedRadii = a.radius + b.radius;
+	const float combinedRadii = a.radius + b.radius;
 
 	Vector3 distance = a.position - b.position;
 
-	float length = (distance).Length();
+	const float length = (distance).Length();
 
-	if (length < combinedRadii)
+	const bool collided = length < combinedRadii;
+
+	if (collided)
 	{
 		penetrationDepth = combinedRadii - length;
 
 		distance.Normalise();
 		contactNormal = distance;
+	}
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return collided;
 }
 
 bool Collider::PlaneSphereCollision(SphereCollider& sphere,
-	PlaneCollider& plane, Vector3& contactNormal, float& penetrationDepth)
+                                    PlaneCollider& plane, Vector3& contactNormal, float& penetrationDepth)
 {
-	Vector3 normal = plane.normal;
-
-	float dot = -(Vector3::Dot(plane.position, normal));
-	float length = Vector3::Dot(normal, sphere.position + plane.position);
-	float distance = Vector3::Dot(normal, sphere.position) + plane.position.Length();
+	float dot = -(Vector3::Dot(plane.position, plane.normal));
+	float length = Vector3::Dot(plane.normal, sphere.position + plane.position);
+	const float distance = Vector3::Dot(plane.normal, sphere.position) + plane.position.Length();
 
 	if (distance < sphere.radius)
 	{
@@ -45,18 +41,15 @@ bool Collider::PlaneSphereCollision(SphereCollider& sphere,
 		{
 			return false;
 		}
-		else
-		{
-			penetrationDepth = (sphere.radius - distance);
 
-			normal.Normalise();
-			contactNormal = normal;
+		penetrationDepth = (sphere.radius - distance);
 
-			return true;
-		}
+		Vector3 normal = plane.normal;
+		normal.Normalise();
+		contactNormal = normal;
+
+		return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }

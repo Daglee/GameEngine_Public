@@ -17,11 +17,11 @@ bool PlaneCollider::IsColliding(Vector3& contactNormal, PlaneCollider& collider,
 	return false;
 }
 
-Bounds PlaneCollider::ProjectOnAxis(Vector3& axis)
+Bounds PlaneCollider::ProjectOnAxis(const Vector3& axis)
 {
 	Bounds b;
 
-	float m = std::numeric_limits<float>::max INF();
+	const float m = std::numeric_limits<float>::max INF();
 	b.min = -m;
 	b.max = m;
 

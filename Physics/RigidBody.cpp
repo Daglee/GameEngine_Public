@@ -1,22 +1,23 @@
 #include "RigidBody.h"
 #include "Collider.h"
 
-RigidBody::RigidBody(Vector3 acceleration, Vector3 velocity, 
-	float mass, float drag, float gravity, std::string tag)
+RigidBody::RigidBody(const Vector3 acceleration, const Vector3 velocity,
+                     const float mass, const float drag, const float gravity, const string tag)
 {
 	this->acceleration = acceleration;
-	this->velocity	= velocity;
-	
-	this->mass		= mass;
-	inverseMass		= 1.0f / mass;
+	this->velocity = velocity;
 
-	this->drag		= drag;
-	this->gravity	= gravity;
+	this->mass = mass;
+	inverseMass = 1.0f / mass;
 
-	collider	 = NULL;
-	isStatic	 = false;
-	atRest		 = false;
-	restFrames	 = 0;
+	this->drag = drag;
+	this->gravity = gravity;
+
+	parentMesh = nullptr;
+	collider = nullptr;
+	isStatic = false;
+	atRest = false;
+	restFrames = 0;
 	lastPosition = Vector3();
 
 	this->tag = tag;
@@ -29,20 +30,26 @@ RigidBody::~RigidBody()
 	delete collider;
 }
 
-void RigidBody::ApplyForce(Vector3 force)
+void RigidBody::ApplyForce(const Vector3& force)
 {
 	velocity += (force * inverseMass);
 }
 
-void RigidBody::UpdatePosition(Vector3 pos)
+void RigidBody::UpdatePosition(const Vector3& pos)
 {
 	lastPosition = pos;
 
-	if (parentMesh) {
+	if (parentMesh)
+	{
 		Matrix4 transform = parentMesh->GetTransform();
 		transform.SetPositionVector(pos);
 		parentMesh->SetTransform(transform);
 	}
 
 	collider->position = pos;
+}
+
+inline bool RigidBody::Ignores(const string rigidBodyTag) const
+{
+	return ignoreTag == rigidBodyTag;
 }

@@ -2,12 +2,12 @@
 
 #include "../nclgl/Vector3.h"
 
+#include <vector>
+
 class Renderer;
 class RigidBody;
 class GameObject;
 class DataBase;
-
-#include <vector>
 
 class ExplosionSet
 {
@@ -15,7 +15,7 @@ public:
 	ExplosionSet(Renderer* renderer = nullptr, DataBase* database = nullptr);
 	~ExplosionSet();
 
-	bool InRadiusOfExplosion(const RigidBody* explosion, const RigidBody* rigidBody);
+	bool InRadiusOfExplosion(const RigidBody* explosion, const RigidBody* rigidBody) const;
 	void ExplosionResponse(RigidBody* explosion, RigidBody* rb);
 
 	void RenderAllExplosions();
@@ -23,7 +23,7 @@ public:
 
 private:
 
-	void ExpandExplosions();
+	void ExpandExplosions() const;
 	void PrepareDeletionOfMaxSizeExplosions();
 	void ClearDeleteBuffer();
 
@@ -33,4 +33,3 @@ private:
 	std::vector<GameObject*> explosions;
 	std::vector<GameObject*> deleteBuffer;
 };
-

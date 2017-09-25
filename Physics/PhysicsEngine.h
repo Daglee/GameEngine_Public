@@ -1,46 +1,19 @@
 #pragma once
 
-/*
-  IMPORTANT:
-  Physics engine and the other classes in this
-  library will be used for CSC3222 coursework.
-  All extensions for the game engine have been marked with
-  "// BEGIN EXT" and "// END EXT".
-*/
-
-#include "RigidBody.h"
-#include "SphereCollider.h"
-#include "PlaneCollider.h"
 #include "../ResourceManagment/Resource.h"
 #include "../Game/Subsystem.h"
 #include "ExplosionSet.h"
+#include "../Threading/ThreadPool.h"
+#include "CollisionResponse.h"
+#include "Collider.h"
 
 #include <atomic>
 #include <mutex>
 #include <vector>
-#include <algorithm>
 
 class Renderer;
 class DataBase;
-#include "../Threading/ThreadPool.h"
-
-struct CollisionPair
-{
-	RigidBody* r1;
-	RigidBody* r2;
-
-	CollisionPair()
-	{
-		r1 = nullptr;
-		r2 = nullptr;
-	}
-
-	CollisionPair(RigidBody* r1, RigidBody* r2)
-	{
-		this->r1 = r1;
-		this->r2 = r2;
-	}
-};
+class RigidBody;
 
 class PhysicsEngine : public Resource, public Subsystem
 {
@@ -62,15 +35,13 @@ public:
 		delete explosions;
 	}
 
-	void Update(float deltatime);
+	void Update(float deltatime) override;
 
 	void AddRigidBody(RigidBody* rigidBody);
 	void RemoveRigidBody(RigidBody* rigidBody);
 
-	void SemiImplicitEuler(RigidBody& rigidBody, Vector3 gravity, float time);
-
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(string resourcename) override;
+	void ReadParams(string params) override;
 
 private:
 	Renderer* renderer;
@@ -79,20 +50,17 @@ private:
 	vector<RigidBody*> rigidBodies;
 	vector<RigidBody*> narrowPhaseDeleteBuffer;
 
-	void UpdatePositions(float msec);
+	void UpdatePositions(float msec) const;
 
 	void BroadPhase(); //Sort and sweep!
 	void BroadPhaseChunk(const int& start, const int& end);
-	void SortRigidBodiesAlongAxis(Vector3& axis);
+	void SortRigidBodiesAlongAxis(const Vector3& axis);
+
 	void NarrowPhase();
 
 	static bool compareRigidBodies(RigidBody* a, RigidBody* b);
 
-	void ImpulseResponse(CollisionPair collisionPair, Vector3 contactNormal, float penetrationDepth);
-	void ProjectionResponse(CollisionPair collisionPair, Vector3 contactNormal,
-		float penetrationDepth, float aInverseMass, float bInverseMass);
-
-	void Explosion(CollisionPair collisionPair);
+	void Explosion(CollisionPair collisionPair) const;
 	ExplosionSet* explosions;
 
 	void AnnounceAndDeleteBasicCollisions(const CollisionPair& collisionPair);
@@ -106,5 +74,7 @@ private:
 	std::atomic<int> collisionPairCounter;
 	vector<CollisionPair> collisionPairs;
 	int broadPhaseChunkSize;
+	mutex deleteBufferMutex;
+	mutex positionUpdateMutex;
 };
 

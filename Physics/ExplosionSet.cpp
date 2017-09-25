@@ -23,12 +23,12 @@ ExplosionSet::~ExplosionSet()
 	}
 }
 
-bool ExplosionSet::InRadiusOfExplosion(const RigidBody * explosion, const RigidBody * rigidBody)
+bool ExplosionSet::InRadiusOfExplosion(const RigidBody* explosion, const RigidBody* rigidBody) const
 {
 	Vector3 distance = explosion->lastPosition - rigidBody->lastPosition;
-	distance.x = std::abs(distance.x);
-	distance.y = std::abs(distance.y);
-	distance.z = std::abs(distance.z);
+	distance.x = abs(distance.x);
+	distance.y = abs(distance.y);
+	distance.z = abs(distance.z);
 
 	return distance.Length() < Vector3(EXPLOSION_RADIUS, EXPLOSION_RADIUS, EXPLOSION_RADIUS).Length();
 }
@@ -37,8 +37,8 @@ void ExplosionSet::ExplosionResponse(RigidBody* explosion, RigidBody* rigidBody)
 {
 	Vector3 direction = rigidBody->lastPosition - explosion->lastPosition;
 
-	float length = direction.Length();
-	Vector3 unit = direction / length;
+	const float length = direction.Length();
+	const Vector3 unit = direction / length;
 
 	//Apply force away from centre of explosion.
 	rigidBody->ApplyForce(unit * EXPLOSION_FORCE);
@@ -54,7 +54,8 @@ void ExplosionSet::RenderAllExplosions()
 void ExplosionSet::InitialiseExplosion(const Vector3& Position)
 {
 	GameObject* ex = new GameObject(*renderer);
-	ex->AddMesh(*static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find("../Data/Meshes/sphere.obj")));
+	ex->AddMesh(
+		*static_cast<OBJMesh*>(database->GetTable("OBJMeshes")->GetResources()->Find("../Data/Meshes/sphere.obj")));
 	ex->SetPosition(Position);
 	ex->SetSize(Vector3(30, 30, 30));
 	ex->GetSceneNode()->SetColour(Vector4(1, 0, 0, 1));
@@ -62,8 +63,8 @@ void ExplosionSet::InitialiseExplosion(const Vector3& Position)
 	explosions.push_back(ex);
 }
 
-void ExplosionSet::ExpandExplosions()
-{	
+void ExplosionSet::ExpandExplosions() const
+{
 	//Set a starting size and colour.
 	for each (GameObject* explosion in explosions)
 	{
@@ -88,8 +89,8 @@ void ExplosionSet::ClearDeleteBuffer()
 {
 	for each (GameObject* explosion in deleteBuffer)
 	{
-		explosions.erase(std::remove(explosions.begin(),
-			explosions.end(), explosion), explosions.end());
+		explosions.erase(remove(explosions.begin(),
+		                        explosions.end(), explosion), explosions.end());
 		renderer->RemoveSceneNode(explosion->GetSceneNode());
 	}
 

@@ -1,16 +1,21 @@
 #include "PhysicsEngine.h"
+
 #include "../GameLogicFSM/FSMManager.h"
 #include "../ResourceManagment/Log.h"
 #include "../GameLogicFSM/MessageSystem.h"
 #include "../nclgl/Renderer.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../Threading/TaskFuture.h"
+#include "SemiImplicitEuler.h"
+#include "RigidBody.h"
 
 #include <functional>
 
 const int FRAMES_UNTIL_AT_REST = 10;
 const float MAX_AT_REST_VELOCITY = 0.001f;
 const int BROAD_PHASE_THREADS = 3;
+const int NARROW_PHASE_THREADS = 1;
+const Vector3 X_AXIS = Vector3(1, 0, 0);
 
 PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : Resource()
 {
@@ -21,7 +26,7 @@ PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : Resource(
 
 	threadPool = static_cast<ThreadPool*>(database->GetTable("GThreadPool")->GetResources()->Find("ThreadPool"));
 
-	this->SetSizeInBytes(sizeof(*this));
+	SetSizeInBytes(sizeof(*this));
 }
 
 void PhysicsEngine::AddRigidBody(RigidBody* rigidBody)
@@ -47,8 +52,8 @@ void PhysicsEngine::RemoveRigidBody(RigidBody* rigidBody)
 	*/
 	unique_lock<mutex> lock(update_mutex);
 
-	rigidBodies.erase(std::remove(rigidBodies.begin(),
-		rigidBodies.end(), rigidBody), rigidBodies.end());
+	rigidBodies.erase(remove(rigidBodies.begin(),
+	                         rigidBodies.end(), rigidBody), rigidBodies.end());
 
 	collisionPairs = vector<CollisionPair>(rigidBodies.size() * rigidBodies.size(), CollisionPair());
 
@@ -73,49 +78,20 @@ void PhysicsEngine::Update(float sec)
 	updateTimer.StopTimer();
 }
 
-void PhysicsEngine::UpdatePositions(float msec)
+void PhysicsEngine::UpdatePositions(float msec) const
 {
 	for each (RigidBody* rigidBody in rigidBodies)
 	{
 		if (!(rigidBody->isStatic || rigidBody->atRest))
 		{
-			SemiImplicitEuler(*rigidBody, Vector3(0, rigidBody->gravity, 0), msec);
+			SemiImplicitEuler::UpdateRigidBody(*rigidBody, Vector3(0, rigidBody->gravity, 0), msec);
 		}
 	}
 }
 
-void PhysicsEngine::SemiImplicitEuler(RigidBody& rigidBody, Vector3 gravity, float deltaTime)
-{
-	rigidBody.velocity = (rigidBody.velocity + ((rigidBody.acceleration + gravity) * deltaTime)) * rigidBody.drag;
-
-	//We need to precalculate what the new displacement will be to use it in our rest
-	//detection, but we only apply it if the body is not now considered at rest.
-	Vector3 displacement = rigidBody.collider->position + (rigidBody.velocity * deltaTime);
-
-	//If the object has barely moved for 10 frames then set it to rest
-	if (((displacement - rigidBody.lastPosition) / deltaTime).sqrLength() < MAX_AT_REST_VELOCITY)
-	{
-		++rigidBody.restFrames;
-
-		if (rigidBody.restFrames > FRAMES_UNTIL_AT_REST)
-		{
-			return;
-		}
-	}
-	else
-	{
-		rigidBody.restFrames = 0;
-	}
-
-	//if the object is not at rest, then update it's position and last displacement
-	rigidBody.UpdatePosition(displacement);
-	rigidBody.lastPosition = rigidBody.collider->position;
-}
-
-//Sort and Sweep
 void PhysicsEngine::BroadPhase()
 {
-	SortRigidBodiesAlongAxis(Vector3(1, 0, 0));
+	SortRigidBodiesAlongAxis(X_AXIS);
 
 	vector<TaskFuture<void>> threads;
 	collisionPairCounter = 0;
@@ -126,19 +102,19 @@ void PhysicsEngine::BroadPhase()
 	for (int i = 0; i < BROAD_PHASE_THREADS - 1; ++i)
 	{
 		threads.push_back(threadPool->SubmitJob([](PhysicsEngine& physicsEngine, int start, int end)
-		{
-			physicsEngine.BroadPhaseChunk(start, end);
-		}, std::ref(*this), startIndex, endIndex));
+	                                        {
+		                                        physicsEngine.BroadPhaseChunk(start, end);
+	                                        }, ref(*this), startIndex, endIndex));
 
 		startIndex = endIndex;
 		endIndex = startIndex + (broadPhaseChunkSize) - 1;
 	}
 
 	threads.push_back(threadPool->SubmitJob([](PhysicsEngine& physicsEngine, int start, int end)
-	{
-		physicsEngine.BroadPhaseChunk(start, end);
-	}, std::ref(*this), startIndex, rigidBodies.size()));
-	
+                                        {
+	                                        physicsEngine.BroadPhaseChunk(start, end);
+                                        }, ref(*this), startIndex, rigidBodies.size()));
+
 	for (auto& task : threads)
 	{
 		task.Complete();
@@ -156,20 +132,20 @@ void PhysicsEngine::BroadPhaseChunk(const int& start, const int& end)
 			{
 				//Yes, get Narrow phase to check this pair properly...
 				collisionPairs[collisionPairCounter.load()] = CollisionPair(rigidBodies[x], rigidBodies[y]);
-				collisionPairCounter++;
+				++collisionPairCounter;
 			}
 		}
 	}
 }
 
-void PhysicsEngine::SortRigidBodiesAlongAxis(Vector3& axis)
+void PhysicsEngine::SortRigidBodiesAlongAxis(const Vector3& axis)
 {
 	for each (RigidBody* rigidBody in rigidBodies)
 	{
 		rigidBody->collider->ProjectOnAxis(axis);
 	}
 
-	std::sort(rigidBodies.begin(), rigidBodies.end(), compareRigidBodies);
+	sort(rigidBodies.begin(), rigidBodies.end(), compareRigidBodies);
 }
 
 bool PhysicsEngine::compareRigidBodies(RigidBody* a, RigidBody* b)
@@ -179,8 +155,6 @@ bool PhysicsEngine::compareRigidBodies(RigidBody* a, RigidBody* b)
 
 void PhysicsEngine::NarrowPhase()
 {
-	//for each (CollisionPair collisionPair in pairs)
-
 	for (int i = 0; i < collisionPairCounter.load(); ++i)
 	{
 		CollisionPair collisionPair = collisionPairs[i];
@@ -198,7 +172,7 @@ void PhysicsEngine::NarrowPhase()
 			}
 			else
 			{
-				ImpulseResponse(collisionPair, contactNormal, penetrationDepth);
+				CollisionResponse::ImpulseResponse(collisionPair, contactNormal, penetrationDepth);
 			}
 		}
 	}
@@ -206,58 +180,8 @@ void PhysicsEngine::NarrowPhase()
 	ClearNarrowPhaseDeleteBuffer();
 }
 
-void PhysicsEngine::ImpulseResponse(CollisionPair collisionPair, Vector3 contactNormal,
-	float penetrationDepth)
-{
-	Vector3 vab = collisionPair.r1->velocity - collisionPair.r2->velocity;
-
-	//Reciprocals of masses
-	float aMass = collisionPair.r1->isStatic ? 0 : collisionPair.r1->inverseMass;
-	float bMass = collisionPair.r2->isStatic ? 0 : collisionPair.r2->inverseMass;
-
-	float e = 0.999f;
-
-	float J = (-(1.0f + e) * Vector3::Dot(vab, contactNormal)) /
-		(Vector3::Dot(contactNormal, contactNormal * (aMass + bMass)));
-
-	//Fix the overlap first
-	ProjectionResponse(collisionPair, contactNormal, penetrationDepth, aMass, bMass);
-
-	//No send them flying apart (maybe)...
-	Vector3 aVelocity = (contactNormal * (J * aMass));
-	Vector3 bVelocity = (contactNormal * (J * bMass));
-	collisionPair.r1->velocity += aVelocity;
-	collisionPair.r2->velocity -= bVelocity;
-
-	//No longer at rest?
-	if (aVelocity.sqrLength() > MAX_AT_REST_VELOCITY)
-	{
-		collisionPair.r1->atRest = false;
-	}
-
-	if (bVelocity.sqrLength() > MAX_AT_REST_VELOCITY)
-	{
-		collisionPair.r2->atRest = false;
-	}
-}
-
-void PhysicsEngine::ProjectionResponse(CollisionPair collisionPair, Vector3 contactNormal,
-	float penetrationDepth, float aInverseMass, float bInverseMass)
-{
-	float moveRatio = aInverseMass / (aInverseMass + bInverseMass);
-
-	Vector3 xPosition = collisionPair.r1->collider->position;
-	Vector3 xOffset = xPosition - (contactNormal * penetrationDepth * moveRatio);
-
-	Vector3 yPosition = collisionPair.r2->collider->position;
-	Vector3 yOffset = yPosition + (contactNormal * penetrationDepth * (1.0f - moveRatio));
-
-	collisionPair.r1->UpdatePosition(xOffset);
-	collisionPair.r2->UpdatePosition(yOffset);
-}
-
 //	BEGIN EXT
-void PhysicsEngine::Explosion(CollisionPair collisionPair)
+void PhysicsEngine::Explosion(CollisionPair collisionPair) const
 {
 	RigidBody* explosion;
 	RigidBody* entity;
@@ -329,19 +253,21 @@ void PhysicsEngine::ExplodeIfNotIgnore(const CollisionPair& collisionPair)
 	}
 }
 
-void PhysicsEngine::AnnounceCollision(const std::string& aTag, const std::string& bTag)
+void PhysicsEngine::AnnounceCollision(const string& aTag, const string& bTag)
 {
 	MessageSystem::GetInstance()->BeginEvent(Log::Hash(aTag + "_colliding_" + bTag));
 	MessageSystem::GetInstance()->BeginEvent(Log::Hash(bTag + "_colliding_" + aTag));
 }
 
-void PhysicsEngine::DeleteRigidBodyIfColliderContains(const CollisionPair& collisionPair, const std::string& colliderTag)
+void PhysicsEngine::DeleteRigidBodyIfColliderContains(const CollisionPair& collisionPair, const string& colliderTag)
 {
-	if (collisionPair.r1->tag.find(colliderTag) != std::string::npos)
+	unique_lock<mutex> lock(deleteBufferMutex);
+
+	if (collisionPair.r1->tag.find(colliderTag) != string::npos)
 	{
 		narrowPhaseDeleteBuffer.push_back(collisionPair.r1);
 	}
-	else if (collisionPair.r2->tag.find(colliderTag) != std::string::npos)
+	else if (collisionPair.r2->tag.find(colliderTag) != string::npos)
 	{
 		narrowPhaseDeleteBuffer.push_back(collisionPair.r2);
 	}
@@ -351,8 +277,8 @@ void PhysicsEngine::ClearNarrowPhaseDeleteBuffer()
 {
 	for each (RigidBody* rigidBody in narrowPhaseDeleteBuffer)
 	{
-		rigidBodies.erase(std::remove(rigidBodies.begin(),
-			rigidBodies.end(), rigidBody), rigidBodies.end());
+		rigidBodies.erase(remove(rigidBodies.begin(),
+		                         rigidBodies.end(), rigidBody), rigidBodies.end());
 	}
 
 	narrowPhaseDeleteBuffer.clear();
@@ -367,4 +293,5 @@ void PhysicsEngine::ReadParams(string params)
 {
 	Read(params);
 }
+
 //	END EXT

@@ -19,6 +19,12 @@
     <ClInclude Include="ExplosionSet.h">
       <Filter>PhysicsEngine 2.0\Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="SemiImplicitEuler.h">
+      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionResponse.h">
+      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SphereCollider.cpp">
@@ -39,6 +45,12 @@
     <ClCompile Include="ExplosionSet.cpp">
       <Filter>PhysicsEngine 2.0\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="SemiImplicitEuler.cpp">
+      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionResponse.cpp">
+      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PhysicsEngine 2.0">
@@ -55,6 +67,9 @@
     </Filter>
     <Filter Include="PhysicsEngine 2.0\Gameplay">
       <UniqueIdentifier>{1fe9eb20-7307-4534-956a-268330d4e074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicsEngine 2.0\Engine\Utility Classes">
+      <UniqueIdentifier>{3e6b4b05-1266-4cc3-8d5f-b4ad3c73e2bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

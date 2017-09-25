@@ -15,9 +15,9 @@ bool SphereCollider::IsColliding(Vector3& contactNormal, PlaneCollider& collider
 	return PlaneSphereCollision(*this, collider, contactNormal, penetrationDepth);
 }
 
-Bounds SphereCollider::ProjectOnAxis(Vector3& axis)
+Bounds SphereCollider::ProjectOnAxis(const Vector3& axis)
 {
-	float dot = Vector3::Dot(axis, position);
+	const float dot = Vector3::Dot(axis, position);
 
 	Bounds b;
 	b.max = dot + radius;

@@ -6,19 +6,20 @@
 class SphereCollider : public Collider
 {
 public:
-	SphereCollider(float radius)
+	explicit SphereCollider(const float radius)
 	{
 		this->radius = radius;
 	}
 
-	~SphereCollider() {}
+	~SphereCollider()
+	{
+	}
 
-	virtual bool IsColliding(Vector3& contactNormal, Collider& collider, float& penetrationDepth);
-	virtual bool IsColliding(Vector3& contactNormal, SphereCollider& collider, float& penetrationDepth);
-	virtual bool IsColliding(Vector3& contactNormal, PlaneCollider& collider, float& penetrationDepth);
+	bool IsColliding(Vector3& contactNormal, Collider& collider, float& penetrationDepth) override;
+	bool IsColliding(Vector3& contactNormal, SphereCollider& collider, float& penetrationDepth) override;
+	bool IsColliding(Vector3& contactNormal, PlaneCollider& collider, float& penetrationDepth) override;
 
-	virtual Bounds ProjectOnAxis(Vector3& axis);
+	Bounds ProjectOnAxis(const Vector3& axis) override;
 
 	float radius;
 };
-
