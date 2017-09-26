@@ -95,7 +95,7 @@ void Profiler::RenderToScreen()
 	RenderTimers();
 }
 
-void Profiler::RenderMemory()
+void Profiler::RenderMemory() const
 {
 	renderer->AddText(Text(
 		("Used: " + std::to_string(memoryWatcher.percent) + "%"),
@@ -105,11 +105,11 @@ void Profiler::RenderMemory()
 		Vector3(0, 50, 0), TEXT_SIZE));
 }
 
-void Profiler::RenderFPSCounter()
+void Profiler::RenderFPSCounter() 
 {
 	fpsCounter.CalculateFPS(window->GetTimer()->GetMS());
 	renderer->AddText(Text(
-		("FPS: " + std::to_string(fpsCounter.fps)),
+		("FPS: " + to_string(fpsCounter.fps)),
 		Vector3(0, 0, 0), TEXT_SIZE));
 }
 
@@ -146,9 +146,9 @@ void Profiler::ReadParams(string params)
 	vector<string> tokens{ istream_iterator<string>{iss},
 		istream_iterator<string>{} };
 
-	string name = tokens.at(0);
-	string windowname = tokens.at(1);
-	int num = atoi(tokens.at(2).c_str());
+	const string name = tokens.at(0);
+	const string windowname = tokens.at(1);
+	const int num = atoi(tokens.at(2).c_str());
 
 	numTimers = num;
 	window = static_cast<Window*>(database->GetTable("GWindow")->GetResources()->Find("Window"));

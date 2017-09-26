@@ -29,13 +29,13 @@ public:
 		timePassed = (finish - start);
 	}
 
-	inline float TimePassed()
+	inline float TimePassed() const
 	{
 		return timePassed;
 	}
 
-	void DisplayTimer();
-	void DisplayTimer(string timername);
+	void DisplayTimer() const;
+	void DisplayTimer(const string timername) const;
 
 	float timePassed;
 protected:

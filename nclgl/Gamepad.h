@@ -62,35 +62,35 @@ public:
 
 	//Thumbsticks
 	//Return true if stick is in deadzone
-	bool LStickInDeadzone();
-	bool RStickInDeadzone();
+	bool LStickInDeadzone() const;
+	bool RStickInDeadzone() const;
 
 	//Return axis values
-	float LeftStick_X();
-	float LeftStick_Y();
-	float RightStick_X();
-	float RightStick_Y();
+	float LeftStick_X() const;
+	float LeftStick_Y() const;
+	float RightStick_X() const;
+	float RightStick_Y() const;
 
 	// Trigger functions - Return value of trigger
-	float LeftTrigger();
-	float RightTrigger();
+	float LeftTrigger() const;
+	float RightTrigger() const;
 
 	//Button functions
 	//- 'Pressed' - Return true if pressed, false if not
-	bool GetButtonPressed(int button);
-	bool GetButtonDown(int button);
+	bool GetButtonPressed(const int button) const;
+	bool GetButtonDown(const int button) const;
 
 	//Utility functions
-	XINPUT_STATE GetState();
-	int	 GetIndex();
-	void SetIndex(int index);
+	XINPUT_STATE GetState() const;
+	int	 GetIndex() const;
+	void SetIndex(const int index);
 	bool Connected();
 
-	void Read(std::string resourcename);
-	void ReadParams(std::string params);
+	void Read(std::string resourcename) override;
+	void ReadParams(std::string params) override;
 
 	// Vibrate the gamepad (0.0f none, 1.0f max speed)
-	void Rumble(float a_fLeftMotor = 0.0f, float a_fRightMotor = 0.0f);
+	void Rumble(const float a_fLeftMotor = 0.0f, const float a_fRightMotor = 0.0f) const;
 
 	int	gamepadIndex; //eg 1, 2, 3, 4
 private:

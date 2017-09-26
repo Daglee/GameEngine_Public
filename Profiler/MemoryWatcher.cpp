@@ -11,8 +11,8 @@ void MemoryWatcher::Update()
 {
 	currentUsage = database->CurrentSize();
 
-	percent = ((float)currentUsage / (float)maxUsage) * 100;
-	bytesleft = (float)maxUsage - (float)currentUsage;
+	percent = (static_cast<float>(currentUsage) / static_cast<float>(maxUsage)) * 100;
+	bytesleft = static_cast<float>(maxUsage) - static_cast<float>(currentUsage);
 
 	/*
 	  Log::Error is not needed here to check if database has
@@ -22,10 +22,10 @@ void MemoryWatcher::Update()
 	*/
 }
 
-void MemoryWatcher::DisplayPercent()
+void MemoryWatcher::DisplayPercent() const
 {
-	float percent = ((float)currentUsage / (float)maxUsage) * 100;
-	float bytesleft = (float)maxUsage - (float)currentUsage;
+	const float percent = (static_cast<float>(currentUsage) /
+		static_cast<float>(maxUsage)) * 100;
 
 	cout << "Memory: " << percent << "%";
 }

@@ -14,7 +14,7 @@ public:
 	virtual ~MemoryWatcher() {}
 
 	void Update();
-	void DisplayPercent();
+	void DisplayPercent() const;
 
 	void SetWatch(DataBase* db)
 	{

@@ -45,12 +45,12 @@ void Camera::ReadParams(string params)
 	vector<string> tokens{ istream_iterator<string>{iss},
 		istream_iterator<string>{} };
 
-	string name = tokens.at(0);
-	float pitch = std::stof(tokens.at(1));
-	float yaw = std::stof(tokens.at(2));
-	float xPos = std::stof(tokens.at(3));
-	float yPos = std::stof(tokens.at(4));
-	float zPos = std::stof(tokens.at(5));
+	const string name = tokens.at(0);
+	const float pitch = std::stof(tokens.at(1));
+	const float yaw = std::stof(tokens.at(2));
+	const float xPos = std::stof(tokens.at(3));
+	const float yPos = std::stof(tokens.at(4));
+	const float zPos = std::stof(tokens.at(5));
 
 	this->pitch = pitch;
 	this->yaw = yaw;

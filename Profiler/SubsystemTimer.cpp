@@ -8,12 +8,12 @@ SubsystemTimer::SubsystemTimer()
 	finish = timer.GetMS();
 }
 
-void SubsystemTimer::DisplayTimer()
+void SubsystemTimer::DisplayTimer() const
 {
 	cout << fixed << setprecision(TWO_DECIMAL_PLACES) << "Time: " << timePassed;
 }
 
-void SubsystemTimer::DisplayTimer(string timername)
+void SubsystemTimer::DisplayTimer(const string timername) const
 {
 	cout << timername + ": " << setprecision(TWO_DECIMAL_PLACES) << fixed << timePassed;
 }

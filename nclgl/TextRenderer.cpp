@@ -63,15 +63,15 @@ void TextRenderer::AssignOrthographicMatrices(const Text& textobj)
 	//In ortho mode, we subtract the y from the height, so that a height of 0
 	//is at the top left of the screen, which is more intuitive
 
-	Vector3 position(textobj.position.x, renderer->GetHeight() - textobj.position.y, textobj.position.z);
-	Vector3 size(textobj.size, textobj.size, 1);
+	const Vector3 position(textobj.position.x, renderer->GetHeight() - textobj.position.y, textobj.position.z);
+	const Vector3 size(textobj.size, textobj.size, 1);
 
 	textModelMatrix = Matrix4::Translation(position) * Matrix4::Scale(size);
 
 	textViewMatrix.ToIdentity();
 
 	textProjectionMatrix = Matrix4::Orthographic(-1.0f, 1.0f, 
-		(float)renderer->GetWidth(), 0.0f, (float)renderer->GetHeight(), 0.0f);
+		static_cast<float>(renderer->GetWidth()), 0.0f, static_cast<float>(renderer->GetHeight()), 0.0f);
 }
 
 void TextRenderer::UpdateUniforms()

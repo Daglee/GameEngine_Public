@@ -4,7 +4,6 @@
 #include "FramerateCounter.h"
 #include "../Game/Subsystem.h"
 #include "../ResourceManagment/Resource.h"
-#include "../nclgl/Text.h"
 #include <map>
 
 class Window;
@@ -28,14 +27,14 @@ public:
 	//Name is used when displaying the information
 	void AddSubSystemTimer(string name, SubsystemTimer* timer);
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(string resourcename) override;
+	void ReadParams(string params) override;
 
 private:
 	void UpdateProfiling();
 	void RenderToScreen();
 
-	void RenderMemory();
+	void RenderMemory() const;
 	void RenderFPSCounter();
 	void RenderTimers();
 

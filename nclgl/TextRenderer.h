@@ -12,7 +12,7 @@ class Renderer;
 class TextRenderer
 {
 public:
-	TextRenderer(Renderer* renderer);
+	explicit TextRenderer(Renderer* renderer);
 	~TextRenderer();
 
 	void DrawTextBuffer();

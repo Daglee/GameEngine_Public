@@ -89,11 +89,11 @@ void Gamepad::RefreshState()
 }
 
 //Deadzone check for Left Thumbstick
-bool Gamepad::LStickInDeadzone()
+bool Gamepad::LStickInDeadzone() const
 {
 	//Obtain the X & Y axes of the stick
-	short sX = state.Gamepad.sThumbLX;
-	short sY = state.Gamepad.sThumbLY;
+	const short sX = state.Gamepad.sThumbLX;
+	const short sY = state.Gamepad.sThumbLY;
 
 	//X axis is outside of deadzone
 	if (sX > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE ||
@@ -114,11 +114,11 @@ bool Gamepad::LStickInDeadzone()
 }
 
 //Deadzone check for Right Thumbstick
-bool Gamepad::RStickInDeadzone()
+bool Gamepad::RStickInDeadzone() const
 {
 	//Obtain the X & Y axes of the stick
-	short sX = state.Gamepad.sThumbRX;
-	short sY = state.Gamepad.sThumbRY;
+	const short sX = state.Gamepad.sThumbRX;
+	const short sY = state.Gamepad.sThumbRY;
 
 	//X axis is outside of deadzone
 	if (sX > XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE ||
@@ -138,34 +138,34 @@ bool Gamepad::RStickInDeadzone()
 	return true;
 }
 
-float Gamepad::LeftStick_X()
+float Gamepad::LeftStick_X() const
 {
 	//Obtain X axis of left stick
-	short sX = state.Gamepad.sThumbLX;
+	const short sX = state.Gamepad.sThumbLX;
 
 	//Return axis value, converted to a float
 	return (static_cast<float>(sX) / 32768.0f);
 }
 
-float Gamepad::LeftStick_Y()
+float Gamepad::LeftStick_Y() const
 {
 	//Obtain Y axis of left stick
-	short sY = state.Gamepad.sThumbLY;
+	const short sY = state.Gamepad.sThumbLY;
 
 	//Return axis value, converted to a float
 	return (static_cast<float>(sY) / 32768.0f);
 }
 
-float Gamepad::RightStick_X()
+float Gamepad::RightStick_X() const
 {
 	//Obtain X axis of right stick
-	short sX = state.Gamepad.sThumbRX;
+	const short sX = state.Gamepad.sThumbRX;
 
 	//Return axis value, converted to a float
 	return (static_cast<float>(sX) / 32768.0f);
 }
 
-float Gamepad::RightStick_Y()
+float Gamepad::RightStick_Y() const
 {
 	//Obtain the Y axis of the left stick
 	short sY = state.Gamepad.sThumbRY;
@@ -174,33 +174,39 @@ float Gamepad::RightStick_Y()
 	return (static_cast<float>(sY) / 32768.0f);
 }
 
-float Gamepad::LeftTrigger()
+float Gamepad::LeftTrigger() const
 {
 	//Obtain value of left trigger
-	BYTE Trigger = state.Gamepad.bLeftTrigger;
+	const BYTE Trigger = state.Gamepad.bLeftTrigger;
 
 	if (Trigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
 	{
 		return Trigger / 255.0f;
 	}
-	else return 0.0f; //Trigger was not pressed
+	else
+	{
+		return 0.0f; //Trigger was not pressed
+	}
 }
 
-float Gamepad::RightTrigger()
+float Gamepad::RightTrigger() const
 {
 	//Obtain value of right trigger
-	BYTE Trigger = state.Gamepad.bRightTrigger;
+	const BYTE Trigger = state.Gamepad.bRightTrigger;
 
 	if (Trigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
 	{
 		return Trigger / 255.0f;
 	}
-	else return 0.0f; //Trigger was not pressed
+	else
+	{
+		return 0.0f; //Trigger was not pressed
+	}
 
 }
 
 //Return true if button is pressed, false if not
-bool Gamepad::GetButtonPressed(int button)
+bool Gamepad::GetButtonPressed(const int button) const
 {
 	if (state.Gamepad.wButtons & XINPUT_Buttons[button])
 	{
@@ -211,20 +217,20 @@ bool Gamepad::GetButtonPressed(int button)
 }
 
 //Frame-specific version of 'GetButtonPressed' function
-bool Gamepad::GetButtonDown(int button)
+bool Gamepad::GetButtonDown(const  int button) const
 {
 	return bGamepad_ButtonsDown[button];
 }
 
 //Vibrate the gamepad (values of 0.0f to 1.0f only)
-void Gamepad::Rumble(float a_fLeftMotor, float a_fRightMotor)
+void Gamepad::Rumble(const float a_fLeftMotor, const float a_fRightMotor) const
 {
 	XINPUT_VIBRATION VibrationState;
 	ZeroMemory(&VibrationState, sizeof(XINPUT_VIBRATION));
 
 	//Calculate vibration values
-	int iLeftMotor = int(a_fLeftMotor * 65535.0f);
-	int iRightMotor = int(a_fRightMotor * 65535.0f);
+	const int iLeftMotor = int(a_fLeftMotor * 65535.0f);
+	const int iRightMotor = int(a_fRightMotor * 65535.0f);
 
 	//Set vibration values
 	VibrationState.wLeftMotorSpeed = iLeftMotor;
@@ -234,7 +240,7 @@ void Gamepad::Rumble(float a_fLeftMotor, float a_fRightMotor)
 	XInputSetState(gamepadIndex, &VibrationState);
 }
 
-XINPUT_STATE Gamepad::GetState()
+XINPUT_STATE Gamepad::GetState() const 
 {
 	//Temporary state to return
 	XINPUT_STATE gamepadState;
@@ -247,12 +253,12 @@ XINPUT_STATE Gamepad::GetState()
 }
 
 //Return gamepad index
-int Gamepad::GetIndex()
+int Gamepad::GetIndex() const
 {
 	return gamepadIndex;
 }
 
-void Gamepad::SetIndex(int index)
+void Gamepad::SetIndex(const int index)
 {
 	gamepadIndex = index;
 }
@@ -264,20 +270,24 @@ bool Gamepad::Connected()
 	ZeroMemory(&state, sizeof(XINPUT_STATE));
 
 	//Get the state of the gamepad
-	DWORD Result = XInputGetState(gamepadIndex, &state);
+	const DWORD Result = XInputGetState(gamepadIndex, &state);
 
 	if (Result == ERROR_SUCCESS)
 	{
 		return true;  //The gamepad is connected
 	}
-	else return false; //The gamepad is not connected
+	else
+	{
+		return false; //The gamepad is not connected
+	}
 }
 
 void Gamepad::Read(std::string resourcename)
 {
 	std::string name = resourcename;
 	std::string snum = name.substr(name.size() - 1, name.size());
-	int id = atoi(snum.c_str());
+	const int id = atoi(snum.c_str());
+
 	gamepadIndex = id;
 	this->SetName(resourcename);
 }
