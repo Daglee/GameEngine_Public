@@ -79,6 +79,8 @@ void PhysicsEngine::UpdatePositions(float msec) const
 
 void PhysicsEngine::BroadPhase()
 {
+	SortRigidBodiesAlongAxis(X_AXIS);
+
 	for (unsigned x = 0; x < rigidBodies.size(); ++x)
 	{
 		for (unsigned y = x + 1; y < rigidBodies.size(); ++y)
