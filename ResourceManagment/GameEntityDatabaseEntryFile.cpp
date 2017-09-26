@@ -5,8 +5,6 @@
 #include "../Game/GameEntityBuilder.h"
 #include "../Game/PhysicsEntityBuilder.h"
 
-#include <sstream>
-#include <iostream>
 #include <fstream>
 
 GameEntityDatabaseEntryFile::GameEntityDatabaseEntryFile(DataBase* database)
@@ -14,13 +12,13 @@ GameEntityDatabaseEntryFile::GameEntityDatabaseEntryFile(DataBase* database)
 	this->database = database;
 }
 
-void GameEntityDatabaseEntryFile::FillDatabaseFromFile(std::string fileName)
+void GameEntityDatabaseEntryFile::FillDatabaseFromFile(const string fileName)
 {
-	std::ifstream file(fileName);
+	ifstream file(fileName);
 	string line;
 
 	getline(file, line);
-	int threadCount = atoi(line.c_str());	
+	const int threadCount = atoi(line.c_str());
 	int middleOfFile = threadCount / 2;				
 
 	int threadLine = 0;
@@ -56,18 +54,18 @@ void GameEntityDatabaseEntryFile::FillDatabaseFromFile(std::string fileName)
 	file.close();
 }
 
-void GameEntityDatabaseEntryFile::ReadAllObjects(std::vector<std::string> line, int numLines)
+void GameEntityDatabaseEntryFile::ReadAllObjects(vector<string> line, const int numLines) const
 {
 	for (int i = 0; i < numLines; i++) {
 		BuildEntity(line.at(i));
 	}
 }
 
-void GameEntityDatabaseEntryFile::BuildEntity(std::string resourceManagerAndName)
+void GameEntityDatabaseEntryFile::BuildEntity(const string resourceManagerAndName) const
 {
 	vector<string> tokens = Log::tokenise(resourceManagerAndName);
 
-	string manager = tokens.at(0);
+	const string manager = tokens.at(0);
 
 	if (manager == "PhysicsObjects") {
 		PhysicsEntityBuilder physicsBuilder(database, tokens);

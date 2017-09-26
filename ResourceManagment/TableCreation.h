@@ -8,27 +8,27 @@ class DataBase;
 class TableCreation
 {
 public:
-	TableCreation(DataBase* database);
+	explicit TableCreation(DataBase* database);
 	~TableCreation();
 
-	void AddTablesToDatabase();
+	void AddTablesToDatabase() const;
 
 private:
-	void AddProfiler();
-	void AddInputManager();
-	void AddPhysicsEngine();
-	void AddFSMManager();
-	void AddCamera();
-	void AddGamepads();
-	void AddOBJMeshes();
-	void AddMeshes();
-	void AddPhysicsObjects();
-	void AddGameObjects();
-	void AddPlayers();
-	void AddThreadPool();
-	void AddWindow();
-	void AddRenderer();
-	void AddAudioManager();
+	void AddProfiler() const;
+	void AddInputManager() const;
+	void AddPhysicsEngine() const;
+	void AddFSMManager() const;
+	void AddCamera() const;
+	void AddGamepads() const;
+	void AddOBJMeshes() const;
+	void AddMeshes() const;
+	void AddPhysicsObjects() const;
+	void AddGameObjects() const;
+	void AddPlayers() const;
+	void AddThreadPool() const;
+	void AddWindow() const;
+	void AddRenderer() const;
+	void AddAudioManager() const;
 
 	std::vector<std::function<void()>> tableAdditions;
 

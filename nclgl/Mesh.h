@@ -57,11 +57,13 @@ protected:
 	GLuint		bumpTexture;	
 	
 	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
-	virtual void Read(string resourcename) {
+	void Read(const string resourcename) override
+	{
 		this->SetName(resourcename);
 	}
 
-	virtual void ReadParams(string params) {
+	void ReadParams(const string params) override
+	{
 		Read(params);
 	}
 	//	CSC3224 NCODE BLOCK ENDS

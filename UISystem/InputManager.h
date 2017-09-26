@@ -36,8 +36,8 @@ public:
 		return playerbase;
 	}
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(const string resourcename) override;
+	void ReadParams(const string params) override;
 
 private:
 	std::vector<Player*>* connectedPlayers;

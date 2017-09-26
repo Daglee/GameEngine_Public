@@ -13,9 +13,9 @@ public:
 	void UnloadFromDatabase(DataBase* database);
 
 private:
-	void OBJMeshUnload(DataBase* database);
-	void GameEntityUnload(DataBase* database);
-	void PhysicsEntityUnload(DataBase* database);
+	void OBJMeshUnload(DataBase* database) const;
+	void GameEntityUnload(DataBase* database) const;
+	void PhysicsEntityUnload(DataBase* database) const;
 
 	std::string resourceManager;
 	std::string resourceName;

@@ -27,8 +27,8 @@ public:
 	//Name is used when displaying the information
 	void AddSubSystemTimer(string name, SubsystemTimer* timer);
 
-	void Read(string resourcename) override;
-	void ReadParams(string params) override;
+	void Read(const string resourcename) override;
+	void ReadParams(const string params) override;
 
 private:
 	void UpdateProfiling();

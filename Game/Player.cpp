@@ -251,12 +251,12 @@ const int Player::GetIDNumber() const
 	return idNumber;
 }
 
-void Player::Read(string resourcename)
+void Player::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void Player::ReadParams(string params)
+void Player::ReadParams(const string params)
 {
 	Read(params);
 }

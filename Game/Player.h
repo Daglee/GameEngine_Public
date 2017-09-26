@@ -53,8 +53,8 @@ public:
 
 	void Update(const float& msec, const float& timer = 0);
 
-	void Read(string resourcename) override;
-	void ReadParams(string params) override;
+	void Read(const string resourcename) override;
+	void ReadParams(const string params) override;
 
 	Vector3 rotation;
 	Gun*	gun;

@@ -7,11 +7,11 @@
 
 struct TableConfiguration
 {
-	std::string name;
+	string name;
 	size_t maxNewBinSize;
 	int maxNumberBins;
 
-	TableConfiguration(std::string name, size_t maxNewBinSize, int maxNumberBins)
+	TableConfiguration(string name, size_t maxNewBinSize, int maxNumberBins)
 	{
 		this->name = name;
 		this->maxNewBinSize = maxNewBinSize;
@@ -34,7 +34,7 @@ public:
 	Table()
 	{}
 
-	Table(bool verbose, bool allowDuplicates, std::function<ResourceType*(std::string)> ReadFunction,
+	Table(bool verbose, bool allowDuplicates, function<ResourceType*(string)> ReadFunction,
 		TableConfiguration initialisation)
 	{
 		manager = new ResourceManager<ResourceType>(verbose, allowDuplicates);
@@ -64,7 +64,7 @@ public:
 	}
 
 private:
-	std::function<ResourceType*(std::string)> ReadFromFile;
+	function<ResourceType*(std::string)> ReadFromFile;
 	ResourceManager<ResourceType>* manager;
 	TableConfiguration tableConfig;
 };

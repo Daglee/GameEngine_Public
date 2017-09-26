@@ -6,7 +6,7 @@
 #include "../nclgl/Renderer.h"
 #include "../Physics/PhysicsEngine.h"
 
-TemporaryDatabaseIdentifier::TemporaryDatabaseIdentifier(std::string resourceManager, std::string resourceName)
+TemporaryDatabaseIdentifier::TemporaryDatabaseIdentifier(string resourceManager, string resourceName)
 {
 	this->resourceManager = resourceManager;
 	this->resourceName = resourceName;
@@ -32,12 +32,12 @@ void TemporaryDatabaseIdentifier::UnloadFromDatabase(DataBase* database)
 	}
 }
 
-void TemporaryDatabaseIdentifier::OBJMeshUnload(DataBase* database)
+void TemporaryDatabaseIdentifier::OBJMeshUnload(DataBase* database) const
 {
 	database->GetTable("OBJMeshes")->GetResources()->Unload(resourceName);
 }
 
-void TemporaryDatabaseIdentifier::GameEntityUnload(DataBase* database)
+void TemporaryDatabaseIdentifier::GameEntityUnload(DataBase* database) const
 {
 	GameObject* entity = static_cast<GameObject*>(database->GetTable("GameObjects")->GetResources()->Find(resourceName));
 	SceneNode* node = entity->GetSceneNode();
@@ -48,7 +48,7 @@ void TemporaryDatabaseIdentifier::GameEntityUnload(DataBase* database)
 	database->GetTable("GameObjects")->GetResources()->Unload(resourceName);
 }
 
-void TemporaryDatabaseIdentifier::PhysicsEntityUnload(DataBase* database)
+void TemporaryDatabaseIdentifier::PhysicsEntityUnload(DataBase* database) const
 {
 	Renderer* renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
 	PhysicsEngine* physicsEngine = static_cast<PhysicsEngine*>(database->GetTable("PhysicsEngine")->GetResources()->Find("PhysicsEngine"));

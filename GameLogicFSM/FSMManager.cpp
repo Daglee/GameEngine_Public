@@ -56,12 +56,12 @@ void FSMManager::Update(const float& deltatime)
 	updateTimer.StopTimer();
 }
 
-void FSMManager::Read(string resourcename)
+void FSMManager::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void FSMManager::ReadParams(string params)
+void FSMManager::ReadParams(const string params)
 {
 	std::istringstream iss(params);
 	vector<string> tokens{ istream_iterator<string>{iss},

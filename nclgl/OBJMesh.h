@@ -150,12 +150,14 @@ public:
 	virtual void Draw();
 
 	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
-	virtual void Read(string resourcename) {
+	virtual void Read(const string resourcename) override
+	{
 		this->SetName(resourcename);
 		LoadOBJMesh(resourcename);
 	}
 
-	virtual void ReadParams(string params) {
+	virtual void ReadParams(const string params) override
+	{
 		Read(params);
 	}
 	//	CSC3224 NCODE BLOCK ENDS

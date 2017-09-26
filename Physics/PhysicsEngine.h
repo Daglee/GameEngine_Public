@@ -40,8 +40,8 @@ public:
 	void AddRigidBody(RigidBody* rigidBody);
 	void RemoveRigidBody(RigidBody* rigidBody);
 
-	void Read(string resourcename) override;
-	void ReadParams(string params) override;
+	void Read(const string resourcename) override;
+	void ReadParams(const string params) override;
 
 private:
 	Renderer* renderer;

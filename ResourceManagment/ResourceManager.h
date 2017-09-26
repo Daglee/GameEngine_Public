@@ -56,13 +56,13 @@ public:
 	{
 		Log::ExitIfEmpty(resourceName, "Empty filename not allowed");
 
-		std::string formattedResourceName = Log::TrimAndLower(resourceName);
+		string formattedResourceName = Log::TrimAndLower(resourceName);
 		resource->SetName(formattedResourceName);
 
 		if (!allowDuplicates)
 		{
-			std::vector<ResourceMap<T>*>::iterator mapIterator;
-			for (mapIterator = resourceMaps.begin(); mapIterator != resourceMaps.end(); mapIterator++)
+			vector<ResourceMap<T>*>::iterator mapIterator;
+			for (mapIterator = resourceMaps.begin(); mapIterator != resourceMaps.end(); ++mapIterator)
 			{
 				T* duplicate = (*mapIterator)->Get(resourceName);
 
@@ -86,7 +86,7 @@ public:
 			//Insert into the map
 			//Insert into first bin that has enough space
 			std::vector<ResourceMap<T>*>::iterator iterator;
-			for (iterator = resourceMaps.begin(); iterator != resourceMaps.end(); iterator++)
+			for (iterator = resourceMaps.begin(); iterator != resourceMaps.end(); ++iterator)
 			{
 				if ((*iterator)->FreeSpace() >= resource->GetSizeInBytes())
 				{
@@ -129,11 +129,11 @@ public:
 	{
 		Log::ExitIfEmpty(resourcename, "Empty resource name not allowed");
 
-		std::string name = Log::TrimAndLower(resourcename);
+		const string name = Log::TrimAndLower(resourcename);
 
 		//Find the item to delete
 		for (std::vector<ResourceMap<T>*>::iterator mapit = resourceMaps.begin();
-			mapit != resourceMaps.end(); mapit++)
+			mapit != resourceMaps.end(); ++mapit)
 		{
 			if ((*mapit)->Get(name) != nullptr)
 			{
@@ -147,26 +147,26 @@ public:
 		}
 
 		//If this reached, it could not be found...
-		if (verbose) std::cout << ("cannot find " + name) << std::endl;
+		if (verbose) cout << ("cannot find " + name) << endl;
 		return false;
 	}
 
 	//Retrieve an item
-	T* Find(const std::string &resourcename)
+	T* Find(const string &resourcename)
 	{
 		Log::ExitIfEmpty(resourcename, "Empty resource name not allowed");
 
-		std::string ResourceName = Log::TrimAndLower(resourcename);
+		const string formattedResourceName = Log::TrimAndLower(resourcename);
 
 		/*
 		  Iterates though each map to check for an item.
 		  Worst case: O(N) -- albeit, likely a very short one.
 		  Best case:  O(1) -- First item!
 		*/
-		for (std::vector<ResourceMap<T>*>::iterator mapit = resourceMaps.begin();
-			mapit != resourceMaps.end(); mapit++)
+		for (vector<ResourceMap<T>*>::iterator mapit = resourceMaps.begin();
+			mapit != resourceMaps.end(); ++mapit)
 		{
-			T* res = (*mapit)->Get(resourcename);
+			T* res = (*mapit)->Get(formattedResourceName);
 			if (res != nullptr)
 			{
 				//Found
@@ -181,26 +181,26 @@ public:
 	//Add a new bin
 	void AddResourceMap(ResourceMap<T>* newMap)
 	{
-		if (verbose) std::cout << Name + " added new Resource Map" << std::endl;
+		if (verbose) cout << Name + " added new Resource Map" << endl;
 
 		resourceMaps.push_back(newMap);
 		binNumber++;
 	}
 
 	//Return string containing info on items inside a bin(s)
-	std::string Dump(int mapIndex = -1)
+	string Dump(int mapIndex = -1)
 	{
 		if (mapIndex == -1) //Print all
 		{
-			std::string results;
+			string results;
 
-			for (vector<ResourceMap<T>*>::iterator i = resourceMaps.begin(); i != resourceMaps.end(); i++)
+			for (vector<ResourceMap<T>*>::iterator i = resourceMaps.begin(); i != resourceMaps.end(); ++i)
 			{
 				results = results + (*i)->Dump();
 			}
 
-			results = results + ("\nSpace used : " + std::to_string(currentSize));
-			results = results + ("\nFree space : " + std::to_string(maxManagerSize - currentSize));
+			results = results + ("\nSpace used : " + to_string(currentSize));
+			results = results + ("\nFree space : " + to_string(maxManagerSize - currentSize));
 			results = results + "\n";
 
 			return results;
@@ -209,7 +209,7 @@ public:
 	}
 
 	//Return string containing statistics about the resourcemanager
-	std::string DumpStatistics()
+	string DumpStatistics()
 	{
 		string results = "\n-----------------" + Name + "-----------------";
 
@@ -222,7 +222,7 @@ public:
 		return results;
 	}
 
-	const std::string &GetName() const
+	const string &GetName() const
 	{
 		return Name;
 	}
@@ -244,15 +244,14 @@ public:
 		while (it != resourceMaps.end())
 		{
 			size += (*it)->GetCurrentSize();
-			it++;
+			++it;
 		}
 
 		return size;
 	}
 
 private:
-	ResourceManager(const ResourceManager&)
-	{};
+	ResourceManager(const ResourceManager&) {}
 	ResourceManager &operator = (const ResourceManager&)
 	{
 		return *this;
@@ -269,9 +268,9 @@ private:
 		}
 	}
 
-	std::unordered_map<std::string, T*> Map;
-	std::string	Name;
-	std::vector<ResourceMap<T>*> resourceMaps;
+	unordered_map<string, T*> Map;
+	string	Name;
+	vector<ResourceMap<T>*> resourceMaps;
 
 	size_t newBinSize;
 	size_t maxManagerSize;

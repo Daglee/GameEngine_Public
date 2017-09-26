@@ -135,12 +135,12 @@ void Profiler::RenderTimers()
 		Vector3(0, offset, 0), TEXT_SIZE));
 }
 
-void Profiler::Read(string resourcename)
+void Profiler::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void Profiler::ReadParams(string params)
+void Profiler::ReadParams(const string params)
 {
 	std::istringstream iss(params);
 	vector<string> tokens{ istream_iterator<string>{iss},

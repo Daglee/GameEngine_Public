@@ -17,7 +17,11 @@ public:
 	template <class T> friend class  ResourceManager;
 
 	Resource(std::string resourcename, size_t resourcesize);
-	Resource() {}
+	Resource()
+	{
+		references = 0;
+		size = size_t(0);
+	}
 
 	virtual ~Resource() {}
 
@@ -28,14 +32,10 @@ public:
 	virtual size_t GetSizeInBytes();
 	virtual int GetReferencesCount();
 
-	virtual void Read(std::string resourcename)
-	{}
-	virtual void ReadParams(std::string params)
-	{}
+	virtual void Read(const std::string resourcename) = 0;
+	virtual void ReadParams(const std::string params) = 0;
 
 protected:
-	Resource(const Resource& object) {}
-
 	Resource& operator=(const Resource& object)
 	{
 		return *this;

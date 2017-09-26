@@ -86,8 +86,8 @@ public:
 	void SetIndex(const int index);
 	bool Connected();
 
-	void Read(std::string resourcename) override;
-	void ReadParams(std::string params) override;
+	void Read(const std::string resourcename) override;
+	void ReadParams(const std::string params) override;
 
 	// Vibrate the gamepad (0.0f none, 1.0f max speed)
 	void Rumble(const float a_fLeftMotor = 0.0f, const float a_fRightMotor = 0.0f) const;

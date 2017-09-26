@@ -57,7 +57,7 @@ TableCreation::~TableCreation()
 	delete playerIDCount;
 }
 
-void TableCreation::AddTablesToDatabase()
+void TableCreation::AddTablesToDatabase() const
 {
 	for each (auto additionFunction in tableAdditions)
 	{
@@ -65,7 +65,7 @@ void TableCreation::AddTablesToDatabase()
 	}
 }
 
-void TableCreation::AddProfiler()
+void TableCreation::AddProfiler() const
 {
 	database->AddTable("GProfiler", new Table<Resource>(false, false, [db = database](std::string params)
 	{
@@ -76,7 +76,7 @@ void TableCreation::AddProfiler()
 	}, TableConfiguration("GProfiler", MAX_MEM_PER_TYPE, SINGLE_BIN)));
 }
 
-void TableCreation::AddInputManager()
+void TableCreation::AddInputManager() const
 {
 	database->AddTable("GInputManager", new Table<Resource>(false, false, [db = database](std::string params)
 	{
@@ -89,7 +89,7 @@ void TableCreation::AddInputManager()
 	}, TableConfiguration("GInputManager", MAX_MEM_PER_TYPE, SINGLE_BIN)));
 }
 
-void TableCreation::AddPhysicsEngine()
+void TableCreation::AddPhysicsEngine() const
 {
 	database->AddTable("PhysicsEngine", new Table<Resource>(false, false, [db = database](std::string params)
 	{
@@ -102,7 +102,7 @@ void TableCreation::AddPhysicsEngine()
 	}, TableConfiguration("PhysicsEngine", MAX_MEM_PER_TYPE, SINGLE_BIN)));
 }
 
-void TableCreation::AddFSMManager()
+void TableCreation::AddFSMManager() const
 {
 	database->AddTable("GFSMManager", new Table<Resource>(false, false, [](std::string params)
 	{
@@ -113,7 +113,7 @@ void TableCreation::AddFSMManager()
 	}, TableConfiguration("GFSMManager", MAX_MEM_PER_TYPE, SINGLE_BIN)));
 }
 
-void TableCreation::AddCamera()
+void TableCreation::AddCamera() const
 {
 	database->AddTable("GCamera", new Table<Resource>(false, false, [](std::string params)
 	{
@@ -124,7 +124,7 @@ void TableCreation::AddCamera()
 	}, TableConfiguration("GCamera", sizeof(Camera), SINGLE_BIN)));
 }
 
-void TableCreation::AddGamepads()
+void TableCreation::AddGamepads() const
 {
 	database->AddTable("Gamepads", new Table<Resource>(false, true, [](std::string params)
 	{
@@ -135,7 +135,7 @@ void TableCreation::AddGamepads()
 	}, TableConfiguration("Gamepads", sizeof(Gamepad) * 6, SINGLE_BIN)));
 }
 
-void TableCreation::AddOBJMeshes()
+void TableCreation::AddOBJMeshes() const
 {
 	database->AddTable("OBJMeshes", new Table<Resource>(false, true, [](std::string params)
 	{
@@ -146,7 +146,7 @@ void TableCreation::AddOBJMeshes()
 	}, TableConfiguration("OBJMeshes", MAX_MEM_OBJMESHES, OBJMESH_BINS)));
 }
 
-void TableCreation::AddMeshes()
+void TableCreation::AddMeshes() const
 {
 	database->AddTable("Meshes", new Table<Resource>(false, true, [](std::string params)
 	{
@@ -163,7 +163,7 @@ void TableCreation::AddMeshes()
 	}, TableConfiguration("Meshes", MAX_MEM_OBJMESHES, OBJMESH_BINS)));
 }
 
-void TableCreation::AddPhysicsObjects()
+void TableCreation::AddPhysicsObjects() const
 {
 	database->AddTable("PhysicsObjects", new Table<Resource>(false, true, [](std::string params)
 	{
@@ -174,7 +174,7 @@ void TableCreation::AddPhysicsObjects()
 	}, TableConfiguration("PhysicsObjects", MAX_MEM_PHYSOBJ, PHYS_OBJ_BINS)));
 }
 
-void TableCreation::AddGameObjects()
+void TableCreation::AddGameObjects() const
 {
 	database->AddTable("GameObjects", new Table<Resource>(false, true, [](std::string params)
 	{
@@ -185,7 +185,7 @@ void TableCreation::AddGameObjects()
 	}, TableConfiguration("GameObjects", size_t(MAX_MEM_PHYSOBJ / 4), 2)));
 }
 
-void TableCreation::AddPlayers()
+void TableCreation::AddPlayers() const
 {
 	database->AddTable("Players", new Table<Resource>(false, true, [db = database, idCount = playerIDCount](std::string params)
 	{
@@ -198,7 +198,7 @@ void TableCreation::AddPlayers()
 	}, TableConfiguration("Players", MAX_MEM_PLAYERS, SINGLE_BIN)));
 }
 
-void TableCreation::AddThreadPool()
+void TableCreation::AddThreadPool() const
 {
 	database->AddTable("GThreadPool", new Table<Resource>(false, false, [](std::string params)
 	{
@@ -206,13 +206,13 @@ void TableCreation::AddThreadPool()
 		string name = tokens.at(0);
 
 		ThreadPool* threadPool = new ThreadPool();
-		threadPool->SetName(params);
+		threadPool->SetName(name);
 
 		return threadPool;
 	}, TableConfiguration("GThreadPool", MAX_MEM_PER_TYPE, SINGLE_BIN)));
 }
 
-void TableCreation::AddWindow()
+void TableCreation::AddWindow() const
 {
 	database->AddTable("GWindow", new Table<Resource>(false, false, [db = database](std::string params)
 	{
@@ -230,7 +230,7 @@ void TableCreation::AddWindow()
 	}, TableConfiguration("GWindow", sizeof(Window), SINGLE_BIN)));
 }
 
-void TableCreation::AddRenderer()
+void TableCreation::AddRenderer() const
 {
 	database->AddTable("GRenderer", new Table<Resource>(false, false, [db = database](std::string params)
 	{
@@ -239,7 +239,6 @@ void TableCreation::AddRenderer()
 		vector<string> tokens = Log::tokenise(params);
 
 		string name = tokens.at(0);
-		string winName = tokens.at(1);
 
 		Renderer* renderer = new Renderer(db, *window);
 		renderer->SetName(name);
@@ -248,7 +247,7 @@ void TableCreation::AddRenderer()
 	}, TableConfiguration("GRenderer", MAX_MEM_PER_TYPE, SINGLE_BIN)));
 }
 
-void TableCreation::AddAudioManager()
+void TableCreation::AddAudioManager() const
 {
 	database->AddTable("GAudioManager", new Table<Resource>(false, false, [](std::string params)
 	{

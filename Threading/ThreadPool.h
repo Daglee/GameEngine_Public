@@ -73,8 +73,8 @@ public:
 		return paused;
 	}
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(const string resourcename) override;
+	void ReadParams(const string params) override;
 
 	KeyboardKeys pauseButton;
 private:

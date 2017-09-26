@@ -116,12 +116,12 @@ RigidBody* PhysicsObject::GetRigidBody()
 	return &rigidBody;
 }
 
-void PhysicsObject::Read(string resourcename)
+void PhysicsObject::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void PhysicsObject::ReadParams(string params)
+void PhysicsObject::ReadParams(const string params)
 {
 	Read(params);
 }

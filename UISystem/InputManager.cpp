@@ -40,12 +40,12 @@ void InputManager::Update(const float& deltatime)
 	updateTimer.StopTimer();
 }
 
-void InputManager::Read(string resourcename)
+void InputManager::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void InputManager::ReadParams(string params)
+void InputManager::ReadParams(const string params)
 {
 	Read(params);
 }

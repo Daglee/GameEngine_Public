@@ -1,34 +1,5 @@
 #pragma once
 
-/////
-//#include "ResourceManager.h"
-//#include "../Profiler/MemoryWatcher.h"
-//#include "../Threading/ThreadPool.h"
-//#include "../Game/PhysicsObject.h"
-//#include "../nclgl/Mesh.h"
-//#include "../nclgl/OBJMesh.h"
-//#include "../GameLogicFSM/FSMManager.h"
-//#include "../GameLogicFSM/FSM.h"
-//#include "../NCLGL/Renderer.h"
-//#include "../nclgl/Gamepad.h"
-//#include "../nclgl/Camera.h"
-//#include "../Physics/PhysicsEngine.h"
-//#include "../nclgl/Window.h"
-//#include "../Game/Player.h"
-//#include "../Profiler/Profiler.h"
-//#include "../UISystem/InputManager.h"
-//#include "../Game/AudioManager.h"
-
-#include <sstream>
-#include <iostream>
-#include <fstream>
-#include <algorithm>
-#include <iterator>
-#include <thread>
-#include <mutex>
-#include <ctime>
-/////
-
 #include "Resource.h"
 #include "Table.h"
 
@@ -42,17 +13,17 @@ public:
 	DataBase() {}
 	~DataBase();
 
-	void StartUp(std::string filename, bool rendererInitialised, bool renderLoadingScreen);
+	void StartUp(string filename, bool rendererInitialised, bool renderLoadingScreen);
 
-	void ReserveMemoryForAllTables();
-	void AddResourceToTable(std::string tableName, std::string resourceName);
+	void ReserveMemoryForAllTables() const;
+	void AddResourceToTable(const string tableName, const string resourceName);
 
-	void AddTable(std::string tableName, Table<Resource>* table)
+	void AddTable(const string tableName, Table<Resource>* table)
 	{
 		tables[tableName] = table;
 	}
 
-	Table<Resource>* GetTable(std::string tableName)
+	Table<Resource>* GetTable(const string tableName)
 	{
 		return tables[tableName];
 	}
@@ -61,14 +32,14 @@ public:
 	const size_t MaxSize() const;
 
 private:
-	void ReadLoop(std::vector<std::vector<std::string>> tokens, std::vector<std::string> line, int numLines);
+	void ReadLoop(vector<vector<string>> tokens, vector<string> line, const int numLines);
 
-	void ReadItem(std::vector<std::string> tokens, std::string line);
-	void ReadParameters(std::vector<std::string> tokens, std::string line,
+	void ReadItem(vector<string> tokens);
+	void ReadParameters(vector<string> tokens, string line,
 		bool* renderInit, bool renderLoadingScreen);
 
 	void ClearAllTables();
 
-	std::unordered_map <std::string, Table<Resource>*> tables;
+	unordered_map <string, Table<Resource>*> tables;
 };
 

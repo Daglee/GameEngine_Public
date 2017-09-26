@@ -284,12 +284,12 @@ void PhysicsEngine::ClearNarrowPhaseDeleteBuffer()
 	narrowPhaseDeleteBuffer.clear();
 }
 
-void PhysicsEngine::Read(string resourcename)
+void PhysicsEngine::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void PhysicsEngine::ReadParams(string params)
+void PhysicsEngine::ReadParams(const string params)
 {
 	Read(params);
 }

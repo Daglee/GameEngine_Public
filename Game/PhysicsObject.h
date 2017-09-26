@@ -47,8 +47,8 @@ public:
 
 	RigidBody* GetRigidBody();
 
-	void Read(string resourcename) override;
-	void ReadParams(string params) override;
+	void Read(const string resourcename) override;
+	void ReadParams(const string params) override;
 
 	bool isSphere;
 protected:

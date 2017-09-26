@@ -22,8 +22,8 @@ public:
 	virtual bool Fire(const Vector3& from, const Vector3& rotation, const int& id) = 0;
 	virtual void Reload() = 0;
 
-	virtual void Read(string resourcename) override;
-	virtual void ReadParams(string params) override;
+	virtual void Read(const string resourcename) override;
+	virtual void ReadParams(const string params) override;
 
 	float fireDelay;
 

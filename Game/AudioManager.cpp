@@ -144,12 +144,12 @@ void AudioManager::ClearRemoveBuffer()
 	}
 }
 
-void AudioManager::Read(string resourcename)
+void AudioManager::Read(const string resourcename)
 {
 	SetName(resourcename);
 }
 
-void AudioManager::ReadParams(string params)
+void AudioManager::ReadParams(const string params)
 {
 	Read(params);
 }

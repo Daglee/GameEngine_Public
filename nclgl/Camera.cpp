@@ -34,12 +34,12 @@ Matrix4 Camera::BuildViewMatrix()
 		Matrix4::Translation(-node.GetTransform().GetPositionVector());
 };
 
-void Camera::Read(string resourcename)
+void Camera::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void Camera::ReadParams(string params)
+void Camera::ReadParams(const string params)
 {
 	std::istringstream iss(params);
 	vector<string> tokens{ istream_iterator<string>{iss},

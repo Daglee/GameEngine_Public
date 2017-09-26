@@ -23,12 +23,12 @@ Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, const float reloa
 	this->SetSizeInBytes(sizeof(*this));
 }
 
-void Gun::Read(string resourcename)
+void Gun::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void Gun::ReadParams(string params)
+void Gun::ReadParams(const string params)
 {
 	Read(params);
 }

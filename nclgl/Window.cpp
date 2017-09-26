@@ -336,11 +336,11 @@ void	Window::ShowOSPointer(bool show)	{
 	}
 }
 
-void Window::Read(string resourcename) {
+void Window::Read(const string resourcename) {
 	this->SetName(resourcename);
 }
 
-void Window::ReadParams(string params) {
+void Window::ReadParams(const string params) {
 	std::istringstream iss(params);
 	vector<string> tokens{ istream_iterator<string>{iss},
 		istream_iterator<string>{} };

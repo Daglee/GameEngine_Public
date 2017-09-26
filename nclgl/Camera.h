@@ -83,8 +83,8 @@ public:
 	}
 
 	//	CSC3224 NCODE [Kiyavash Kandar] [140245239]
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(const string resourcename) override;
+	void ReadParams(const string params) override;
 	//	CSC3224 NCODE BLOCK ENDS
 
 protected:

@@ -118,8 +118,8 @@ public:
 	//Updates sound system and temporary sounds buffer.
 	void Update(const float& deltatime) override;
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(const string resourcename) override;
+	void ReadParams(const string params) override;
 
 protected:
 	AudioManager(SceneNode* camNode);

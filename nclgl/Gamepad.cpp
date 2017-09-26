@@ -282,7 +282,7 @@ bool Gamepad::Connected()
 	}
 }
 
-void Gamepad::Read(std::string resourcename)
+void Gamepad::Read(const std::string resourcename)
 {
 	std::string name = resourcename;
 	std::string snum = name.substr(name.size() - 1, name.size());
@@ -292,7 +292,7 @@ void Gamepad::Read(std::string resourcename)
 	this->SetName(resourcename);
 }
 
-void Gamepad::ReadParams(std::string params)
+void Gamepad::ReadParams(const std::string params)
 {
 	Read(params);
 }

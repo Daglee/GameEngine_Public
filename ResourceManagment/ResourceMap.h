@@ -57,7 +57,7 @@ public:
 	{
 		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
 
-		std::string formattedResourceName = Log::TrimAndLower(resourceName);
+		const std::string formattedResourceName = Log::TrimAndLower(resourceName);
 
 		if (verbose)
 		{
@@ -79,7 +79,7 @@ public:
 	{
 		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
 
-		std::string formattedResourceName = Log::TrimAndLower(resourceName);
+		const std::string formattedResourceName = Log::TrimAndLower(resourceName);
 
 		if (verbose)
 		{
@@ -100,7 +100,7 @@ public:
 
 		while (it != resources.end())
 		{
-			std::string filename = (*it).second->GetName();
+			const std::string filename = (*it).second->GetName();
 			size_t hash = std::hash <std::string>{}(filename);
 
 			delete(resources.find(hash)->second);
@@ -117,7 +117,7 @@ public:
 
 		for (std::unordered_map<size_t, T* >::iterator it = resources.begin(); it != resources.end(); ++it)
 		{
-			std::size_t size = (*it).second->GetSizeInBytes();
+			const size_t size = (*it).second->GetSizeInBytes();
 			str += ("Name : " + (*it).second->GetName() + " -- Size : ");
 			str += std::to_string(size);
 		}
@@ -131,18 +131,15 @@ public:
 	{
 		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
 
-		std::string formattedResourceName = Log::TrimAndLower(resourceName);
+		const std::string formattedResourceName = Log::TrimAndLower(resourceName);
 		size_t hash = std::hash <std::string>{}(formattedResourceName);
-
-		std::unordered_map<size_t, T*>::iterator it;
 
 		if (verbose)
 		{
 			std::cout << (mapName + "Looking for " + formattedResourceName + ".");
 		}
 
-		//Does this bin already contain this item?
-		it = resources.find(hash);
+		std::unordered_map<size_t, T*>::iterator it = resources.find(hash);
 
 		//Yes, return pointer to element
 		if (it != resources.end())
@@ -176,7 +173,7 @@ public:
 		verbose = false;
 	}
 
-	size_t	GetMaxSize()
+	size_t	GetMaxSize() const
 	{
 		return maxSize;
 	}
@@ -193,9 +190,9 @@ public:
 		return size;
 	}
 
-	size_t  FreeSpace()
+	size_t  FreeSpace() const
 	{
-		size_t free = maxSize - currentSize;
+		const size_t free = maxSize - currentSize;
 		return free;
 	}
 
@@ -220,7 +217,7 @@ private:
 
 		//Check if element (by value) is already present.
 		//If it is found, then return true, else exit with false.
-		std::unordered_mapsize_t, T* > ::iterator it = Map.begin();
+		std::unordered_map<size_t, T* > ::iterator it = Map.begin();
 
 		while (it != resources.end())
 		{

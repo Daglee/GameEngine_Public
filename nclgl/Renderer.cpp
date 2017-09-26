@@ -350,12 +350,12 @@ void Renderer::RemoveSceneNode(SceneNode* sn)
 	this->SetSizeInBytes(sizeof(*this));
 }
 
-void Renderer::Read(string resourcename)
+void Renderer::Read(const string resourcename)
 {
 	SetName(resourcename);
 }
 
-void Renderer::ReadParams(string params)
+void Renderer::ReadParams(const string params)
 {
 	std::istringstream iss(params);
 	vector<string> tokens{ istream_iterator<string>{iss},
