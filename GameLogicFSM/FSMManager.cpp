@@ -25,7 +25,6 @@ FSMManager::~FSMManager()
 
 void FSMManager::LateBuildFSM(string FSMName, string filename) const
 {
-	//Multiple FSMs could use the same config file.
 	for each (FSM* fsm in fsmsNotBuilt)
 	{
 		if (fsm->FSMName == FSMName)

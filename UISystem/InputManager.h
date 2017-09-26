@@ -21,10 +21,6 @@ public:
 	InputManager(Playerbase* playerbase, Window* window);
 	~InputManager();
 
-	/*
-	  Fill the input arrays/buffers...
-	  and apply them!
-	*/
 	void Update(const float& deltatime) override;
 
 	Playerbase* GetPlayerbase() const

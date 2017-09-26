@@ -4,11 +4,7 @@ MessageSystem* MessageSystem::instance = nullptr;
 
 bool MessageSystem::MessageTransmitting(const float msgTitle)
 {
-	/*
-	  LOCK! Nothing in the system is allowed
-	  to change until the check is done.
-	*/
-	lock_guard<mutex> lock(transmit_mutex);
+	lock_guard<mutex> lock(transmitMutex);
 
 	return MessageExists(msgTitle) || EventExists(msgTitle);
 }
@@ -17,7 +13,7 @@ void MessageSystem::StopEvent(const float msgTitle)
 {
 	if (EventExists(msgTitle))
 	{
-		lock_guard<mutex> lock(transmit_mutex);
+		lock_guard<mutex> lock(transmitMutex);
 
 		for (vector<float>::iterator message = events.begin();
 			message != events.end();)

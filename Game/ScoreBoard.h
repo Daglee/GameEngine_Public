@@ -19,7 +19,6 @@ struct Entry
 	}
 };
 
-//For std::sort.
 struct Comparison
 {
 	bool const operator()(Entry* lhs, Entry* rhs) const
@@ -30,9 +29,6 @@ struct Comparison
 
 /*
   Singleton that manages points for an entity.
-  Adds text to top right of screen.
-   - Sorts entries into descending order.
-   - Can add points to entries.
 */
 class ScoreBoard
 {
@@ -47,16 +43,13 @@ public:
 		return instance;
 	}
 
-	//Render it.
 	void DisplayScores();
 
-	//Duplicates will be allowed.
 	void AddEntry(Entry* entry)
 	{
 		entries.push_back(entry);
 	}
 
-	//Adds the parameter score to the current score.
 	void UpdateEntryScore(std::string name, int score) const;
 
 private:
@@ -71,7 +64,6 @@ private:
 		delete instance;
 	}
 
-	//Using std::sort.
 	void OrderAscending();
 	void DisplayText(const std::string& entry, const float& yPosition) const;
 

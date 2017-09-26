@@ -27,17 +27,13 @@ public:
 
 	virtual ~State() {}
 
-	//Order could be important!
 	virtual void ExecuteAllActions();
-
-	//Save the variables to save us from reading the string on each check
 	virtual void ConstructAction();
 
 	int id;
-	vector<string> actionNames;  //The actions without parsing
-	vector<struct Action> actions; //To be executed on each update.
+	vector<string> actionNames;
+	vector<struct Action> actions;
 
-	//Obtained from the object that the FSM will act on
 	unordered_map<string, float*>* properties;
 
 	vector<Transition*> transitions;

@@ -12,7 +12,6 @@ State::State(std::unordered_map<string, float*>* properties, const int id)
 	this->properties = properties;
 }
 
-//Change some variables in the object vars is in
 void State::ExecuteAllActions()
 {
 	for each (Action action in actions)
@@ -21,8 +20,6 @@ void State::ExecuteAllActions()
 	}
 }
 
-//Save the check to stop the stirng from being parsed
-//every frame.
 void State::ConstructAction()
 {
 	for each(string actionName in actionNames)

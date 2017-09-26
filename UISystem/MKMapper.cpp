@@ -152,31 +152,24 @@ void MKMapper::ReadMapping(const string filename)
 	ifstream file(filename);
 	string button;
 
-	//MOVE LEFT
 	getline(file, button);
 	NEG_MOVEMENT_X = Window::GetKeyboard()->Mapper(button);
 
-	//MOVE RIGHT
 	getline(file, button);
 	POS_MOVEMENT_X = Window::GetKeyboard()->Mapper(button);
 
-	//MOVE DOWN
 	getline(file, button);
 	POS_MOVEMENT_Z = Window::GetKeyboard()->Mapper(button);
 
-	//MOVE UP
 	getline(file, button);
 	NEG_MOVEMENT_Z = Window::GetKeyboard()->Mapper(button);
 
-	//PAUSE BUTTON
 	getline(file, button);
 	PAUSE = Window::GetKeyboard()->Mapper(button);
 
-	//QUIT BUTTON
 	getline(file, button);
 	STOP_GAME = Window::GetKeyboard()->Mapper(button);
 
-	//MOVE UP
 	getline(file, button);
 	RELOAD_BUTTON = Window::GetKeyboard()->Mapper(button);
 }

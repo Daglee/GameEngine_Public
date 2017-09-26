@@ -31,11 +31,7 @@ PhysicsEngine::PhysicsEngine(Renderer* renderer, DataBase* database) : Resource(
 
 void PhysicsEngine::AddRigidBody(RigidBody* rigidBody)
 {
-	/*
-	  Is the update busy? If not, add. If it is,
-	  then just wait.
-	*/
-	unique_lock<mutex> lock(update_mutex);
+	unique_lock<mutex> lock(updateMutex);
 
 	rigidBodies.push_back(rigidBody);
 
@@ -46,11 +42,7 @@ void PhysicsEngine::AddRigidBody(RigidBody* rigidBody)
 
 void PhysicsEngine::RemoveRigidBody(RigidBody* rigidBody)
 {
-	/*
-	  Is the update busy? If not, remove. If it is,
-	  then just wait.
-	*/
-	unique_lock<mutex> lock(update_mutex);
+	unique_lock<mutex> lock(updateMutex);
 
 	rigidBodies.erase(remove(rigidBodies.begin(),
 	                         rigidBodies.end(), rigidBody), rigidBodies.end());
@@ -62,11 +54,7 @@ void PhysicsEngine::RemoveRigidBody(RigidBody* rigidBody)
 
 void PhysicsEngine::Update(const float& deltatime)
 {
-	/*
-	  LOCK! Nothing in the engine is allowed
-	  to change until the update is done.
-	*/
-	lock_guard<mutex> lock(update_mutex);
+	lock_guard<mutex> lock(updateMutex);
 
 	updateTimer.StartTimer();
 
@@ -102,18 +90,18 @@ void PhysicsEngine::BroadPhase()
 	for (int i = 0; i < BROAD_PHASE_THREADS - 1; ++i)
 	{
 		threads.push_back(threadPool->SubmitJob([](PhysicsEngine& physicsEngine, int start, int end)
-	                                        {
-		                                        physicsEngine.BroadPhaseChunk(start, end);
-	                                        }, ref(*this), startIndex, endIndex));
+	    {
+		    physicsEngine.BroadPhaseChunk(start, end);
+	    }, ref(*this), startIndex, endIndex));
 
 		startIndex = endIndex;
 		endIndex = startIndex + (broadPhaseChunkSize) - 1;
 	}
 
 	threads.push_back(threadPool->SubmitJob([](PhysicsEngine& physicsEngine, int start, int end)
-                                        {
-	                                        physicsEngine.BroadPhaseChunk(start, end);
-                                        }, ref(*this), startIndex, rigidBodies.size()));
+    {
+	    physicsEngine.BroadPhaseChunk(start, end);
+    }, ref(*this), startIndex, rigidBodies.size()));
 
 	for (auto& task : threads)
 	{
@@ -180,7 +168,6 @@ void PhysicsEngine::NarrowPhase()
 	ClearNarrowPhaseDeleteBuffer();
 }
 
-//	BEGIN EXT
 void PhysicsEngine::Explosion(CollisionPair collisionPair) const
 {
 	RigidBody* explosion;
@@ -293,5 +280,3 @@ void PhysicsEngine::ReadParams(const string params)
 {
 	Read(params);
 }
-
-//	END EXT

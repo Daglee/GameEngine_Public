@@ -7,7 +7,6 @@ AudioManager* AudioManager::instance = NULL;
 
 AudioManager::AudioManager(SceneNode* camNode) : Resource()
 {
-	//The SoundSystem singleton is managed in this class.
 	SoundSystem::Initialise();
 	SoundSystem::GetSoundSystem()->SetListener(camNode);
 
@@ -36,16 +35,12 @@ AudioManager::~AudioManager()
 	Destroy();
 }
 
-void AudioManager::BeginPlay(SoundNode* gs)
+void AudioManager::BeginPlay(SoundNode* sound)
 {
-	/*
-	  Is the update busy? If not, add. If it is,
-	  then just wait.
-	*/
-	unique_lock<mutex> lock(update_mutex);
+	unique_lock<mutex> lock(updateMutex);
 
-	gs->SetLooping(true);
-	SoundSystem::GetSoundSystem()->AddSoundNode(gs);
+	sound->SetLooping(true);
+	SoundSystem::GetSoundSystem()->AddSoundNode(sound);
 }
 
 void AudioManager::BeginBackgroundPlay(string name)
@@ -66,14 +61,10 @@ void AudioManager::BeginPlay(string name)
 
 void AudioManager::StopPlay(SoundNode* gs)
 {
-	/*
-	  Is the update busy? If not, add. If it is,
-	  then just wait.
-	*/
-	unique_lock<mutex> lock(update_mutex);
+	unique_lock<mutex> lock(updateMutex);
 
 	if (gs->GetLooping())
-	{ //If currently playing...
+	{
 		gs->SetLooping(false);
 		gs->DetachSource();
 	}
@@ -84,9 +75,9 @@ void AudioManager::StopPlay(string name)
 	StopPlay(GetSound(name));
 }
 
-void AudioManager::PlayOnce(SoundNode* gs)
+void AudioManager::PlayOnce(SoundNode* sound)
 {
-	SoundSystem::GetSoundSystem()->AddSoundNode(gs);
+	SoundSystem::GetSoundSystem()->AddSoundNode(sound);
 }
 
 void AudioManager::PlayOnce(string name)
@@ -94,33 +85,28 @@ void AudioManager::PlayOnce(string name)
 	PlayOnce(GetSound(name));
 }
 
-void AudioManager::TemporaryPlay(Sound* gs, enum SoundPriority sp)
+void AudioManager::TemporaryPlay(Sound* sound, enum SoundPriority priority)
 {
-	remove_buffer.push_back(gs);
-	SoundSystem::GetSoundSystem()->PlaySound(gs, sp);
+	remove_buffer.push_back(sound);
+	SoundSystem::GetSoundSystem()->PlaySound(sound, priority);
 	this->SetSizeInBytes(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 }
 
-void AudioManager::TemporaryPlay(string name, enum SoundPriority sp)
+void AudioManager::TemporaryPlay(string name, enum SoundPriority priority)
 {
-	TemporaryPlay(GetSound(name)->GetSound(), sp);
+	TemporaryPlay(GetSound(name)->GetSound(), priority);
 }
 
 void AudioManager::Update(const float& deltatime)
 {
-	/*
-	  LOCK! Nothing in the engine is allowed
-	  to change until the update is done.
-	*/
-	lock_guard<mutex> lock(update_mutex);
+	lock_guard<mutex> lock(updateMutex);
 
 	updateTimer.StartTimer();
 
 	ClearRemoveBuffer();
 	this->SetSizeInBytes(sizeof(*instance) + sizeof(*SoundSystem::GetSoundSystem()));
 
-	//Play the audio!
-	for each (std::pair<string, SoundNode*> bsound in backgroundSounds)
+	for each (pair<string, SoundNode*> bsound in backgroundSounds)
 	{
 		BeginBackgroundPlay(bsound.first);
 	}
@@ -136,7 +122,7 @@ void AudioManager::ClearRemoveBuffer()
 	while (iterator != remove_buffer.end())
 	{
 		if ((*iterator)->sound->IsStreaming())
-		{ //Is it currently playing?
+		{
 			delete *iterator;
 			iterator = remove_buffer.erase(iterator);
 		}

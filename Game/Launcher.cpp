@@ -27,7 +27,6 @@ void Launcher::Launch(const string directory)
 
 void Launcher::InitProfilerTimers() const
 {
-	//Retrieve everything from the database and hook it up.
 	Profiler* profiler = static_cast<Profiler*>(database->GetTable("GProfiler")->GetResources()->Find("Profiler"));
 	PhysicsEngine* physicsEngine = static_cast<PhysicsEngine*>(database->GetTable("PhysicsEngine")->GetResources()->Find("PhysicsEngine"));
 	FSMManager* fsmManager = static_cast<FSMManager*>(database->GetTable("GFSMManager")->GetResources()->Find("GFSMManager"));
@@ -62,13 +61,11 @@ bool Launcher::IsGraphicsInitialised()
 	if (!window->HasInitialised())
 	{
 		Log::Error("Window not succesfully initialised.");
-		return false;
 	}
 
 	if (!renderer->HasInitialised())
 	{
 		Log::Error("Renderer not succesfully initialised.");
-		return false;
 	}
 
 	return true;
@@ -76,12 +73,14 @@ bool Launcher::IsGraphicsInitialised()
 
 bool Launcher::IsSubSystemNull(Subsystem* subsystem, const string name)
 {
-	if (subsystem == nullptr)
+	const bool subsystemIsNull = subsystem == nullptr;
+
+	if (subsystemIsNull)
 	{
 		Log::Warning(name + " is null.");
-		return true;
 	}
-	else return false;
+	
+	return subsystemIsNull;
 }
 
 void Launcher::AttachGraphicsAndInput()

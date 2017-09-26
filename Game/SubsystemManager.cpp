@@ -40,33 +40,23 @@ void SubsystemManager::ThreadedUpdate(float deltatime)
 
 	//But these other subsystems do...
 
-	/*
-	  The promises that multithreaded updates will get
-	  done must be stored as they would wait and join
-	  if they went out of scope/destructor was called.
-	*/
 	vector<TaskFuture<void>> updates;
 
 	if (!threadPool->Paused())
 	{
-		//Start all the threads needed to update sybsystems...
 		for each(Subsystem* subsystem in subsystems)
 		{
 			updates.push_back(threadPool->SubmitJob([](Subsystem* s, float dt)
-			{	//Any parameters needed...
-				s->Update(dt);				//The function to call...
-			}, subsystem, deltatime));		//What we are passing in...
-			//Equivalent to "physicsEngine->Update(deltatime)".
+			{
+				s->Update(dt);				
+			}, subsystem, deltatime));		
 		}
 	}
 
-	//Synchronise threads.
 	for (auto& task : updates)
 	{
 		task.Complete();
 	}
-
-	//if (updateCount % MESSAGE_LIFETIME == 0) MessageSystem::GetInstance()->ClearAllMessages();
 
 	MessageSystem::GetInstance()->ClearAllMessages();
 	++updateCount;

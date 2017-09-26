@@ -7,9 +7,9 @@
 
 #include <fstream>
 
-Level::Level(DataBase* db)
+Level::Level(DataBase* database)
 {
-	database = db;
+	this->database = database;
 }
 
 void Level::LoadAndInitialiseAssets(const string directory)
@@ -22,7 +22,7 @@ void Level::LoadAndInitialiseAssets(const string directory)
 	const string assetsFile = path + "/assets.txt";
 	const string positionsFile = path + "/positions.txt";
 
-	this->assetsfile = assetsFile; ////!!!!!!!!!!!!!!!!!
+	this->assetsfile = assetsFile;
 	LoadLevelAssets(assetsFile);
 	InitialiseObjects(positionsFile);
 

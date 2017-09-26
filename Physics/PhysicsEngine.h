@@ -18,17 +18,6 @@ class RigidBody;
 class PhysicsEngine : public Resource, public Subsystem
 {
 public:
-	/*
-	  A mutex is needed in the update function to make sure
-	  no rigid bodies are added or removed during the update.
-	  It stops a rigid body suddenly being removed by another
-	  thread in the middle of, for example, broadphase.
-
-	  Performance loss is negligible and it stops a whole
-	  load of errors.
-	*/
-	mutex update_mutex;
-
 	PhysicsEngine(Renderer* renderer, DataBase* database);
 	~PhysicsEngine() 
 	{
@@ -52,7 +41,7 @@ private:
 
 	void UpdatePositions(float msec) const;
 
-	void BroadPhase(); //Sort and sweep!
+	void BroadPhase(); 
 	void BroadPhaseChunk(const int& start, const int& end);
 	void SortRigidBodiesAlongAxis(const Vector3& axis);
 
@@ -76,5 +65,6 @@ private:
 	int broadPhaseChunkSize;
 	mutex deleteBufferMutex;
 	mutex positionUpdateMutex;
+	mutex updateMutex;
 };
 

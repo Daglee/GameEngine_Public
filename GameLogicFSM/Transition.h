@@ -24,22 +24,20 @@ struct Check
 class Transition
 {
 public:
-	Transition(std::unordered_map<string, float*>* properties = nullptr, const int startingState = -1,
+	Transition(unordered_map<string, float*>* properties = nullptr, const int startingState = -1,
 		const int nextState = -1, const string check = "");
 
 	~Transition() {}
 
-	bool Check(); //Called by the FSM
+	bool Check();
 
-	//Save the variables to save us from reading the string on each check
 	void ConstructCheck();
 
-	int nextState;				//State to move to
-	int startingState;			//Starting state
-	string checkstring;	//The condition itself, no parsing.
-	std::vector<struct Check> checks;
+	int nextState;		
+	int startingState;	
+	string checkstring;	
+	vector<struct Check> checks;
 
-	//Obtained from the object that the FSM will act on
-	std::unordered_map<string, float*>* properties;
+	unordered_map<string, float*>* properties;
 };
 

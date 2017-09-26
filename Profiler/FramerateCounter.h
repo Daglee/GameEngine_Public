@@ -13,8 +13,6 @@ public:
 
 	inline void CalculateFPS(const float& time)
 	{
-		//Only update it periodically to stop a flickering number.
-		//After a set amount of time and number of frames.
 		const float elapsedTime = time - lastTime;
 
 		if (elapsedTime > MIN_TIME_PASSED && frames > MIN_FRAMES)
@@ -23,7 +21,6 @@ public:
 			lastTime = time;
 			frames = 0;
 		}
-		//else just dont change it...
 	}
 
 	void DisplayFPS() const;

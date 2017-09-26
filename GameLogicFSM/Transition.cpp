@@ -3,7 +3,7 @@
 #include "MessageSystem.h"
 #include "TransitionCheck.h"
 
-Transition::Transition(std::unordered_map<string, float*>* properties, const int startingState,
+Transition::Transition(unordered_map<string, float*>* properties, const int startingState,
 	const int nextState, const string check)
 {
 	this->properties = properties;

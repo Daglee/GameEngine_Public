@@ -17,7 +17,6 @@ public:
 
 	~SubsystemManager() {}
 
-	//Iterates the game loop
 	void ThreadedUpdate(float deltatime);
 	void Update(float deltatime) const;
 

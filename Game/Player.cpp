@@ -124,7 +124,6 @@ void Player::CheckHealth()
 
 void Player::AddPoints() const
 {
-	//Add any points that are pending from the game logic.
 	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints")))
 	{
 		ScoreBoard::GetInstance()->UpdateEntryScore(rigidBody.tag, killstreak);

@@ -31,21 +31,18 @@ void LevelManager::LoadFirstLevel()
 
 void LevelManager::Update(const float& msec)
 {
-	//Is it time to stop this level?
 	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash("ExitLevel")))
 	{
 		MessageSystem::GetInstance()->StopEvent(Log::Hash("ExitLevel"));
 		loader.ExitLevel();
 	}
 
-	//Should we load a new one?
 	CheckLoadLevel();
 
 	timer += msec / 1000.0f;
 
-	//How much time is left for this level
-	const string mt = to_string((matchLength - timer));
-	const Text matchTimer(mt, Vector3((renderer->GetWidth() / 2) - 15, 0, 0), 15.0f, false);
+	const string timeLeft = to_string((matchLength - timer));
+	const Text matchTimer(timeLeft, Vector3((renderer->GetWidth() / 2) - 15, 0, 0), 15.0f, false);
 
 	renderer->AddText(matchTimer);
 }
