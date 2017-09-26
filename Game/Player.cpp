@@ -126,7 +126,7 @@ void Player::AddPoints() const
 {
 	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints")))
 	{
-		ScoreBoard::GetInstance()->UpdateEntryScore(rigidBody.tag, killstreak);
+		ScoreBoard::GetInstance()->UpdateEntryScore(rigidBody.tag, static_cast<const int>(killstreak));
 
 		MessageSystem::GetInstance()->StopEvent(Log::Hash(rigidBody.tag + "addkillstreakpoints"));
 	}

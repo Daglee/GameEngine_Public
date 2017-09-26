@@ -62,12 +62,12 @@ public:
 
 	const float GetWidth() const
 	{
-		return width;
+		return static_cast<float>(width);
 	}
 
 	const float GetHeight() const
 	{
-		return height;
+		return static_cast<float>(height);
 	}
 
 

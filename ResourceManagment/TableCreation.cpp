@@ -18,7 +18,7 @@
 #include "../Threading/ThreadPool.h"
 #include "../Game/AudioManager.h"
 
-#include <vector>;
+#include <vector>
 #include "Log.h"
 
 const size_t MAX_MEM_PER_TYPE = 5000;

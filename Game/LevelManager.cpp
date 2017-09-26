@@ -49,7 +49,7 @@ void LevelManager::Update(const float& msec)
 
 void LevelManager::CheckLoadLevel()
 {
-	for (int i = 0; i < levelIDs.size(); ++i)
+	for (unsigned i = 0; i < levelIDs.size(); ++i)
 	{
 		if (levelIDs[i] == INITIAL_LEVEL)
 		{

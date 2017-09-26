@@ -80,6 +80,7 @@ void PhysicsEngine::UpdatePositions(float msec) const
 void PhysicsEngine::BroadPhase()
 {
 	SortRigidBodiesAlongAxis(X_AXIS);
+	collisionPairCounter = 0;
 
 	for (unsigned x = 0; x < rigidBodies.size(); ++x)
 	{
@@ -89,7 +90,7 @@ void PhysicsEngine::BroadPhase()
 			if (rigidBodies[x]->collider->objbounds.max > rigidBodies[y]->collider->objbounds.min)
 			{
 				//Yes, get Narrow phase to check this pair properly...
-				collisionPairs[collisionPairCounter.load()] = CollisionPair(rigidBodies[x], rigidBodies[y]);
+				collisionPairs[collisionPairCounter] = CollisionPair(rigidBodies[x], rigidBodies[y]);
 				++collisionPairCounter;
 			}
 		}
@@ -113,7 +114,7 @@ bool PhysicsEngine::compareRigidBodies(RigidBody* a, RigidBody* b)
 
 void PhysicsEngine::NarrowPhase()
 {
-	for (int i = 0; i < collisionPairCounter.load(); ++i)
+	for (int i = 0; i < collisionPairCounter; ++i)
 	{
 		CollisionPair collisionPair = collisionPairs[i];
 

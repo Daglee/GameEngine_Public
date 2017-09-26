@@ -59,7 +59,8 @@ private:
 	void ClearNarrowPhaseDeleteBuffer();
 
 	ThreadPool* threadPool;
-	std::atomic<int> collisionPairCounter;
+	//std::atomic<int> collisionPairCounter;
+	int collisionPairCounter;
 	vector<CollisionPair> collisionPairs;
 	int broadPhaseChunkSize;
 	mutex deleteBufferMutex;

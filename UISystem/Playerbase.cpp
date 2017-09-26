@@ -133,7 +133,7 @@ void Playerbase::ReInitialisePlayers()
 	ScoreBoard::GetInstance()->AddEntry(new Entry(players[0]->GetRigidBody()->tag, 0));
 
 	ConnectGamepads(true);
-	for (int i = 1; i < connectedPlayers.size(); ++i)
+	for (unsigned i = 1; i < connectedPlayers.size(); ++i)
 	{
 		ScoreBoard::GetInstance()->AddEntry(new Entry("player" + std::to_string(i + 1), 0));
 	}

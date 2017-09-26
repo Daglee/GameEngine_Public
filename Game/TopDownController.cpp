@@ -32,7 +32,7 @@ void TopDownController::ApplyRotation()
 
 void TopDownController::UpdatePosition()
 {
-	const Vector3 movement = input->GetMovement() * speedMultiplier;
+	const Vector3 movement = input->GetMovement() * static_cast<float>(speedMultiplier);
 
 	rigidBody->ApplyForce(movement);
 
