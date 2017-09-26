@@ -36,7 +36,7 @@ public:
 	//Can be called to construct a FSM that has not been built yet.
 	void LateBuildFSM(string FSMName, string filename) const;
 
-	void Update(float deltatime = 0) override; //For state changes
+	void Update(const float& deltatime = 0) override; //For state changes
 
 	FSM** fsms;				//Array of FSMs.
 	vector<FSM*> fsmsNotBuilt;	//FSMs that have yet to be constructed.

@@ -104,11 +104,9 @@ class OGLRenderer
 public:
 	friend class Window;
 	OGLRenderer(Window &parent);
-	//OGLRenderer() { init = true; }
 	virtual ~OGLRenderer(void);
 
 	virtual void	RenderScene() = 0;
-	virtual void	UpdateScene(float msec);
 	void			SwapBuffers();
 
 	bool			HasInitialised() const;

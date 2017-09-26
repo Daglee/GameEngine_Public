@@ -32,7 +32,7 @@ Profiler::Profiler(DataBase* db) : Resource()
 	this->SetSizeInBytes(sizeof(*this));
 }
 
-void Profiler::Update(float deltatime)
+void Profiler::Update(const float& deltatime)
 {
 	updateTimer.StartTimer();
 

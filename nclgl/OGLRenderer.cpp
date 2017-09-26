@@ -234,10 +234,10 @@ STUDENTS: Don't put your entity update routine in this, or anything like
 that - it's just asking for trouble! Strictly speaking, even the camera
 shouldn't be in here...(I'm lazy)
 */
-void OGLRenderer::UpdateScene(float msec)
-{
-
-}
+//void OGLRenderer::UpdateScene(float msec)
+//{
+//
+//}
 
 /*
 Updates the uniform matrices of the current shader. Assumes that

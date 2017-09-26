@@ -28,19 +28,19 @@ public:
 	Renderer(DataBase* database, Window &parent);
 	~Renderer(void);
 
-	void Update(float deltatime);
-	void UpdateScene(float msec);
+	void Update(const float& deltatime) override;
+	void UpdateScene(const float& msec);
 
 	void InitialiseScene()
 	{
 		SwitchToPerspective();
 	}
 
-	void RenderScene();
+	void RenderScene() override;
 
 
 	void InitialiseLoadingScreen();
-	void RenderLoadingScreen(float current, float total);
+	void RenderLoadingScreen(const float current, const float total);
 
 	void AddSceneNode(SceneNode* sn);
 	void RemoveSceneNode(SceneNode* sn);
@@ -74,7 +74,7 @@ public:
 	inline void SwitchToPerspective()
 	{
 		projMatrix = Matrix4::Perspective(1.0f, 15000.0f,
-			(float)width / (float)height, 45.0f);
+			static_cast<float>(width) / static_cast<float>(height), 45.0f);
 	}
 
 	inline void SwitchToOrthographic()
@@ -84,17 +84,17 @@ public:
 			-height / 2.0f);
 	}
 
-	void AddText(const Text& text)
+	void AddText(const Text& text) const
 	{
 		textRenderer->textbuffer.push_back(text);
 	}
 
 	Font* basicFont;
 
-	void Read(string resourcename);
-	void ReadParams(string params);
+	void Read(string resourcename) override;
+	void ReadParams(string params) override;
 
-	std::vector<std::string> overlays;
+	vector<string> overlays;
 
 	Mesh* loadingBar;
 	Mesh* overlay;
@@ -102,8 +102,8 @@ protected:
 	TextRenderer* textRenderer;
 	Shader* textShader;
 
-	void DrawAllText();
-	void DrawLoadingScreen(float current, float total);
+	void DrawAllText() const;
+	void DrawLoadingScreen(const float current, const float total);
 
 	void RenderOverlay();
 	void DrawOverlay();
@@ -128,8 +128,8 @@ protected:
 	Light*	light;
 
 	SceneNode root;
-	std::vector<SceneNode*> transparentNodeList;
-	std::vector<SceneNode*> nodeList;
+	vector<SceneNode*> transparentNodeList;
+	vector<SceneNode*> nodeList;
 
 	Window* wparent;
 	float timer = 0;

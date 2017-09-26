@@ -116,7 +116,7 @@ public:
 	}
 
 	//Updates sound system and temporary sounds buffer.
-	void Update(float deltatime);
+	void Update(const float& deltatime) override;
 
 	void Read(string resourcename);
 	void ReadParams(string params);

@@ -60,7 +60,7 @@ void PhysicsEngine::RemoveRigidBody(RigidBody* rigidBody)
 	broadPhaseChunkSize = rigidBodies.size() / BROAD_PHASE_THREADS;
 }
 
-void PhysicsEngine::Update(float sec)
+void PhysicsEngine::Update(const float& deltatime)
 {
 	/*
 	  LOCK! Nothing in the engine is allowed
@@ -70,7 +70,7 @@ void PhysicsEngine::Update(float sec)
 
 	updateTimer.StartTimer();
 
-	UpdatePositions(sec);
+	UpdatePositions(deltatime);
 	BroadPhase();
 	NarrowPhase();
 	explosions->RenderAllExplosions();

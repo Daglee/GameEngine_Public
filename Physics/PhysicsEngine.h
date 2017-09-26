@@ -35,7 +35,7 @@ public:
 		delete explosions;
 	}
 
-	void Update(float deltatime) override;
+	void Update(const float& deltatime) override;
 
 	void AddRigidBody(RigidBody* rigidBody);
 	void RemoveRigidBody(RigidBody* rigidBody);

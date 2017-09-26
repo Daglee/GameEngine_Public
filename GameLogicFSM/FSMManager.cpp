@@ -35,7 +35,7 @@ void FSMManager::LateBuildFSM(string FSMName, string filename) const
 	}
 }
 
-void FSMManager::Update(float deltatime)
+void FSMManager::Update(const float& deltatime)
 {
 	updateTimer.StartTimer();
 

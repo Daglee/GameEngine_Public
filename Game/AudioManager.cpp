@@ -106,7 +106,7 @@ void AudioManager::TemporaryPlay(string name, enum SoundPriority sp)
 	TemporaryPlay(GetSound(name)->GetSound(), sp);
 }
 
-void AudioManager::Update(float deltatime)
+void AudioManager::Update(const float& deltatime)
 {
 	/*
 	  LOCK! Nothing in the engine is allowed

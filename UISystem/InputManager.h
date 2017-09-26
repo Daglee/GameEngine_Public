@@ -29,7 +29,7 @@ public:
 	  Fill the input arrays/buffers...
 	  and apply them!
 	*/
-	void Update(float deltatime);
+	void Update(const float& deltatime) override;
 
 	Playerbase* GetPlayerbase()
 	{

@@ -41,7 +41,7 @@ Renderer::Renderer(DataBase* database, Window &parent) :
 	glEnable(GL_MULTISAMPLE);
 
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f,
-		(float)width / (float)height, 45.0f);
+		static_cast<float>(width) / static_cast<float>(height), 45.0f);
 
 	root.SetTransform(Matrix4::Translation(Vector3(0, 0, 0)));
 	basicFont = new Font(SOIL_load_OGL_texture(TEXTUREDIR"tahoma.tga",
@@ -80,13 +80,13 @@ Renderer::~Renderer(void)
 	delete textRenderer;
 }
 
-void Renderer::Update(float deltatime)
+void Renderer::Update(const float& deltatime)
 {
 	updateTimer.StartTimer();
 
 	UpdateScene(deltatime);
 	RenderScene();
-	//DrawOverlay();
+	DrawOverlay();
 
 	updateTimer.StopTimer();
 }
@@ -101,16 +101,16 @@ void Renderer::InitialiseLoadingScreen()
 	SwitchToOrthographic();
 }
 
-void Renderer::RenderLoadingScreen(float current, float total)
+void Renderer::RenderLoadingScreen(const float current, const float total)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glUseProgram(currentShader->GetProgram());
 
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
-		"currentProgress"), (int)current);
+		"currentProgress"), static_cast<int>(current));
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
-		"finalValue"), (int)total);
+		"finalValue"), static_cast<int>(total));
 
 	UpdateShaderMatrices();
 	DrawLoadingScreen(current, total);
@@ -181,19 +181,20 @@ void Renderer::DrawCombinedScene()
 	DrawNodes();
 }
 
-void Renderer::UpdateScene(float msec)
+void Renderer::UpdateScene(const float& msec)
 {
 	++timer;
+
 	camera->UpdateCamera(msec);
 	viewMatrix = camera->BuildViewMatrix();
 	root.Update(msec);
 }
 
-void Renderer::DrawLoadingScreen(float current, float total)
+void Renderer::DrawLoadingScreen(const float current, const float total)
 {
-	float progress = (current / total);
-	Vector3 scale((float)width * progress, 100, 100);
-	Vector3 pos(-((float)width * 0.5f) + scale.x, -((float)height * 0.5f) + scale.y, 0);
+	const float progress = (current / total);
+	const Vector3 scale(static_cast<float>(width) * progress, 100, 100);
+	const Vector3 pos(-(static_cast<float>(width) * 0.5f) + scale.x, -(static_cast<float>(height) * 0.5f) + scale.y, 0);
 
 	modelMatrix.SetPositionVector(pos);
 	modelMatrix.SetScalingVector(scale);
@@ -265,7 +266,7 @@ void Renderer::DrawNode(SceneNode* n)
 	}
 }
 
-void Renderer::DrawAllText()
+void Renderer::DrawAllText() const
 {
 	textRenderer->DrawTextBuffer();
 
@@ -295,7 +296,7 @@ void Renderer::BuildNodeLists(SceneNode* from)
 {
 	if (frameFrustum.InsideFrustum(*from))
 	{
-		Vector3 dir = from->GetWorldTransform().GetPositionVector() -
+		const Vector3 dir = from->GetWorldTransform().GetPositionVector() -
 			camera->GetPosition();
 		from->SetCameraDistance(Vector3::Dot(dir, dir));
 
@@ -351,7 +352,7 @@ void Renderer::RemoveSceneNode(SceneNode* sn)
 
 void Renderer::Read(string resourcename)
 {
-	this->SetName(resourcename);
+	SetName(resourcename);
 }
 
 void Renderer::ReadParams(string params)
@@ -359,6 +360,7 @@ void Renderer::ReadParams(string params)
 	std::istringstream iss(params);
 	vector<string> tokens{ istream_iterator<string>{iss},
 		istream_iterator<string>{} };
-	string name = tokens.at(0);
-	string winName = tokens.at(1);
+	const string name = tokens.at(0);
+	const string winName = tokens.at(1);
+	SetName(name);
 }

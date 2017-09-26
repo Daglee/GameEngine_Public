@@ -24,7 +24,7 @@ InputManager::~InputManager()
 }
 
 //Fill the buffers and use them!
-void InputManager::Update(float deltatime)
+void InputManager::Update(const float& deltatime)
 {
 	updateTimer.StartTimer();
 
