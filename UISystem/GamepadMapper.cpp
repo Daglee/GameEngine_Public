@@ -1,5 +1,6 @@
 #include "GamepadMapper.h"
 #include "../GameLogicFSM/MessageSystem.h"
+#include <math.h>
 
 enum BASIC_CONTROL
 {
@@ -22,6 +23,8 @@ enum RHS_BUTTONS
 GamepadMapper::GamepadMapper() : InputMapper()
 {
 	rawRotation = Vector3(-1, 0, 0);
+	id = 0;
+	gamepad = nullptr;
 }
 
 void GamepadMapper::FillInputs()
@@ -74,10 +77,12 @@ Vector3 GamepadMapper::GetMovement()
 
 float GamepadMapper::GetRotation()
 {
+	float newRotation = 0;
+
 	if (inputs[ROTATION_Y] != 0 || inputs[ROTATION_X] != 0)
 	{
 		float rotation = atan2(inputs[ROTATION_X], inputs[ROTATION_Y])
-			* (float)(180.0f / M_PI) + 90.0f;
+			* static_cast<float>(180.0f / M_PI) + 90.0f;
 
 		//So we dont keep bouncing back and forth
 		if (rotation < 0)
@@ -86,15 +91,14 @@ float GamepadMapper::GetRotation()
 		}
 
 		//To stop the player from spinning like mad
-		float newRotation = rotation - prevRotation;
+		newRotation = rotation - prevRotation;
 		prevRotation = rotation;
 
 		//The x and y values before being converted to degrees.
 		rawRotation = Vector3((inputs[ROTATION_Y]), 0, (inputs[ROTATION_X]));
-
-		return newRotation;
 	}
-	else return 0;
+
+	return newRotation;
 }
 
 bool GamepadMapper::Fired()
@@ -107,9 +111,9 @@ bool GamepadMapper::Reload()
 	return inputs[RELOAD] > 0;
 }
 
-void GamepadMapper::AnnounceTeamChanges()
+void GamepadMapper::AnnounceTeamChanges() const
 {
-	string playerid = "Player" + std::to_string(id);
+	const string playerid = "Player" + to_string(id);
 
 	if (gamepad->GetButtonPressed(A))
 	{

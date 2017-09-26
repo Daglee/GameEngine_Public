@@ -11,7 +11,7 @@
 #include "../Game/SpawnSystem.h"
 #include "../Game/GunInput.h"
 
-PlayerConfiguration::PlayerConfiguration(BasePlayerSystems playerComponents)
+PlayerConfiguration::PlayerConfiguration(const BasePlayerSystems playerComponents)
 {
 	this->playerComponents = playerComponents;
 }
@@ -19,7 +19,7 @@ PlayerConfiguration::PlayerConfiguration(BasePlayerSystems playerComponents)
 PlayerConfiguration::~PlayerConfiguration()
 {}
 
-void PlayerConfiguration::InitialisePlayer(Player* player, int playerNumber)
+void PlayerConfiguration::InitialisePlayer(Player* player, const int playerNumber)
 {
 	SetBasicProperties(player, playerNumber);
 
@@ -28,16 +28,16 @@ void PlayerConfiguration::InitialisePlayer(Player* player, int playerNumber)
 	SetGameplayComponents(player);
 }
 
-void PlayerConfiguration::SetBasicProperties(Player* player, int playerNumber)
+void PlayerConfiguration::SetBasicProperties(Player* player, const int playerNumber) const
 {
-	Vector3 spawnPos(-1 * (float)(50 * playerNumber), 100, 1 * (float)(50 * playerNumber));
+	const Vector3 spawnPos(-1 * static_cast<float>(50 * playerNumber), 100, 1 * static_cast<float>(50 * playerNumber));
 	SpawnSystem::GetInstance()->AddSpawnPoint(spawnPos);
 
 	player->GetRigidBody()->UpdatePosition(spawnPos);
 
 	player->teamID = playerNumber; 
+	const string tag = "player" + to_string(playerNumber);
 
-	string tag = "player" + std::to_string(playerNumber);
 	player->GetRigidBody()->tag = tag;
 	player->GetPlayerModel()->playertag = tag;
 	player->walkingSoundName = "walkingsound" + tag;
@@ -48,7 +48,7 @@ void PlayerConfiguration::SetBasicProperties(Player* player, int playerNumber)
 	player->playerModelMesh = playerComponents.defaultPlayerMesh;
 }
 
-void PlayerConfiguration::SetGameplayComponents(Player* player)
+void PlayerConfiguration::SetGameplayComponents(Player* player) const
 {
 	player->gunInput = new GunInput(player->GetPlayerController()->GetInputMapper(), player->gun,
 		WeaponData(&player->GetRigidBody()->lastPosition, player->GetIDNumber()));

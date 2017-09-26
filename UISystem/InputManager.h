@@ -1,14 +1,10 @@
 #pragma once
 
-#include "../nclgl/Gamepad.h"
-#include "GamepadMapper.h"
 #include "MKMapper.h"
 #include "../Game/Player.h"
 #include <vector>
 #include "../Game/Subsystem.h"
 #include "../ResourceManagment/Resource.h"
-#include "PlayerConfiguration.h"
-#include "IngamePlayer.h"
 
 #include "Playerbase.h"
 
@@ -31,7 +27,7 @@ public:
 	*/
 	void Update(const float& deltatime) override;
 
-	Playerbase* GetPlayerbase()
+	Playerbase* GetPlayerbase() const
 	{
 		return playerbase;
 	}

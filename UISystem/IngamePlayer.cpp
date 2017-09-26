@@ -3,7 +3,7 @@
 #include "../Game/Player.h"
 #include "../Game/Pistol.h"
 
-IngamePlayer::IngamePlayer(Subsystems subsystems)
+IngamePlayer::IngamePlayer(const Subsystems subsystems)
 {
 	this->subsystems = subsystems;
 }
@@ -11,7 +11,7 @@ IngamePlayer::IngamePlayer(Subsystems subsystems)
 IngamePlayer::~IngamePlayer()
 {}
 
-void IngamePlayer::AddPlayerToGame(Player* player)
+void IngamePlayer::AddPlayerToGame(Player* player) const
 {
 	player->gun = new Pistol(subsystems.database, subsystems.renderer,
 		subsystems.physicsEngine, nullptr);

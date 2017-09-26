@@ -5,7 +5,6 @@
 #include "../nclgl/Vector3.h"
 
 #include <string>
-#include <unordered_map>
 
 /*
   Translates inputs from the M&K into inputs for a game object.
@@ -14,18 +13,18 @@
 class MKMapper : public InputMapper
 {
 public:
-	MKMapper(Window* w, std::string filename);
+	MKMapper(Window* w, string filename);
 
 	~MKMapper() {}
 
 	//Fill and clear buffer
-	void FillInputs();
-	void ClearInputs();
+	void FillInputs() override;
+	void ClearInputs() override;
 
-	Vector3 GetMovement();
-	float GetRotation();
-	bool Fired();
-	bool Reload();
+	Vector3 GetMovement() override;
+	float GetRotation() override;
+	bool Fired() override;
+	bool Reload() override;
 
 	float* GetInputs()
 	{
@@ -33,11 +32,11 @@ public:
 	}
 
 	//Read in the button mappings.
-	virtual void ReadMapping(std::string filename);
+	virtual void ReadMapping(const string filename);
 
 	KeyboardKeys PAUSE;
 private:
-	void AnnounceTeamChanges();
+	void AnnounceTeamChanges()  const;
 
 	float inputs[6];
 	Window* window;

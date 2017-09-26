@@ -12,7 +12,7 @@ PlayerInputConnection::PlayerInputConnection(Player* player)
 	this->player = player;
 }
 
-void PlayerInputConnection::ConnectPlayerToController(Gamepad* gamepad)
+void PlayerInputConnection::ConnectPlayerToController(Gamepad* gamepad) const
 {
 	GamepadMapper* input = new GamepadMapper();
 	input->SetGamePad(gamepad);
@@ -20,7 +20,7 @@ void PlayerInputConnection::ConnectPlayerToController(Gamepad* gamepad)
 	AssignController(input);
 }
 
-void PlayerInputConnection::ConnectPlayerToKeyboard(Window* window, ThreadPool* threadPool)
+void PlayerInputConnection::ConnectPlayerToKeyboard(Window* window, ThreadPool* threadPool) const
 {
 	MKMapper* input = new MKMapper(window, "../Data/ButtonMapping/MKMap.txt");
 	AssignController(input);
@@ -28,7 +28,7 @@ void PlayerInputConnection::ConnectPlayerToKeyboard(Window* window, ThreadPool* 
 	threadPool->pauseButton = input->PAUSE;
 }
 
-void PlayerInputConnection::AssignController(InputMapper* input)
+void PlayerInputConnection::AssignController(InputMapper* input) const
 {
 	player->SetPlayerController(new TopDownController(input));
 	player->GetPlayerController()->SetInputMapper(input);

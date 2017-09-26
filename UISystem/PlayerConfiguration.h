@@ -13,14 +13,14 @@ struct BasePlayerSystems
 class PlayerConfiguration
 {
 public:
-	PlayerConfiguration(BasePlayerSystems playerComponents);
+	explicit PlayerConfiguration(const BasePlayerSystems playerComponents);
 	~PlayerConfiguration();
 
-	void InitialisePlayer(Player* player, int playerNumber);
+	void InitialisePlayer(Player* player, const int playerNumber);
 
 private:
-	void SetBasicProperties(Player* player, int playerNumber);
-	void SetGameplayComponents(Player* player);
+	void SetBasicProperties(Player* player, const int playerNumber) const;
+	void SetGameplayComponents(Player* player) const;
 
 	BasePlayerSystems playerComponents;
 };

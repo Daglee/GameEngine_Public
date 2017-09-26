@@ -1,5 +1,6 @@
 #include "MKMapper.h"
 #include "../GameLogicFSM/MessageSystem.h"
+#include <math.h>
 
 enum BASIC_CONTROL
 {
@@ -11,7 +12,7 @@ enum BASIC_CONTROL
 	RELOAD
 };
 
-MKMapper::MKMapper(Window* w, std::string filename) : InputMapper()
+MKMapper::MKMapper(Window* w, string filename) : InputMapper()
 {
 	window = w;
 	rawRotation = Vector3(-1, 0, 0);
@@ -71,7 +72,7 @@ void MKMapper::FillInputs()
 	inputs[ROTATION_X] = Window::GetMouse()->GetRelativePosition().x / 10;
 }
 
-void MKMapper::AnnounceTeamChanges()
+void MKMapper::AnnounceTeamChanges() const
 {
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_1))
 	{
@@ -111,10 +112,12 @@ Vector3 MKMapper::GetMovement()
 
 float MKMapper::GetRotation()
 {
+	float newRotation = 0;
+
 	if (inputs[ROTATION_Y] != 0 || inputs[ROTATION_X] != 0)
 	{
 		float rotation = atan2(inputs[ROTATION_X], inputs[ROTATION_Y])
-			* (float)(180.0 / M_PI);
+			* static_cast<float>(180.0 / M_PI);
 
 		if (rotation < 0)
 		{
@@ -122,17 +125,13 @@ float MKMapper::GetRotation()
 		}
 
 		//To stop the player from spinning like mad
-		float newRotation = rotation - prevRotation;
+		newRotation = rotation - prevRotation;
 		prevRotation = rotation;
 
 		rawRotation = Vector3(inputs[ROTATION_X] / 10, 0, -inputs[ROTATION_Y] / 10);
+	}
 
-		return newRotation;
-	}
-	else
-	{
-		return 0;
-	}
+	return newRotation;
 }
 
 bool MKMapper::Fired()
@@ -148,9 +147,9 @@ bool MKMapper::Reload()
 /*
   Example at: ../../ButtonMappings/MKMap.txt
 */
-void MKMapper::ReadMapping(std::string filename)
+void MKMapper::ReadMapping(const string filename)
 {
-	std::ifstream file(filename);
+	ifstream file(filename);
 	string button;
 
 	//MOVE LEFT

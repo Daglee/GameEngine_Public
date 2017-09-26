@@ -19,10 +19,10 @@ struct Subsystems
 class IngamePlayer
 {
 public:
-	IngamePlayer(Subsystems subsystems);
+	explicit IngamePlayer(const Subsystems subsystems);
 	~IngamePlayer();
 
-	void AddPlayerToGame(Player* player);
+	void AddPlayerToGame(Player* player) const;
 
 private:
 	Subsystems subsystems;

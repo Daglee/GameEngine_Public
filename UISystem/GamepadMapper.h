@@ -16,22 +16,22 @@ public:
 	~GamepadMapper() {}
 
 	//Buffer functions
-	void FillInputs();
-	void ClearInputs();
+	void FillInputs() override;
+	void ClearInputs() override;
 
 	//Left stick
-	Vector3 GetMovement();
+	Vector3 GetMovement() override;
 
 	//Right stick
-	float GetRotation();
+	float GetRotation() override;
 
 	/*
 	  Left/Right Triggers.
 	  Could be a float value but it's not required
 	  in this scenario.
 	*/
-	bool Fired();
-	bool Reload();
+	bool Fired() override;
+	bool Reload() override;
 
 	void SetGamePad(Gamepad* newGamepad)
 	{
@@ -40,7 +40,7 @@ public:
 	}
 
 private:
-	void AnnounceTeamChanges();
+	void AnnounceTeamChanges() const;
 
 	enum class BASIC_CONTROL;
 	enum class RHS_BUTTONS;

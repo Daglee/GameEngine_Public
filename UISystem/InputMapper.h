@@ -2,7 +2,6 @@
 
 #include "../nclgl/Vector3.h"
 #define _USE_MATH_DEFINES 
-#include <math.h>  
 
 /*
   Abstract class for input mapping for players.
@@ -12,7 +11,6 @@
 class InputMapper
 {
 public:
-
 	InputMapper()
 	{
 		prevRotation = 0;

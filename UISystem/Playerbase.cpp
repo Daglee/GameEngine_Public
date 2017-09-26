@@ -21,6 +21,7 @@ Playerbase::Playerbase(DataBase* database)
 	players = new Player*[6];
 
 	this->database = database;
+	playerConfig = nullptr;
 }
 
 Playerbase::~Playerbase()
@@ -36,12 +37,12 @@ void Playerbase::RetrieveGamepadsAndPlayers(DataBase* db)
 
 	for (int i = 0; i < 6; i++)
 	{
-		std::string id = std::to_string(i);
+		const string id = to_string(i);
 
-		std::string gamepad = "gamepad" + id;
+		const string gamepad = "gamepad" + id;
 		gamepads[i] = static_cast<Gamepad*>(database->GetTable("Gamepads")->GetResources()->Find(gamepad));
 		
-		std::string player = "player" + id;
+		const string player = "player" + id;
 		players[i] = static_cast<Player*>(database->GetTable("Players")->GetResources()->Find(player));
 	}
 
@@ -69,7 +70,7 @@ void Playerbase::StoreDatabase()
 	playerConfig = new PlayerConfiguration(components);
 }
 
-void Playerbase::AddPlayerToGame(Player* player)
+void Playerbase::AddPlayerToGame(Player* player) const
 {
 	IngamePlayer ingamePlayer(systems);
 	ingamePlayer.AddPlayerToGame(player);
@@ -77,14 +78,15 @@ void Playerbase::AddPlayerToGame(Player* player)
 	playerConfig->InitialisePlayer(player, connectedPlayers.size());
 }
 
-void Playerbase::ConnectGamepads(bool reconnection)
+void Playerbase::ConnectGamepads(const bool reconnection)
 {
 	for (int i = 0; i < MAX_CONTROLLERS; i++)
 	{
 		if (gamepads[i]->Connected())
 		{
 			//Check if the gamepad is already connected and inside the vector
-			bool gamepadNotStored = std::find(connectedGPads.begin(), connectedGPads.end(), gamepads[i]) == connectedGPads.end();
+			const bool gamepadNotStored = find(connectedGPads.begin(), connectedGPads.end(), 
+				gamepads[i]) == connectedGPads.end();
 			
 			if (gamepadNotStored)
 			{
@@ -137,12 +139,12 @@ void Playerbase::ReInitialisePlayers()
 	}
 }
 
-void Playerbase::StorePlayer(int index)
+void Playerbase::StorePlayer(const int index)
 {
 	connectedPlayers.push_back(players[index]);
 }
 
-void Playerbase::StoreGamepad(int index)
+void Playerbase::StoreGamepad(const int index)
 {
 	connectedGPads.push_back(gamepads[index]);
 }

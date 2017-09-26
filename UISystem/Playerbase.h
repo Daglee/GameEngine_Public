@@ -4,7 +4,6 @@
 #include "PlayerConfiguration.h"
 
 #include <vector>
-#include <functional>
 
 class Player;
 class Gamepad;
@@ -17,7 +16,7 @@ public:
 	~Playerbase();
 
 	void RetrieveGamepadsAndPlayers(DataBase* db);
-	void ConnectGamepads(bool reconnection);
+	void ConnectGamepads(const bool reconnection);
 	void UpdateConnections();
 
 	void ReInitialisePlayers();
@@ -31,11 +30,10 @@ public:
 
 private:
 	void StoreDatabase();
-	void AddPlayerToGame(Player* player);
+	void AddPlayerToGame(Player* player) const;
 
-	//void StoreGamepadPlayer(int index);
-	void StoreGamepad(int index);
-	void StorePlayer(int index);
+	void StoreGamepad(const int index);
+	void StorePlayer(const int index);
 
 	std::vector<Gamepad*> connectedGPads;
 	std::vector<Player*> connectedPlayers;
