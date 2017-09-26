@@ -13,7 +13,7 @@ ThreadPool::ThreadPool() : Resource()
 	running = true;
 
 	//Create as many threads as the hardware allows but keep one for the main thread.
-	int numThreads = (max)(thread::hardware_concurrency(), unsigned(2)) - 1;
+	const int numThreads = (max)(thread::hardware_concurrency(), unsigned(2)) - 1;
 
 	InitialiseWorkers(numThreads);
 
@@ -49,12 +49,12 @@ void ThreadPool::JoinAll()
 	}
 }
 
-void ThreadPool::Read(string resourcename)
+void ThreadPool::Read(const string resourcename)
 {
 	this->SetName(resourcename);
 }
 
-void ThreadPool::ReadParams(string params) 
+void ThreadPool::ReadParams(const string params)
 {
 	Read(params);
 }

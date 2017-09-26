@@ -78,7 +78,7 @@ public:
 
 	KeyboardKeys pauseButton;
 private:
-	std::atomic_bool paused = false;
+	atomic_bool paused = false;
 
 	//Initialise threads
 	void InitialiseWorkers(int numWorkers);
@@ -89,7 +89,7 @@ private:
 	//Invalidate queue and join all threads.
 	void JoinAll();
 
-	std::atomic_bool running; //Should the threads still be finding tasks to carry out?
-	ThreadQueue<std::unique_ptr<Task>> taskQueue;
-	std::vector<std::thread> threads;
+	atomic_bool running; //Should the threads still be finding tasks to carry out?
+	ThreadQueue<unique_ptr<Task>> taskQueue;
+	vector<thread> threads;
 };
