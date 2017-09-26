@@ -79,39 +79,7 @@ void PhysicsEngine::UpdatePositions(float msec) const
 
 void PhysicsEngine::BroadPhase()
 {
-	SortRigidBodiesAlongAxis(X_AXIS);
-
-	vector<TaskFuture<void>> threads;
-	collisionPairCounter = 0;
-
-	int startIndex = 0;
-	int endIndex = broadPhaseChunkSize;
-
-	for (int i = 0; i < BROAD_PHASE_THREADS - 1; ++i)
-	{
-		threads.push_back(threadPool->SubmitJob([](PhysicsEngine& physicsEngine, int start, int end)
-	    {
-		    physicsEngine.BroadPhaseChunk(start, end);
-	    }, ref(*this), startIndex, endIndex));
-
-		startIndex = endIndex;
-		endIndex = startIndex + (broadPhaseChunkSize) - 1;
-	}
-
-	threads.push_back(threadPool->SubmitJob([](PhysicsEngine& physicsEngine, int start, int end)
-    {
-	    physicsEngine.BroadPhaseChunk(start, end);
-    }, ref(*this), startIndex, rigidBodies.size()));
-
-	for (auto& task : threads)
-	{
-		task.Complete();
-	}
-}
-
-void PhysicsEngine::BroadPhaseChunk(const int& start, const int& end)
-{
-	for (unsigned x = start; x < end; ++x)
+	for (unsigned x = 0; x < rigidBodies.size(); ++x)
 	{
 		for (unsigned y = x + 1; y < rigidBodies.size(); ++y)
 		{

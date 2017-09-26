@@ -42,7 +42,6 @@ private:
 	void UpdatePositions(float msec) const;
 
 	void BroadPhase(); 
-	void BroadPhaseChunk(const int& start, const int& end);
 	void SortRigidBodiesAlongAxis(const Vector3& axis);
 
 	void NarrowPhase();

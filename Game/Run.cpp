@@ -6,6 +6,10 @@
 #pragma comment(lib, "UISystem.lib")
 #pragma comment(lib, "ResourceManagment.lib")
 
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 #include "Launcher.h"
 #include "SubsystemManager.h"
 #include "../ResourceManagment/DataBase.h"
@@ -84,6 +88,8 @@ int main()
 	delete game;
 	delete lvlManager;
 	delete database;
+
+	_CrtDumpMemoryLeaks();
 
     return 0;
 }
