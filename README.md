@@ -1,28 +1,29 @@
-#Game Engine
-##Description
+# Game Engine
+
+## Description
 A c++ data driven game engine consisting of various subsystems including graphics, physics and multi-threading.
 
 
 
-##How To Play
+## How To Play
 * Up to 4 players supported
 * Player 1 will always use mouse and keyboard
 * Xbox One controllers are supported as well the official wireless adapter.
 
-###Controls
-####Mouse and Keyboard
+### Controls
+#### Mouse and Keyboard
 * WASD = move
 * Mouse = aim
 * Left click = shoot.
 * R = reload
 
-####Xbox One Controller
+#### Xbox One Controller
 * Left stick = move
 * Right stick = aim
 * Right trigger = shoot
 * Left trigger = reload
 
-####Utilities
+#### Utilities
 * P = profiler **Profiler will not be displayed when paused**
 * Escape = pause
 * L = exit
@@ -30,16 +31,16 @@ A c++ data driven game engine consisting of various subsystems including graphic
 
 
 
-##File I/O
+## File I/O
 The engine is wholly data driven, based off files in the "Data" folder. 
 
 
-###Start Up
+### Start Up
 *See ../Data/startup.txt*
 
 One file must handle the initialisation of the subsystems of the engine. They will not be initialised in the order they are read as this is multi-threaded and therefore non-deterministic.
 
-####Creating a resource
+#### Creating a resource
 A subsystem must be specified with a number to create, the name of the database table to insert into, and the name of this resource.
 For example:
 
@@ -47,7 +48,7 @@ For example:
 
 If more than 1 of any resource is created, the number is appended onto the end of the resource name.
 
-####Specifying Parameters.
+#### Specifying Parameters.
 The keyword "params" ensures that all tokens after the name of the resource are parsed into parameters to be used in the creation of the resource.
 
 For example, the Window class requires a resolution and a flag to set whether to run the game in fullscreen.
@@ -56,23 +57,23 @@ For example, the Window class requires a resolution and a flag to set whether to
 
 
 
-###Creating Levels
+### Creating Levels
 "../Data/Levels/Directories" contains files that specify where each levels assets are located. 
 This is used in the level list file. The level list file lists which levels to load and thus points towards the assets required for each level.
 
-####Assets
+#### Assets
 *See ../Data/Levels/Arena1/assets.txt*
 
 The assets file specifies what assets to load and of what quanitity. 
 
 This follows the same syntax as the start up file.
 
-####Game Logic
+#### Game Logic
 *See ../Data/Levels/Arena1/GameLogic.txt*
 
 A finite state machine can be allocated a configuration file to be built off.
 
-####Game Entities
+#### Game Entities
 *See ../Data/Levels/Arena1/GameObjects or PhysicsObjects.txt*
 
 Game or physics objects that were loaded by the assets file can be configured using this file.
@@ -91,7 +92,7 @@ Entities can be positioned and attached to a mesh in the positions file.
 
 
 
-###Game Logic Finite State Machine
+### Game Logic Finite State Machine
 Classes can inherit from FSMUnit to create a finite state machine. Properties can be added to the inherited unordered map, allowing the finite state machine to use them.
 
 Finite state machines are also data driven. *See ../Data/GameLogic/player1.txt*
@@ -103,7 +104,7 @@ For example:
 
 These files are split into two sections.
 
-####States
+#### States
 The first line must specify the number of states that are created here.
 
 States consist of actions to carry out. The left hand side must be a property of the finite state machine (which is available in the unordered map), 
@@ -123,7 +124,7 @@ Other actions available:
 **endevent**
 **addpoints**
 
-####Transitions
+#### Transitions
 Transitions consist of 3 lines.
 
 1. Transition name
