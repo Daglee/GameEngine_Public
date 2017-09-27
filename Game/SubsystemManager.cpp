@@ -18,8 +18,6 @@ enum SUBSYSTEM_INDEXES
 	AUDIO_MNGR
 };
 
-const int MESSAGE_LIFETIME = 100;
-
 SubsystemManager::SubsystemManager(DataBase* database)
 {
 	this->renderer = static_cast<Renderer*>(database->GetTable("GRenderer")->GetResources()->Find("Renderer"));
@@ -57,28 +55,6 @@ void SubsystemManager::ThreadedUpdate(float deltatime)
 	{
 		task.Complete();
 	}
-
-	MessageSystem::GetInstance()->ClearAllMessages();
-	++updateCount;
-}
-
-void SubsystemManager::Update(float deltatime) const
-{
-	renderer->Update(deltatime);
-
-	/*
-	  Even though this update is not threaded,
-	  this works just fine and saves writing
-	  the same code in two places.
-	*/
-	if (!threadPool->Paused())
-	{
-		for each(Subsystem* subsystem in subsystems)
-		{
-			subsystem->Update(deltatime);
-		}
-	}
-
 
 	MessageSystem::GetInstance()->ClearAllMessages();
 }
