@@ -116,13 +116,13 @@ For example:
 **--**
 
 Other actions available:
-**-=**
-**+=**
-***=**
-**transmit**
-**newevent**
-**endevent**
-**addpoints**
+* **-=**
+* **+=**
+* ***=**
+* **transmit**
+* **newevent**
+* **endevent**
+* **addpoints**
 
 #### Transitions
 Transitions consist of 3 lines.
@@ -138,8 +138,8 @@ For example:
 **playerHealth == 0 && playerID == 1**
 
 Other operators available:
-**!=**
-**>**
-**<**
-**exists_transmission**
-**!exists_transmission**
+* **!=**
+* **>**
+* **<**
+* **exists_transmission**
+* **!exists_transmission**
