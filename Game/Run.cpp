@@ -17,22 +17,6 @@
 #include "../ResourceManagment/TableCreation.h"
 
 /*  
-	Important Notes:
-	Up to 5 players supported. Player 1 will use mouse and keyboard.
-	Xbox One controllers are supported and the official wireless/bluetooth
-	adapter is compatible.
-
-	Controls: (There is also an in-game tutorial)
-	Mouse + Keyboard: WASD = Move, Mouse = Aim, Left Click = shoot.
-	Controller: Left Stick = Move, Right Stick = Aim, Right Trigger = shoot.
-
-	Press "P" on the keyboard to toggle the profiler being displayed on screen.
-	
-	Press "Escape" to toggle whether the game is paused or not. The profiler 
-	will not be displayed when paused.
-	
-	Press "L" to stop the game.
-
 	===========================================================================
 	 .-.			 .-.			  .--.
 	| OO|			| OO|			 / _.-' .-.   .-.  .-.   .''.
@@ -84,8 +68,6 @@ int main()
 	delete game;
 	delete lvlManager;
 	delete database;
-
-	_CrtDumpMemoryLeaks();
 
     return 0;
 }
