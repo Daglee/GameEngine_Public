@@ -84,7 +84,9 @@ The last line must use the delimiter "-".
 For example:
 
 `ball4`
+
 `mass 300`
+
 `-`
 
 Entities can be positioned and attached to a mesh in the positions file.
@@ -112,7 +114,9 @@ followed by = *some value*.
 
 For example:
 `state1`
+
 `playerHealth = 100`
+
 `--`
 
 Other actions available:
@@ -134,7 +138,9 @@ Transitions consist of 3 lines.
 For example:
 
 `Transition1`
+
 `0 -> 1`
+
 `playerHealth == 0 && playerID == 1`
 
 Other operators available:
