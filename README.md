@@ -44,7 +44,7 @@ One file must handle the initialisation of the subsystems of the engine. They wi
 A subsystem must be specified with a number to create, the name of the database table to insert into, and the name of this resource.
 For example:
 
-**1 PhysicsEngineTable physicsEngineInstance**
+`1 PhysicsEngineTable physicsEngineInstance`
 
 If more than 1 of any resource is created, the number is appended onto the end of the resource name.
 
@@ -53,7 +53,7 @@ The keyword "params" ensures that all tokens after the name of the resource are 
 
 For example, the Window class requires a resolution and a flag to set whether to run the game in fullscreen.
 
-**params WindowTable WindowInstance 1920 1080 1**
+`params WindowTable WindowInstance 1920 1080 1`
 
 
 
@@ -83,9 +83,9 @@ The last line must use the delimiter "-".
 
 For example:
 
-**ball4**
-**mass 300**
-**-**
+`ball4`
+`mass 300`
+`-`
 
 Entities can be positioned and attached to a mesh in the positions file.
 *See ../Data/Levels/Arena1/positions.txt*
@@ -99,7 +99,7 @@ Finite state machines are also data driven. *See ../Data/GameLogic/player1.txt*
 All values are floats. Strings can be hashed into floats by appending "s:" to the start.
 
 For example:
-**playerID = s:ThisIsAnID**
+`playerID = s:ThisIsAnID`
 
 
 These files are split into two sections.
@@ -111,9 +111,9 @@ States consist of actions to carry out. The left hand side must be a property of
 followed by = *some value*.
 
 For example:
-**state1**
-**playerHealth = 100**
-**--**
+`state1`
+`playerHealth = 100`
+`--`
 
 Other actions available:
 * **-=**
@@ -133,9 +133,9 @@ Transitions consist of 3 lines.
 
 For example:
 
-**Transition1**
-**0 -> 1**
-**playerHealth == 0 && playerID == 1**
+`Transition1`
+`0 -> 1`
+`playerHealth == 0 && playerID == 1`
 
 Other operators available:
 * **!=**
