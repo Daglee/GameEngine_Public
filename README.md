@@ -4,6 +4,73 @@
 A c++ data driven game engine consisting of various subsystems including graphics, physics and multi-threading.
 
 
+## How To Use
+*See Game/run.cpp*
+
+#### Singletons
+The audio manager and message system singletons can be initialised using the namespace.
+
+```cpp
+	AudioManager::Initialise();
+	MessageSystem::Initialise();
+```
+
+#### Database
+A new instance of database must be created to house all assets and manage memory.
+Tables are specified in TableCreation.
+
+The following creats a database and initialises the added tables.
+
+```cpp
+	DataBase* database = new DataBase();
+
+	TableCreation tables(database);
+	tables.AddTablesToDatabase();
+
+	database->ReserveMemoryForAllTables();
+```
+
+#### Launcher
+The launcher starts up the game, setting up everything that is required.
+
+```cpp
+	Launcher* game = new Launcher("RendererResourceName", "WindowResourceName", databasePointer);
+	game->Launch("../Data/startup.txt");
+	
+	game->InitProfilerTimers();
+```
+
+#### Levels
+The list of levels for the game are sent to a level manager which handles the loading of levels.
+
+```cpp
+	LevelManager* levels = new LevelManager(database, "../Data/Levels/LevelList.txt");
+	levels->LoadFirstLevel();
+```
+
+#### Subsystems
+The SubsystemManager class retrieves subsystems from the database and handles the updating of them.
+This will happen in the constructor, and therefore must happen after the database has been filled.
+
+```cpp
+	SubsystemManager subsystems(database);
+```
+
+#### Game Loop
+The window class contains a game timer which can be used to send delta time to all subsystems.
+The running flag will allow for the exit of the game loop. This is handled by the game logic.
+
+```cpp
+	while (window->UpdateWindow() && window->running)
+	{
+		float deltatime = window->GetTimer()->GetTimedMS();
+
+		levels->Update(deltatime);
+		subsystems.Update(deltatime);
+	}
+```
+
+
 
 ## How To Play
 * Up to 4 players supported
@@ -24,7 +91,7 @@ A c++ data driven game engine consisting of various subsystems including graphic
 * Left trigger = reload
 
 #### Utilities
-* P = profiler **Profiler will not be displayed when paused**
+* P = profiler *Profiler will not be displayed when paused*
 * Escape = pause
 * L = exit
 
