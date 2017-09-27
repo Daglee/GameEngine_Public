@@ -46,12 +46,12 @@ For Example:
 	}
 ```
 
-1. 
+2. 
 ```cpp
 	tableAdditions.push_back(std::bind(&TableCreation::AddMyTable, this));
 ```
 
-1.
+3.
 ```cpp
 	void TableCreation::AddTablesToDatabase() const
 	{
