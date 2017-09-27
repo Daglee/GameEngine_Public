@@ -17,7 +17,6 @@ public:
 
 	~SubsystemManager() {}
 
-	void ThreadedUpdate(float deltatime);
 	void Update(float deltatime) const;
 
 private:
@@ -26,6 +25,5 @@ private:
 
 	enum class SUBSYSTEM_INDEXES;
 	Subsystem* subsystems[5];
-	int updateCount = 0;
 };
 
