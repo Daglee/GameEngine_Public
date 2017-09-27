@@ -83,9 +83,9 @@ The last line must use the delimiter "-".
 
 For example:
 
-**ball4
-mass 300
--**
+**ball4**
+**mass 300**
+**-**
 
 Entities can be positioned and attached to a mesh in the positions file.
 *See ../Data/Levels/Arena1/positions.txt*
@@ -111,18 +111,18 @@ States consist of actions to carry out. The left hand side must be a property of
 followed by = *some value*.
 
 For example:
-**state1
-playerHealth = 100
---**
+**state1**
+**playerHealth = 100**
+**--**
 
 Other actions available:
-**-=
-+=
-*=
-transmit
-newevent
-endevent
-addpoints**
+**-=**
+**+=**
+***=**
+**transmit**
+**newevent**
+**endevent**
+**addpoints**
 
 #### Transitions
 Transitions consist of 3 lines.
@@ -133,13 +133,13 @@ Transitions consist of 3 lines.
 
 For example:
 
-**Transition1
-0 -> 1
-playerHealth == 0 && playerID == 1**
+**Transition1**
+**0 -> 1**
+**playerHealth == 0 && playerID == 1**
 
 Other operators available:
-**!=
->
-<
-exists_transmission
-!exists_transmission**
+**!=**
+**>**
+**<**
+**exists_transmission**
+**!exists_transmission**
