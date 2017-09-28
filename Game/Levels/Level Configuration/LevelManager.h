@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../GameLogicFSM/FSMUnit.h"
+#include "../GameLogicFSM/Finite State Machine/Structure/FSMUnit.h"
 #include "LevelLoader.h"
 
 #include <string>

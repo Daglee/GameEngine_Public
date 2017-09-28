@@ -3,7 +3,7 @@
 #include "../ResourceManagment/Resource.h"
 #include "../Physics/RigidBody.h"
 #include "../Game/Subsystems/Subsystem.h"
-#include "FSM.h"
+#include "Finite State Machine/Structure/FSM.h"
 
 /*
   Handles the game logic of the game via finite state machines.

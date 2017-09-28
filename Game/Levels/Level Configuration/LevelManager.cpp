@@ -1,6 +1,6 @@
 #include "LevelManager.h"
 
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"

@@ -1,6 +1,6 @@
 #include "ActionFunction.h"
 
-#include "MessageSystem.h"
+#include "../../Messaging/MessageSystem.h"
 #include "../Game/Scoring/ScoreBoard.h"
 
 ActionFunction::ActionFunction(unordered_map<string, float*>** properties, Action* action)

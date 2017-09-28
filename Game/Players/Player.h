@@ -11,7 +11,7 @@
 #include "../Physics/RigidBody.h"
 #include "../ResourceManagment/Resource.h"
 #include "../nclgl/Vector3.h"
-#include "../GameLogicFSM/FSMUnit.h"
+#include "../GameLogicFSM/Finite State Machine/Structure/FSMUnit.h"
 
 class Gun;
 class PlayerController;

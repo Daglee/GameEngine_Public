@@ -9,7 +9,7 @@
 #include "Structure/Launcher.h"
 #include "Subsystems/SubsystemManager.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "Levels/Level Configuration/LevelManager.h"
 #include "../nclgl/Camera.h"
 #include "../nclgl/Renderer.h"

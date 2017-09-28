@@ -19,24 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionFunction.h" />
-    <ClInclude Include="FSM.h" />
+    <ClInclude Include="Finite State Machine\State\ActionFunction.h" />
+    <ClInclude Include="Finite State Machine\Structure\FSM.h" />
     <ClInclude Include="FSMManager.h" />
-    <ClInclude Include="FSMUnit.h" />
-    <ClInclude Include="MessageSystem.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="Transition.h" />
-    <ClInclude Include="TransitionCheck.h" />
+    <ClInclude Include="Finite State Machine\Structure\FSMUnit.h" />
+    <ClInclude Include="Messaging\MessageSystem.h" />
+    <ClInclude Include="Finite State Machine\State\State.h" />
+    <ClInclude Include="Finite State Machine\Transition\Transition.h" />
+    <ClInclude Include="Finite State Machine\Transition\TransitionCheck.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ActionFunction.cpp" />
-    <ClCompile Include="FSM.cpp" />
+    <ClCompile Include="Finite State Machine\State\ActionFunction.cpp" />
+    <ClCompile Include="Finite State Machine\Structure\FSM.cpp" />
     <ClCompile Include="FSMManager.cpp" />
-    <ClCompile Include="FSMUnit.cpp" />
-    <ClCompile Include="MessageSystem.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="Transition.cpp" />
-    <ClCompile Include="TransitionCheck.cpp" />
+    <ClCompile Include="Finite State Machine\Structure\FSMUnit.cpp" />
+    <ClCompile Include="Messaging\MessageSystem.cpp" />
+    <ClCompile Include="Finite State Machine\State\State.cpp" />
+    <ClCompile Include="Finite State Machine\Transition\Transition.cpp" />
+    <ClCompile Include="Finite State Machine\Transition\TransitionCheck.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3258E548-E244-4DAC-975C-3E0DE2691BB0}</ProjectGuid>

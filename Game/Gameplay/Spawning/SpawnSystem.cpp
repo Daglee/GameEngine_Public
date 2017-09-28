@@ -1,6 +1,6 @@
 #include "SpawnSystem.h"
 
-#include "../../GameLogicFSM/MessageSystem.h"
+#include "../../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../../Physics/RigidBody.h"
 
 #include <random>

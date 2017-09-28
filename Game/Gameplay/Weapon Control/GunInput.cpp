@@ -3,7 +3,7 @@
 #include "../UISystem/InputMapper.h"
 #include "Gun.h"
 #include "../../Audio/AudioManager.h"
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 
 GunInput::GunInput(InputMapper* input, const WeaponData weaponData)
 {

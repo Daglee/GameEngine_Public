@@ -18,7 +18,7 @@
 #include "Mouse.h"
 #include "GameTimer.h"
 #include "../ResourceManagment/Resource.h"
-#include "../GameLogicFSM/FSMUnit.h"
+#include "../GameLogicFSM/Finite State Machine/Structure/FSMUnit.h"
 
 #define WIN32_LEAN_AND_MEAN
 #define VC_EXTRALEAN

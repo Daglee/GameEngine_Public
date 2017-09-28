@@ -7,7 +7,7 @@
 #include "OBJMesh.h"
 #include "Mesh.h"
 #include "../ResourceManagment/Resource.h"
-#include "../GameLogicFSM/FSMUnit.h"
+#include "../GameLogicFSM/Finite State Machine/Structure/FSMUnit.h"
 #include "../Game/Subsystems/Subsystem.h"
 #include "Text.h"
 #include "TextMesh.h"

@@ -4,52 +4,52 @@
     <ClInclude Include="FSMManager.h">
       <Filter>FSM Managment</Filter>
     </ClInclude>
-    <ClInclude Include="MessageSystem.h">
-      <Filter>Messaging</Filter>
+    <ClInclude Include="Finite State Machine\State\ActionFunction.h">
+      <Filter>Finite State Machine\State</Filter>
     </ClInclude>
-    <ClInclude Include="FSMUnit.h">
-      <Filter>FSM Managment</Filter>
+    <ClInclude Include="Finite State Machine\State\State.h">
+      <Filter>Finite State Machine\State</Filter>
     </ClInclude>
-    <ClInclude Include="FSM.h">
+    <ClInclude Include="Finite State Machine\Structure\FSM.h">
       <Filter>Finite State Machine\Structure</Filter>
     </ClInclude>
-    <ClInclude Include="ActionFunction.h">
-      <Filter>Finite State Machine\State</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Finite State Machine\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Transition.h">
+    <ClInclude Include="Finite State Machine\Transition\Transition.h">
       <Filter>Finite State Machine\Transition</Filter>
     </ClInclude>
-    <ClInclude Include="TransitionCheck.h">
+    <ClInclude Include="Finite State Machine\Transition\TransitionCheck.h">
       <Filter>Finite State Machine\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="Finite State Machine\Structure\FSMUnit.h">
+      <Filter>FSM Managment</Filter>
+    </ClInclude>
+    <ClInclude Include="Messaging\MessageSystem.h">
+      <Filter>Messaging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FSMManager.cpp">
       <Filter>FSM Managment</Filter>
     </ClCompile>
-    <ClCompile Include="MessageSystem.cpp">
-      <Filter>Messaging</Filter>
+    <ClCompile Include="Finite State Machine\State\ActionFunction.cpp">
+      <Filter>Finite State Machine\State</Filter>
     </ClCompile>
-    <ClCompile Include="FSMUnit.cpp">
-      <Filter>FSM Managment</Filter>
+    <ClCompile Include="Finite State Machine\State\State.cpp">
+      <Filter>Finite State Machine\State</Filter>
     </ClCompile>
-    <ClCompile Include="FSM.cpp">
+    <ClCompile Include="Finite State Machine\Structure\FSM.cpp">
       <Filter>Finite State Machine\Structure</Filter>
     </ClCompile>
-    <ClCompile Include="ActionFunction.cpp">
-      <Filter>Finite State Machine\State</Filter>
+    <ClCompile Include="Finite State Machine\Structure\FSMUnit.cpp">
+      <Filter>FSM Managment</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Finite State Machine\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Transition.cpp">
+    <ClCompile Include="Finite State Machine\Transition\Transition.cpp">
       <Filter>Finite State Machine\Transition</Filter>
     </ClCompile>
-    <ClCompile Include="TransitionCheck.cpp">
+    <ClCompile Include="Finite State Machine\Transition\TransitionCheck.cpp">
       <Filter>Finite State Machine\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="Messaging\MessageSystem.cpp">
+      <Filter>Messaging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

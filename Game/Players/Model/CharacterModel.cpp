@@ -2,7 +2,7 @@
 
 #include "../../nclgl/OBJMesh.h"
 #include "../ResourceManagment/Log.h"
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 
 #include <istream>
 #include <sstream>

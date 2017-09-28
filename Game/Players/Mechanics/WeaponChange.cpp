@@ -4,7 +4,7 @@
 #include "../../Gameplay/Weapon Types/RocketLauncher.h"
 #include "../../Gameplay/Weapon Types/Pistol.h"
 
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Renderer.h"
 #include "../nclgl/Mesh.h"

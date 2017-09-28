@@ -1,7 +1,7 @@
 #include "SubsystemManager.h"
 
 #include "../ResourceManagment/DataBase.h"
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../UISystem/InputManager.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../Physics/PhysicsEngine.h"

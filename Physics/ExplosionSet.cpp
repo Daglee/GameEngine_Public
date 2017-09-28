@@ -1,7 +1,7 @@
 #include "ExplosionSet.h"
 
 #include "RigidBody.h"
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../Game/Structure/GameObject.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Renderer.h"

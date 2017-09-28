@@ -1,8 +1,9 @@
 #include "FSMManager.h"
+
 #include "../ResourceManagment/DataBase.h"
 #include "../Game/Players/Player.h"
 #include "../Game/Scoring/ScoreBoard.h"
-#include "MessageSystem.h"
+#include "Messaging/MessageSystem.h"
 
 FSMManager::FSMManager(const int numFSMs) : Resource()
 {

@@ -1,5 +1,5 @@
 #include "GamepadMapper.h"
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include <math.h>
 
 enum BASIC_CONTROL

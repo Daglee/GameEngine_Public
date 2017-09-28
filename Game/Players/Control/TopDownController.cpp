@@ -2,7 +2,7 @@
 
 #include "../Model/CharacterModel.h"
 #include "../Physics/RigidBody.h"
-#include "../GameLogicFSM/MessageSystem.h"
+#include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../../Audio/AudioManager.h"
 
 const Vector3 Y_ROTATION_AXIS = Vector3(0, 1, 0);
