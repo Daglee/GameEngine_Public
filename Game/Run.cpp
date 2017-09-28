@@ -4,7 +4,7 @@
 #pragma comment(lib, "GameLogicFSM.lib")
 #pragma comment(lib, "Profiler.lib")
 #pragma comment(lib, "UISystem.lib")
-#pragma comment(lib, "ResourceManagment.lib")
+#pragma comment(lib, "ResourceManagement.lib")
 
 #include "Structure/Launcher.h"
 #include "Subsystems/SubsystemManager.h"
