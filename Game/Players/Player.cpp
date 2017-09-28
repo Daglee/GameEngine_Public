@@ -4,7 +4,7 @@
 #define NOMINMAX
 
 #include "../ResourceManagment/DataBase.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 #include "../../nclgl/Rendering/Renderer.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../Scoring/ScoreBoard.h"
@@ -13,7 +13,7 @@
 #include "../Gameplay/Weapon Control/GunInput.h"
 #include "Model/PlayerRagdollSet.h"
 #include "../Gameplay/Spawning/SpawnSystem.h"
-#include "../Physics/SphereCollider.h"
+#include "../Physics/Colliders/SphereCollider.h"
 
 const float PLAYER_MASS = 500.0f;
 const float PLAYER_DRAG = 0.7f;

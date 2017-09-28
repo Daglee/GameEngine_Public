@@ -2,10 +2,10 @@
 
 #include "../ResourceManagment/Resource.h"
 #include "../Game/Subsystems/Subsystem.h"
-#include "ExplosionSet.h"
+#include "../Gameplay/ExplosionSet.h"
 #include "../Threading/ThreadPool.h"
-#include "CollisionResponse.h"
-#include "Collider.h"
+#include "Utilities/CollisionResponse.h"
+#include "../Colliders/Collider.h"
 
 #include <atomic>
 #include <mutex>

@@ -2,7 +2,7 @@
 
 #include "Ragdoll.h"
 #include "../nclgl/Rendering/Renderer.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 #include "../../Structure/PhysicsObject.h"
 #include "CharacterModel.h"
 #include "../ResourceManagment/DataBase.h"

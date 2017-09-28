@@ -2,9 +2,9 @@
 
 #include "../Structure/PhysicsObject.h"
 #include "../../ResourceManagment/DataBase.h"
-#include "../../Physics/PlaneCollider.h"
-#include "../../Physics/SphereCollider.h"
-#include "../../Physics/PhysicsEngine.h"
+#include "../../Physics/Colliders/PlaneCollider.h"
+#include "../../Physics/Colliders/SphereCollider.h"
+#include "../../Physics/Engine/PhysicsEngine.h"
 #include "../../nclgl/Rendering/Renderer.h"
 
 const int ASSET_NAME = 1;

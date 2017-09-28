@@ -1,7 +1,7 @@
 #include "TopDownController.h"
 
 #include "../Model/CharacterModel.h"
-#include "../Physics/RigidBody.h"
+#include "../Physics/Entities/RigidBody.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../../Audio/AudioManager.h"
 

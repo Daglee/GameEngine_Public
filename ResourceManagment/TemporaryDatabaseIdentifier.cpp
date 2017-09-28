@@ -4,7 +4,7 @@
 #include "../Game/Structure/GameObject.h"
 #include "../Game/Structure/PhysicsObject.h"
 #include "../nclgl/Rendering/Renderer.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 
 TemporaryDatabaseIdentifier::TemporaryDatabaseIdentifier(string resourceManager, string resourceName)
 {

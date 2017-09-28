@@ -139,24 +139,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="CollisionResponse.h" />
-    <ClInclude Include="ExplosionSet.h" />
-    <ClInclude Include="PhysicsEngine.h" />
-    <ClInclude Include="PlaneCollider.h" />
-    <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="SemiImplicitEuler.h" />
-    <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="Colliders\Collider.h" />
+    <ClInclude Include="Engine\Utilities\CollisionResponse.h" />
+    <ClInclude Include="Gameplay\ExplosionSet.h" />
+    <ClInclude Include="Engine\PhysicsEngine.h" />
+    <ClInclude Include="Colliders\PlaneCollider.h" />
+    <ClInclude Include="Entities\RigidBody.h" />
+    <ClInclude Include="Engine\Utilities\SemiImplicitEuler.h" />
+    <ClInclude Include="Colliders\SphereCollider.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="CollisionResponse.cpp" />
-    <ClCompile Include="ExplosionSet.cpp" />
-    <ClCompile Include="PhysicsEngine.cpp" />
-    <ClCompile Include="PlaneCollider.cpp" />
-    <ClCompile Include="RigidBody.cpp" />
-    <ClCompile Include="SemiImplicitEuler.cpp" />
-    <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="Colliders\Collider.cpp" />
+    <ClCompile Include="Engine\Utilities\CollisionResponse.cpp" />
+    <ClCompile Include="Gameplay\ExplosionSet.cpp" />
+    <ClCompile Include="Engine\PhysicsEngine.cpp" />
+    <ClCompile Include="Colliders\PlaneCollider.cpp" />
+    <ClCompile Include="Entities\RigidBody.cpp" />
+    <ClCompile Include="Engine\Utilities\SemiImplicitEuler.cpp" />
+    <ClCompile Include="Colliders\SphereCollider.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

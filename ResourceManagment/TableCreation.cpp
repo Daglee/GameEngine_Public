@@ -6,7 +6,7 @@
 #include "../UISystem/InputManager.h"
 #include "../nclgl/Rendering/View/Window.h"
 #include "../GameLogicFSM/FSMManager.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 #include "../nclgl/Rendering/View/Camera.h"
 #include "../nclgl/InputDevices/Gamepad.h"
 #include "../nclgl/Meshes/OBJMesh.h"

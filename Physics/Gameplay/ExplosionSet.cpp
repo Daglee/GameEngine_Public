@@ -1,6 +1,6 @@
 #include "ExplosionSet.h"
 
-#include "RigidBody.h"
+#include "../Entities/RigidBody.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../Game/Structure/GameObject.h"
 #include "../ResourceManagment/DataBase.h"

@@ -2,8 +2,8 @@
 
 #include "../../NCLGL/Maths/Vector3.h"
 #include "../../NCLGL/Rendering/Renderer.h"
-#include "../../Physics/PhysicsEngine.h"
-#include "../../Physics/SphereCollider.h"
+#include "../../Physics/Engine/PhysicsEngine.h"
+#include "../../Physics/Colliders/SphereCollider.h"
 
 PhysicsObject::PhysicsObject(Renderer* renderer, PhysicsEngine* physicsEngine,
 	const bool isStatic, const bool isSphere) : GameObject(*renderer)

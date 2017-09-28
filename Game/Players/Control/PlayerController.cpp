@@ -2,7 +2,7 @@
 
 #include "../Player.h"
 #include "../Model/CharacterModel.h"
-#include "../Physics/RigidBody.h"
+#include "../Physics/Entities/RigidBody.h"
 
 void PlayerController::ApplyInputs()
 {

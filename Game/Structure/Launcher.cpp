@@ -3,7 +3,7 @@
 #include "../Scoring/ScoreBoard.h"
 #include "../Profiler/Profiler.h"
 #include "../GameLogicFSM/FSMManager.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 #include "../nclgl/Rendering/Renderer.h"
 
 Launcher::Launcher(const string rendName, const string windName, DataBase* db)

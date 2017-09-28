@@ -8,7 +8,7 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Rendering/Renderer.h"
 #include "../nclgl/Meshes/Mesh.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 
 const bool WeaponChange::RocketLauncherAvailable(const std::string& playerTag)
 {

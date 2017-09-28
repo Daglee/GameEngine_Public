@@ -3,9 +3,9 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../ResourceManagment/Log.h"
 #include "../nclgl/Maths/Vector3.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 #include "../nclgl/Rendering/Renderer.h"
-#include "../Physics/SphereCollider.h"
+#include "../Physics/Colliders/SphereCollider.h"
 
 #include <time.h>
 

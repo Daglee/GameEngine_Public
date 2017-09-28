@@ -8,7 +8,7 @@
 #include "../Game/Players/Control/PlayerController.h"
 #include "../nclgl/InputDevices/Gamepad.h"
 #include "../nclgl/Rendering/Renderer.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 #include "../Threading/ThreadPool.h"
 
 #include <string>

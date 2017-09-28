@@ -1,8 +1,8 @@
 #include "SemiImplicitEuler.h"
 
-#include "RigidBody.h"
+#include "../../Entities/RigidBody.h"
 #include "../nclgl/Maths/Vector3.h"
-#include "Collider.h"
+#include "../../Colliders/Collider.h"
 
 const int FRAMES_UNTIL_AT_REST = 10;
 const float MAX_AT_REST_VELOCITY = 0.001f;

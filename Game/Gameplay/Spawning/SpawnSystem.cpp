@@ -1,7 +1,7 @@
 #include "SpawnSystem.h"
 
 #include "../../GameLogicFSM/Messaging/MessageSystem.h"
-#include "../../Physics/RigidBody.h"
+#include "../../Physics/Entities/RigidBody.h"
 
 #include <random>
 

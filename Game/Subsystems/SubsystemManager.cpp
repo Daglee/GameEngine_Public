@@ -4,7 +4,7 @@
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../UISystem/InputManager.h"
 #include "../GameLogicFSM/FSMManager.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 #include "../Profiler/Profiler.h"
 #include "../Threading/ThreadPool.h"
 #include "../nclgl/Rendering/Renderer.h"

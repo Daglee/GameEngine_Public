@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
-#include "../../Physics/RigidBody.h"
+#include "../../Physics/Entities/RigidBody.h"
 
 class RigidBody;
 class PhysicsEngine;

@@ -6,8 +6,8 @@
 #include "../nclgl/Rendering/Renderer.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../Threading/TaskFuture.h"
-#include "SemiImplicitEuler.h"
-#include "RigidBody.h"
+#include "Utilities/SemiImplicitEuler.h"
+#include "../Entities/RigidBody.h"
 
 #include <functional>
 

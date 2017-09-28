@@ -1,55 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Collider.h">
+    <ClInclude Include="Colliders\Collider.h">
       <Filter>PhysicsEngine 2.0\Colliders</Filter>
     </ClInclude>
-    <ClInclude Include="SphereCollider.h">
+    <ClInclude Include="Colliders\PlaneCollider.h">
       <Filter>PhysicsEngine 2.0\Colliders</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>PhysicsEngine 2.0\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaneCollider.h">
+    <ClInclude Include="Colliders\SphereCollider.h">
       <Filter>PhysicsEngine 2.0\Colliders</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsEngine.h">
+    <ClInclude Include="Engine\Utilities\CollisionResponse.h">
+      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\SemiImplicitEuler.h">
+      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PhysicsEngine.h">
       <Filter>PhysicsEngine 2.0\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="ExplosionSet.h">
+    <ClInclude Include="Gameplay\ExplosionSet.h">
       <Filter>PhysicsEngine 2.0\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="SemiImplicitEuler.h">
-      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionResponse.h">
-      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    <ClInclude Include="Entities\RigidBody.h">
+      <Filter>PhysicsEngine 2.0\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SphereCollider.cpp">
+    <ClCompile Include="Colliders\Collider.cpp">
       <Filter>PhysicsEngine 2.0\Colliders</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>PhysicsEngine 2.0\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaneCollider.cpp">
+    <ClCompile Include="Colliders\PlaneCollider.cpp">
       <Filter>PhysicsEngine 2.0\Colliders</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngine.cpp">
+    <ClCompile Include="Colliders\SphereCollider.cpp">
+      <Filter>PhysicsEngine 2.0\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utilities\CollisionResponse.cpp">
+      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utilities\SemiImplicitEuler.cpp">
+      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PhysicsEngine.cpp">
       <Filter>PhysicsEngine 2.0\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>PhysicsEngine 2.0\Colliders</Filter>
-    </ClCompile>
-    <ClCompile Include="ExplosionSet.cpp">
+    <ClCompile Include="Gameplay\ExplosionSet.cpp">
       <Filter>PhysicsEngine 2.0\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="SemiImplicitEuler.cpp">
-      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionResponse.cpp">
-      <Filter>PhysicsEngine 2.0\Engine\Utility Classes</Filter>
+    <ClCompile Include="Entities\RigidBody.cpp">
+      <Filter>PhysicsEngine 2.0\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

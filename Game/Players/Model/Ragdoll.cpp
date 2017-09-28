@@ -1,12 +1,12 @@
 #include "Ragdoll.h"
 
 #include "../nclgl/Rendering/Renderer.h"
-#include "../Physics/PhysicsEngine.h"
+#include "../Physics/Engine/PhysicsEngine.h"
 #include "../../Structure/PhysicsObject.h"
 #include "CharacterModel.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Maths/Matrix4.h"
-#include "../Physics/SphereCollider.h"
+#include "../Physics/Colliders/SphereCollider.h"
 
 Ragdoll::Ragdoll(CharacterModel* playerModel, Renderer* renderer, PhysicsEngine* physicsEngine)
 {
