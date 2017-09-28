@@ -1,9 +1,9 @@
 #include "LevelConfiguration.h"
 
-#include "Structure/PhysicsObject.h"
-#include "Structure/GameObject.h"
-#include "EntityConfiguration.h"
-#include "Audio/AudioManager.h"
+#include "../../Structure/PhysicsObject.h"
+#include "../../Structure/GameObject.h"
+#include "../../Levels/Entity Configuration/EntityConfiguration.h"
+#include "../../Audio/AudioManager.h"
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/FSMManager.h"

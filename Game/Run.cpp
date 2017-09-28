@@ -10,7 +10,7 @@
 #include "SubsystemManager.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/MessageSystem.h"
-#include "LevelManager.h"
+#include "Levels/Level Configuration/LevelManager.h"
 #include "../nclgl/Camera.h"
 #include "../nclgl/Renderer.h"
 

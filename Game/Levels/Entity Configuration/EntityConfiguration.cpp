@@ -1,7 +1,7 @@
 #include "EntityConfiguration.h"
 #include "EntityAttributeReader.h"
 
-#include "Structure/PhysicsObject.h"
+#include "../../Structure/PhysicsObject.h"
 
 EntityConfiguration::EntityConfiguration(const vector<string> attributeTokens, GameObject* entity)
 {

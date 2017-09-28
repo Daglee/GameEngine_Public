@@ -45,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Level.h">
-      <Filter>Levels</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -66,12 +63,6 @@
     <ClInclude Include="PlayerController.h">
       <Filter>Player\PlayerControl</Filter>
     </ClInclude>
-    <ClInclude Include="EntityAttributeReader.h">
-      <Filter>Levels\Entity Config</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityConfiguration.h">
-      <Filter>Levels\Entity Config</Filter>
-    </ClInclude>
     <ClInclude Include="LifeSpan.h">
       <Filter>Player\Player Mechanics</Filter>
     </ClInclude>
@@ -86,15 +77,6 @@
     </ClInclude>
     <ClInclude Include="PlayerRagdollSet.h">
       <Filter>Player\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelConfiguration.h">
-      <Filter>Levels\Level Config</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelLoader.h">
-      <Filter>Levels\Level Config</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelManager.h">
-      <Filter>Levels\Level Config</Filter>
     </ClInclude>
     <ClInclude Include="Asset Construction\GameEntityBuilder.h" />
     <ClInclude Include="Asset Construction\PhysicsEntityBuilder.h" />
@@ -123,11 +105,26 @@
     <ClInclude Include="Gameplay\Weapon Types\RocketLauncher.h">
       <Filter>Gameplay\WeaponTypes</Filter>
     </ClInclude>
+    <ClInclude Include="Levels\Entity Configuration\EntityAttributeReader.h">
+      <Filter>Levels\Entity Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\Entity Configuration\EntityConfiguration.h">
+      <Filter>Levels\Entity Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\Level Configuration\LevelConfiguration.h">
+      <Filter>Levels\Level Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\Level Configuration\LevelLoader.h">
+      <Filter>Levels\Level Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\Level Configuration\LevelManager.h">
+      <Filter>Levels\Level Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\Level.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Level.cpp">
-      <Filter>Levels</Filter>
-    </ClCompile>
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
@@ -144,12 +141,6 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Player\PlayerControl</Filter>
     </ClCompile>
-    <ClCompile Include="EntityAttributeReader.cpp">
-      <Filter>Levels\Entity Config</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityConfiguration.cpp">
-      <Filter>Levels\Entity Config</Filter>
-    </ClCompile>
     <ClCompile Include="LifeSpan.cpp">
       <Filter>Player\Player Mechanics</Filter>
     </ClCompile>
@@ -164,15 +155,6 @@
     </ClCompile>
     <ClCompile Include="PlayerRagdollSet.cpp">
       <Filter>Player\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelConfiguration.cpp">
-      <Filter>Levels\Level Config</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>Levels\Level Config</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
-      <Filter>Levels\Level Config</Filter>
     </ClCompile>
     <ClCompile Include="Asset Construction\GameEntityBuilder.cpp" />
     <ClCompile Include="Asset Construction\PhysicsEntityBuilder.cpp" />
@@ -200,6 +182,24 @@
     </ClCompile>
     <ClCompile Include="Gameplay\Weapon Types\RocketLauncher.cpp">
       <Filter>Gameplay\WeaponTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\Entity Configuration\EntityAttributeReader.cpp">
+      <Filter>Levels\Entity Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\Entity Configuration\EntityConfiguration.cpp">
+      <Filter>Levels\Entity Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\Level Configuration\LevelConfiguration.cpp">
+      <Filter>Levels\Level Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\Level Configuration\LevelLoader.cpp">
+      <Filter>Levels\Level Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\Level Configuration\LevelManager.cpp">
+      <Filter>Levels\Level Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\Level.cpp">
+      <Filter>Levels</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
