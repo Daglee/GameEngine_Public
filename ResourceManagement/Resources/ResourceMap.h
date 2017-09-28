@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 
 /*
   A bin that is created by the resource manager.
@@ -66,7 +67,7 @@ public:
 
 		size_t hash = std::hash <std::string>{}(formattedResourceName);
 
-		resources.insert(std::pair<size_t, T*>(hash, resource));
+		resources.insert(std::pair<size_t, unique_ptr<T*>>(hash, make_unique<T*>(resource)));
 
 		currentSize = currentSize + resource->GetSizeInBytes();
 
@@ -88,7 +89,7 @@ public:
 
 		size_t hash = std::hash <std::string>{}(formattedResourceName);
 
-		currentSize = currentSize - resources.at(hash)->GetSizeInBytes();
+		currentSize = currentSize - (*resources.at(hash))->GetSizeInBytes();
 
 		resources.erase(hash);
 	}
@@ -96,7 +97,7 @@ public:
 	//Clear all elements from bin
 	void Clear()
 	{
-		std::unordered_map<size_t, T* >::iterator it = resources.begin();
+		std::unordered_map<size_t, unique_ptr<T*>>::iterator it = resources.begin();
 
 		while (it != resources.end())
 		{
@@ -115,7 +116,7 @@ public:
 	{
 		std::string str = ("Dumping database - " + mapName + "\n");
 
-		for (std::unordered_map<size_t, T* >::iterator it = resources.begin(); it != resources.end(); ++it)
+		for (std::unordered_map<size_t, unique_ptr<T*>>::iterator it = resources.begin(); it != resources.end(); ++it)
 		{
 			const size_t size = (*it).second->GetSizeInBytes();
 			str += ("Name : " + (*it).second->GetName() + " -- Size : ");
@@ -139,13 +140,13 @@ public:
 			std::cout << (mapName + "Looking for " + formattedResourceName + ".");
 		}
 
-		std::unordered_map<size_t, T*>::iterator it = resources.find(hash);
+		std::unordered_map<size_t, unique_ptr<T*>>::iterator it = resources.find(hash);
 
 		//Yes, return pointer to element
 		if (it != resources.end())
 		{
 			if (verbose) std::cout << " -- Found --" << std::endl;
-			return it->second;
+			return *it->second.get();
 		}
 
 		//if we get here, element couldn't be found
@@ -182,9 +183,9 @@ public:
 	{
 		size_t size = 0;
 
-		for (std::unordered_map<size_t, T* >::iterator it = resources.begin(); it != resources.end(); ++it)
+		for (std::unordered_map<size_t, unique_ptr<T*>>::iterator it = resources.begin(); it != resources.end(); ++it)
 		{
-			size += (*it).second->GetSizeInBytes();
+			size += (*(*it).second)->GetSizeInBytes();
 		}
 
 		return size;
@@ -217,7 +218,7 @@ private:
 
 		//Check if element (by value) is already present.
 		//If it is found, then return true, else exit with false.
-		std::unordered_map<size_t, T* > ::iterator it = Map.begin();
+		std::unordered_map<size_t, unique_ptr<T*>> ::iterator it = Map.begin();
 
 		while (it != resources.end())
 		{
@@ -235,7 +236,7 @@ private:
 	std::string mapName;							//Name of this resource mapper
 	int verbose;
 	int allowDuplicates;								//Allow or disallow duplicate resources
-	std::unordered_map<unsigned int, T* > resources;	//Resource map
+	std::unordered_map<unsigned int, std::unique_ptr<T*> > resources;	//Resource map
 	size_t maxSize;								//Max size that this map can contain
 	size_t currentSize;							//How much space currently being used
 
