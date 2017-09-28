@@ -8,9 +8,6 @@
     <ClInclude Include="ResourceMap.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="resource1.h">
-      <Filter>Random Things</Filter>
-    </ClInclude>
     <ClInclude Include="GameEntityDatabaseEntryFile.h">
       <Filter>Identifiers</Filter>
     </ClInclude>
@@ -60,10 +57,5 @@
     <ClCompile Include="TableCreation.cpp">
       <Filter>Database</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="ResourceManagment.rc">
-      <Filter>Random Things</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>
