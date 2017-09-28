@@ -1,9 +1,9 @@
 #include "Profiler.h"
 
 #include "../nclgl/Rendering/View/Window.h"
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 #include "../nclgl/Rendering/Renderer.h"
-#include "../ResourceManagment/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/Log.h"
 
 #define FRAME_MIN 1
 #define TEXT_SIZE 15.0f

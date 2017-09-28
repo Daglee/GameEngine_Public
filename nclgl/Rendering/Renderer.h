@@ -6,7 +6,7 @@
 #include "../Utilities/Frustum.h"
 #include "../Meshes/OBJMesh.h"
 #include "../Meshes/Mesh.h"
-#include "../ResourceManagment/Resources/Resource.h"
+#include "../ResourceManagement/Resources/Resource.h"
 #include "../GameLogicFSM/Finite State Machine/Structure/FSMUnit.h"
 #include "../Game/Subsystems/Subsystem.h"
 #include "../Text/Text.h"

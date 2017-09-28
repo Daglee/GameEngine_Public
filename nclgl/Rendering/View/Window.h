@@ -17,7 +17,7 @@
 #include "../../InputDevices/Keyboard.h"
 #include "../../InputDevices/Mouse.h"
 #include "../../Utilities/GameTimer.h"
-#include "../ResourceManagment/Resources/Resource.h"
+#include "../ResourceManagement/Resources/Resource.h"
 #include "../GameLogicFSM/Finite State Machine/Structure/FSMUnit.h"
 
 #define WIN32_LEAN_AND_MEAN

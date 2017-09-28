@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../ResourceManagment/Resources/Resource.h"
-#include "../../ResourceManagment/Utilities/Log.h"
+#include "../../ResourceManagement/Resources/Resource.h"
+#include "../../ResourceManagement/Utilities/Log.h"
 #include "../../nclgl/Sound/SoundNode.h"
 #include "../../Game/Subsystems/Subsystem.h"
 

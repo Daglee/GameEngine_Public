@@ -1,6 +1,6 @@
 #include "FSMUnit.h"
 
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 #include "../../FSMManager.h"
 
 FSMUnit::FSMUnit(const string FSMName, DataBase* database)

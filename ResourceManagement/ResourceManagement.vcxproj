@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B51C1859-8CD9-4049-9E94-FA12556B016A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ResourceManagment</RootNamespace>
+    <RootNamespace>ResourceManagement</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>ResourceManagement</ProjectName>
   </PropertyGroup>

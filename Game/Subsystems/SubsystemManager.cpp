@@ -1,6 +1,6 @@
 #include "SubsystemManager.h"
 
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../UISystem/Input Managment/Input/InputManager.h"
 #include "../GameLogicFSM/FSMManager.h"

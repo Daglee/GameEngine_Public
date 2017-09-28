@@ -1,7 +1,7 @@
 #include "Window.h"
 #include "../../InputDevices/Mouse.h"
 #include "../../InputDevices/Keyboard.h"
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 
 Window* Window::window;
 

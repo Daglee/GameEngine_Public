@@ -1,7 +1,7 @@
 #include "PhysicsEntityBuilder.h"
 
 #include "../Structure/PhysicsObject.h"
-#include "../../ResourceManagment/Database/DataBase.h"
+#include "../../ResourceManagement/Database/DataBase.h"
 #include "../../Physics/Colliders/PlaneCollider.h"
 #include "../../Physics/Colliders/SphereCollider.h"
 #include "../../Physics/Engine/PhysicsEngine.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ResourceManagment/Resources/Resource.h"
+#include "../ResourceManagement/Resources/Resource.h"
 #include "../Physics/Entities/RigidBody.h"
 #include "../Game/Subsystems/Subsystem.h"
 #include "Finite State Machine/Structure/FSM.h"

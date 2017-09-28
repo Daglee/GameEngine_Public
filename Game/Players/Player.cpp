@@ -3,7 +3,7 @@
 #include "Player.h"
 #define NOMINMAX
 
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 #include "../Physics/Engine/PhysicsEngine.h"
 #include "../../nclgl/Rendering/Renderer.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"

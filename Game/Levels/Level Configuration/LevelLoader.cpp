@@ -1,7 +1,7 @@
 #include "LevelLoader.h"
 #include "../Level.h"
 #include "../../Scoring/ScoreBoard.h"
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 #include "../UISystem/Input Managment/Input/InputManager.h"
 #include "../nclgl/Rendering/Renderer.h"
 

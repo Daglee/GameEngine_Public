@@ -1,6 +1,6 @@
 #include "FSM.h"
 
-#include "../ResourceManagment/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/Log.h"
 
 const int PERMANENT_STATE_LINE_LENGTH = 2;
 const string ACTION_DELIMITER = "--";

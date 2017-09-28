@@ -4,7 +4,7 @@
 	KIYAVASH KANDAR WHERE SPECIFIED
 */
 #include "../Rendering/OGLRenderer.h"
-#include "../ResourceManagment/Resources/Resource.h"
+#include "../ResourceManagement/Resources/Resource.h"
 
 enum MeshBuffer {
 	VERTEX_BUFFER, COLOUR_BUFFER, 

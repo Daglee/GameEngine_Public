@@ -16,7 +16,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics", "Physics\Physics.vcxproj", "{72BCB08E-28F2-4292-A02B-DFC502BA924B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManagment", "ResourceManagment\ResourceManagment.vcxproj", "{B51C1859-8CD9-4049-9E94-FA12556B016A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManagement", "ResourceManagement\ResourceManagement.vcxproj", "{B51C1859-8CD9-4049-9E94-FA12556B016A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Threading", "Threading\Threading.vcxproj", "{0F80745B-87C1-4C10-8E1D-1DC53ADA2CDE}"
 EndProject

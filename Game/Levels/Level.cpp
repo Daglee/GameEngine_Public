@@ -1,8 +1,8 @@
 #include "Level.h"
-#include "../ResourceManagment/Database/DataBase.h"
-#include "../ResourceManagment/Utilities/Log.h"
-#include "../ResourceManagment/Identifiers/TemporaryDatabaseIdentifier.h"
-#include "../ResourceManagment/Identifiers/GameEntityDatabaseEntryFile.h"
+#include "../ResourceManagement/Database/DataBase.h"
+#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Identifiers/TemporaryDatabaseIdentifier.h"
+#include "../ResourceManagement/Identifiers/GameEntityDatabaseEntryFile.h"
 #include "Level Configuration/LevelConfiguration.h"
 
 #include <fstream>

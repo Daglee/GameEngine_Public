@@ -3,7 +3,7 @@
 #include "../../nclgl/Maths/Vector3.h"
 #include "../../nclgl/Meshes/SceneNode.h"
 #include "../../nclgl/Meshes/Mesh.h"
-#include "../../ResourceManagment/Resources/Resource.h"
+#include "../../ResourceManagement/Resources/Resource.h"
 
 class Renderer;
 

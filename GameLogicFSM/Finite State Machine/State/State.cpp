@@ -1,5 +1,5 @@
 #include "State.h"
-#include "../ResourceManagment/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/Log.h"
 #include "../../Messaging/MessageSystem.h"
 #include "../Game/Scoring/ScoreBoard.h"
 #include "ActionFunction.h"

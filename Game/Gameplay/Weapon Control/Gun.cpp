@@ -1,7 +1,7 @@
 #include "Gun.h"
 
-#include "../ResourceManagment/Database/DataBase.h"
-#include "../ResourceManagment/Utilities/Log.h"
+#include "../ResourceManagement/Database/DataBase.h"
+#include "../ResourceManagement/Utilities/Log.h"
 
 Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, const float reloadSpeed, const int bulletsPerMag,
 	const float bulletSpeed, const float fireDelay) : Resource()

@@ -5,7 +5,7 @@
 #include "../../Gameplay/Weapon Types/Pistol.h"
 
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 #include "../nclgl/Rendering/Renderer.h"
 #include "../nclgl/Meshes/Mesh.h"
 #include "../Physics/Engine/PhysicsEngine.h"

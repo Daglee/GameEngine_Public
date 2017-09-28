@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 
 Renderer::Renderer(DataBase* database, Window &parent) :
 	OGLRenderer(parent), Resource(), FSMUnit("Renderer", database)

@@ -4,7 +4,7 @@
 #include "../Game/Players/Player.h"
 #include <vector>
 #include "../Game/Subsystems/Subsystem.h"
-#include "../ResourceManagment/Resources/Resource.h"
+#include "../ResourceManagement/Resources/Resource.h"
 
 #include "Playerbase.h"
 

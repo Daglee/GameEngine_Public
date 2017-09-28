@@ -3,7 +3,7 @@
 #include "../Entities/RigidBody.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../Game/Structure/GameObject.h"
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Database/DataBase.h"
 #include "../nclgl/Rendering/Renderer.h"
 
 const float EXPLOSION_RADIUS = 100.0f;

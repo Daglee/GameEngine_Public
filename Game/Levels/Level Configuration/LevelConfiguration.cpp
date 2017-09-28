@@ -4,8 +4,8 @@
 #include "../../Structure/GameObject.h"
 #include "../../Levels/Entity Configuration/EntityConfiguration.h"
 #include "../../Audio/AudioManager.h"
-#include "../ResourceManagment/Utilities/Log.h"
-#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Database/DataBase.h"
 #include "../GameLogicFSM/FSMManager.h"
 
 LevelConfiguration::LevelConfiguration(DataBase* database, const string directory)

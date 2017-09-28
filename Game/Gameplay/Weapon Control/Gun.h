@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ResourceManagment/Resources/Resource.h"
+#include "../ResourceManagement/Resources/Resource.h"
 #include "../../Structure/PhysicsObject.h"
 #include <vector>
 
