@@ -39,7 +39,7 @@ public:
 	const bool IsFinished() const;
 
 private:
-	std::string currentAttribute;
+	std::string attributeName;
 
 	GameObject* entity;
 	std::vector<std::string> attributeTokens;

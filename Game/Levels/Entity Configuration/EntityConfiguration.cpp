@@ -24,11 +24,11 @@ EntityConfiguration::EntityConfiguration(const vector<string> attributeTokens, G
 
 void EntityConfiguration::ConfigureEntityWithAttribute()
 {
-	currentAttribute = attributeTokens.at(0);
+	attributeName = attributeTokens.at(0);
 
 	for each (Property entityProperty in properties)
 	{
-		if (currentAttribute == entityProperty.name)
+		if (attributeName == entityProperty.name)
 		{
 			entityProperty.configurator();
 		}
@@ -37,7 +37,7 @@ void EntityConfiguration::ConfigureEntityWithAttribute()
 
 const bool EntityConfiguration::IsFinished() const
 {
-	return currentAttribute == "-";
+	return attributeName == "-";
 }
 
 
