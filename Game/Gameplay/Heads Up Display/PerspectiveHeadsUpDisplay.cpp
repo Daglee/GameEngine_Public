@@ -1,8 +1,8 @@
 #include "PerspectiveHeadsUpDisplay.h"
 
 #include "TextParagraph.h"
-#include "../../nclgl/Renderer.h"
-#include "../../nclgl/Text.h"
+#include "../../nclgl/Rendering/Renderer.h"
+#include "../../nclgl/Text/Text.h"
 
 const bool PERSPECTIVE = true;
 const float FONT_SIZE = 25.0f;

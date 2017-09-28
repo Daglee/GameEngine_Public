@@ -1,7 +1,7 @@
 #include "SemiImplicitEuler.h"
 
 #include "RigidBody.h"
-#include "../nclgl/Vector3.h"
+#include "../nclgl/Maths/Vector3.h"
 #include "Collider.h"
 
 const int FRAMES_UNTIL_AT_REST = 10;

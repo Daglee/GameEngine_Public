@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../nclgl/SceneNode.h"
+#include "../../nclgl/Meshes/SceneNode.h"
 
 #include <string>
 #include <unordered_map>

@@ -2,7 +2,7 @@
 
 #include "../Structure/GameObject.h"
 #include "../../ResourceManagment/DataBase.h"
-#include "../../nclgl/Renderer.h"
+#include "../../nclgl/Rendering/Renderer.h"
 
 const int ASSET_NAME = 1;
 const int X_POSITION = 2;

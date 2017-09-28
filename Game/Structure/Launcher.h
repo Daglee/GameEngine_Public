@@ -1,7 +1,7 @@
 #pragma once
 #pragma comment(lib, "nclgl.lib")
 
-#include "../../NCLGL/window.h"
+#include "../../NCLGL/Rendering/View/window.h"
 #include "../../UISystem/InputManager.h"
 #include "../Subsystems/Subsystem.h"
 #include "../Players/Player.h"

@@ -3,7 +3,7 @@
 #include "../../Scoring/ScoreBoard.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../UISystem/InputManager.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/Renderer.h"
 
 LevelLoader::LevelLoader(DataBase* database)
 {

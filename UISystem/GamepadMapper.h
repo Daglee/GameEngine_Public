@@ -1,8 +1,8 @@
 #pragma once
 
 #include "InputMapper.h"
-#include "../nclgl/Gamepad.h"
-#include "../nclgl/Vector3.h"
+#include "../nclgl/InputDevices/Gamepad.h"
+#include "../nclgl/Maths/Vector3.h"
 
 /*
   Translates inputs from the controller into inputs for a game object.

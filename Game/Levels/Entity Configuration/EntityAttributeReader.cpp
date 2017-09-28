@@ -1,8 +1,8 @@
 #include "EntityAttributeReader.h"
 
 #include "../../Structure/PhysicsObject.h"
-#include "../nclgl/Vector3.h"
-#include "../nclgl/Vector4.h"
+#include "../nclgl/Maths/Vector3.h"
+#include "../nclgl/Maths/Vector4.h"
 
 EntityAttributeReader::EntityAttributeReader(const vector<string> tokens, GameObject * entity)
 {

@@ -1,8 +1,8 @@
 #pragma once
 //SEE PHYSICSENGINE.H COMMENT
 
-#include "../nclgl/Vector3.h"
-#include "../nclgl/SceneNode.h"
+#include "../nclgl/Maths/Vector3.h"
+#include "../nclgl/Meshes/SceneNode.h"
 
 class Collider;
 

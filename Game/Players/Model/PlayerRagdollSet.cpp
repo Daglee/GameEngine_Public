@@ -1,12 +1,12 @@
 #include "PlayerRagdollSet.h"
 
 #include "Ragdoll.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/Renderer.h"
 #include "../Physics/PhysicsEngine.h"
 #include "../../Structure/PhysicsObject.h"
 #include "CharacterModel.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../nclgl/Matrix4.h"
+#include "../nclgl/Maths/Matrix4.h"
 
 PlayerRagdollSet::PlayerRagdollSet(const int ragdollLimit, CharacterModel* playerModel,
 	Renderer* renderer, PhysicsEngine* physicsEngine)

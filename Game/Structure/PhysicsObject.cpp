@@ -1,7 +1,7 @@
 #include "PhysicsObject.h"
 
-#include "../../NCLGL/Vector3.h"
-#include "../../NCLGL/Renderer.h"
+#include "../../NCLGL/Maths/Vector3.h"
+#include "../../NCLGL/Rendering/Renderer.h"
 #include "../../Physics/PhysicsEngine.h"
 #include "../../Physics/SphereCollider.h"
 

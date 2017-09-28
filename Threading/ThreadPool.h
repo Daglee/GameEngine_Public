@@ -4,7 +4,7 @@
 #include "ThreadTask.h"
 #include "TaskFuture.h"
 #include "../ResourceManagment/Resource.h"
-#include "../nclgl/Window.h"
+#include "../nclgl/Rendering/View/Window.h"
 
 #include <algorithm>
 #include <atomic>

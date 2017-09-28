@@ -7,7 +7,7 @@
 #include "../Physics/PhysicsEngine.h"
 #include "../Profiler/Profiler.h"
 #include "../Threading/ThreadPool.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/Renderer.h"
 
 enum SUBSYSTEM_INDEXES
 {

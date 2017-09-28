@@ -6,8 +6,8 @@
 
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../nclgl/Renderer.h"
-#include "../nclgl/Mesh.h"
+#include "../nclgl/Rendering/Renderer.h"
+#include "../nclgl/Meshes/Mesh.h"
 #include "../Physics/PhysicsEngine.h"
 
 const bool WeaponChange::RocketLauncherAvailable(const std::string& playerTag)

@@ -3,7 +3,7 @@
 #include "../GameLogicFSM/FSMManager.h"
 #include "../ResourceManagment/Log.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/Renderer.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../Threading/TaskFuture.h"
 #include "SemiImplicitEuler.h"

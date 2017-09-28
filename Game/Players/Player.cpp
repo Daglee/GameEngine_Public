@@ -5,7 +5,7 @@
 
 #include "../ResourceManagment/DataBase.h"
 #include "../Physics/PhysicsEngine.h"
-#include "../../nclgl/Renderer.h"
+#include "../../nclgl/Rendering/Renderer.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../Scoring/ScoreBoard.h"
 #include "../Gameplay/Weapon Control/Gun.h"

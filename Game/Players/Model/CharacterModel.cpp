@@ -1,6 +1,6 @@
 #include "CharacterModel.h"
 
-#include "../../nclgl/OBJMesh.h"
+#include "../../nclgl/Meshes/OBJMesh.h"
 #include "../ResourceManagment/Log.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 

@@ -4,7 +4,7 @@
 #include "../GameLogicFSM/FSMManager.h"
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/Renderer.h"
 
 const int INITIAL_LEVEL = 1;
 const int REPLACEMENT_LEVEL = 2;

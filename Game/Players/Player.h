@@ -10,7 +10,7 @@
 #include "../Gameplay/Heads Up Display/TextParagraph.h"
 #include "../Physics/RigidBody.h"
 #include "../ResourceManagment/Resource.h"
-#include "../nclgl/Vector3.h"
+#include "../nclgl/Maths/Vector3.h"
 #include "../GameLogicFSM/Finite State Machine/Structure/FSMUnit.h"
 
 class Gun;

@@ -4,7 +4,7 @@
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../Game/Structure/GameObject.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/Renderer.h"
 
 const float EXPLOSION_RADIUS = 100.0f;
 const float EXPLOSION_FORCE = 1000.0f;

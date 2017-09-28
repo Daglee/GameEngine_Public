@@ -1,5 +1,5 @@
 #include "GameObject.h"
-#include "../../nclgl/Renderer.h"
+#include "../../nclgl/Rendering/Renderer.h"
 
 GameObject::GameObject(Renderer& r) : Resource()
 {

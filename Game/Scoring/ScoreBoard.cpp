@@ -1,5 +1,5 @@
 #include "ScoreBoard.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/Renderer.h"
 
 const float TEXT_SIZE = 15.0f;
 const float XAXIS_OFFSET = 200.0f;

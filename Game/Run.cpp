@@ -11,8 +11,8 @@
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "Levels/Level Configuration/LevelManager.h"
-#include "../nclgl/Camera.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/View/Camera.h"
+#include "../nclgl/Rendering/Renderer.h"
 
 #include "../ResourceManagment/TableCreation.h"
 

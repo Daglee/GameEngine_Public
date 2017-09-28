@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../nclgl/Vector3.h"
+#include "../nclgl/Maths/Vector3.h"
 
 class InputMapper;
 class Gun;

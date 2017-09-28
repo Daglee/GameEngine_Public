@@ -1,8 +1,8 @@
 #pragma once
 
 #include "InputMapper.h"
-#include "../nclgl/Window.h"
-#include "../nclgl/Vector3.h"
+#include "../nclgl/Rendering/View/Window.h"
+#include "../nclgl/Maths/Vector3.h"
 
 #include <string>
 

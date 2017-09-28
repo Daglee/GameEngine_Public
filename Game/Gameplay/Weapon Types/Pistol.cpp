@@ -2,9 +2,9 @@
 
 #include "../ResourceManagment/DataBase.h"
 #include "../ResourceManagment/Log.h"
-#include "../nclgl/Vector3.h"
+#include "../nclgl/Maths/Vector3.h"
 #include "../Physics/PhysicsEngine.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/Rendering/Renderer.h"
 #include "../Physics/SphereCollider.h"
 
 #include <time.h>

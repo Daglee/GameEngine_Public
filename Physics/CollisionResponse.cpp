@@ -2,7 +2,7 @@
 
 #include "RigidBody.h"
 #include "Collider.h"
-#include "../nclgl/Vector3.h"
+#include "../nclgl/Maths/Vector3.h"
 
 const float MAX_AT_REST_VELOCITY = 0.001f;
 

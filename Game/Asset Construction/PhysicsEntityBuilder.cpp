@@ -5,7 +5,7 @@
 #include "../../Physics/PlaneCollider.h"
 #include "../../Physics/SphereCollider.h"
 #include "../../Physics/PhysicsEngine.h"
-#include "../../nclgl/Renderer.h"
+#include "../../nclgl/Rendering/Renderer.h"
 
 const int ASSET_NAME = 1;
 const int X_POSITION = 2;

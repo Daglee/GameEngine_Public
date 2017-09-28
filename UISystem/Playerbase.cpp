@@ -6,8 +6,8 @@
 #include "../Game/Scoring/ScoreBoard.h"
 #include "../Game/Players/Player.h"
 #include "../Game/Players/Control/PlayerController.h"
-#include "../nclgl/Gamepad.h"
-#include "../nclgl/Renderer.h"
+#include "../nclgl/InputDevices/Gamepad.h"
+#include "../nclgl/Rendering/Renderer.h"
 #include "../Physics/PhysicsEngine.h"
 #include "../Threading/ThreadPool.h"
 
