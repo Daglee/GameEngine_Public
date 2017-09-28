@@ -16,9 +16,6 @@
     <Filter Include="SubSystems">
       <UniqueIdentifier>{565f721b-06d0-4e00-9bd5-ca079a0506fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Audio">
-      <UniqueIdentifier>{ffad4122-371d-410e-afbd-38299a57cfe6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scoring">
       <UniqueIdentifier>{28baa0c5-f647-4f0f-8771-b88464e0e942}</UniqueIdentifier>
     </Filter>
@@ -68,9 +65,6 @@
     </ClInclude>
     <ClInclude Include="SubsystemManager.h">
       <Filter>SubSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioManager.h">
-      <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="ScoreBoard.h">
       <Filter>Scoring</Filter>
@@ -137,6 +131,7 @@
     </ClInclude>
     <ClInclude Include="Asset Construction\GameEntityBuilder.h" />
     <ClInclude Include="Asset Construction\PhysicsEntityBuilder.h" />
+    <ClInclude Include="Audio\AudioManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -154,9 +149,6 @@
     </ClCompile>
     <ClCompile Include="SubsystemManager.cpp">
       <Filter>SubSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioManager.cpp">
-      <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Scoring</Filter>
@@ -223,5 +215,6 @@
     </ClCompile>
     <ClCompile Include="Asset Construction\GameEntityBuilder.cpp" />
     <ClCompile Include="Asset Construction\PhysicsEntityBuilder.cpp" />
+    <ClCompile Include="Audio\AudioManager.cpp" />
   </ItemGroup>
 </Project>

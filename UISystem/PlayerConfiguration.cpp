@@ -7,7 +7,7 @@
 #include "../Game/Pistol.h"
 #include "../Threading/ThreadPool.h"
 #include "../Game/ScoreBoard.h"
-#include "../Game/AudioManager.h"
+#include "../Game/Audio/AudioManager.h"
 #include "../Game/SpawnSystem.h"
 #include "../Game/GunInput.h"
 

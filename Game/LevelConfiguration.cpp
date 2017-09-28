@@ -3,7 +3,7 @@
 #include "PhysicsObject.h"
 #include "GameObject.h"
 #include "EntityConfiguration.h"
-#include "AudioManager.h"
+#include "Audio/AudioManager.h"
 #include "../ResourceManagment/Log.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/FSMManager.h"

@@ -16,7 +16,7 @@
 #include "../Game/GameObject.h"
 #include "../Game/Player.h"
 #include "../Threading/ThreadPool.h"
-#include "../Game/AudioManager.h"
+#include "../Game/Audio/AudioManager.h"
 
 #include <vector>
 #include "Log.h"

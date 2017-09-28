@@ -156,7 +156,7 @@
   <ItemGroup>
     <ClInclude Include="Asset Construction\GameEntityBuilder.h" />
     <ClInclude Include="Asset Construction\PhysicsEntityBuilder.h" />
-    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="Audio\AudioManager.h" />
     <ClInclude Include="CharacterModel.h" />
     <ClInclude Include="PerspectiveHeadsUpDisplay.h" />
     <ClInclude Include="EntityAttributeReader.h" />
@@ -188,7 +188,7 @@
   <ItemGroup>
     <ClCompile Include="Asset Construction\GameEntityBuilder.cpp" />
     <ClCompile Include="Asset Construction\PhysicsEntityBuilder.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="Audio\AudioManager.cpp" />
     <ClCompile Include="CharacterModel.cpp" />
     <ClCompile Include="PerspectiveHeadsUpDisplay.cpp" />
     <ClCompile Include="EntityAttributeReader.cpp" />

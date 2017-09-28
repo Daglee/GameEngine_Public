@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../ResourceManagment/Resource.h"
-#include "../ResourceManagment/Log.h"
-#include "../nclgl/SoundNode.h"
-#include "../Game/Subsystem.h"
+#include "../../ResourceManagment/Resource.h"
+#include "../../ResourceManagment/Log.h"
+#include "../../nclgl/SoundNode.h"
+#include "../../Game/Subsystem.h"
 
 #include <unordered_map>
 #include <mutex>
