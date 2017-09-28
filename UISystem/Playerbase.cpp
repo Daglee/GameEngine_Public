@@ -9,7 +9,7 @@
 #include "../nclgl/InputDevices/Gamepad.h"
 #include "../nclgl/Rendering/Renderer.h"
 #include "../Physics/Engine/PhysicsEngine.h"
-#include "../Threading/ThreadPool.h"
+#include "../Threading/ThreadPool/ThreadPool.h"
 
 #include <string>
 

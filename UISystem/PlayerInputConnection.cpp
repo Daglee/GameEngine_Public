@@ -4,7 +4,7 @@
 #include "GamepadMapper.h"
 #include "MKMapper.h"
 #include "../Game/Players/Control/TopDownController.h"
-#include "../Threading/ThreadPool.h"
+#include "../Threading/ThreadPool/ThreadPool.h"
 #include "InputMapper.h"
 
 PlayerInputConnection::PlayerInputConnection(Player* player)

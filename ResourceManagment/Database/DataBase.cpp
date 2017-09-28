@@ -1,7 +1,7 @@
 #include "DataBase.h"
 
 #include "../nclgl/Rendering/Renderer.h"
-#include "../Threading/ThreadPool.h"
+#include "../Threading/ThreadPool/ThreadPool.h"
 
 DataBase::~DataBase()
 {

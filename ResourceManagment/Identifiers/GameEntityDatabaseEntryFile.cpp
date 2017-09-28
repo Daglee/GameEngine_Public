@@ -1,7 +1,7 @@
 #include "GameEntityDatabaseEntryFile.h"
 
 #include "../Database/DataBase.h"
-#include "../Threading/ThreadPool.h"
+#include "../Threading/ThreadPool/ThreadPool.h"
 #include "../Game/Asset Construction/GameEntityBuilder.h"
 #include "../Game/Asset Construction/PhysicsEntityBuilder.h"
 

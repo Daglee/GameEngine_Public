@@ -3,7 +3,7 @@
 #include "../ResourceManagment/Resources/Resource.h"
 #include "../Game/Subsystems/Subsystem.h"
 #include "../Gameplay/ExplosionSet.h"
-#include "../Threading/ThreadPool.h"
+#include "../Threading/ThreadPool/ThreadPool.h"
 #include "Utilities/CollisionResponse.h"
 #include "../Colliders/Collider.h"
 

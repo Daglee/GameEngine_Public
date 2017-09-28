@@ -141,12 +141,12 @@
   <ItemGroup>
     <ClInclude Include="Tasks\Task.h" />
     <ClInclude Include="Tasks\TaskFuture.h" />
-    <ClInclude Include="ThreadPool.h" />
-    <ClInclude Include="ThreadQueue.h" />
+    <ClInclude Include="ThreadPool\ThreadPool.h" />
+    <ClInclude Include="ThreadPool\ThreadQueue.h" />
     <ClInclude Include="Tasks\ThreadTask.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="ThreadPool\ThreadPool.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

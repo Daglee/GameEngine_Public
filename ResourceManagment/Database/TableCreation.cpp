@@ -15,7 +15,7 @@
 #include "../Game/Structure/PhysicsObject.h"
 #include "../Game/Structure/GameObject.h"
 #include "../Game/Players/Player.h"
-#include "../Threading/ThreadPool.h"
+#include "../Threading/ThreadPool/ThreadPool.h"
 #include "../Game/Audio/AudioManager.h"
 
 #include <vector>
