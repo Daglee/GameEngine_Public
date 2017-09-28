@@ -1,8 +1,8 @@
 #include "WeaponChange.h"
 
-#include "Gun.h"
-#include "RocketLauncher.h"
-#include "Pistol.h"
+#include "Gameplay/Weapon Control/Gun.h"
+#include "Gameplay/Weapon Types/RocketLauncher.h"
+#include "Gameplay/Weapon Types/Pistol.h"
 
 #include "../GameLogicFSM/MessageSystem.h"
 #include "../ResourceManagment/DataBase.h"

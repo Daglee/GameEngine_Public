@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../ResourceManagment/Resource.h"
-#include "Structure/PhysicsObject.h"
+#include "../../Structure/PhysicsObject.h"
 #include <vector>
 
 class DataBase;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Gun.h"
+#include "../Weapon Control/Gun.h"
 
 class Pistol : public Gun
 {

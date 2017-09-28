@@ -1,7 +1,7 @@
 #include "InputManager.h"
 #include "../Threading/ThreadPool.h"
 #include "../Game/TopDownController.h"
-#include "../Game/SpawnSystem.h"
+#include "../Game/Gameplay/Spawning/SpawnSystem.h"
 
 InputManager::InputManager(Playerbase* playerbase, Window* window)
 {

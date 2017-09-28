@@ -8,11 +8,11 @@
 #include "../../nclgl/Renderer.h"
 #include "../GameLogicFSM/MessageSystem.h"
 #include "ScoreBoard.h"
-#include "Gun.h"
+#include "Gameplay/Weapon Control/Gun.h"
 #include "PlayerController.h"
-#include "GunInput.h"
+#include "Gameplay/Weapon Control/GunInput.h"
 #include "PlayerRagdollSet.h"
-#include "SpawnSystem.h"
+#include "Gameplay/Spawning/SpawnSystem.h"
 #include "../Physics/SphereCollider.h"
 
 const float PLAYER_MASS = 500.0f;

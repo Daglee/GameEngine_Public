@@ -4,12 +4,12 @@
 #include "../nclgl/Gamepad.h"
 #include "../Game/Player.h"
 #include "../Game/TopDownController.h"
-#include "../Game/Pistol.h"
+#include "../Game/Gameplay/Weapon Types/Pistol.h"
 #include "../Threading/ThreadPool.h"
 #include "../Game/ScoreBoard.h"
 #include "../Game/Audio/AudioManager.h"
-#include "../Game/SpawnSystem.h"
-#include "../Game/GunInput.h"
+#include "../Game/Gameplay/Spawning/SpawnSystem.h"
+#include "../Game/Gameplay/Weapon Control/GunInput.h"
 
 PlayerConfiguration::PlayerConfiguration(const BasePlayerSystems playerComponents)
 {

@@ -66,12 +66,6 @@
     <ClInclude Include="PlayerController.h">
       <Filter>Player\PlayerControl</Filter>
     </ClInclude>
-    <ClInclude Include="Pistol.h">
-      <Filter>Gameplay\WeaponTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="RocketLauncher.h">
-      <Filter>Gameplay\WeaponTypes</Filter>
-    </ClInclude>
     <ClInclude Include="EntityAttributeReader.h">
       <Filter>Levels\Entity Config</Filter>
     </ClInclude>
@@ -84,18 +78,6 @@
     <ClInclude Include="WeaponChange.h">
       <Filter>Player\Player Mechanics</Filter>
     </ClInclude>
-    <ClInclude Include="PerspectiveHeadsUpDisplay.h">
-      <Filter>Gameplay\Heads Up Display</Filter>
-    </ClInclude>
-    <ClInclude Include="TextParagraph.h">
-      <Filter>Gameplay\Heads Up Display</Filter>
-    </ClInclude>
-    <ClInclude Include="Gun.h">
-      <Filter>Gameplay\Weapon Control</Filter>
-    </ClInclude>
-    <ClInclude Include="GunInput.h">
-      <Filter>Gameplay\Weapon Control</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterModel.h">
       <Filter>Player\Model</Filter>
     </ClInclude>
@@ -104,9 +86,6 @@
     </ClInclude>
     <ClInclude Include="PlayerRagdollSet.h">
       <Filter>Player\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="SpawnSystem.h">
-      <Filter>Gameplay\Spawning</Filter>
     </ClInclude>
     <ClInclude Include="LevelConfiguration.h">
       <Filter>Levels\Level Config</Filter>
@@ -123,6 +102,27 @@
     <ClInclude Include="Structure\PhysicsObject.h" />
     <ClInclude Include="Structure\Launcher.h" />
     <ClInclude Include="Structure\GameObject.h" />
+    <ClInclude Include="Gameplay\Heads Up Display\PerspectiveHeadsUpDisplay.h">
+      <Filter>Gameplay\Heads Up Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Heads Up Display\TextParagraph.h">
+      <Filter>Gameplay\Heads Up Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Spawning\SpawnSystem.h">
+      <Filter>Gameplay\Spawning</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Weapon Control\Gun.h">
+      <Filter>Gameplay\Weapon Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Weapon Control\GunInput.h">
+      <Filter>Gameplay\Weapon Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Weapon Types\Pistol.h">
+      <Filter>Gameplay\WeaponTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Weapon Types\RocketLauncher.h">
+      <Filter>Gameplay\WeaponTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -144,12 +144,6 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Player\PlayerControl</Filter>
     </ClCompile>
-    <ClCompile Include="Pistol.cpp">
-      <Filter>Gameplay\WeaponTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="RocketLauncher.cpp">
-      <Filter>Gameplay\WeaponTypes</Filter>
-    </ClCompile>
     <ClCompile Include="EntityAttributeReader.cpp">
       <Filter>Levels\Entity Config</Filter>
     </ClCompile>
@@ -162,18 +156,6 @@
     <ClCompile Include="WeaponChange.cpp">
       <Filter>Player\Player Mechanics</Filter>
     </ClCompile>
-    <ClCompile Include="PerspectiveHeadsUpDisplay.cpp">
-      <Filter>Gameplay\Heads Up Display</Filter>
-    </ClCompile>
-    <ClCompile Include="TextParagraph.cpp">
-      <Filter>Gameplay\Heads Up Display</Filter>
-    </ClCompile>
-    <ClCompile Include="GunInput.cpp">
-      <Filter>Gameplay\Weapon Control</Filter>
-    </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>Gameplay\Weapon Control</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterModel.cpp">
       <Filter>Player\Model</Filter>
     </ClCompile>
@@ -182,9 +164,6 @@
     </ClCompile>
     <ClCompile Include="PlayerRagdollSet.cpp">
       <Filter>Player\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="SpawnSystem.cpp">
-      <Filter>Gameplay\Spawning</Filter>
     </ClCompile>
     <ClCompile Include="LevelConfiguration.cpp">
       <Filter>Levels\Level Config</Filter>
@@ -201,5 +180,26 @@
     <ClCompile Include="Structure\PhysicsObject.cpp" />
     <ClCompile Include="Structure\Launcher.cpp" />
     <ClCompile Include="Structure\GameObject.cpp" />
+    <ClCompile Include="Gameplay\Heads Up Display\PerspectiveHeadsUpDisplay.cpp">
+      <Filter>Gameplay\Heads Up Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Heads Up Display\TextParagraph.cpp">
+      <Filter>Gameplay\Heads Up Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Spawning\SpawnSystem.cpp">
+      <Filter>Gameplay\Spawning</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Weapon Control\Gun.cpp">
+      <Filter>Gameplay\Weapon Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Weapon Control\GunInput.cpp">
+      <Filter>Gameplay\Weapon Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Weapon Types\Pistol.cpp">
+      <Filter>Gameplay\WeaponTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Weapon Types\RocketLauncher.cpp">
+      <Filter>Gameplay\WeaponTypes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
