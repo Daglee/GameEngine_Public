@@ -5,7 +5,6 @@
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../nclgl/Rendering/Renderer.h"
 #include "../ResourceManagment/Database/DataBase.h"
-#include "../Threading/TaskFuture.h"
 #include "Utilities/SemiImplicitEuler.h"
 #include "../Entities/RigidBody.h"
 

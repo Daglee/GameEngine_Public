@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Task.h" />
-    <ClInclude Include="TaskFuture.h" />
+    <ClInclude Include="Tasks\Task.h" />
+    <ClInclude Include="Tasks\TaskFuture.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="ThreadQueue.h" />
-    <ClInclude Include="ThreadTask.h" />
+    <ClInclude Include="Tasks\ThreadTask.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThreadPool.cpp" />

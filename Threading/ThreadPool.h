@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ThreadQueue.h"
-#include "ThreadTask.h"
-#include "TaskFuture.h"
+#include "Tasks/ThreadTask.h"
+#include "Tasks/TaskFuture.h"
 #include "../ResourceManagment/Resources/Resource.h"
 #include "../nclgl/Rendering/View/Window.h"
 

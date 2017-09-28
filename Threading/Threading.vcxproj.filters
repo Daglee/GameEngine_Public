@@ -7,13 +7,13 @@
     <ClInclude Include="ThreadQueue.h">
       <Filter>Threading 2.0</Filter>
     </ClInclude>
-    <ClInclude Include="TaskFuture.h">
+    <ClInclude Include="Tasks\Task.h">
       <Filter>Threading 2.0\Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="Task.h">
+    <ClInclude Include="Tasks\TaskFuture.h">
       <Filter>Threading 2.0\Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadTask.h">
+    <ClInclude Include="Tasks\ThreadTask.h">
       <Filter>Threading 2.0\Tasks</Filter>
     </ClInclude>
   </ItemGroup>
