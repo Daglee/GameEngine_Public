@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MKMapper.h"
-#include "../Game/Player.h"
+#include "../Game/Players/Player.h"
 #include <vector>
 #include "../Game/Subsystem.h"
 #include "../ResourceManagment/Resource.h"

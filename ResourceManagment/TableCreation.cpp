@@ -14,7 +14,7 @@
 #include "../nclgl/Renderer.h"
 #include "../Game/Structure/PhysicsObject.h"
 #include "../Game/Structure/GameObject.h"
-#include "../Game/Player.h"
+#include "../Game/Players/Player.h"
 #include "../Threading/ThreadPool.h"
 #include "../Game/Audio/AudioManager.h"
 

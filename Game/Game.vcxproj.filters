@@ -45,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Player</Filter>
-    </ClInclude>
     <ClInclude Include="Subsystem.h">
       <Filter>SubSystems</Filter>
     </ClInclude>
@@ -56,27 +53,6 @@
     </ClInclude>
     <ClInclude Include="ScoreBoard.h">
       <Filter>Scoring</Filter>
-    </ClInclude>
-    <ClInclude Include="TopDownController.h">
-      <Filter>Player\PlayerControl</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>Player\PlayerControl</Filter>
-    </ClInclude>
-    <ClInclude Include="LifeSpan.h">
-      <Filter>Player\Player Mechanics</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponChange.h">
-      <Filter>Player\Player Mechanics</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterModel.h">
-      <Filter>Player\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Ragdoll.h">
-      <Filter>Player\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerRagdollSet.h">
-      <Filter>Player\Model</Filter>
     </ClInclude>
     <ClInclude Include="Asset Construction\GameEntityBuilder.h" />
     <ClInclude Include="Asset Construction\PhysicsEntityBuilder.h" />
@@ -123,38 +99,38 @@
     <ClInclude Include="Levels\Level.h">
       <Filter>Levels</Filter>
     </ClInclude>
+    <ClInclude Include="Players\Control\PlayerController.h">
+      <Filter>Player\PlayerControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\Control\TopDownController.h">
+      <Filter>Player\PlayerControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\Mechanics\LifeSpan.h">
+      <Filter>Player\Player Mechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\Mechanics\WeaponChange.h">
+      <Filter>Player\Player Mechanics</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\Model\CharacterModel.h">
+      <Filter>Player\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\Model\PlayerRagdollSet.h">
+      <Filter>Player\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\Model\Ragdoll.h">
+      <Filter>Player\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Run.cpp" />
-    <ClCompile Include="Player.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
     <ClCompile Include="SubsystemManager.cpp">
       <Filter>SubSystems</Filter>
     </ClCompile>
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Scoring</Filter>
-    </ClCompile>
-    <ClCompile Include="TopDownController.cpp">
-      <Filter>Player\PlayerControl</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Player\PlayerControl</Filter>
-    </ClCompile>
-    <ClCompile Include="LifeSpan.cpp">
-      <Filter>Player\Player Mechanics</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponChange.cpp">
-      <Filter>Player\Player Mechanics</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterModel.cpp">
-      <Filter>Player\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Ragdoll.cpp">
-      <Filter>Player\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRagdollSet.cpp">
-      <Filter>Player\Model</Filter>
     </ClCompile>
     <ClCompile Include="Asset Construction\GameEntityBuilder.cpp" />
     <ClCompile Include="Asset Construction\PhysicsEntityBuilder.cpp" />
@@ -200,6 +176,30 @@
     </ClCompile>
     <ClCompile Include="Levels\Level.cpp">
       <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\Control\PlayerController.cpp">
+      <Filter>Player\PlayerControl</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\Control\TopDownController.cpp">
+      <Filter>Player\PlayerControl</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\Mechanics\LifeSpan.cpp">
+      <Filter>Player\Player Mechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\Mechanics\WeaponChange.cpp">
+      <Filter>Player\Player Mechanics</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\Model\CharacterModel.cpp">
+      <Filter>Player\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\Model\PlayerRagdollSet.cpp">
+      <Filter>Player\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\Model\Ragdoll.cpp">
+      <Filter>Player\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\Player.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

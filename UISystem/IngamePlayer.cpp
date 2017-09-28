@@ -1,6 +1,6 @@
 #include "IngamePlayer.h"
 
-#include "../Game/Player.h"
+#include "../Game/Players/Player.h"
 #include "../Game/Gameplay/Weapon Types/Pistol.h"
 
 IngamePlayer::IngamePlayer(const Subsystems subsystems)

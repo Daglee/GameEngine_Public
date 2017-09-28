@@ -1,9 +1,9 @@
 #include "PlayerInputConnection.h"
 
-#include "../Game/Player.h"
+#include "../Game/Players/Player.h"
 #include "GamepadMapper.h"
 #include "MKMapper.h"
-#include "../Game/TopDownController.h"
+#include "../Game/Players/Control/TopDownController.h"
 #include "../Threading/ThreadPool.h"
 #include "InputMapper.h"
 

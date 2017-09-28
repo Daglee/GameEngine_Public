@@ -7,12 +7,12 @@
 #include "../Physics/PhysicsEngine.h"
 #include "../../nclgl/Renderer.h"
 #include "../GameLogicFSM/MessageSystem.h"
-#include "ScoreBoard.h"
-#include "Gameplay/Weapon Control/Gun.h"
-#include "PlayerController.h"
-#include "Gameplay/Weapon Control/GunInput.h"
-#include "PlayerRagdollSet.h"
-#include "Gameplay/Spawning/SpawnSystem.h"
+#include "../ScoreBoard.h"
+#include "../Gameplay/Weapon Control/Gun.h"
+#include "Control/PlayerController.h"
+#include "../Gameplay/Weapon Control/GunInput.h"
+#include "Model/PlayerRagdollSet.h"
+#include "../Gameplay/Spawning/SpawnSystem.h"
 #include "../Physics/SphereCollider.h"
 
 const float PLAYER_MASS = 500.0f;

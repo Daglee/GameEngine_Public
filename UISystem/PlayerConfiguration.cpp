@@ -2,8 +2,8 @@
 
 #include "MKMapper.h"
 #include "../nclgl/Gamepad.h"
-#include "../Game/Player.h"
-#include "../Game/TopDownController.h"
+#include "../Game/Players/Player.h"
+#include "../Game/Players/Control/TopDownController.h"
 #include "../Game/Gameplay/Weapon Types/Pistol.h"
 #include "../Threading/ThreadPool.h"
 #include "../Game/ScoreBoard.h"

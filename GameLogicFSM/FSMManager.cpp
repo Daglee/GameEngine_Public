@@ -1,6 +1,6 @@
 #include "FSMManager.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../Game/Player.h"
+#include "../Game/Players/Player.h"
 #include "../Game/ScoreBoard.h"
 #include "MessageSystem.h"
 

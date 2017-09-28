@@ -2,12 +2,12 @@
 #pragma once
 #define NOMINMAX
 
-#include "Audio/AudioManager.h"
-#include "CharacterModel.h"
-#include "LifeSpan.h"
-#include "WeaponChange.h"
-#include "Gameplay/Heads Up Display/PerspectiveHeadsUpDisplay.h"
-#include "Gameplay/Heads Up Display/TextParagraph.h"
+#include "../Audio/AudioManager.h"
+#include "Model/CharacterModel.h"
+#include "Mechanics/LifeSpan.h"
+#include "Mechanics/WeaponChange.h"
+#include "../Gameplay/Heads Up Display/PerspectiveHeadsUpDisplay.h"
+#include "../Gameplay/Heads Up Display/TextParagraph.h"
 #include "../Physics/RigidBody.h"
 #include "../ResourceManagment/Resource.h"
 #include "../nclgl/Vector3.h"
