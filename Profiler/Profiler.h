@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MemoryWatcher.h"
-#include "FramerateCounter.h"
+#include "Memory/MemoryWatcher.h"
+#include "Framerate/FramerateCounter.h"
 #include "../Game/Subsystems/Subsystem.h"
 #include "../ResourceManagment/Resource.h"
 #include <map>
