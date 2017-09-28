@@ -154,12 +154,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Asset Construction\GameEntityBuilder.h" />
+    <ClInclude Include="Asset Construction\PhysicsEntityBuilder.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="CharacterModel.h" />
     <ClInclude Include="PerspectiveHeadsUpDisplay.h" />
     <ClInclude Include="EntityAttributeReader.h" />
     <ClInclude Include="EntityConfiguration.h" />
-    <ClInclude Include="GameEntityBuilder.h" />
     <ClInclude Include="GunInput.h" />
     <ClInclude Include="PlayerRagdollSet.h" />
     <ClInclude Include="Ragdoll.h" />
@@ -173,7 +174,6 @@
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LifeSpan.h" />
-    <ClInclude Include="PhysicsEntityBuilder.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="Pistol.h" />
     <ClInclude Include="Player.h" />
@@ -186,12 +186,13 @@
     <ClInclude Include="WeaponChange.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Asset Construction\GameEntityBuilder.cpp" />
+    <ClCompile Include="Asset Construction\PhysicsEntityBuilder.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="CharacterModel.cpp" />
     <ClCompile Include="PerspectiveHeadsUpDisplay.cpp" />
     <ClCompile Include="EntityAttributeReader.cpp" />
     <ClCompile Include="EntityConfiguration.cpp" />
-    <ClCompile Include="GameEntityBuilder.cpp" />
     <ClCompile Include="GunInput.cpp" />
     <ClCompile Include="PlayerRagdollSet.cpp" />
     <ClCompile Include="Ragdoll.cpp" />
@@ -205,7 +206,6 @@
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LifeSpan.cpp" />
-    <ClCompile Include="PhysicsEntityBuilder.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Player.cpp" />
