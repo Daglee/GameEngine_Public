@@ -4,9 +4,6 @@
     <Filter Include="Levels">
       <UniqueIdentifier>{98211780-0f49-4943-aa66-3d9accd969e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Structure">
-      <UniqueIdentifier>{a1ed596f-0472-4941-8217-fd727638d194}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Player">
       <UniqueIdentifier>{eeb4060a-a977-4e17-9f9a-8dc7f64528ac}</UniqueIdentifier>
     </Filter>
@@ -51,12 +48,6 @@
     <ClInclude Include="Level.h">
       <Filter>Levels</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsObject.h">
-      <Filter>Game Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Game Structure</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -68,9 +59,6 @@
     </ClInclude>
     <ClInclude Include="ScoreBoard.h">
       <Filter>Scoring</Filter>
-    </ClInclude>
-    <ClInclude Include="Launcher.h">
-      <Filter>Game Structure</Filter>
     </ClInclude>
     <ClInclude Include="TopDownController.h">
       <Filter>Player\PlayerControl</Filter>
@@ -132,16 +120,13 @@
     <ClInclude Include="Asset Construction\GameEntityBuilder.h" />
     <ClInclude Include="Asset Construction\PhysicsEntityBuilder.h" />
     <ClInclude Include="Audio\AudioManager.h" />
+    <ClInclude Include="Structure\PhysicsObject.h" />
+    <ClInclude Include="Structure\Launcher.h" />
+    <ClInclude Include="Structure\GameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
       <Filter>Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsObject.cpp">
-      <Filter>Game Structure</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Game Structure</Filter>
     </ClCompile>
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="Player.cpp">
@@ -152,9 +137,6 @@
     </ClCompile>
     <ClCompile Include="ScoreBoard.cpp">
       <Filter>Scoring</Filter>
-    </ClCompile>
-    <ClCompile Include="Launcher.cpp">
-      <Filter>Game Structure</Filter>
     </ClCompile>
     <ClCompile Include="TopDownController.cpp">
       <Filter>Player\PlayerControl</Filter>
@@ -216,5 +198,8 @@
     <ClCompile Include="Asset Construction\GameEntityBuilder.cpp" />
     <ClCompile Include="Asset Construction\PhysicsEntityBuilder.cpp" />
     <ClCompile Include="Audio\AudioManager.cpp" />
+    <ClCompile Include="Structure\PhysicsObject.cpp" />
+    <ClCompile Include="Structure\Launcher.cpp" />
+    <ClCompile Include="Structure\GameObject.cpp" />
   </ItemGroup>
 </Project>

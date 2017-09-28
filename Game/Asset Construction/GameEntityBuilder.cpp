@@ -1,6 +1,6 @@
 #include "GameEntityBuilder.h"
 
-#include "../GameObject.h"
+#include "../Structure/GameObject.h"
 #include "../../ResourceManagment/DataBase.h"
 #include "../../nclgl/Renderer.h"
 

@@ -1,8 +1,8 @@
 #include "TemporaryDatabaseIdentifier.h"
 
 #include "DataBase.h"
-#include "../Game/GameObject.h"
-#include "../Game/PhysicsObject.h"
+#include "../Game/Structure/GameObject.h"
+#include "../Game/Structure/PhysicsObject.h"
 #include "../nclgl/Renderer.h"
 #include "../Physics/PhysicsEngine.h"
 

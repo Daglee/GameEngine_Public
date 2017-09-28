@@ -2,7 +2,7 @@
 
 #include "RigidBody.h"
 #include "../GameLogicFSM/MessageSystem.h"
-#include "../Game/GameObject.h"
+#include "../Game/Structure/GameObject.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../nclgl/Renderer.h"
 

@@ -1,7 +1,7 @@
 #include "LevelConfiguration.h"
 
-#include "PhysicsObject.h"
-#include "GameObject.h"
+#include "Structure/PhysicsObject.h"
+#include "Structure/GameObject.h"
 #include "EntityConfiguration.h"
 #include "Audio/AudioManager.h"
 #include "../ResourceManagment/Log.h"

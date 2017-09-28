@@ -6,7 +6,7 @@
 #pragma comment(lib, "UISystem.lib")
 #pragma comment(lib, "ResourceManagment.lib")
 
-#include "Launcher.h"
+#include "Structure/Launcher.h"
 #include "SubsystemManager.h"
 #include "../ResourceManagment/DataBase.h"
 #include "../GameLogicFSM/MessageSystem.h"

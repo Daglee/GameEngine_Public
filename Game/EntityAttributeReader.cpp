@@ -1,6 +1,6 @@
 #include "EntityAttributeReader.h"
 
-#include "PhysicsObject.h"
+#include "Structure/PhysicsObject.h"
 #include "../nclgl/Vector3.h"
 #include "../nclgl/Vector4.h"
 
