@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../ResourceManagment/Resource.h"
-#include "../Game/Subsystem.h"
+#include "../Game/Subsystems/Subsystem.h"
 #include "ExplosionSet.h"
 #include "../Threading/ThreadPool.h"
 #include "CollisionResponse.h"

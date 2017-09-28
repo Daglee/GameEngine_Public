@@ -2,7 +2,7 @@
 
 #include "MemoryWatcher.h"
 #include "FramerateCounter.h"
-#include "../Game/Subsystem.h"
+#include "../Game/Subsystems/Subsystem.h"
 #include "../ResourceManagment/Resource.h"
 #include <map>
 

@@ -8,7 +8,7 @@
 #include "Mesh.h"
 #include "../ResourceManagment/Resource.h"
 #include "../GameLogicFSM/FSMUnit.h"
-#include "../Game/Subsystem.h"
+#include "../Game/Subsystems/Subsystem.h"
 #include "Text.h"
 #include "TextMesh.h"
 #include "TextRenderer.h"
