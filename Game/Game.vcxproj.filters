@@ -22,9 +22,6 @@
     <Filter Include="Scoring">
       <UniqueIdentifier>{28baa0c5-f647-4f0f-8771-b88464e0e942}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AssetConstruction">
-      <UniqueIdentifier>{0eb7da0c-c71f-47d9-98f6-1bfb9ebec688}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Gameplay\WeaponTypes">
       <UniqueIdentifier>{cf598702-22e9-4a7a-9933-3dc63d4e84a3}</UniqueIdentifier>
     </Filter>
@@ -80,12 +77,6 @@
     </ClInclude>
     <ClInclude Include="Launcher.h">
       <Filter>Game Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEntityBuilder.h">
-      <Filter>AssetConstruction</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEntityBuilder.h">
-      <Filter>AssetConstruction</Filter>
     </ClInclude>
     <ClInclude Include="TopDownController.h">
       <Filter>Player\PlayerControl</Filter>
@@ -144,6 +135,8 @@
     <ClInclude Include="LevelManager.h">
       <Filter>Levels\Level Config</Filter>
     </ClInclude>
+    <ClInclude Include="Asset Construction\GameEntityBuilder.h" />
+    <ClInclude Include="Asset Construction\PhysicsEntityBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp">
@@ -170,12 +163,6 @@
     </ClCompile>
     <ClCompile Include="Launcher.cpp">
       <Filter>Game Structure</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsEntityBuilder.cpp">
-      <Filter>AssetConstruction</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEntityBuilder.cpp">
-      <Filter>AssetConstruction</Filter>
     </ClCompile>
     <ClCompile Include="TopDownController.cpp">
       <Filter>Player\PlayerControl</Filter>
@@ -234,5 +221,7 @@
     <ClCompile Include="LevelManager.cpp">
       <Filter>Levels\Level Config</Filter>
     </ClCompile>
+    <ClCompile Include="Asset Construction\GameEntityBuilder.cpp" />
+    <ClCompile Include="Asset Construction\PhysicsEntityBuilder.cpp" />
   </ItemGroup>
 </Project>

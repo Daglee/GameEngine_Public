@@ -2,8 +2,8 @@
 
 #include "DataBase.h"
 #include "../Threading/ThreadPool.h"
-#include "../Game/GameEntityBuilder.h"
-#include "../Game/PhysicsEntityBuilder.h"
+#include "../Game/Asset Construction/GameEntityBuilder.h"
+#include "../Game/Asset Construction/PhysicsEntityBuilder.h"
 
 #include <fstream>
 
