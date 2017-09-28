@@ -6,7 +6,7 @@
 #include "../Game/Players/Control/TopDownController.h"
 #include "../Game/Gameplay/Weapon Types/Pistol.h"
 #include "../Threading/ThreadPool.h"
-#include "../Game/ScoreBoard.h"
+#include "../Game/Scoring/ScoreBoard.h"
 #include "../Game/Audio/AudioManager.h"
 #include "../Game/Gameplay/Spawning/SpawnSystem.h"
 #include "../Game/Gameplay/Weapon Control/GunInput.h"

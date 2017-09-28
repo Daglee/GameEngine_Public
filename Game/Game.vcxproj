@@ -179,7 +179,7 @@
     <ClInclude Include="Players\Player.h" />
     <ClInclude Include="Players\Control\PlayerController.h" />
     <ClInclude Include="Gameplay\Weapon Types\RocketLauncher.h" />
-    <ClInclude Include="ScoreBoard.h" />
+    <ClInclude Include="Scoring\ScoreBoard.h" />
     <ClInclude Include="Subsystem.h" />
     <ClInclude Include="SubsystemManager.h" />
     <ClInclude Include="Players\Control\TopDownController.h" />
@@ -212,7 +212,7 @@
     <ClCompile Include="Players\Control\PlayerController.cpp" />
     <ClCompile Include="Gameplay\Weapon Types\RocketLauncher.cpp" />
     <ClCompile Include="Run.cpp" />
-    <ClCompile Include="ScoreBoard.cpp" />
+    <ClCompile Include="Scoring\ScoreBoard.cpp" />
     <ClCompile Include="SubsystemManager.cpp" />
     <ClCompile Include="Players\Control\TopDownController.cpp" />
     <ClCompile Include="Players\Mechanics\WeaponChange.cpp" />

@@ -51,9 +51,6 @@
     <ClInclude Include="SubsystemManager.h">
       <Filter>SubSystems</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreBoard.h">
-      <Filter>Scoring</Filter>
-    </ClInclude>
     <ClInclude Include="Asset Construction\GameEntityBuilder.h" />
     <ClInclude Include="Asset Construction\PhysicsEntityBuilder.h" />
     <ClInclude Include="Audio\AudioManager.h" />
@@ -123,14 +120,14 @@
     <ClInclude Include="Players\Player.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="Scoring\ScoreBoard.h">
+      <Filter>Scoring</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="SubsystemManager.cpp">
       <Filter>SubSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreBoard.cpp">
-      <Filter>Scoring</Filter>
     </ClCompile>
     <ClCompile Include="Asset Construction\GameEntityBuilder.cpp" />
     <ClCompile Include="Asset Construction\PhysicsEntityBuilder.cpp" />
@@ -200,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="Players\Player.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Scoring\ScoreBoard.cpp">
+      <Filter>Scoring</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

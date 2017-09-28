@@ -1,7 +1,7 @@
 #include "State.h"
 #include "../ResourceManagment/Log.h"
 #include "MessageSystem.h"
-#include "../Game/ScoreBoard.h"
+#include "../Game/Scoring/ScoreBoard.h"
 #include "ActionFunction.h"
 
 const string STRING_TYPE = "s:";

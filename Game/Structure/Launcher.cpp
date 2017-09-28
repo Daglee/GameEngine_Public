@@ -1,6 +1,6 @@
 #include "Launcher.h"
 #include "../ResourceManagment/DataBase.h"
-#include "../ScoreBoard.h"
+#include "../Scoring/ScoreBoard.h"
 #include "../Profiler/Profiler.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../Physics/PhysicsEngine.h"
