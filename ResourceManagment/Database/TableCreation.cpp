@@ -3,7 +3,7 @@
 #include "DataBase.h"
 #include "Table.h"
 #include "../Profiler/Profiler.h"
-#include "../UISystem/InputManager.h"
+#include "../UISystem/Input Managment/Input/InputManager.h"
 #include "../nclgl/Rendering/View/Window.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../Physics/Engine/PhysicsEngine.h"

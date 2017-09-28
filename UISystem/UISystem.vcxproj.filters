@@ -1,53 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GamepadMapper.cpp">
+    <ClCompile Include="Gamepad\GamepadMapper.cpp">
       <Filter>Gamepad</Filter>
     </ClCompile>
-    <ClCompile Include="MKMapper.cpp">
-      <Filter>Mouse &amp; Keyboard</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerConfiguration.cpp">
-      <Filter>Input Managment\Player Config</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerInputConnection.cpp">
-      <Filter>Input Managment\Player Config</Filter>
-    </ClCompile>
-    <ClCompile Include="IngamePlayer.cpp">
-      <Filter>Input Managment\Player Config</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
+    <ClCompile Include="Input Managment\Input\Playerbase.cpp">
       <Filter>Input Managment\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Playerbase.cpp">
+    <ClCompile Include="Input Managment\Input\InputManager.cpp">
       <Filter>Input Managment\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Input Managment\Player Configuration\IngamePlayer.cpp">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Input Managment\Player Configuration\PlayerConfiguration.cpp">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Input Managment\Player Configuration\PlayerInputConnection.cpp">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseAndKeyboard\MKMapper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GamepadMapper.h">
+    <ClInclude Include="Gamepad\GamepadMapper.h">
       <Filter>Gamepad</Filter>
     </ClInclude>
-    <ClInclude Include="MKMapper.h">
-      <Filter>Mouse &amp; Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerConfiguration.h">
-      <Filter>Input Managment\Player Config</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerInputConnection.h">
-      <Filter>Input Managment\Player Config</Filter>
-    </ClInclude>
-    <ClInclude Include="IngamePlayer.h">
-      <Filter>Input Managment\Player Config</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
+    <ClInclude Include="Input Managment\Input\Playerbase.h">
       <Filter>Input Managment\Input</Filter>
     </ClInclude>
-    <ClInclude Include="InputMapper.h">
+    <ClInclude Include="Input Managment\Input\InputManager.h">
       <Filter>Input Managment\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Playerbase.h">
+    <ClInclude Include="Input Managment\Input\InputMapper.h">
       <Filter>Input Managment\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Input Managment\Player Configuration\IngamePlayer.h">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Input Managment\Player Configuration\PlayerConfiguration.h">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Input Managment\Player Configuration\PlayerInputConnection.h">
+      <Filter>Input Managment\Player Config</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseAndKeyboard\MKMapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Gamepad">

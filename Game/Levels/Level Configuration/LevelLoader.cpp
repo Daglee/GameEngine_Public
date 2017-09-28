@@ -2,7 +2,7 @@
 #include "../Level.h"
 #include "../../Scoring/ScoreBoard.h"
 #include "../ResourceManagment/Database/DataBase.h"
-#include "../UISystem/InputManager.h"
+#include "../UISystem/Input Managment/Input/InputManager.h"
 #include "../nclgl/Rendering/Renderer.h"
 
 LevelLoader::LevelLoader(DataBase* database)

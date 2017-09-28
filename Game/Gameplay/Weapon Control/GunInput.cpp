@@ -1,6 +1,6 @@
 #include "GunInput.h"
 
-#include "../UISystem/InputMapper.h"
+#include "../UISystem/Input Managment/Input/InputMapper.h"
 #include "Gun.h"
 #include "../../Audio/AudioManager.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"

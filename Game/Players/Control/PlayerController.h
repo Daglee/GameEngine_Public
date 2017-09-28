@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../UISystem/InputMapper.h"
+#include "../UISystem/Input Managment/Input/InputMapper.h"
 #include "../nclgl/Maths/Matrix4.h"
 
 #include <string>

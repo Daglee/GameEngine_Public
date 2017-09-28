@@ -1,6 +1,6 @@
 #include "PlayerConfiguration.h"
 
-#include "MKMapper.h"
+#include "../../MouseAndKeyboard/MKMapper.h"
 #include "../nclgl/InputDevices/Gamepad.h"
 #include "../Game/Players/Player.h"
 #include "../Game/Players/Control/TopDownController.h"

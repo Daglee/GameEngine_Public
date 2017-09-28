@@ -2,7 +2,7 @@
 #pragma comment(lib, "nclgl.lib")
 
 #include "../../NCLGL/Rendering/View/window.h"
-#include "../../UISystem/InputManager.h"
+#include "../../UISystem/Input Managment/Input/InputManager.h"
 #include "../Subsystems/Subsystem.h"
 #include "../Players/Player.h"
 

@@ -1,12 +1,12 @@
 #include "SubsystemManager.h"
 
-#include "../ResourceManagment/DataBase.h"
+#include "../ResourceManagment/Database/DataBase.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
-#include "../UISystem/InputManager.h"
+#include "../UISystem/Input Managment/Input/InputManager.h"
 #include "../GameLogicFSM/FSMManager.h"
 #include "../Physics/Engine/PhysicsEngine.h"
 #include "../Profiler/Profiler.h"
-#include "../Threading/ThreadPool.h"
+#include "../Threading/ThreadPool/ThreadPool.h"
 #include "../nclgl/Rendering/Renderer.h"
 
 enum SUBSYSTEM_INDEXES

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InputMapper.h"
+#include "../Input Managment/Input/InputMapper.h"
 #include "../nclgl/InputDevices/Gamepad.h"
 #include "../nclgl/Maths/Vector3.h"
 

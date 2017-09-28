@@ -1,11 +1,11 @@
 #include "PlayerInputConnection.h"
 
 #include "../Game/Players/Player.h"
-#include "GamepadMapper.h"
-#include "MKMapper.h"
+#include "../../Gamepad/GamepadMapper.h"
+#include "../../MouseAndKeyboard/MKMapper.h"
 #include "../Game/Players/Control/TopDownController.h"
 #include "../Threading/ThreadPool/ThreadPool.h"
-#include "InputMapper.h"
+#include "../Input/InputMapper.h"
 
 PlayerInputConnection::PlayerInputConnection(Player* player)
 {
