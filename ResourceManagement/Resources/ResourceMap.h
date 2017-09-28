@@ -23,8 +23,6 @@ public:
 		{
 			std::cout << mapName + (" : Releasing\n");
 		}
-
-		Clear();
 	}
 
 	void Initialise(const std::string &name, bool verbosity, bool duplicates, size_t maximumSize)
@@ -92,23 +90,6 @@ public:
 		currentSize = currentSize - (*resources.at(hash))->GetSizeInBytes();
 
 		resources.erase(hash);
-	}
-
-	//Clear all elements from bin
-	void Clear()
-	{
-		std::unordered_map<size_t, unique_ptr<T*>>::iterator it = resources.begin();
-
-		while (it != resources.end())
-		{
-			const std::string filename = (*it).second->GetName();
-			size_t hash = std::hash <std::string>{}(filename);
-
-			delete(resources.find(hash)->second);
-			it = resources.erase(hash);
-		}
-
-		currentSize = 0;
 	}
 
 	//Dumps bin content to a string

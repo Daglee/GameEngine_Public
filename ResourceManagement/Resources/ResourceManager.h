@@ -20,10 +20,7 @@ public:
 		this->allowDuplicates = allowDuplicates;
 	}
 
-	~ResourceManager()
-	{
-		ReleaseAll();
-	}
+	~ResourceManager() {}
 
 	void Initialise(const std::string &name, size_t maxNewBinSize, int maxNumberBins)
 	{
@@ -61,10 +58,10 @@ public:
 
 		if (!allowDuplicates)
 		{
-			vector<ResourceMap<T>*>::iterator mapIterator;
+			vector<unique_ptr<ResourceMap<T>*>>::iterator mapIterator;
 			for (mapIterator = resourceMaps.begin(); mapIterator != resourceMaps.end(); ++mapIterator)
 			{
-				T* duplicate = (*mapIterator)->Get(resourceName);
+				T* duplicate = (*(*mapIterator))->Get(resourceName);
 
 				if (duplicate != nullptr)
 				{
@@ -85,13 +82,13 @@ public:
 		{
 			//Insert into the map
 			//Insert into first bin that has enough space
-			std::vector<ResourceMap<T>*>::iterator iterator;
+			std::vector<unique_ptr<ResourceMap<T>*>>::iterator iterator;
 			for (iterator = resourceMaps.begin(); iterator != resourceMaps.end(); ++iterator)
 			{
-				if ((*iterator)->FreeSpace() >= resource->GetSizeInBytes())
+				if ((*(*iterator))->FreeSpace() >= resource->GetSizeInBytes())
 				{
 					//There is enough space. Insert.
-					(*iterator)->Add(resourceName, resource);
+					(*(*iterator))->Add(resourceName, resource);
 					currentSize = currentSize + resource->GetSizeInBytes();
 
 					return resource;
@@ -101,8 +98,8 @@ public:
 			//No bins had enough space or no bins present. Create new bin
 			ResourceMap<T>* newMap = new ResourceMap<T>;
 			newMap->Initialise("Map" + std::to_string(binNumber), verbose, allowDuplicates, newBinSize);
-			AddResourceMap(newMap);
 			newMap->Add(resourceName, resource);
+			AddResourceMap(newMap);
 			
 			currentSize = currentSize + resource->GetSizeInBytes();
 		}
@@ -132,14 +129,14 @@ public:
 		const string name = Log::TrimAndLower(resourcename);
 
 		//Find the item to delete
-		for (std::vector<ResourceMap<T>*>::iterator mapit = resourceMaps.begin();
+		for (std::vector<unique_ptr<ResourceMap<T>*>>::iterator mapit = resourceMaps.begin();
 			mapit != resourceMaps.end(); ++mapit)
 		{
-			if ((*mapit)->Get(name) != nullptr)
+			if ((*(*mapit))->Get(name) != nullptr)
 			{
 				//Found
-				currentSize = currentSize - (*mapit)->Get(name)->GetSizeInBytes();
-				(*mapit)->Remove(name);
+				currentSize = currentSize - (*(*mapit))->Get(name)->GetSizeInBytes();
+				(*(*mapit))->Remove(name);
 
 				return true;
 			}
@@ -163,10 +160,10 @@ public:
 		  Worst case: O(N) -- albeit, likely a very short one.
 		  Best case:  O(1) -- First item!
 		*/
-		for (vector<ResourceMap<T>*>::iterator mapit = resourceMaps.begin();
+		for (vector<unique_ptr<ResourceMap<T>*>>::iterator mapit = resourceMaps.begin();
 			mapit != resourceMaps.end(); ++mapit)
 		{
-			T* res = (*mapit)->Get(formattedResourceName);
+			T* res = (*(*mapit))->Get(formattedResourceName);
 			if (res != nullptr)
 			{
 				//Found
@@ -183,7 +180,7 @@ public:
 	{
 		if (verbose) cout << Name + " added new Resource Map" << endl;
 
-		resourceMaps.push_back(newMap);
+		resourceMaps.push_back(make_unique<ResourceMap<T>*>(newMap));
 		binNumber++;
 	}
 
@@ -194,7 +191,7 @@ public:
 		{
 			string results;
 
-			for (vector<ResourceMap<T>*>::iterator i = resourceMaps.begin(); i != resourceMaps.end(); ++i)
+			for (vector<unique_ptr<ResourceMap<T>*>>::iterator i = resourceMaps.begin(); i != resourceMaps.end(); ++i)
 			{
 				results = results + (*i)->Dump();
 			}
@@ -239,11 +236,11 @@ public:
 	size_t GetCurrentSize() const
 	{
 		size_t size = 0;
-		std::vector<ResourceMap<T>*>::const_iterator it = resourceMaps.begin();
+		vector<unique_ptr<ResourceMap<T>*>>::const_iterator it = resourceMaps.begin();
 
 		while (it != resourceMaps.end())
 		{
-			size += (*it)->GetCurrentSize();
+			size += (*(*it))->GetCurrentSize();
 			++it;
 		}
 
@@ -257,20 +254,9 @@ private:
 		return *this;
 	}
 
-	//Force removal for each map
-	void ReleaseAll()
-	{
-		std::vector<ResourceMap<T>*>::iterator it = resourceMaps.begin();
-
-		while (it != resourceMaps.end())
-		{
-			it = resourceMaps.erase(it);
-		}
-	}
-
 	unordered_map<string, T*> Map;
 	string	Name;
-	vector<ResourceMap<T>*> resourceMaps;
+	vector<unique_ptr<ResourceMap<T>*>> resourceMaps;
 
 	size_t newBinSize;
 	size_t maxManagerSize;
