@@ -9,7 +9,7 @@
 #include "../Gameplay/Heads Up Display/PerspectiveHeadsUpDisplay.h"
 #include "../Gameplay/Heads Up Display/TextParagraph.h"
 #include "../Physics/Entities/RigidBody.h"
-#include "../ResourceManagment/Resource.h"
+#include "../ResourceManagment/Resources/Resource.h"
 #include "../nclgl/Maths/Vector3.h"
 #include "../GameLogicFSM/Finite State Machine/Structure/FSMUnit.h"
 

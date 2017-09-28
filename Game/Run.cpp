@@ -8,13 +8,13 @@
 
 #include "Structure/Launcher.h"
 #include "Subsystems/SubsystemManager.h"
-#include "../ResourceManagment/DataBase.h"
+#include "../ResourceManagment/Database/DataBase.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "Levels/Level Configuration/LevelManager.h"
 #include "../nclgl/Rendering/View/Camera.h"
 #include "../nclgl/Rendering/Renderer.h"
 
-#include "../ResourceManagment/TableCreation.h"
+#include "../ResourceManagment/Database/TableCreation.h"
 
 /*  
 	===========================================================================

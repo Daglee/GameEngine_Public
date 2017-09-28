@@ -1,5 +1,5 @@
 #include "MemoryWatcher.h"
-#include "../ResourceManagment/DataBase.h"
+#include "../ResourceManagment/Database/DataBase.h"
 
 MemoryWatcher::MemoryWatcher(size_t max, DataBase* db)
 {

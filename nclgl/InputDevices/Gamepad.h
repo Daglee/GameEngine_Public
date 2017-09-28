@@ -2,7 +2,7 @@
 
 #include <windows.h>
 #include <Xinput.h>
-#include "../ResourceManagment/Resource.h"
+#include "../ResourceManagment/Resources/Resource.h"
 #include <string>
 
 // XInput Button values

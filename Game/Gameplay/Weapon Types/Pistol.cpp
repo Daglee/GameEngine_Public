@@ -1,7 +1,7 @@
 #include "Pistol.h"
 
-#include "../ResourceManagment/DataBase.h"
-#include "../ResourceManagment/Log.h"
+#include "../ResourceManagment/Database/DataBase.h"
+#include "../ResourceManagment/Utilities/Log.h"
 #include "../nclgl/Maths/Vector3.h"
 #include "../Physics/Engine/PhysicsEngine.h"
 #include "../nclgl/Rendering/Renderer.h"

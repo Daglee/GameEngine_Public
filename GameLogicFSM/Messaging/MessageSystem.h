@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ResourceManagment/Log.h"
+#include "../ResourceManagment/Utilities/Log.h"
 
 #include <vector>
 #include <mutex>

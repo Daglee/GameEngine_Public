@@ -1,7 +1,7 @@
 #include "GameEntityBuilder.h"
 
 #include "../Structure/GameObject.h"
-#include "../../ResourceManagment/DataBase.h"
+#include "../../ResourceManagment/Database/DataBase.h"
 #include "../../nclgl/Rendering/Renderer.h"
 
 const int ASSET_NAME = 1;

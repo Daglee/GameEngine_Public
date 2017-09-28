@@ -19,7 +19,7 @@
 #include "../Game/Audio/AudioManager.h"
 
 #include <vector>
-#include "Log.h"
+#include "../Utilities/Log.h"
 
 const size_t MAX_MEM_PER_TYPE = 5000;
 const size_t MAX_MEM_PLAYERS = 7000;

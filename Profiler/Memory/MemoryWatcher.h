@@ -1,7 +1,7 @@
 #pragma once
 #include <string.h>
 #include <iostream>
-#include "../ResourceManagment/Log.h"
+#include "../ResourceManagment/Utilities/Log.h"
 
 class DataBase;
 

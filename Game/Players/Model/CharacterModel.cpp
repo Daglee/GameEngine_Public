@@ -1,7 +1,7 @@
 #include "CharacterModel.h"
 
 #include "../../nclgl/Meshes/OBJMesh.h"
-#include "../ResourceManagment/Log.h"
+#include "../ResourceManagment/Utilities/Log.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 
 #include <istream>

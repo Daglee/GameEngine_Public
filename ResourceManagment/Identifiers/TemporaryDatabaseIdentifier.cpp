@@ -1,6 +1,6 @@
 #include "TemporaryDatabaseIdentifier.h"
 
-#include "DataBase.h"
+#include "../Database/DataBase.h"
 #include "../Game/Structure/GameObject.h"
 #include "../Game/Structure/PhysicsObject.h"
 #include "../nclgl/Rendering/Renderer.h"

@@ -143,22 +143,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DataBase.h" />
-    <ClInclude Include="GameEntityDatabaseEntryFile.h" />
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="ResourceMap.h" />
-    <ClInclude Include="Table.h" />
-    <ClInclude Include="TableCreation.h" />
-    <ClInclude Include="TemporaryDatabaseIdentifier.h" />
+    <ClInclude Include="Database\DataBase.h" />
+    <ClInclude Include="Identifiers\GameEntityDatabaseEntryFile.h" />
+    <ClInclude Include="Utilities\Log.h" />
+    <ClInclude Include="Resources\Resource.h" />
+    <ClInclude Include="Resources\ResourceManager.h" />
+    <ClInclude Include="Resources\ResourceMap.h" />
+    <ClInclude Include="Database\Table.h" />
+    <ClInclude Include="Database\TableCreation.h" />
+    <ClInclude Include="Identifiers\TemporaryDatabaseIdentifier.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataBase.cpp" />
-    <ClCompile Include="GameEntityDatabaseEntryFile.cpp" />
-    <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="TableCreation.cpp" />
-    <ClCompile Include="TemporaryDatabaseIdentifier.cpp" />
+    <ClCompile Include="Database\DataBase.cpp" />
+    <ClCompile Include="Identifiers\GameEntityDatabaseEntryFile.cpp" />
+    <ClCompile Include="Resources\Resource.cpp" />
+    <ClCompile Include="Database\TableCreation.cpp" />
+    <ClCompile Include="Identifiers\TemporaryDatabaseIdentifier.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

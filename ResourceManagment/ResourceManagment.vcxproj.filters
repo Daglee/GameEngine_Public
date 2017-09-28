@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Resources</Filter>
+    <ClInclude Include="Database\DataBase.h">
+      <Filter>Database</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceMap.h">
-      <Filter>Resources</Filter>
+    <ClInclude Include="Database\Table.h">
+      <Filter>Database</Filter>
     </ClInclude>
-    <ClInclude Include="GameEntityDatabaseEntryFile.h">
+    <ClInclude Include="Database\TableCreation.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Identifiers\GameEntityDatabaseEntryFile.h">
       <Filter>Identifiers</Filter>
     </ClInclude>
-    <ClInclude Include="TemporaryDatabaseIdentifier.h">
+    <ClInclude Include="Identifiers\TemporaryDatabaseIdentifier.h">
       <Filter>Identifiers</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
+    <ClInclude Include="Resources\Resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="DataBase.h">
-      <Filter>Database</Filter>
+    <ClInclude Include="Resources\ResourceManager.h">
+      <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="TableCreation.h">
-      <Filter>Database</Filter>
+    <ClInclude Include="Resources\ResourceMap.h">
+      <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Table.h">
-      <Filter>Database</Filter>
-    </ClInclude>
+    <ClInclude Include="Utilities\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resources">
@@ -34,28 +34,25 @@
     <Filter Include="Database">
       <UniqueIdentifier>{69b19bfd-213d-4392-b9b2-ae49c0944291}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Random Things">
-      <UniqueIdentifier>{49d6153c-c8dd-40eb-abf2-4a68288aa724}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Identifiers">
       <UniqueIdentifier>{9d24bab5-04b5-498f-a332-20fd9aed1f76}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameEntityDatabaseEntryFile.cpp">
+    <ClCompile Include="Database\DataBase.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\TableCreation.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Identifiers\GameEntityDatabaseEntryFile.cpp">
       <Filter>Identifiers</Filter>
     </ClCompile>
-    <ClCompile Include="TemporaryDatabaseIdentifier.cpp">
+    <ClCompile Include="Identifiers\TemporaryDatabaseIdentifier.cpp">
       <Filter>Identifiers</Filter>
     </ClCompile>
-    <ClCompile Include="Resource.cpp">
+    <ClCompile Include="Resources\Resource.cpp">
       <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="DataBase.cpp">
-      <Filter>Database</Filter>
-    </ClCompile>
-    <ClCompile Include="TableCreation.cpp">
-      <Filter>Database</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

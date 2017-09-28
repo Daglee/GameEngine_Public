@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ResourceManagment/Resource.h"
+#include "../ResourceManagment/Resources/Resource.h"
 #include "../Game/Subsystems/Subsystem.h"
 #include "../Gameplay/ExplosionSet.h"
 #include "../Threading/ThreadPool.h"

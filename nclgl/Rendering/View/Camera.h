@@ -7,7 +7,7 @@
 #include "Window.h"
 #include "../../Maths/Matrix4.h"
 #include "../../Maths/Vector3.h"
-#include "../ResourceManagment/Resource.h"
+#include "../ResourceManagment/Resources/Resource.h"
 #include "../../Meshes/SceneNode.h"
 
 class Camera : public Resource

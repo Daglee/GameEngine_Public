@@ -2,8 +2,8 @@
 
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../GameLogicFSM/FSMManager.h"
-#include "../ResourceManagment/Log.h"
-#include "../ResourceManagment/DataBase.h"
+#include "../ResourceManagment/Utilities/Log.h"
+#include "../ResourceManagment/Database/DataBase.h"
 #include "../nclgl/Rendering/Renderer.h"
 
 const int INITIAL_LEVEL = 1;

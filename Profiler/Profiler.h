@@ -3,7 +3,7 @@
 #include "Memory/MemoryWatcher.h"
 #include "Framerate/FramerateCounter.h"
 #include "../Game/Subsystems/Subsystem.h"
-#include "../ResourceManagment/Resource.h"
+#include "../ResourceManagment/Resources/Resource.h"
 #include <map>
 
 class Window;

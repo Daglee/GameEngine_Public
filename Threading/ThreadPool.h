@@ -3,7 +3,7 @@
 #include "ThreadQueue.h"
 #include "ThreadTask.h"
 #include "TaskFuture.h"
-#include "../ResourceManagment/Resource.h"
+#include "../ResourceManagment/Resources/Resource.h"
 #include "../nclgl/Rendering/View/Window.h"
 
 #include <algorithm>

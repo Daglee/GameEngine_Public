@@ -1,7 +1,7 @@
 #include "AudioManager.h"
 
 #include "../../nclgl/Sound/SoundSystem.h"
-#include "../../ResourceManagment/DataBase.h"
+#include "../../ResourceManagment/Database/DataBase.h"
 
 AudioManager* AudioManager::instance = NULL;
 

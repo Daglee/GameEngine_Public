@@ -2,7 +2,7 @@
 
 #include "PlayerInputConnection.h"
 #include "MKMapper.h"
-#include "../ResourceManagment/DataBase.h"
+#include "../ResourceManagment/Database/DataBase.h"
 #include "../Game/Scoring/ScoreBoard.h"
 #include "../Game/Players/Player.h"
 #include "../Game/Players/Control/PlayerController.h"

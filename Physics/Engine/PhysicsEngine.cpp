@@ -1,10 +1,10 @@
 #include "PhysicsEngine.h"
 
 #include "../GameLogicFSM/FSMManager.h"
-#include "../ResourceManagment/Log.h"
+#include "../ResourceManagment/Utilities/Log.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../nclgl/Rendering/Renderer.h"
-#include "../ResourceManagment/DataBase.h"
+#include "../ResourceManagment/Database/DataBase.h"
 #include "../Threading/TaskFuture.h"
 #include "Utilities/SemiImplicitEuler.h"
 #include "../Entities/RigidBody.h"

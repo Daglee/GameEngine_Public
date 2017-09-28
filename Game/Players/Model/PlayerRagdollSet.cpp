@@ -5,7 +5,7 @@
 #include "../Physics/Engine/PhysicsEngine.h"
 #include "../../Structure/PhysicsObject.h"
 #include "CharacterModel.h"
-#include "../ResourceManagment/DataBase.h"
+#include "../ResourceManagment/Database/DataBase.h"
 #include "../nclgl/Maths/Matrix4.h"
 
 PlayerRagdollSet::PlayerRagdollSet(const int ragdollLimit, CharacterModel* playerModel,
