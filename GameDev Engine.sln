@@ -42,7 +42,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Backup dlls\OpenAL32.dll = Backup dlls\OpenAL32.dll
 		Data\Meshes\pyramid.obj = Data\Meshes\pyramid.obj
 		Data\Meshes\robotcube.obj = Data\Meshes\robotcube.obj
+		SOIL\Debug\SOIL.lib = SOIL\Debug\SOIL.lib
+		SOIL\Release\SOIL.lib = SOIL\Release\SOIL.lib
 		Data\Meshes\sphere.obj = Data\Meshes\sphere.obj
+		SOIL\Debug\vc120.pdb = SOIL\Debug\vc120.pdb
+		SOIL\Release\vc120.pdb = SOIL\Release\vc120.pdb
 	EndProjectSection
 EndProject
 Global
