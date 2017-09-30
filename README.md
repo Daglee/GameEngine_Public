@@ -5,6 +5,9 @@ A c++ data driven game engine consisting of various subsystems including graphic
 
 
 ## How To Use
+**IMPORTANT**
+Please copy and paste the OPENAL32.dll file into the debug and release folders within the solution folder once builds are complete.
+
 *See Game/run.cpp*
 
 #### Singletons
