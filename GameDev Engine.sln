@@ -30,7 +30,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nclgl", "nclgl\nclgl.vcxpro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5076C0C4-B993-49EC-9BC1-6DAF3796E568}"
 	ProjectSection(SolutionItems) = preProject
+		Data\Meshes\centeredcube.obj = Data\Meshes\centeredcube.obj
+		Data\Meshes\cube.obj = Data\Meshes\cube.obj
+		Data\Meshes\cubeobj.obj = Data\Meshes\cubeobj.obj
+		Data\Meshes\cubeobjq.obj = Data\Meshes\cubeobjq.obj
+		Data\Meshes\floor.obj = Data\Meshes\floor.obj
+		Data\Meshes\floorcube.obj = Data\Meshes\floorcube.obj
+		Data\Meshes\ico.obj = Data\Meshes\ico.obj
 		Backup dlls\OpenAL32.dll = Backup dlls\OpenAL32.dll
+		Data\Meshes\pyramid.obj = Data\Meshes\pyramid.obj
+		Data\Meshes\robotcube.obj = Data\Meshes\robotcube.obj
+		Data\Meshes\sphere.obj = Data\Meshes\sphere.obj
 	EndProjectSection
 EndProject
 Global
