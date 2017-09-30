@@ -27,7 +27,7 @@ public:
 	{
 		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(name, "Empty Resource Manager name not allowed");
 
-		Name = StringUtility::TrimAndLower(name);
+		managerName = StringUtility::TrimAndLower(name);
 		newBinSize = maxNewBinSize;
 		maxNumBins = maxNumberBins;
 
@@ -40,7 +40,7 @@ public:
 	{
 		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(name, "Empty Resource Manager name not allowed");
 
-		Name = StringUtility::TrimAndLower(name);
+		managerName = StringUtility::TrimAndLower(name);
 		maxNumBins = maxNumberBins;
 		maxItemsPerBin = maxNumItemsPerBin;
 
@@ -106,7 +106,7 @@ public:
 		}
 		else
 		{
-			ErrorLog::Error(Name + " Cannot add item - would exceed limit");
+			ErrorLog::Error(managerName + " Cannot add item - would exceed limit");
 		}
 
 		return resource;
@@ -127,17 +127,17 @@ public:
 	{
 		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(resourcename, "Empty resource name not allowed");
 
-		const string name = StringUtility::TrimAndLower(resourcename);
+		const string formattedResourceName = StringUtility::TrimAndLower(resourcename);
 
 		//Find the item to delete
 		for (std::vector<unique_ptr<ResourceMap<T>*>>::iterator mapit = resourceMaps.begin();
 			mapit != resourceMaps.end(); ++mapit)
 		{
-			if ((*(*mapit))->Get(name) != nullptr)
+			if ((*(*mapit))->Get(formattedResourceName) != nullptr)
 			{
 				//Found
-				currentSize = currentSize - (*(*mapit))->Get(name)->GetSizeInBytes();
-				(*(*mapit))->Remove(name);
+				currentSize = currentSize - (*(*mapit))->Get(formattedResourceName)->GetSizeInBytes();
+				(*(*mapit))->Remove(formattedResourceName);
 
 				return true;
 			}
@@ -145,7 +145,11 @@ public:
 		}
 
 		//If this reached, it could not be found...
-		if (verbose) cout << ("cannot find " + name) << endl;
+		if (verbose)
+		{
+			cout << ("cannot find " + formattedResourceName) << endl;
+		}
+
 		return false;
 	}
 
@@ -179,7 +183,10 @@ public:
 	//Add a new bin
 	void AddResourceMap(ResourceMap<T>* newMap)
 	{
-		if (verbose) cout << Name + " added new Resource Map" << endl;
+		if (verbose)
+		{
+			cout << managerName + " added new Resource Map" << endl;
+		}
 
 		resourceMaps.push_back(make_unique<ResourceMap<T>*>(newMap));
 		binNumber++;
@@ -203,13 +210,14 @@ public:
 
 			return results;
 		}
-		else return resourceMaps.at(mapIndex)->Dump();
+			
+		return resourceMaps.at(mapIndex)->Dump();
 	}
 
 	//Return string containing statistics about the resourcemanager
 	string DumpStatistics()
 	{
-		string results = "\n-----------------" + Name + "-----------------";
+		string results = "\n-----------------" + managerName + "-----------------";
 
 		results = results + ("\nNumber of bins in use : " + std::to_string(resourceMaps.size()));
 		results = results + ("\nMaximum number of bins allowed : " + std::to_string(maxNumBins));
@@ -222,11 +230,11 @@ public:
 
 	const string &GetName() const
 	{
-		return Name;
+		return managerName;
 	}
 	const int Size() const
 	{
-		return Map.size();
+		return resourceMaps.size();
 	}
 
 	size_t GetMaxSize() const
@@ -255,8 +263,7 @@ private:
 		return *this;
 	}
 
-	unordered_map<string, T*> Map;
-	string	Name;
+	string	managerName;
 	vector<unique_ptr<ResourceMap<T>*>> resourceMaps;
 
 	size_t newBinSize;

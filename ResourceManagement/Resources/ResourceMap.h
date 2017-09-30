@@ -124,46 +124,54 @@ public:
 			std::cout << (mapName + "Looking for " + formattedResourceName + ".");
 		}
 
-		std::unordered_map<size_t, unique_ptr<T*>>::iterator it = resources.find(hash);
+		std::unordered_map<size_t, unique_ptr<T*>>::iterator resourceIterator = resources.find(hash);
 
 		//Yes, return pointer to element
-		if (it != resources.end())
+		if (resourceIterator != resources.end())
 		{
-			if (verbose) std::cout << " -- Found --" << std::endl;
-			return *it->second.get();
+			if (verbose)
+			{
+				std::cout << " -- Found --" << std::endl;
+			}
+
+			return *resourceIterator->second.get();
 		}
 
 		//if we get here, element couldn't be found
-		if (verbose) std::cout << " -- NOT Found --" << std::endl;
+		if (verbose)
+		{
+			std::cout << " -- NOT Found --" << std::endl;
+		}
+
 		return nullptr;
 	}
 
-	void	AllowDuplicates()
+	void AllowDuplicates()
 	{
 		allowDuplicates = true;
 	}
 
-	void	DisallowDuplicates()
+	void DisallowDuplicates()
 	{
 		allowDuplicates = false;
 	}
 
-	void	SetVerbose()
+	void SetVerbose()
 	{
 		verbose = true;
 	}
 
-	void	SetQuiet()
+	void SetQuiet()
 	{
 		verbose = false;
 	}
 
-	size_t	GetMaxSize() const
+	size_t GetMaxSize() const
 	{
 		return maxSize;
 	}
 
-	size_t	GetCurrentSize()
+	size_t GetCurrentSize()
 	{
 		size_t size = 0;
 
@@ -193,7 +201,7 @@ public:
 
 private:
 
-	bool IsValNonUnique(const std::string &filename)
+	bool IsValNonUnique(const std::string& filename)
 	{
 		if (allowDuplicates)
 		{
@@ -202,16 +210,16 @@ private:
 
 		//Check if element (by value) is already present.
 		//If it is found, then return true, else exit with false.
-		std::unordered_map<size_t, unique_ptr<T*>> ::iterator it = Map.begin();
+		std::unordered_map<size_t, unique_ptr<T*>> ::iterator mapIterator = Map.begin();
 
-		while (it != resources.end())
+		while (mapIterator != resources.end())
 		{
-			if ((it->second->GetName() == filename))
+			if ((mapIterator->second->GetName() == filename))
 			{
 				return false;
 			}
 
-			++it;
+			++mapIterator;
 		}
 
 		return true;
@@ -224,7 +232,8 @@ private:
 	size_t maxSize;								//Max size that this map can contain
 	size_t currentSize;							//How much space currently being used
 
-	ResourceMap(const ResourceMap&) {}
+	ResourceMap(const ResourceMap&)
+	{}
 
 	ResourceMap &operator = (const ResourceMap&)
 	{
