@@ -4,6 +4,7 @@
 #include "Gun.h"
 #include "../../Audio/AudioManager.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
+#include "../../../ResourceManagement/Utilities/StringUtility.h"
 
 GunInput::GunInput(InputMapper* input, const WeaponData weaponData)
 {
@@ -39,7 +40,7 @@ void GunInput::FireWeapon() const
 		Sound* shoot = new Sound("../Data/Sounds/14615__man__canon.wav"); //AudioManager will delete this.
 		AudioManager::GetInstance()->TemporaryPlay(shoot, SOUNDPRIORITY_MEDIUM);
 	}
-	MessageSystem::GetInstance()->TransmitMessage(Log::Hash("player_fired"));
+	MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash("player_fired"));
 }
 
 void GunInput::ReloadWeapon() const

@@ -4,7 +4,7 @@
 #include "../../Structure/GameObject.h"
 #include "../../Levels/Entity Configuration/EntityConfiguration.h"
 #include "../../Audio/AudioManager.h"
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
 #include "../ResourceManagement/Database/DataBase.h"
 #include "../GameLogicFSM/FSMManager.h"
 
@@ -27,7 +27,7 @@ void LevelConfiguration::ConfigureFromAllExistingFiles() const
 {
 	for each (ConfigurationFile configFile in configFiles)
 	{
-		if (Log::FileExists(configFile.file))
+		if (StringUtility::FileExists(configFile.file))
 		{
 			configFile.configurator(configFile.file);
 		}
@@ -86,7 +86,7 @@ void LevelConfiguration::InitialiseGameLogic(const string filename) const
 
 	while (getline(file, line))
 	{
-		vector<std::string> tokens = Log::tokenise(line);
+		vector<std::string> tokens = StringUtility::Tokenise(line);
 		const string FSMName = tokens.at(0);
 		const string FSMConfigurationFile = tokens.at(1);
 
@@ -114,7 +114,7 @@ void LevelConfiguration::ConfigureAllEntityAttributes(std::ifstream& file, GameO
 
 	while (getline(file, attribute))
 	{
-		const vector<string> tokens = Log::tokenise(attribute);
+		const vector<string> tokens = StringUtility::Tokenise(attribute);
 
 		configuration.SetAttributeTokens(tokens);
 		configuration.ConfigureEntityWithAttribute();

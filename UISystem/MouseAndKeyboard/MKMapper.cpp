@@ -1,5 +1,6 @@
 #include "MKMapper.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
+#include "../../ResourceManagement/Utilities/StringUtility.h"
 #include <math.h>
 
 enum BASIC_CONTROL
@@ -48,7 +49,7 @@ void MKMapper::FillInputs()
 
 	if (Window::GetKeyboard()->KeyDown(STOP_GAME))
 	{
-		MessageSystem::GetInstance()->BeginEvent(Log::Hash("stop_game"));
+		MessageSystem::GetInstance()->BeginEvent(StringUtility::Hash("stop_game"));
 	}
 
 	//Key: LC - index - 4
@@ -76,22 +77,22 @@ void MKMapper::AnnounceTeamChanges() const
 {
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_1))
 	{
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchRedTeam"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash("Player1SwitchRedTeam"));
 	}
 
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_2))
 	{
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchBlueTeam"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash("Player1SwitchBlueTeam"));
 	}
 
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_3))
 	{
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchGreenTeam"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash("Player1SwitchGreenTeam"));
 	}
 
 	if (Window::GetKeyboard()->KeyDown(KEYBOARD_4))
 	{
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("Player1SwitchYellowTeam"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash("Player1SwitchYellowTeam"));
 	}
 }
 

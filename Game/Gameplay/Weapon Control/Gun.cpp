@@ -1,7 +1,7 @@
 #include "Gun.h"
 
 #include "../ResourceManagement/Database/DataBase.h"
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
 
 Gun::Gun(DataBase* db, Renderer* r, PhysicsEngine* p, Mesh* m, const float reloadSpeed, const int bulletsPerMag,
 	const float bulletSpeed, const float fireDelay) : Resource()
@@ -37,7 +37,7 @@ void Gun::CheckReloadSpeed(const float reloadSpeed)
 {
 	if (reloadSpeed < 1000)
 	{
-		Log::Error("Reload Speed is too low.");
+		ErrorLog::Error("Reload Speed is too low.");
 	}
 	else
 	{
@@ -49,7 +49,7 @@ void Gun::CheckFireDelay(const float fireDelay)
 {
 	if (fireDelay < 150)
 	{
-		Log::Error("Fire Rate is too high.");
+		ErrorLog::Error("Fire Rate is too high.");
 	}
 	else
 	{

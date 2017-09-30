@@ -2,6 +2,7 @@
 
 #include "../../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../../Physics/Entities/RigidBody.h"
+#include "../../../ResourceManagement/Utilities/StringUtility.h"
 
 #include <random>
 
@@ -11,7 +12,7 @@ SpawnSystem* SpawnSystem::instance = nullptr;
 
 void SpawnSystem::RemovePlayerFromGame(RigidBody* playerRigidBody)
 {
-	MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerRigidBody->tag + "dead"));
+	MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash(playerRigidBody->tag + "dead"));
 
 	playerRigidBody->UpdatePosition(playerRigidBody->lastPosition + Vector3(0, 100000, 0));
 	playerRigidBody->gravity = 0;

@@ -12,12 +12,12 @@
 
 const bool WeaponChange::RocketLauncherAvailable(const std::string& playerTag)
 {
-	return MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(playerTag + "rocketlauncher"));
+	return MessageSystem::GetInstance()->MessageTransmitting(StringUtility::Hash(playerTag + "rocketlauncher"));
 }
 
 const bool WeaponChange::MachineGunAvailable(const std::string& playerTag)
 {
-	return MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(playerTag + "machinegun"));
+	return MessageSystem::GetInstance()->MessageTransmitting(StringUtility::Hash(playerTag + "machinegun"));
 }
 
 Gun* WeaponChange::CopyToRocketLauncher(Gun* currentWeapon)
@@ -61,11 +61,11 @@ Gun* WeaponChange::CopyToMachineGun(Gun* currentWeapon)
 
 void WeaponChange::AnnounceChange() const
 {
-	MessageSystem::GetInstance()->BeginEvent(Log::Hash(newWeapon));
+	MessageSystem::GetInstance()->BeginEvent(StringUtility::Hash(newWeapon));
 }
 
 void WeaponChange::StopPreviousEvents() const
 {
-	MessageSystem::GetInstance()->StopEvent(Log::Hash(newWeaponAnnouncementToStop));
-	MessageSystem::GetInstance()->StopEvent(Log::Hash(previousAnnouncement));
+	MessageSystem::GetInstance()->StopEvent(StringUtility::Hash(newWeaponAnnouncementToStop));
+	MessageSystem::GetInstance()->StopEvent(StringUtility::Hash(previousAnnouncement));
 }

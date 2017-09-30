@@ -1,6 +1,6 @@
 #include "Level.h"
 #include "../ResourceManagement/Database/DataBase.h"
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
 #include "../ResourceManagement/Identifiers/TemporaryDatabaseIdentifier.h"
 #include "../ResourceManagement/Identifiers/GameEntityDatabaseEntryFile.h"
 #include "Level Configuration/LevelConfiguration.h"
@@ -40,7 +40,7 @@ void Level::LoadLevelAssets(const string filename)
 
 	while (getline(file, line))
 	{
-		const vector<string> identifierTokens = Log::tokenise(line);
+		const vector<string> identifierTokens = StringUtility::Tokenise(line);
 		const ResourceIdentifier resourcesToAdd = ReadResourceIdentifier(identifierTokens);
 
 		if (resourcesToAdd.numberInDatabase == 1)
@@ -81,7 +81,7 @@ void Level::UnloadLevel()
 
 	while (getline(file, line))
 	{
-		const vector<string> identifierTokens = Log::tokenise(line);
+		const vector<string> identifierTokens = StringUtility::Tokenise(line);
 		const ResourceIdentifier entryToRemove = ReadResourceIdentifier(identifierTokens);
 
 		if (entryToRemove.numberInDatabase == 1)

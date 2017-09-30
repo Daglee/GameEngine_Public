@@ -4,6 +4,7 @@
 #include "../Threading/ThreadPool/ThreadPool.h"
 #include "../Game/Asset Construction/GameEntityBuilder.h"
 #include "../Game/Asset Construction/PhysicsEntityBuilder.h"
+#include "../ResourceManagement/Utilities/StringUtility.h"
 
 #include <fstream>
 
@@ -63,7 +64,7 @@ void GameEntityDatabaseEntryFile::ReadAllObjects(vector<string> line, const int 
 
 void GameEntityDatabaseEntryFile::BuildEntity(const string resourceManagerAndName) const
 {
-	vector<string> tokens = Log::tokenise(resourceManagerAndName);
+	vector<string> tokens = StringUtility::Tokenise(resourceManagerAndName);
 
 	const string manager = tokens.at(0);
 

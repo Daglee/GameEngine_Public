@@ -2,7 +2,7 @@
 
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../GameLogicFSM/FSMManager.h"
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
 #include "../ResourceManagement/Database/DataBase.h"
 #include "../nclgl/Rendering/Renderer.h"
 
@@ -31,9 +31,9 @@ void LevelManager::LoadFirstLevel()
 
 void LevelManager::Update(const float& msec)
 {
-	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash("ExitLevel")))
+	if (MessageSystem::GetInstance()->MessageTransmitting(StringUtility::Hash("ExitLevel")))
 	{
-		MessageSystem::GetInstance()->StopEvent(Log::Hash("ExitLevel"));
+		MessageSystem::GetInstance()->StopEvent(StringUtility::Hash("ExitLevel"));
 		loader.ExitLevel();
 	}
 

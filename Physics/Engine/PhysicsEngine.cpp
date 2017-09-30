@@ -1,7 +1,8 @@
 #include "PhysicsEngine.h"
 
 #include "../GameLogicFSM/FSMManager.h"
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
+#include "../ResourceManagement/Utilities/StringUtility.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../nclgl/Rendering/Renderer.h"
 #include "../ResourceManagement/Database/DataBase.h"
@@ -167,8 +168,8 @@ void PhysicsEngine::Explosion(CollisionPair collisionPair) const
 		}
 	}
 
-	MessageSystem::GetInstance()->TransmitMessage(Log::Hash(entity->tag + "_colliding_" + explosion->tag));
-	MessageSystem::GetInstance()->TransmitMessage(Log::Hash(explosion->tag + "_colliding_" + entity->tag));
+	MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash(entity->tag + "_colliding_" + explosion->tag));
+	MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash(explosion->tag + "_colliding_" + entity->tag));
 
 	explosions->InitialiseExplosion(explosion->lastPosition);
 }
@@ -212,8 +213,8 @@ void PhysicsEngine::ExplodeIfNotIgnore(const CollisionPair& collisionPair)
 
 void PhysicsEngine::AnnounceCollision(const string& aTag, const string& bTag)
 {
-	MessageSystem::GetInstance()->BeginEvent(Log::Hash(aTag + "_colliding_" + bTag));
-	MessageSystem::GetInstance()->BeginEvent(Log::Hash(bTag + "_colliding_" + aTag));
+	MessageSystem::GetInstance()->BeginEvent(StringUtility::Hash(aTag + "_colliding_" + bTag));
+	MessageSystem::GetInstance()->BeginEvent(StringUtility::Hash(bTag + "_colliding_" + aTag));
 }
 
 void PhysicsEngine::DeleteRigidBodyIfColliderContains(const CollisionPair& collisionPair, const string& colliderTag)

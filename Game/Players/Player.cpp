@@ -3,17 +3,18 @@
 #include "Player.h"
 #define NOMINMAX
 
-#include "../ResourceManagement/Database/DataBase.h"
+#include "Control/PlayerController.h"
+#include "Model/PlayerRagdollSet.h"
 #include "../Physics/Engine/PhysicsEngine.h"
-#include "../../nclgl/Rendering/Renderer.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../Scoring/ScoreBoard.h"
 #include "../Gameplay/Weapon Control/Gun.h"
-#include "Control/PlayerController.h"
-#include "../Gameplay/Weapon Control/GunInput.h"
-#include "Model/PlayerRagdollSet.h"
 #include "../Gameplay/Spawning/SpawnSystem.h"
+#include "../Gameplay/Weapon Control/GunInput.h"
 #include "../Physics/Colliders/SphereCollider.h"
+#include "../ResourceManagement/Utilities/StringUtility.h"
+#include "../ResourceManagement/Database/DataBase.h"
+#include "../../nclgl/Rendering/Renderer.h"
 
 const float PLAYER_MASS = 500.0f;
 const float PLAYER_DRAG = 0.7f;
@@ -124,11 +125,11 @@ void Player::CheckHealth()
 
 void Player::AddPoints() const
 {
-	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(rigidBody.tag + "addkillstreakpoints")))
+	if (MessageSystem::GetInstance()->MessageTransmitting(StringUtility::Hash(rigidBody.tag + "addkillstreakpoints")))
 	{
 		ScoreBoard::GetInstance()->UpdateEntryScore(rigidBody.tag, static_cast<const int>(killstreak));
 
-		MessageSystem::GetInstance()->StopEvent(Log::Hash(rigidBody.tag + "addkillstreakpoints"));
+		MessageSystem::GetInstance()->StopEvent(StringUtility::Hash(rigidBody.tag + "addkillstreakpoints"));
 	}
 }
 

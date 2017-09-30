@@ -146,7 +146,8 @@
   <ItemGroup>
     <ClInclude Include="Database\DataBase.h" />
     <ClInclude Include="Identifiers\GameEntityDatabaseEntryFile.h" />
-    <ClInclude Include="Utilities\Log.h" />
+    <ClInclude Include="Utilities\StringUtility.h" />
+    <ClInclude Include="Utilities\ErrorLog.h" />
     <ClInclude Include="Resources\Resource.h" />
     <ClInclude Include="Resources\ResourceManager.h" />
     <ClInclude Include="Resources\ResourceMap.h" />

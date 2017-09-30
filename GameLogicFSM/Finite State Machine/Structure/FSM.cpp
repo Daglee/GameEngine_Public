@@ -1,6 +1,7 @@
 #include "FSM.h"
 
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
+#include "../ResourceManagement/Utilities/StringUtility.h"
 
 const int PERMANENT_STATE_LINE_LENGTH = 2;
 const string ACTION_DELIMITER = "--";
@@ -87,7 +88,7 @@ void FSM::ReadStates(ifstream& file)
 
 	while (line != STATE_DELIMITER)
 	{
-		vector<string> tokens = Log::tokenise(line);
+		vector<string> tokens = StringUtility::Tokenise(line);
 
 		const int stateID = atoi(tokens.at(1).c_str());
 
@@ -129,7 +130,7 @@ void FSM::ReadTransitions(ifstream& file) const
 	while (line != STATE_DELIMITER)
 	{
 		getline(file, line);
-		vector<string> tokens = Log::tokenise(line);
+		vector<string> tokens = StringUtility::Tokenise(line);
 
 		const int startingState = atoi(tokens.at(0).c_str());
 		const int stateToMoveTo = atoi(tokens.at(2).c_str());

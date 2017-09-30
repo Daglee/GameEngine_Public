@@ -19,7 +19,8 @@
 #include "../Game/Audio/AudioManager.h"
 
 #include <vector>
-#include "../Utilities/Log.h"
+#include "../Utilities/ErrorLog.h"
+#include "../Utilities/StringUtility.h"
 
 const size_t MAX_MEM_PER_TYPE = 5000;
 const size_t MAX_MEM_PLAYERS = 7000;
@@ -202,7 +203,7 @@ void TableCreation::AddThreadPool() const
 {
 	database->AddTable("GThreadPool", new Table<Resource>(false, false, [](std::string params)
 	{
-		vector<string> tokens = Log::tokenise(params);
+		vector<string> tokens = StringUtility::Tokenise(params);
 		string name = tokens.at(0);
 
 		ThreadPool* threadPool = new ThreadPool();
@@ -216,7 +217,7 @@ void TableCreation::AddWindow() const
 {
 	database->AddTable("GWindow", new Table<Resource>(false, false, [db = database](std::string params)
 	{
-		vector<string> tokens = Log::tokenise(params);
+		vector<string> tokens = StringUtility::Tokenise(params);
 
 		string name = tokens.at(0);
 		int resX = atoi(tokens.at(1).c_str());
@@ -236,7 +237,7 @@ void TableCreation::AddRenderer() const
 	{
 		Window* window = static_cast<Window*>(db->GetTable("GWindow")->GetResources()->Find("Window"));
 
-		vector<string> tokens = Log::tokenise(params);
+		vector<string> tokens = StringUtility::Tokenise(params);
 
 		string name = tokens.at(0);
 

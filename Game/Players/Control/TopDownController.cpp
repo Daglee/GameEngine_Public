@@ -4,6 +4,7 @@
 #include "../Physics/Entities/RigidBody.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 #include "../../Audio/AudioManager.h"
+#include "../../../ResourceManagement/Utilities/StringUtility.h"
 
 const Vector3 Y_ROTATION_AXIS = Vector3(0, 1, 0);
 
@@ -26,7 +27,7 @@ void TopDownController::ApplyRotation()
 	if (inputtedRotationInDegrees != 0)
 	{
 		currentRotation = rotation;
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("player_rotated"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash("player_rotated"));
 	}
 }
 
@@ -40,8 +41,8 @@ void TopDownController::UpdatePosition()
 	{
 		AudioManager::GetInstance()->BeginPlay(movementSound);
 
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash("player_moved"));
-		MessageSystem::GetInstance()->BeginEvent(Log::Hash(rigidBody->tag + "moving"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash("player_moved"));
+		MessageSystem::GetInstance()->BeginEvent(StringUtility::Hash(rigidBody->tag + "moving"));
 	}
 	else
 	{

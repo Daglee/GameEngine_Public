@@ -3,7 +3,7 @@
 #include "../nclgl/Rendering/View/Window.h"
 #include "../ResourceManagement/Database/DataBase.h"
 #include "../nclgl/Rendering/Renderer.h"
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
 
 #define FRAME_MIN 1
 #define TEXT_SIZE 15.0f
@@ -65,11 +65,11 @@ void Profiler::AddSubSystemTimer(string name, SubsystemTimer* timer)
 {
 	if (numAdded == numTimers)
 	{
-		Log::Error("No more subsystems can be added to the profiler.");
+		ErrorLog::Error("No more subsystems can be added to the profiler.");
 	}
 	else if (name.empty())
 	{
-		Log::Error("Timer name cannot be empty.");
+		ErrorLog::Error("Timer name cannot be empty.");
 	}
 	else
 	{

@@ -1,5 +1,6 @@
 #include "GamepadMapper.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
+#include "../ResourceManagement/Utilities/StringUtility.h"
 #include <math.h>
 
 enum BASIC_CONTROL
@@ -117,21 +118,21 @@ void GamepadMapper::AnnounceTeamChanges() const
 
 	if (gamepad->GetButtonPressed(A))
 	{
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerid + "SwitchGreenTeam"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash(playerid + "SwitchGreenTeam"));
 	}
 
 	if (gamepad->GetButtonPressed(X))
 	{
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerid + "SwitchBlueTeam"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash(playerid + "SwitchBlueTeam"));
 	}
 
 	if (gamepad->GetButtonPressed(Y))
 	{
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerid + "SwitchYellowTeam"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash(playerid + "SwitchYellowTeam"));
 	}
 
 	if (gamepad->GetButtonPressed(B))
 	{
-		MessageSystem::GetInstance()->TransmitMessage(Log::Hash(playerid + "SwitchRedTeam"));
+		MessageSystem::GetInstance()->TransmitMessage(StringUtility::Hash(playerid + "SwitchRedTeam"));
 	}
 }

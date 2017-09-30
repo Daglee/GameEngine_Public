@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../ResourceManagement/Resources/Resource.h"
-#include "../../ResourceManagement/Utilities/Log.h"
+#include "../../ResourceManagement/Utilities/ErrorLog.h"
 #include "../../nclgl/Sound/SoundNode.h"
 #include "../../Game/Subsystems/Subsystem.h"
 
@@ -38,7 +38,7 @@ public:
 	{
 		if (sound == nullptr)
 		{
-			Log::Error("SoundNode " + name + " is null. Cannot be added.");
+			ErrorLog::Error("SoundNode " + name + " is null. Cannot be added.");
 		}
 		else
 		{
@@ -64,7 +64,7 @@ public:
 
 		if (sound == nullptr)
 		{
-			Log::Error("Sound " + name + " not found.");
+			ErrorLog::Error("Sound " + name + " not found.");
 		}
 
 		return sounds.at(name);

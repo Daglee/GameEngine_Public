@@ -1,7 +1,7 @@
 #include "CharacterModel.h"
 
 #include "../../nclgl/Meshes/OBJMesh.h"
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
 #include "../GameLogicFSM/Messaging/MessageSystem.h"
 
 #include <istream>
@@ -10,6 +10,7 @@
 #include <fstream>
 #include <vector>
 #include <iterator>
+#include "../../../ResourceManagement/Utilities/StringUtility.h"
 
 /*
   Dimensions for different scenenodes for this character model
@@ -124,7 +125,7 @@ void CharacterModel::ReadFile(string filename)
 		if (it == nodeMap.end())
 		{
 			//Probably a typo in the file if its in the unordered_map
-			Log::Error("Node " + line + " not found in map.");
+			ErrorLog::Error("Node " + line + " not found in map.");
 		}
 
 		node = it->second;
@@ -134,7 +135,7 @@ void CharacterModel::ReadFile(string filename)
 		getline(file, line);
 		while (line != "-")
 		{
-			vector<string> lineTokens = Log::tokenise(line);
+			vector<string> lineTokens = StringUtility::Tokenise(line);
 			tokens.push_back(lineTokens);
 
 			getline(file, line);
@@ -203,7 +204,7 @@ void CharacterModel::Update(const float& msec)
 	SceneNode::Update(msec);
 
 	//Move the legs if the player is moving!
-	if (MessageSystem::GetInstance()->MessageTransmitting(Log::Hash(playertag + "moving")))
+	if (MessageSystem::GetInstance()->MessageTransmitting(StringUtility::Hash(playertag + "moving")))
 	{
 		leftLegRotation = std::sinf(animFrames) * 30;
 		leftLeg.SetTransform(leftLeg.GetTransform().Translation(leftLeg.GetTransform().GetPositionVector()) *
@@ -214,7 +215,7 @@ void CharacterModel::Update(const float& msec)
 			Matrix4::Rotation(rightLegRotation, Vector3(1, 0, 0)));
 
 		animFrames = animFrames + (msec / 100);// 0.05f;
-		MessageSystem::GetInstance()->StopEvent(Log::Hash(playertag + "moving"));
+		MessageSystem::GetInstance()->StopEvent(StringUtility::Hash(playertag + "moving"));
 
 		animReset = false;
 	}

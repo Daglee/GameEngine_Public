@@ -25,7 +25,8 @@
     <ClInclude Include="Resources\ResourceMap.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\Log.h" />
+    <ClInclude Include="Utilities\ErrorLog.h" />
+    <ClInclude Include="Utilities\StringUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resources">

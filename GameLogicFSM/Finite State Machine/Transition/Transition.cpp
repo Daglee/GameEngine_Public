@@ -1,6 +1,7 @@
 #include "Transition.h"
 
 #include "../../Messaging/MessageSystem.h"
+#include "../../ResourceManagement/Utilities/StringUtility.h"
 #include "TransitionCheck.h"
 
 Transition::Transition(unordered_map<string, float*>* properties, const int startingState,
@@ -39,7 +40,7 @@ bool Transition::Check()
 //every frame.
 void Transition::ConstructCheck()
 {
-	vector<string> tokens = Log::tokenise(checkstring);
+	vector<string> tokens = StringUtility::Tokenise(checkstring);
 
 	for (int i = 0; i < tokens.size(); i += 4)
 	{
@@ -56,7 +57,7 @@ void Transition::ConstructCheck()
 		if (tokens.at(i + 2).find("s:") != string::npos)
 		{
 			const string substring = tokens.at(i + 2).substr(2);
-			check.comparison = Log::Hash(substring);
+			check.comparison = StringUtility::Hash(substring);
 		}
 		else check.comparison = stof(tokens.at(i + 2).c_str());
 

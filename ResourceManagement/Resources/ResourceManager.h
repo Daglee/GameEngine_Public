@@ -3,7 +3,8 @@
 #include <vector>
 #include "ResourceMap.h"
 
-#include "../Utilities/Log.h"
+#include "../Utilities/ErrorLog.h"
+#include "../Utilities/StringUtility.h"
 
 /*
   Manages a series of bins for one type of object.
@@ -24,9 +25,9 @@ public:
 
 	void Initialise(const std::string &name, size_t maxNewBinSize, int maxNumberBins)
 	{
-		Log::ExitIfEmpty(name, "Empty Resource Manager name not allowed");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(name, "Empty Resource Manager name not allowed");
 
-		Name = Log::TrimAndLower(name);
+		Name = StringUtility::TrimAndLower(name);
 		newBinSize = maxNewBinSize;
 		maxNumBins = maxNumberBins;
 
@@ -37,9 +38,9 @@ public:
 	//Must be updated based on first object being added
 	void Initialise(const std::string &name, int maxNumItemsPerBin, int maxNumberBins)
 	{
-		Log::ExitIfEmpty(name, "Empty Resource Manager name not allowed");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(name, "Empty Resource Manager name not allowed");
 
-		Name = Log::TrimAndLower(name);
+		Name = StringUtility::TrimAndLower(name);
 		maxNumBins = maxNumberBins;
 		maxItemsPerBin = maxNumItemsPerBin;
 
@@ -51,9 +52,9 @@ public:
 	//Add an item to the database
 	T *Load(const std::string &resourceName, T* resource)
 	{
-		Log::ExitIfEmpty(resourceName, "Empty filename not allowed");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(resourceName, "Empty filename not allowed");
 
-		string formattedResourceName = Log::TrimAndLower(resourceName);
+		string formattedResourceName = StringUtility::TrimAndLower(resourceName);
 		resource->SetName(formattedResourceName);
 
 		if (!allowDuplicates)
@@ -105,7 +106,7 @@ public:
 		}
 		else
 		{
-			Log::Error(Name + " Cannot add item - would exceed limit");
+			ErrorLog::Error(Name + " Cannot add item - would exceed limit");
 		}
 
 		return resource;
@@ -124,9 +125,9 @@ public:
 	//Delete an item
 	bool Unload(const std::string &resourcename)
 	{
-		Log::ExitIfEmpty(resourcename, "Empty resource name not allowed");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(resourcename, "Empty resource name not allowed");
 
-		const string name = Log::TrimAndLower(resourcename);
+		const string name = StringUtility::TrimAndLower(resourcename);
 
 		//Find the item to delete
 		for (std::vector<unique_ptr<ResourceMap<T>*>>::iterator mapit = resourceMaps.begin();
@@ -151,9 +152,9 @@ public:
 	//Retrieve an item
 	T* Find(const string &resourcename)
 	{
-		Log::ExitIfEmpty(resourcename, "Empty resource name not allowed");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(resourcename, "Empty resource name not allowed");
 
-		const string formattedResourceName = Log::TrimAndLower(resourcename);
+		const string formattedResourceName = StringUtility::TrimAndLower(resourcename);
 
 		/*
 		  Iterates though each map to check for an item.

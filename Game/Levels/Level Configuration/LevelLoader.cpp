@@ -49,7 +49,7 @@ void LevelLoader::ExitLevel() const
 		currentLevel->UnloadLevel();
 		delete currentLevel;
 	}
-	else Log::Error("Trying to unload a level that has not been loaded!");
+	else ErrorLog::Error("Trying to unload a level that has not been loaded!");
 }
 
 void LevelLoader::LoadLevel(const string level)

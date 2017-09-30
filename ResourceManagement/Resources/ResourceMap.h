@@ -2,6 +2,9 @@
 #include <string>
 #include <memory>
 
+#include "../Utilities/ErrorLog.h"
+#include "../Utilities/StringUtility.h"
+
 /*
   A bin that is created by the resource manager.
    -- Essentially a wrapper around a map.
@@ -27,9 +30,9 @@ public:
 
 	void Initialise(const std::string &name, bool verbosity, bool duplicates, size_t maximumSize)
 	{
-		Log::ExitIfEmpty(name, mapName + " : Array name cannot be empty");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(name, mapName + ": Array name cannot be empty");
 
-		mapName = Log::TrimAndLower(name);
+		mapName = StringUtility::TrimAndLower(name);
 
 		verbose = verbosity;
 		allowDuplicates = duplicates;
@@ -54,9 +57,9 @@ public:
 	//Add a new element!
 	T *Add(const std::string &resourceName, T* resource)
 	{
-		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(resourceName, mapName + ": Resource name cannot be empty");
 
-		const std::string formattedResourceName = Log::TrimAndLower(resourceName);
+		const std::string formattedResourceName = StringUtility::TrimAndLower(resourceName);
 
 		if (verbose)
 		{
@@ -76,9 +79,9 @@ public:
 	//Delete an element using resourcename
 	void Remove(const std::string &resourceName)
 	{
-		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(resourceName, mapName + " : resource name cannot be empty");
 
-		const std::string formattedResourceName = Log::TrimAndLower(resourceName);
+		const std::string formattedResourceName = StringUtility::TrimAndLower(resourceName);
 
 		if (verbose)
 		{
@@ -111,9 +114,9 @@ public:
 	//Retrieves element using resource name -- Hashed
 	T* Get(const std::string &resourceName)
 	{
-		Log::ExitIfEmpty(resourceName, mapName + " : resource name cannot be empty");
+		ErrorLog::LogErrorAndThrowExceptionIfStringEmpty(resourceName, mapName + " : resource name cannot be empty");
 
-		const std::string formattedResourceName = Log::TrimAndLower(resourceName);
+		const std::string formattedResourceName = StringUtility::TrimAndLower(resourceName);
 		size_t hash = std::hash <std::string>{}(formattedResourceName);
 
 		if (verbose)

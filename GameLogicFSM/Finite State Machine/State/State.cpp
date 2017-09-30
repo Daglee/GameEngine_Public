@@ -1,5 +1,6 @@
 #include "State.h"
-#include "../ResourceManagement/Utilities/Log.h"
+#include "../ResourceManagement/Utilities/ErrorLog.h"
+#include "../ResourceManagement/Utilities/StringUtility.h"
 #include "../../Messaging/MessageSystem.h"
 #include "../Game/Scoring/ScoreBoard.h"
 #include "ActionFunction.h"
@@ -25,14 +26,14 @@ void State::ConstructAction()
 	for each(string actionName in actionNames)
 	{
 		Action action;
-		vector<string> tokens = Log::tokenise(actionName);
+		vector<string> tokens = StringUtility::Tokenise(actionName);
 
 		action.property = tokens.at(0);
 		action.operatorName = tokens.at(1);
 
 		if (tokens.at(2).find(STRING_TYPE) != string::npos)
 		{
-			action.operand = Log::Hash(tokens.at(2).substr(2));
+			action.operand = StringUtility::Hash(tokens.at(2).substr(2));
 		}
 		else
 		{

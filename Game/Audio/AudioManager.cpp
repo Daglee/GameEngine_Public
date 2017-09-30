@@ -47,7 +47,7 @@ void AudioManager::BeginBackgroundPlay(string name)
 {
 	SoundNode* sound = backgroundSounds.at(name);
 
-	if (sound == nullptr) Log::Error("Sound " + name + " not found.");
+	if (sound == nullptr) ErrorLog::Error("Sound " + name + " not found.");
 
 	sound->SetLooping(true);
 	sound->SetIsGlobal(true);

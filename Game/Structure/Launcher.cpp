@@ -49,7 +49,7 @@ bool Launcher::GraphicsExists()
 
 	if (window == nullptr)
 	{
-		Log::Warning("Window is null.");
+		ErrorLog::Warning("Window is null.");
 		systemsExist = false;
 	}
 
@@ -60,12 +60,12 @@ bool Launcher::IsGraphicsInitialised()
 {
 	if (!window->HasInitialised())
 	{
-		Log::Error("Window not succesfully initialised.");
+		ErrorLog::Error("Window not succesfully initialised.");
 	}
 
 	if (!renderer->HasInitialised())
 	{
-		Log::Error("Renderer not succesfully initialised.");
+		ErrorLog::Error("Renderer not succesfully initialised.");
 	}
 
 	return true;
@@ -77,7 +77,7 @@ bool Launcher::IsSubSystemNull(Subsystem* subsystem, const string name)
 
 	if (subsystemIsNull)
 	{
-		Log::Warning(name + " is null.");
+		ErrorLog::Warning(name + " is null.");
 	}
 	
 	return subsystemIsNull;
